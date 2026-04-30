@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Guides | Twilight Tech LLC</title>
+<meta name="description" content="CompTIA A+ Study Guides — Core 1 (220-1201), Core 2 (220-1202), and the Complete Bundle. PDF + DOCX. Mapped 1:1 to official objectives v2.0. Created by Twilight Technology LLC.">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://twilighttech.io/guides/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://twilighttech.io/guides/">
+<meta property="og:title" content="CompTIA A+ Study Guides | Twilight Tech LLC">
+<meta property="og:description" content="Mapped 1:1 to official objectives v2.0. PDF + DOCX. Save $9 with the bundle.">
+<meta property="og:image" content="https://twilighttech.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Twilight Tech LLC">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@TwilightTechio">
+<meta name="twitter:creator" content="@TwilightTechio">
+<meta name="twitter:title" content="CompTIA A+ Study Guides | Twilight Tech LLC">
+<meta name="twitter:description" content="Mapped 1:1 to official objectives v2.0. PDF + DOCX. Save $9 with the bundle.">
+<meta name="twitter:image" content="https://twilighttech.io/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cyan:    #00f0ff;
+  --magenta: #ff00e5;
+  --green:   #39ff14;
+  --bg:      #07090d;
+  --card:    #0d1117;
+  --border:  rgba(255,255,255,0.08);
+  --border-h:rgba(0,240,255,0.35);
+  --text:    #e8edf2;
+  --muted:   #8b95a5;
+  --display: 'Orbitron', system-ui, sans-serif;
+  --mono:    'JetBrains Mono', ui-monospace, monospace;
+  --body:    'Inter', system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  line-height: 1.55;
+  min-height: 100vh;
+}
+a { color: var(--cyan); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Background atmosphere matching the home page */
+body {
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(0, 240, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(255, 0, 229, 0.06) 0%, transparent 50%),
+    var(--bg);
+}
+
+/* Header */
+.tw-header {
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: rgba(7, 9, 13, 0.85);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+.tw-logo {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+}
+.tw-logo .slash { color: var(--magenta); font-weight: 400; }
+.tw-nav { display: flex; gap: 1.6rem; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.04em; }
+.tw-nav a { color: var(--text); }
+.tw-nav a:hover { color: var(--cyan); text-decoration: none; }
+
+/* Hero */
+.guides-hero {
+  text-align: center;
+  padding: 5rem 1.5rem 3rem;
+  max-width: 920px;
+  margin: 0 auto;
+}
+.guides-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--green);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.guides-title {
+  font-family: var(--display);
+  font-size: clamp(2rem, 6vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.1;
+  background: linear-gradient(135deg, var(--cyan) 0%, #fff 40%, var(--magenta) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 30px rgba(0, 240, 255, 0.2));
+  margin-bottom: 1.2rem;
+}
+.guides-subtitle {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 640px;
+  margin: 0 auto 1.5rem;
+}
+.guides-pill {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(57, 255, 20, 0.3);
+  border-radius: 100px;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  color: var(--green);
+  letter-spacing: 0.1em;
+}
+
+/* Cards grid */
+.cards-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem 4rem;
+}
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--magenta));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.card:hover {
+  border-color: var(--border-h);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+.card:hover::after { opacity: 1; }
+.card.featured {
+  border-color: rgba(0, 240, 255, 0.28);
+  background: linear-gradient(180deg, rgba(0, 240, 255, 0.04) 0%, var(--card) 50%);
+}
+.card.featured::after { opacity: 1; }
+
+.card-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.3rem 0.7rem;
+  background: rgba(255, 0, 229, 0.12);
+  border: 1px solid rgba(255, 0, 229, 0.4);
+  border-radius: 100px;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  color: var(--magenta);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.card-icon { font-size: 2.2rem; margin-bottom: 0.8rem; }
+.card-title {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.01em;
+}
+.card-tagline {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-bottom: 1.5rem;
+  min-height: 2.5em;
+}
+.card-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+}
+.card-price {
+  font-family: var(--display);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--cyan);
+  text-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+}
+.card-price-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+.card-includes {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin-bottom: 1.4rem;
+  flex: 1;
+}
+.card-includes li {
+  font-size: 0.88rem;
+  display: flex;
+  gap: 0.5rem;
+}
+.card-includes li::before {
+  content: '✓';
+  color: var(--green);
+  font-weight: bold;
+}
+.card-cta {
+  display: inline-block;
+  text-align: center;
+  padding: 0.85rem 1.2rem;
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.card-cta:hover {
+  background: rgba(0, 240, 255, 0.12);
+  text-decoration: none;
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.3);
+}
+.card.featured .card-cta {
+  border-color: var(--magenta);
+  color: var(--magenta);
+}
+.card.featured .card-cta:hover {
+  background: rgba(255, 0, 229, 0.12);
+  box-shadow: 0 0 18px rgba(255, 0, 229, 0.3);
+}
+.card-fineprint {
+  display: block;
+  text-align: center;
+  margin-top: 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+/* Trust strip */
+.trust-strip {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.trust-strip h2 {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.trust-strip p {
+  color: var(--muted);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* FAQ */
+.faq-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+.faq-section h2 {
+  font-family: var(--display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+details {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 1.1rem 1.3rem;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+details:hover { border-color: var(--border-h); }
+details summary {
+  font-weight: 600;
+  font-size: 0.98rem;
+  list-style: none;
+  outline: none;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before {
+  content: '+';
+  display: inline-block;
+  width: 1.2em;
+  color: var(--cyan);
+  font-weight: 700;
+  transition: transform 0.2s;
+}
+details[open] summary::before { content: '−'; }
+details p {
+  margin-top: 0.7rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* Footer */
+.tw-footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.tw-footer a { color: var(--muted); }
+.tw-footer a:hover { color: var(--cyan); }
+</style>
+</head>
+<body>
+
+<header class="tw-header">
+  <a href="/" class="tw-logo">TWILIGHT<span class="slash">/</span>TECH</a>
+  <nav class="tw-nav">
+    <a href="/">Home</a>
+    <a href="/#services">Services</a>
+    <a href="/guides/">Guides</a>
+    <a href="/#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="guides-hero">
+  <div class="guides-eyebrow">// Study Guides</div>
+  <h1 class="guides-title">CompTIA A+ Study Guides</h1>
+  <p class="guides-subtitle">
+    Mapped 1:1 to the official 2026 objectives. Reference tables,
+    practice questions, exam tips, and domain score trackers — built
+    by an MSP, not a publisher.
+  </p>
+  <span class="guides-pill">⚡ INSTANT DELIVERY · PDF + DOCX</span>
+</section>
+
+<section class="cards-section">
+  <div class="cards-grid">
+
+    <!-- Core 1 -->
+    <div class="card">
+      <div class="card-icon">🧰</div>
+      <div class="card-title">CompTIA A+ Core 1</div>
+      <div class="card-tagline">Exam 220-1201 — hardware, networking, mobile, virtualization, troubleshooting.</div>
+      <div class="card-price-row">
+        <span class="card-price">$29</span>
+        <span class="card-price-label">one-time</span>
+      </div>
+      <ul class="card-includes">
+        <li>1:1 with official objectives v2.0</li>
+        <li>50 practice questions + answer key</li>
+        <li>Reference tables &amp; DALL-E illustrations</li>
+        <li>Exam tips + domain score tracker</li>
+        <li>PDF + DOCX (editable)</li>
+      </ul>
+      <a href="https://buy.stripe.com/dRm6oJ8OQaywc3C1TV6Vq09" class="card-cta" target="_blank" rel="noopener">Buy Core 1 — $29 →</a>
+      <span class="card-fineprint">Secure checkout · Stripe</span>
+    </div>
+
+    <!-- Bundle (FEATURED) -->
+    <div class="card featured">
+      <div class="card-badge">★ Best Value</div>
+      <div class="card-icon">📦</div>
+      <div class="card-title">A+ Complete Bundle</div>
+      <div class="card-tagline">Core 1 + Core 2 together. Save $9 vs buying individually.</div>
+      <div class="card-price-row">
+        <span class="card-price">$49</span>
+        <span class="card-price-label">one-time · save $9</span>
+      </div>
+      <ul class="card-includes">
+        <li>Both Core 1 (220-1201) and Core 2 (220-1202)</li>
+        <li>All 9 exam domains</li>
+        <li>52+ reference tables, 17 illustrations</li>
+        <li>100 practice questions across both exams</li>
+        <li>Domain score trackers + quick reference</li>
+        <li>PDF + DOCX · 2026 Edition</li>
+      </ul>
+      <a href="https://buy.stripe.com/6oUaEZ8OQ2207NmeGH6Vq0b" class="card-cta" target="_blank" rel="noopener">Get the Bundle — $49 →</a>
+      <span class="card-fineprint">Secure checkout · Stripe</span>
+    </div>
+
+    <!-- Core 2 -->
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <div class="card-title">CompTIA A+ Core 2</div>
+      <div class="card-tagline">Exam 220-1202 — operating systems, security, software troubleshooting, operational procedures.</div>
+      <div class="card-price-row">
+        <span class="card-price">$29</span>
+        <span class="card-price-label">one-time</span>
+      </div>
+      <ul class="card-includes">
+        <li>1:1 with official objectives v2.0</li>
+        <li>50 practice questions + answer key</li>
+        <li>Reference tables &amp; DALL-E illustrations</li>
+        <li>Exam tips + domain score tracker</li>
+        <li>PDF + DOCX (editable)</li>
+      </ul>
+      <a href="https://buy.stripe.com/4gM8wR9SU5ec4BaeGH6Vq0a" class="card-cta" target="_blank" rel="noopener">Buy Core 2 — $29 →</a>
+      <span class="card-fineprint">Secure checkout · Stripe</span>
+    </div>
+
+  </div>
+</section>
+
+<section class="trust-strip">
+  <h2>Built by people who do the work</h2>
+  <p>
+    Twilight Tech LLC is an Atlanta-based managed IT &amp; cybersecurity practice.
+    These guides are the same study material we'd hand to a junior tech we hire.
+  </p>
+</section>
+
+<section class="faq-section">
+  <h2>Frequently asked</h2>
+
+  <details>
+    <summary>What format do I get?</summary>
+    <p>Both PDF (for printing or reading on any device) and DOCX (so you can edit, highlight, annotate, or remix the material). Delivered after Stripe checkout.</p>
+  </details>
+
+  <details>
+    <summary>Are these guides up to date?</summary>
+    <p>Yes — they're mapped 1:1 to the current CompTIA A+ objectives v2.0 (Core 1 220-1201 and Core 2 220-1202), 2026 edition.</p>
+  </details>
+
+  <details>
+    <summary>Should I buy individually or get the bundle?</summary>
+    <p>If you only need one core, buy it standalone for $29. If you're going for full A+ certification (which requires both cores), the bundle saves you $9 and gets you everything in one purchase.</p>
+  </details>
+
+  <details>
+    <summary>What's the refund policy?</summary>
+    <p>Email <a href="mailto:hello@twilighttech.io">hello@twilighttech.io</a> within 14 days of purchase if the guide isn't what you expected and we'll work with you. We're a small Atlanta operation, not an automated reseller.</p>
+  </details>
+
+  <details>
+    <summary>Do you have other certifications planned?</summary>
+    <p>More guides are in development. If there's a specific cert you'd like covered (Network+, Security+, etc.), let us know — demand drives the roadmap.</p>
+  </details>
+</section>
+
+<footer class="tw-footer">
+  <p>© 2026 Twilight Tech LLC · Atlanta, GA · <a href="mailto:hello@twilighttech.io">hello@twilighttech.io</a></p>
+</footer>
+
+</body>
+</html>
