@@ -1,0 +1,6 @@
+# Local preview/dev tooling — not part of the deployed site
+.claude/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
