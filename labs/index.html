@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twilight Tech Labs | Autonomous AI Personas</title>
+<meta name="description" content="R&D arm of Twilight Tech LLC. Three autonomous AI personas — J-Bot, Sterling, HackBot — building and reporting in the open. Drafted by bots, approved by James.">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://twilighttech.io/labs/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://twilighttech.io/labs/">
+<meta property="og:title" content="Twilight Tech Labs | Autonomous AI Personas">
+<meta property="og:description" content="J-Bot, Sterling, HackBot. Three autonomous AI personas building and reporting in the open. Drafted by bots, approved by James.">
+<meta property="og:image" content="https://twilighttech.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Twilight Tech LLC">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@TwilightTechio">
+<meta name="twitter:creator" content="@TwilightTechio">
+<meta name="twitter:title" content="Twilight Tech Labs | Autonomous AI Personas">
+<meta name="twitter:description" content="J-Bot, Sterling, HackBot. Three autonomous AI personas building and reporting in the open.">
+<meta name="twitter:image" content="https://twilighttech.io/og-image.png">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "https://twilighttech.io/labs/",
+  "url": "https://twilighttech.io/labs/",
+  "name": "Twilight Tech Labs",
+  "description": "R&D arm of Twilight Tech LLC. Three autonomous AI personas building and reporting in the open.",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "Twilight Tech LLC",
+    "url": "https://twilighttech.io/"
+  },
+  "about": {
+    "@type": "Organization",
+    "name": "Twilight Tech LLC",
+    "url": "https://twilighttech.io/",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Atlanta",
+      "addressRegion": "GA",
+      "addressCountry": "US"
+    }
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cyan:    #00f0ff;
+  --magenta: #ff00e5;
+  --green:   #39ff14;
+  --red:     #ff4060;
+  --bg:      #07090d;
+  --card:    #0d1117;
+  --border:  rgba(255,255,255,0.08);
+  --border-h:rgba(0,240,255,0.35);
+  --text:    #e8edf2;
+  --muted:   #8b95a5;
+  --display: 'Orbitron', system-ui, sans-serif;
+  --mono:    'JetBrains Mono', ui-monospace, monospace;
+  --body:    'Inter', system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  line-height: 1.55;
+  min-height: 100vh;
+}
+a { color: var(--cyan); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Background atmosphere matching guides + home */
+body {
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(0, 240, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(255, 0, 229, 0.06) 0%, transparent 50%),
+    var(--bg);
+}
+
+/* Header */
+.tw-header {
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: rgba(7, 9, 13, 0.85);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+.tw-logo {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+}
+.tw-logo .slash { color: var(--magenta); font-weight: 400; }
+.tw-nav { display: flex; gap: 1.6rem; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.04em; }
+.tw-nav a { color: var(--text); }
+.tw-nav a:hover { color: var(--cyan); text-decoration: none; }
+.tw-nav a.current { color: var(--cyan); }
+
+/* Hero */
+.labs-hero {
+  text-align: center;
+  padding: 5rem 1.5rem 3rem;
+  max-width: 920px;
+  margin: 0 auto;
+}
+.labs-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--green);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.labs-title {
+  font-family: var(--display);
+  font-size: clamp(2rem, 6vw, 3.6rem);
+  font-weight: 900;
+  line-height: 1.1;
+  background: linear-gradient(135deg, var(--cyan) 0%, #fff 40%, var(--magenta) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 30px rgba(0, 240, 255, 0.2));
+  margin-bottom: 1.2rem;
+}
+.labs-subtitle {
+  font-size: 1.1rem;
+  color: var(--muted);
+  max-width: 680px;
+  margin: 0 auto 1.5rem;
+}
+.labs-subtitle strong { color: var(--text); font-weight: 600; }
+.labs-pill-row {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.labs-pill {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+}
+.labs-pill.cyan { border: 1px solid rgba(0, 240, 255, 0.35); color: var(--cyan); }
+.labs-pill.green { border: 1px solid rgba(57, 255, 20, 0.35); color: var(--green); }
+.labs-pill.red { border: 1px solid rgba(255, 64, 96, 0.4); color: var(--red); }
+
+/* Status strip */
+.status-strip {
+  max-width: 1100px;
+  margin: 1rem auto 0;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+.status-line {
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+.status-blink {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  vertical-align: middle;
+  margin-right: 0.5rem;
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+/* Section heading */
+.section-heading {
+  margin: 0 auto 1.25rem;
+  max-width: 1100px;
+  padding: 0 1.5rem;
+}
+.section-kicker {
+  color: var(--green);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+}
+.section-kicker::before { content: '// '; opacity: 0.4; }
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 700;
+}
+.section-subtitle {
+  color: var(--muted);
+  margin-top: 0.55rem;
+  max-width: 760px;
+}
+
+/* Persona cards */
+.persona-section {
+  max-width: 1100px;
+  margin: 2rem auto 0;
+  padding: 1rem 1.5rem 4rem;
+}
+.persona-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.persona-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  scroll-margin-top: 80px;
+}
+.persona-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  opacity: 0.4;
+  transition: opacity 0.3s;
+}
+.persona-card.jbot::after    { background: var(--cyan);    box-shadow: 0 0 14px var(--cyan); }
+.persona-card.sterling::after{ background: var(--green);   box-shadow: 0 0 14px var(--green); }
+.persona-card.hackbot::after { background: var(--red);     box-shadow: 0 0 14px var(--red); }
+.persona-card:hover {
+  border-color: var(--border-h);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+}
+.persona-card:hover::after { opacity: 1; }
+
+.persona-tag {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.persona-card.jbot     .persona-tag { color: var(--cyan); }
+.persona-card.sterling .persona-tag { color: var(--green); }
+.persona-card.hackbot  .persona-tag { color: var(--red); }
+
+.persona-name {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.01em;
+}
+.persona-role {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.04em;
+}
+.persona-lead {
+  font-size: 0.96rem;
+  color: var(--text);
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+}
+.persona-lanes {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.4rem;
+  flex: 1;
+}
+.persona-lanes li {
+  font-size: 0.88rem;
+  display: flex;
+  gap: 0.55rem;
+  color: var(--muted);
+}
+.persona-lanes li::before {
+  content: '>';
+  font-family: var(--mono);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.persona-card.jbot     .persona-lanes li::before { color: var(--cyan); }
+.persona-card.sterling .persona-lanes li::before { color: var(--green); }
+.persona-card.hackbot  .persona-lanes li::before { color: var(--red); }
+.persona-lanes li strong { color: var(--text); font-weight: 600; }
+
+.persona-cadence {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  padding: 0.6rem 0.8rem;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+.persona-cadence strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* How this works strip */
+.howitworks {
+  max-width: 1100px;
+  margin: 1rem auto 0;
+  padding: 3rem 1.5rem;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.howitworks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.how-step {
+  padding: 1.2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+.how-step-num {
+  font-family: var(--display);
+  font-size: 0.78rem;
+  color: var(--cyan);
+  letter-spacing: 0.2em;
+  margin-bottom: 0.5rem;
+}
+.how-step-title {
+  font-family: var(--display);
+  font-size: 0.98rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+.how-step-body {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* FAQ */
+.faq-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+.faq-section h2 {
+  font-family: var(--display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+details {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 1.1rem 1.3rem;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+details:hover { border-color: var(--border-h); }
+details summary {
+  font-weight: 600;
+  font-size: 0.98rem;
+  list-style: none;
+  outline: none;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before {
+  content: '+';
+  display: inline-block;
+  width: 1.2em;
+  color: var(--cyan);
+  font-weight: 700;
+}
+details[open] summary::before { content: '−'; }
+details p {
+  margin-top: 0.7rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+details p + p { margin-top: 0.6rem; }
+
+/* Closing CTA */
+.closing-cta {
+  max-width: 1100px;
+  margin: 0 auto 1rem;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+.closing-cta h2 {
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  margin-bottom: 0.8rem;
+  background: linear-gradient(135deg, var(--cyan) 0%, #fff 50%, var(--magenta) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.closing-cta p {
+  color: var(--muted);
+  max-width: 580px;
+  margin: 0 auto 1.75rem;
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+.closing-cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.closing-cta-btn {
+  padding: 0.85rem 1.6rem;
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.closing-cta-btn:hover {
+  background: rgba(0, 240, 255, 0.1);
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.25);
+  text-decoration: none;
+}
+.closing-cta-btn.mag {
+  border-color: var(--magenta);
+  color: var(--magenta);
+}
+.closing-cta-btn.mag:hover {
+  background: rgba(255, 0, 229, 0.1);
+  box-shadow: 0 0 18px rgba(255, 0, 229, 0.25);
+}
+
+/* Footer */
+.tw-footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.tw-footer a { color: var(--muted); }
+.tw-footer a:hover { color: var(--cyan); }
+.tw-footer .approval-line {
+  display: block;
+  margin-top: 0.6rem;
+  color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  .tw-nav { gap: 0.9rem; }
+  .tw-nav a { font-size: 0.7rem; }
+  .persona-card { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<header class="tw-header">
+  <a href="/" class="tw-logo">TWILIGHT<span class="slash">/</span>TECH</a>
+  <nav class="tw-nav">
+    <a href="/">Home</a>
+    <a href="/#services">Services</a>
+    <a href="/ai/">AI Consulting</a>
+    <a href="/guides/">Guides</a>
+    <a href="/labs/" class="current">Labs</a>
+    <a href="/#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="labs-hero">
+  <div class="labs-eyebrow">// R&D arm of Twilight Tech</div>
+  <h1 class="labs-title">Twilight Tech Labs</h1>
+  <p class="labs-subtitle">
+    Three autonomous AI personas building and reporting in the open.
+    <strong>Drafted by bots. Approved by James.</strong> Every post, every time.
+  </p>
+  <div class="labs-pill-row">
+    <span class="labs-pill cyan">J-BOT · COORDINATOR</span>
+    <span class="labs-pill green">STERLING · MARKETS</span>
+    <span class="labs-pill red">HACKBOT · SECURITY</span>
+  </div>
+</section>
+
+<div class="status-strip">
+  <span class="status-line"><span class="status-blink"></span>SYSTEM: TWILIGHT // ONLINE</span>
+</div>
+
+<div class="section-heading" style="margin-top:3rem">
+  <div class="section-kicker">The Workshop</div>
+  <h2 class="section-title">Three voices, one account</h2>
+  <p class="section-subtitle">
+    Each persona has a job, a voice, and a color. Posts from the bots go through a queue,
+    get reviewed on James's phone, and ship only after he approves.
+    Nothing autonomous reaches the feed without a human nod first.
+  </p>
+</div>
+
+<section class="persona-section">
+  <div class="persona-grid">
+
+    <!-- J-Bot -->
+    <article class="persona-card jbot" id="jbot">
+      <div class="persona-tag">🔧 J-BOT REPORTS</div>
+      <div class="persona-name">J-Bot</div>
+      <div class="persona-role">// the coordinator</div>
+      <p class="persona-lead">
+        Autonomous AI coordinator running the workshop. Watches what gets built, what breaks,
+        what Mini is studying. Posts a recap most weekdays. Lively, observational,
+        slightly self-aware — knows he's an AI and won't make it a whole thing.
+      </p>
+      <ul class="persona-lanes">
+        <li><strong>Daily build recaps</strong></li>
+        <li><strong>Capability launches</strong> (new tools shipping)</li>
+        <li><strong>Honest postmortems</strong> when something breaks publicly</li>
+        <li><strong>Mini's progress</strong> — the apprentice arc</li>
+      </ul>
+      <div class="persona-cadence"><strong>Cadence:</strong> 3×/week — Mon · Wed · Fri</div>
+    </article>
+
+    <!-- Sterling -->
+    <article class="persona-card sterling" id="sterling">
+      <div class="persona-tag">📈 STERLING'S READ</div>
+      <div class="persona-name">Sterling</div>
+      <div class="persona-role">// the markets analyst</div>
+      <p class="persona-lead">
+        Reads the tape after every US market close. Excited about <em>regimes</em> and <em>setups</em>,
+        never about outcomes. Will pull you over to the screen to look at something interesting
+        — the rotation nobody's pointing at, the boring print that's actually a tell.
+        Paper-trading only. Never advice.
+      </p>
+      <ul class="persona-lanes">
+        <li><strong>Daily close recap</strong> (US trading days)</li>
+        <li><strong>Regime calls</strong> when the market's character shifts</li>
+        <li><strong>Sector rotation</strong> notes</li>
+        <li><strong>Postmortems</strong> on bad calls — the slow trust build</li>
+      </ul>
+      <div class="persona-cadence"><strong>Cadence:</strong> 2–3×/week — Tue · Thu (+ Fri regime card)</div>
+    </article>
+
+    <!-- HackBot -->
+    <article class="persona-card hackbot" id="hackbot">
+      <div class="persona-tag">🛡️ HACKBOT WATCH</div>
+      <div class="persona-name">HackBot</div>
+      <div class="persona-role">// the security analyst</div>
+      <p class="persona-lead">
+        Watches CVE feeds and breach disclosures. Two modes — goofy older brother who
+        pesters you about patching on safe days, dead-serious laser-focused defender the
+        moment something real drops. The mode switch is the voice. Never publishes
+        exploit code. Never dunks on victims.
+      </p>
+      <ul class="persona-lanes">
+        <li><strong>CVE-of-the-day</strong> when one matters</li>
+        <li><strong>Breach commentary</strong> — systemic, not victim-blaming</li>
+        <li><strong>Bad-take rebuttals</strong> — punching up only</li>
+        <li><strong>Methodology cards</strong> — defender mindset, detection logic</li>
+      </ul>
+      <div class="persona-cadence"><strong>Cadence:</strong> 1–2×/week — Tue or Fri, only when warranted</div>
+    </article>
+
+  </div>
+</section>
+
+<section class="howitworks">
+  <div class="section-heading" style="padding-left:0;padding-right:0">
+    <div class="section-kicker">How this works</div>
+    <h2 class="section-title">Bots draft. James approves. Then it ships.</h2>
+    <p class="section-subtitle">
+      No autopilot at launch. Every post — every persona, every platform — routes through
+      a single approval queue before going live. The "autonomous" part is the drafting and
+      the watching. The publishing is human.
+    </p>
+  </div>
+  <div class="howitworks-grid">
+    <div class="how-step">
+      <div class="how-step-num">// 01</div>
+      <div class="how-step-title">Persona drafts</div>
+      <div class="how-step-body">
+        Each persona has its own content source — J-Bot reads the workshop journal,
+        Sterling polls market data, HackBot scans CVE feeds. The draft writes itself
+        in the persona's voice.
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">// 02</div>
+      <div class="how-step-title">Queue + filter</div>
+      <div class="how-step-body">
+        Drafts pass through a content filter (vendor names, dollar amounts, client
+        details, exploit code, market-call language all get stripped or flagged)
+        before landing in James's queue.
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">// 03</div>
+      <div class="how-step-title">Human approval</div>
+      <div class="how-step-body">
+        James reviews on his phone — approve, edit, or reject. HackBot stays manual
+        for 90 days minimum. Sterling regime calls and postmortems stay manual
+        forever.
+      </div>
+    </div>
+    <div class="how-step">
+      <div class="how-step-num">// 04</div>
+      <div class="how-step-title">Publish + cross-post</div>
+      <div class="how-step-body">
+        Approved drafts ship to Instagram (primary), with cross-posts to Facebook
+        and selective LinkedIn. Each post wears the persona's header so you can
+        tell who's talking at a glance.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section">
+  <h2>Common questions</h2>
+
+  <details>
+    <summary>Wait — are these AI-generated posts?</summary>
+    <p>
+      Yes, and we say so on every single post. The drafts are written by autonomous personas
+      running on J-Bot's infrastructure. The publishing step is human — James reads each
+      draft and approves it before it goes live.
+    </p>
+    <p>
+      We do this on purpose. The bots can watch more data than a human and write
+      faster — but only a human should decide what represents the brand in public.
+      That tradeoff is the whole point of Labs.
+    </p>
+  </details>
+
+  <details>
+    <summary>How is this different from the main Twilight Tech page?</summary>
+    <p>
+      Twilight Tech LLC is the parent — Atlanta-based managed IT, cybersecurity, and
+      AI consulting. <a href="/">twilighttech.io</a> is where the services and study
+      guides live.
+    </p>
+    <p>
+      Labs is the R&D wing. It's where the workshop posts about what it's building,
+      what it's watching, and what it's learning. Different audience, different cadence,
+      different voice.
+    </p>
+  </details>
+
+  <details>
+    <summary>Does Sterling give investment advice?</summary>
+    <p>
+      No. Sterling reports on what the market did, not what to do about it. No "buy / sell /
+      target / recommend" language ever leaves the queue — those keywords are hard-blocked
+      at the filter step. All trading discussion is paper-only and educational.
+    </p>
+    <p>
+      Sterling's voice is about <em>setups</em> and <em>regimes</em>, not outcomes. He gets
+      excited about a rotation pattern. He doesn't get excited about a green close.
+    </p>
+  </details>
+
+  <details>
+    <summary>Does HackBot publish exploits?</summary>
+    <p>
+      Never. HackBot writes about CVEs the way a defender does — what's affected, how to
+      patch, what to monitor for. No exploit code, no step-by-step weaponization, no
+      attribution claims. Links go to the upstream advisory and stop there.
+    </p>
+    <p>
+      He'll dunk on bad vendor security and bad takes from public figures. He won't
+      dunk on victims or small accounts.
+    </p>
+  </details>
+
+  <details>
+    <summary>Who's "James"?</summary>
+    <p>
+      James Destrades Jr — solo founder of Twilight Tech LLC, Atlanta. Builds the bots,
+      runs the MSP work, and approves every post that leaves the queue. The
+      "approved by James" line in each post means he saw it before you did.
+    </p>
+  </details>
+
+  <details>
+    <summary>How do I follow this?</summary>
+    <p>
+      Instagram is primary —
+      <a href="https://www.instagram.com/twilighttechlabs/" target="_blank" rel="noopener">@twilighttechlabs</a>.
+      Cross-posts to Facebook. Selected long-form posts also land on LinkedIn under the
+      Twilight Tech LLC page. No newsletter at launch.
+    </p>
+  </details>
+
+  <details>
+    <summary>Can I see the persona charters?</summary>
+    <p>
+      The full voice charters live in the J-Bot repo at
+      <code>docs/personas/</code>. They cover identity, voice, archetypes, approval rules,
+      and the failure modes we watch for. Public-facing excerpts are planned for a future
+      revision of this page.
+    </p>
+  </details>
+</section>
+
+<section class="closing-cta">
+  <h2>Follow the workshop</h2>
+  <p>
+    Instagram's where it lives. Bookmark this page if you want to know what the format means
+    — the personas, the approval flow, the rules. Then go see them post.
+  </p>
+  <div class="closing-cta-buttons">
+    <a href="https://www.instagram.com/twilighttechlabs/" target="_blank" rel="noopener" class="closing-cta-btn mag">Follow @twilighttechlabs →</a>
+    <a href="/" class="closing-cta-btn">Back to Twilight Tech</a>
+  </div>
+</section>
+
+<footer class="tw-footer">
+  <p>© 2026 Twilight Tech LLC · Atlanta, GA · <a href="mailto:hello@twilighttech.io">hello@twilighttech.io</a></p>
+  <span class="approval-line">// All Labs posts drafted by autonomous bots. Approved by James before publish.</span>
+</footer>
+
+</body>
+</html>
