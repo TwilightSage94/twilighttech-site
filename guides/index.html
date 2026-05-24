@@ -601,6 +601,72 @@ body {
   margin: 0 auto;
 }
 
+/* Cross-sell strip (Guides → Strategy session) */
+.cross-strip {
+  max-width: 920px;
+  margin: 2.5rem auto;
+  padding: 1.6rem 1.75rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(255, 0, 229, 0.04) 0%, var(--card) 60%);
+  border: 1px solid rgba(255, 0, 229, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+.cross-strip::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--magenta), var(--cyan));
+}
+.cross-strip-text {
+  flex: 1 1 380px;
+  min-width: 260px;
+}
+.cross-strip-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: var(--magenta);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.cross-strip-eyebrow::before { content: '// '; opacity: 0.5; }
+.cross-strip-headline {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.cross-strip-sub {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.cross-strip-cta {
+  display: inline-block;
+  padding: 0.85rem 1.4rem;
+  border: 1px solid var(--magenta);
+  color: var(--magenta);
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s;
+  white-space: nowrap;
+}
+.cross-strip-cta:hover {
+  background: rgba(255, 0, 229, 0.12);
+  text-decoration: none;
+  box-shadow: 0 0 16px rgba(255, 0, 229, 0.3);
+}
+
 /* FAQ */
 .faq-section {
   max-width: 800px;
@@ -675,6 +741,7 @@ details p {
     <a href="/#services">Services</a>
     <a href="/ai/">AI Consulting</a>
     <a href="/guides/">Guides</a>
+    <a href="/strategy/">Strategy</a>
     <a href="/labs/">Labs</a>
     <a href="/#contact">Contact</a>
   </nav>
@@ -952,6 +1019,20 @@ details p {
     The A+ guides help you pass the exam. From Cert to Career helps you survive the first real queue,
     first escalation, and first production mistake without losing your footing.
   </p>
+</section>
+
+<!-- Cross-sell: Guides reader → Strategy session -->
+<section class="cross-strip" aria-label="Cert Strategy Session cross-sell">
+  <div class="cross-strip-text">
+    <div class="cross-strip-eyebrow">PRO MOVE</div>
+    <div class="cross-strip-headline">Studying right now? Get a custom 14-day plan.</div>
+    <div class="cross-strip-sub">
+      45-minute one-on-one strategy session — weak-area diagnosis, exam-day playbook,
+      and the day-by-day plan that fits your real week. $99, capped at 4 a month.
+    </div>
+  </div>
+  <a href="/strategy/?utm_campaign=guides-cross-sell&utm_medium=cross-sell&utm_source=guides-page"
+     class="cross-strip-cta">Book a session →</a>
 </section>
 
 <section class="faq-section">
