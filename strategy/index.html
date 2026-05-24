@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CompTIA A+ Strategy Session — 45-Minute Custom Study Plan | Twilight Tech</title>
+<meta name="description" content="A 45-minute one-on-one session to diagnose your weak areas and build a 14-day study path to your CompTIA A+ exam (Core 1, Core 2, or both). Built by an MSP, not a publisher. Limited to 4 sessions per month.">
+<meta name="robots" content="index, follow">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="canonical" href="https://twilighttech.io/strategy/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://twilighttech.io/strategy/">
+<meta property="og:title" content="CompTIA A+ Strategy Session — 45 minutes, custom plan, $99">
+<meta property="og:description" content="Stop guessing what to study next. 45 minutes one-on-one to build the 14-day plan that gets you to your A+ exam date. Limited to 4 sessions per month.">
+<meta property="og:image" content="https://twilighttech.io/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Twilight Tech LLC">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@TwilightTechio">
+<meta name="twitter:creator" content="@TwilightTechio">
+<meta name="twitter:title" content="CompTIA A+ Strategy Session — 45 minutes, $99">
+<meta name="twitter:description" content="Stop guessing what to study next. Build your 14-day A+ exam plan in one session.">
+<meta name="twitter:image" content="https://twilighttech.io/og-image.png">
+
+<!-- Service JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "CompTIA A+ Strategy Session",
+  "description": "45-minute one-on-one strategy session for CompTIA A+ exam candidates (Core 1, Core 2, or both). Includes weak-area diagnosis, custom 14-day study path, and exam-day plan. Limited to 4 sessions per month.",
+  "provider": {"@type": "Organization", "name": "Twilight Tech LLC", "url": "https://twilighttech.io/"},
+  "serviceType": "Education Consulting",
+  "areaServed": "Online",
+  "offers": {
+    "@type": "Offer",
+    "price": "99",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/LimitedAvailability",
+    "url": "https://twilighttech.io/strategy/"
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --cyan:    #00f0ff;
+  --magenta: #ff00e5;
+  --green:   #39ff14;
+  --bg:      #07090d;
+  --card:    #0d1117;
+  --border:  rgba(255,255,255,0.08);
+  --border-h:rgba(0,240,255,0.35);
+  --text:    #e8edf2;
+  --muted:   #8b95a5;
+  --display: 'Orbitron', system-ui, sans-serif;
+  --mono:    'JetBrains Mono', ui-monospace, monospace;
+  --body:    'Inter', system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  line-height: 1.55;
+  min-height: 100vh;
+}
+a { color: var(--cyan); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+body {
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(0, 240, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(255, 0, 229, 0.06) 0%, transparent 50%),
+    var(--bg);
+}
+
+/* Header */
+.tw-header {
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background: rgba(7, 9, 13, 0.85);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+.tw-logo {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: 1.05rem;
+  letter-spacing: 0.05em;
+}
+.tw-logo .slash { color: var(--magenta); font-weight: 400; }
+.tw-nav { display: flex; gap: 1.6rem; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.04em; }
+.tw-nav a { color: var(--text); }
+.tw-nav a:hover { color: var(--cyan); text-decoration: none; }
+.tw-nav a.active { color: var(--cyan); }
+
+/* Hero */
+.strat-hero {
+  text-align: center;
+  padding: 5rem 1.5rem 2.5rem;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.strat-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--green);
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.strat-title {
+  font-family: var(--display);
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  font-weight: 900;
+  line-height: 1.1;
+  background: linear-gradient(135deg, var(--cyan) 0%, #fff 40%, var(--magenta) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 30px rgba(0, 240, 255, 0.2));
+  margin-bottom: 1.2rem;
+}
+.strat-subtitle {
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 640px;
+  margin: 0 auto 1.5rem;
+}
+.strat-pill {
+  display: inline-block;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(255, 0, 229, 0.35);
+  border-radius: 100px;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--magenta);
+  letter-spacing: 0.12em;
+}
+
+/* Primary CTA card */
+.cta-card-wrap {
+  max-width: 720px;
+  margin: 0 auto 3.5rem;
+  padding: 0 1.5rem;
+}
+.cta-card {
+  background: linear-gradient(180deg, rgba(0, 240, 255, 0.04) 0%, var(--card) 50%);
+  border: 1px solid rgba(0, 240, 255, 0.28);
+  padding: 2.2rem 2rem;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.cta-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--magenta));
+}
+.cta-card-title {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+.cta-card-price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 0.8rem 0 1.4rem;
+}
+.cta-card-price {
+  font-family: var(--display);
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: var(--cyan);
+  text-shadow: 0 0 18px rgba(0, 240, 255, 0.3);
+}
+.cta-card-price-label {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+.cta-card-btn {
+  display: inline-block;
+  padding: 1rem 2rem;
+  border: 1px solid var(--magenta);
+  color: var(--magenta);
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.cta-card-btn:hover {
+  background: rgba(255, 0, 229, 0.12);
+  text-decoration: none;
+  box-shadow: 0 0 22px rgba(255, 0, 229, 0.35);
+}
+.cta-card-fineprint {
+  display: block;
+  margin-top: 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+.cta-scarcity {
+  margin-top: 1.2rem;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  color: var(--green);
+  letter-spacing: 0.08em;
+}
+
+/* Section base */
+.section-heading {
+  margin: 0 auto 1.25rem;
+  max-width: 1000px;
+  padding: 0 1.5rem;
+}
+.section-kicker {
+  color: var(--green);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+}
+.section-title {
+  font-family: var(--display);
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 700;
+}
+.section-subtitle {
+  color: var(--muted);
+  margin-top: 0.55rem;
+  max-width: 720px;
+}
+
+/* What you walk away with */
+.walkaway {
+  max-width: 1000px;
+  margin: 0 auto 3.5rem;
+  padding: 1rem 1.5rem 0;
+}
+.walkaway-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+.walkaway-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 1.6rem;
+  transition: border-color 0.2s;
+}
+.walkaway-item:hover { border-color: var(--border-h); }
+.walkaway-icon {
+  font-size: 1.7rem;
+  margin-bottom: 0.7rem;
+}
+.walkaway-title {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.walkaway-body {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* The 45 minutes */
+.agenda-section {
+  max-width: 880px;
+  margin: 0 auto 3.5rem;
+  padding: 0 1.5rem;
+}
+.agenda-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-top: 1.5rem;
+  counter-reset: agenda-counter;
+}
+.agenda-list li {
+  counter-increment: agenda-counter;
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 1.1rem 1.3rem 1.1rem 3.6rem;
+  position: relative;
+  transition: border-color 0.2s;
+}
+.agenda-list li:hover { border-color: var(--border-h); }
+.agenda-list li::before {
+  content: counter(agenda-counter, decimal-leading-zero);
+  position: absolute;
+  left: 1.1rem;
+  top: 1.1rem;
+  font-family: var(--mono);
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--cyan);
+  letter-spacing: 0.05em;
+}
+.agenda-list li strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+.agenda-time {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  margin-left: 0.5rem;
+}
+.agenda-list li p {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+}
+
+/* Who this is for */
+.fit-section {
+  max-width: 1000px;
+  margin: 0 auto 3.5rem;
+  padding: 0 1.5rem;
+}
+.fit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+@media (max-width: 720px) {
+  .fit-grid { grid-template-columns: 1fr; }
+}
+.fit-col {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 1.6rem;
+}
+.fit-col h3 {
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.fit-col.yes h3 { color: var(--green); }
+.fit-col.no h3 { color: var(--muted); }
+.fit-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+.fit-col ul li {
+  font-size: 0.92rem;
+  display: flex;
+  gap: 0.55rem;
+  color: var(--text);
+}
+.fit-col.yes ul li::before { content: '✓'; color: var(--green); font-weight: 700; }
+.fit-col.no  ul li::before { content: '✗'; color: var(--muted); font-weight: 700; }
+
+/* Trust strip */
+.trust-strip {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.trust-strip h2 {
+  font-family: var(--display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+.trust-strip p {
+  color: var(--muted);
+  max-width: 640px;
+  margin: 0 auto;
+  font-size: 0.96rem;
+}
+
+/* FAQ */
+.faq-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+.faq-section h2 {
+  font-family: var(--display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+details {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 1.1rem 1.3rem;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+details:hover { border-color: var(--border-h); }
+details summary {
+  font-weight: 600;
+  font-size: 0.98rem;
+  list-style: none;
+  outline: none;
+}
+details summary::-webkit-details-marker { display: none; }
+details summary::before {
+  content: '+';
+  display: inline-block;
+  width: 1.2em;
+  color: var(--cyan);
+  font-weight: 700;
+}
+details[open] summary::before { content: '−'; }
+details p {
+  margin-top: 0.7rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+/* Closing CTA */
+.closing-cta {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+.closing-cta h2 {
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 3vw, 2rem);
+  font-weight: 800;
+  margin-bottom: 0.8rem;
+  background: linear-gradient(135deg, var(--cyan) 0%, #fff 50%, var(--magenta) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.closing-cta p {
+  color: var(--muted);
+  max-width: 580px;
+  margin: 0 auto 1.75rem;
+  font-size: 1.02rem;
+}
+.closing-cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.closing-cta-btn {
+  padding: 0.85rem 1.6rem;
+  border: 1px solid var(--cyan);
+  color: var(--cyan);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.25s;
+}
+.closing-cta-btn:hover {
+  background: rgba(0, 240, 255, 0.1);
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.25);
+  text-decoration: none;
+}
+.closing-cta-btn.mag {
+  border-color: var(--magenta);
+  color: var(--magenta);
+}
+.closing-cta-btn.mag:hover {
+  background: rgba(255, 0, 229, 0.1);
+  box-shadow: 0 0 18px rgba(255, 0, 229, 0.25);
+}
+
+/* Footer */
+.tw-footer {
+  border-top: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.tw-footer a { color: var(--muted); }
+.tw-footer a:hover { color: var(--cyan); }
+</style>
+
+<!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-c0LpTwqFVP1lceRI6RQ_N.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+</head>
+<body>
+
+<header class="tw-header">
+  <a href="/" class="tw-logo">TWILIGHT<span class="slash">/</span>TECH</a>
+  <nav class="tw-nav">
+    <a href="/">Home</a>
+    <a href="/#services">Services</a>
+    <a href="/ai/">AI Consulting</a>
+    <a href="/guides/">Guides</a>
+    <a href="/strategy/" class="active">Strategy</a>
+    <a href="/labs/">Labs</a>
+    <a href="/#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="strat-hero">
+  <div class="strat-eyebrow">// One-on-One · 45 Minutes · $99</div>
+  <h1 class="strat-title">Stop guessing what to study next.</h1>
+  <p class="strat-subtitle">
+    45 minutes. We diagnose your weak areas, build the 14-day plan
+    that gets you to your exam date, and you walk out knowing exactly
+    what to open tomorrow morning.
+  </p>
+  <span class="strat-pill">45 MINUTES · ONE-ON-ONE · LIVE PLAN BUILD</span>
+</section>
+
+<div class="cta-card-wrap">
+  <div class="cta-card">
+    <div class="cta-card-title">CompTIA A+ Strategy Session</div>
+    <div class="cta-card-price-row">
+      <span class="cta-card-price">$99</span>
+      <span class="cta-card-price-label">one session · 45 min</span>
+    </div>
+    <!-- STRIPE-LINK-PLACEHOLDER: replace with the production buy.stripe.com URL on ship day. -->
+    <a href="#" class="cta-card-btn" data-stripe-pending="prod_UYqA7oEn1UVSUK">Book your session — $99 →</a>
+    <span class="cta-card-fineprint">Secure checkout · Stripe · Calendly link in your receipt</span>
+    <div class="cta-scarcity">// Limited to 4 sessions per month</div>
+  </div>
+</div>
+
+<div class="section-heading">
+  <div class="section-kicker">What You Walk Away With</div>
+  <h2 class="section-title">Three artifacts. One conversation.</h2>
+  <p class="section-subtitle">
+    No fluff, no generic "here's how to study" talk. You leave the
+    session with three concrete things you can act on immediately.
+  </p>
+</div>
+
+<section class="walkaway">
+  <div class="walkaway-grid">
+    <div class="walkaway-item">
+      <div class="walkaway-icon">🎯</div>
+      <div class="walkaway-title">Weak-area diagnosis</div>
+      <p class="walkaway-body">
+        We pressure-test the domains where you're least confident.
+        You'll know which 3-4 sub-objectives are quietly going to lose
+        you the exam — and which ones you can stop over-studying.
+      </p>
+    </div>
+    <div class="walkaway-item">
+      <div class="walkaway-icon">📅</div>
+      <div class="walkaway-title">14-day study plan</div>
+      <p class="walkaway-body">
+        Day-by-day. What to read, what to practice, when to do mock
+        tests, when to rest. Sized to the time you actually have, not
+        the time a publisher assumes you have.
+      </p>
+    </div>
+    <div class="walkaway-item">
+      <div class="walkaway-icon">📝</div>
+      <div class="walkaway-title">Exam-day plan</div>
+      <p class="walkaway-body">
+        Time budgeting per domain, when to flag-and-move, how to
+        handle the PBQ block, and what to do the morning of. The
+        small stuff that costs people 5 points.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="section-heading">
+  <div class="section-kicker">The 45 Minutes</div>
+  <h2 class="section-title">How a session actually runs</h2>
+  <p class="section-subtitle">
+    Structured but not rigid. We adjust on the fly based on what
+    surfaces — the diagnosis usually drives the rest.
+  </p>
+</div>
+
+<section class="agenda-section">
+  <ul class="agenda-list">
+    <li>
+      <strong>Context + current state <span class="agenda-time">~5 min</span></strong>
+      <p>Which cert, target date, time budget per week, what you've already tried, what's been hardest. Calibrates everything that follows.</p>
+    </li>
+    <li>
+      <strong>Diagnostic pass <span class="agenda-time">~15 min</span></strong>
+      <p>Targeted questions across each domain. Not a full practice exam — sampling. The goal is to find the 3-4 sub-objectives that are actually shaky, not the ones you only think you're shaky on.</p>
+    </li>
+    <li>
+      <strong>Plan build <span class="agenda-time">~15 min</span></strong>
+      <p>We construct your 14-day study path live. You see the reasoning. Adjustments happen in real time so it actually fits your week.</p>
+    </li>
+    <li>
+      <strong>Exam-day playbook <span class="agenda-time">~5 min</span></strong>
+      <p>Time budget, flag-and-move strategy, PBQ tactics, morning-of routine. The procedural layer most candidates ignore until they're sitting at the testing center.</p>
+    </li>
+    <li>
+      <strong>Q&amp;A + send-off <span class="agenda-time">~5 min</span></strong>
+      <p>Whatever's still on your mind. You'll get the written plan within 24 hours of the session, so the last 5 minutes is for you, not me.</p>
+    </li>
+  </ul>
+</section>
+
+<div class="section-heading">
+  <div class="section-kicker">Fit Check</div>
+  <h2 class="section-title">Who this is for — and who it isn't.</h2>
+</div>
+
+<section class="fit-section">
+  <div class="fit-grid">
+    <div class="fit-col yes">
+      <h3>This is for you if</h3>
+      <ul>
+        <li>You have an exam date (or want to set one) within 4-8 weeks</li>
+        <li>You've already started studying and feel stuck or scattered</li>
+        <li>You want a custom plan, not a generic "study harder" pep talk</li>
+        <li>You'd rather pay once for clarity than buy your fourth study guide</li>
+        <li>You're working full-time and need a plan that respects that</li>
+      </ul>
+    </div>
+    <div class="fit-col no">
+      <h3>This isn't for you if</h3>
+      <ul>
+        <li>You haven't picked a cert yet — start with the guides first</li>
+        <li>You want someone to study for you or "guarantee" a pass</li>
+        <li>You're looking for free advice on Reddit — go check r/CompTIA</li>
+        <li>You're studying a vendor exam (Cisco, Microsoft, AWS) — not covered yet</li>
+        <li>You want hands-on lab walkthroughs — different service, not this one</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="trust-strip">
+  <h2>Built by someone who actually does the work.</h2>
+  <p>
+    Twilight Tech LLC is an Atlanta-based managed IT and cybersecurity
+    practice. James "Twilight" Destrades Jr is the operator — former
+    technical support and sysadmin, current MSP owner, current builder
+    of the study guides this site sells. The plan you walk out with
+    comes from the same playbook he runs himself.
+  </p>
+</section>
+
+<section class="faq-section">
+  <h2>Frequently asked</h2>
+
+  <details>
+    <summary>What happens after I pay?</summary>
+    <p>Stripe sends your receipt with a Calendly link to book your 45-minute slot. Pick whatever works for your week. You'll get a calendar invite with a Google Meet link.</p>
+  </details>
+
+  <details>
+    <summary>Why only 4 sessions per month?</summary>
+    <p>So this stays a strategy service, not a calendar-based job. The cap also keeps the conversation focused and the prep quality high. When it fills, it fills — and the next slot opens at the start of the following month.</p>
+  </details>
+
+  <details>
+    <summary>Which exams does this session cover?</summary>
+    <p>v0 is CompTIA A+ only — Core 1 (220-1201), Core 2 (220-1202), or both. The session and the matching <a href="/guides/">A+ study guides</a> are tightly aligned.</p>
+    <p>Network+, Security+, CySA+, and PenTest+ get their own strategy sessions as the matching study guides ship. If you're studying for one of those, <a href="mailto:hello@twilighttech.io?subject=Future%20cert%20strategy%20session">drop a note</a> and I'll let you know when that one's live.</p>
+  </details>
+
+  <details>
+    <summary>Why $99?</summary>
+    <p>Roughly the price of the A+ guide bundle ($49) plus 45 minutes of one-on-one strategy with someone who actually does the work. You're paying for the diagnosis, the personalized plan, and the exam-day playbook — not just materials. If you'd rather just have the materials, the <a href="/guides/">guides start at $25</a>.</p>
+  </details>
+
+  <details>
+    <summary>Do I get the written plan, or just notes?</summary>
+    <p>You get the full written plan within 24 hours. The 14-day study path, the weak-area summary, and the exam-day checklist — all in one document you can refer back to.</p>
+  </details>
+
+  <details>
+    <summary>What if I'm 12 weeks out, not 4-8?</summary>
+    <p>Still works, but we'd build a 14-day "diagnostic phase" plan first — get clarity on where you actually stand — and you'd book a follow-up closer to your exam date if you want a second pass. Not required.</p>
+  </details>
+
+  <details>
+    <summary>Can I get a refund if I don't show up?</summary>
+    <p>Reschedule once for free, no questions, via the Calendly link in your receipt. After that, the session is non-refundable — the slot is held for you and the cap means it would have otherwise gone to someone else.</p>
+  </details>
+
+  <details>
+    <summary>Just want the guides — not the session?</summary>
+    <p>Totally fine. <a href="/guides/">The A+ guides and the Career Launch Suite</a> are there for that. The strategy session is for people who already have the materials and want help putting them in the right order.</p>
+  </details>
+</section>
+
+<section class="closing-cta">
+  <h2>One session. Custom plan. $99.</h2>
+  <p>
+    Most people spend $200-400 on materials they don't end up using. This is
+    the conversation that tells you which ones to actually open — and what
+    order to work them in.
+  </p>
+  <div class="closing-cta-buttons">
+    <!-- STRIPE-LINK-PLACEHOLDER: replace with the production buy.stripe.com URL on ship day. -->
+    <a href="#" class="closing-cta-btn mag" data-stripe-pending="prod_UYqA7oEn1UVSUK">Book your session — $99</a>
+    <a href="/guides/" class="closing-cta-btn">Browse the Guides instead</a>
+  </div>
+</section>
+
+<footer class="tw-footer">
+  <p>© 2026 Twilight Tech LLC · Atlanta, GA · <a href="mailto:hello@twilighttech.io">hello@twilighttech.io</a></p>
+</footer>
+
+</body>
+</html>
