@@ -418,6 +418,111 @@ body {
 }
 .inside-list li strong { color: var(--text); display: block; margin-bottom: 0.15rem; font-weight: 600; }
 
+/* Email capture strip */
+.capture-strip {
+  max-width: 760px;
+  margin: 2rem auto 3rem;
+  padding: 2rem 1.75rem;
+  background: linear-gradient(180deg, rgba(57, 255, 20, 0.04) 0%, var(--card) 60%);
+  border: 1px solid rgba(57, 255, 20, 0.28);
+  position: relative;
+  overflow: hidden;
+}
+.capture-strip::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--green), var(--cyan));
+}
+.capture-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--green);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+.capture-eyebrow::before { content: '// '; opacity: 0.5; }
+.capture-headline {
+  font-family: var(--display);
+  font-size: clamp(1.1rem, 2.4vw, 1.45rem);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+.capture-sub {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.3rem;
+  line-height: 1.5;
+}
+.capture-form {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.9rem;
+}
+.capture-form input[type="email"] {
+  flex: 1 1 240px;
+  background: rgba(7, 9, 13, 0.7);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.85rem 1rem;
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.capture-form input[type="email"]:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(57, 255, 20, 0.12);
+}
+.capture-form button {
+  background: transparent;
+  border: 1px solid var(--green);
+  color: var(--green);
+  padding: 0.85rem 1.4rem;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.capture-form button:hover {
+  background: rgba(57, 255, 20, 0.1);
+  box-shadow: 0 0 16px rgba(57, 255, 20, 0.25);
+}
+.capture-form button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.capture-fineprint {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.capture-status {
+  margin-top: 0.9rem;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  min-height: 1.2em;
+}
+.capture-status.success { color: var(--green); }
+.capture-status.error   { color: var(--magenta); }
+/* Honeypot — hidden from humans, bait for bots */
+.capture-form .hp-field {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
 /* Closing CTA */
 .closing-cta {
   max-width: 1100px;
@@ -727,6 +832,117 @@ details p {
     </ul>
   </details>
 </div>
+
+<!-- Email capture — self-hosted via J-Bot, posts to Tailscale Funnel endpoint -->
+<section class="capture-strip" aria-labelledby="capture-headline">
+  <div class="capture-eyebrow">STAY IN THE LOOP</div>
+  <h2 class="capture-headline" id="capture-headline">Network+ guide ships next. Sec+ after that.</h2>
+  <p class="capture-sub">
+    Drop your email, get a one-line heads-up the day each new guide hits.
+    Built by an MSP, written for the desk you'll actually work.
+  </p>
+  <form class="capture-form" id="capture-form" novalidate>
+    <input type="email"
+           name="email"
+           placeholder="name@you.com"
+           required
+           autocomplete="email"
+           aria-label="Email address" />
+    <!-- Honeypot — humans can't see it, bots fill it -->
+    <input type="text"
+           name="hp"
+           class="hp-field"
+           tabindex="-1"
+           autocomplete="off"
+           aria-hidden="true" />
+    <button type="submit" id="capture-submit">Notify me →</button>
+  </form>
+  <div class="capture-fineprint">One email per launch. Zero spam. Unsubscribe anytime.</div>
+  <div class="capture-status" id="capture-status" role="status" aria-live="polite"></div>
+</section>
+
+<script>
+(function () {
+  var form    = document.getElementById('capture-form');
+  var button  = document.getElementById('capture-submit');
+  var status  = document.getElementById('capture-status');
+  if (!form) return;
+
+  // J-Bot Tailscale Funnel endpoint. The trailing slash matters — the
+  // FastAPI route is defined as POST "/" under the /api/leads prefix.
+  var ENDPOINT = 'https://jbot-prime.tail1dcfc5.ts.net/api/leads/';
+
+  // Pull UTM params off the current URL so we attribute the capture
+  // back to whichever channel sent the visitor (see UTM Convention doc).
+  function getParam(name) {
+    var p = new URLSearchParams(window.location.search);
+    return p.get(name) || '';
+  }
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    status.className = 'capture-status';
+    status.textContent = '';
+
+    var fd      = new FormData(form);
+    var email   = (fd.get('email') || '').toString().trim();
+    var hp      = (fd.get('hp')    || '').toString();
+
+    if (!email) {
+      status.className = 'capture-status error';
+      status.textContent = 'Drop an email above first.';
+      return;
+    }
+
+    button.disabled    = true;
+    button.textContent = 'Sending…';
+
+    var payload = {
+      email:        email,
+      source_page:  window.location.pathname,
+      utm_campaign: getParam('utm_campaign'),
+      utm_medium:   getParam('utm_medium'),
+      utm_source:   getParam('utm_source'),
+      utm_content:  getParam('utm_content'),
+      referrer:     document.referrer || '',
+      hp:           hp
+    };
+
+    fetch(ENDPOINT, {
+      method:      'POST',
+      mode:        'cors',
+      cache:       'no-cache',
+      headers:     { 'Content-Type': 'application/json' },
+      body:        JSON.stringify(payload)
+    })
+      .then(function (resp) {
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        return resp.json();
+      })
+      .then(function (data) {
+        status.className = 'capture-status success';
+        status.textContent = '✓ ' + (data && data.message ? data.message : "You're on the list.");
+        form.reset();
+        button.textContent = 'Notify me →';
+        button.disabled = false;
+        // Plausible custom event so we can see funnel conversion
+        if (window.plausible) {
+          window.plausible('Lead Captured', { props: {
+            source: payload.utm_source || '(direct)',
+            page:   payload.source_page
+          }});
+        }
+      })
+      .catch(function (err) {
+        // Friendly error — don't expose the URL or backend specifics
+        status.className = 'capture-status error';
+        status.textContent = "Couldn't reach the server. Try again in a sec, or email hello@twilighttech.io.";
+        button.textContent = 'Notify me →';
+        button.disabled = false;
+      });
+  });
+})();
+</script>
 
 <section class="trust-strip">
   <h2>Built by people who do the work</h2>
