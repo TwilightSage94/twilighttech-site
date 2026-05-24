@@ -868,9 +868,10 @@ details p {
   var status  = document.getElementById('capture-status');
   if (!form) return;
 
-  // J-Bot Tailscale Funnel endpoint. The trailing slash matters — the
-  // FastAPI route is defined as POST "/" under the /api/leads prefix.
-  var ENDPOINT = 'https://jbot-prime.tail1dcfc5.ts.net/api/leads/';
+  // J-Bot Tailscale Funnel endpoint (testmachine = canonical Prime).
+  // Trailing slash matters — the FastAPI route is defined as POST "/"
+  // under the /api/leads prefix.
+  var ENDPOINT = 'https://testmachine.tail1dcfc5.ts.net/api/leads/';
 
   // Pull UTM params off the current URL so we attribute the capture
   // back to whichever channel sent the visitor (see UTM Convention doc).
