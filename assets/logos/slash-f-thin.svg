@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <filter id="g" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <linearGradient id="cy" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#00f0ff"/><stop offset="1" stop-color="#bdefff"/></linearGradient>
+  </defs>
+  <g filter="url(#g)">
+    <rect x="32" y="58" width="52" height="11" fill="url(#cy)"/>
+    <rect x="52" y="58" width="11" height="84" fill="url(#cy)"/>
+    <rect x="116" y="58" width="52" height="11" fill="url(#cy)"/>
+    <rect x="136" y="58" width="11" height="84" fill="url(#cy)"/>
+    <line x1="96" y1="148" x2="104" y2="52" stroke="#ff00e5" stroke-width="8" stroke-linecap="round"/>
+  </g>
+</svg>

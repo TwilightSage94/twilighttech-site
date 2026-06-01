@@ -5,739 +5,390 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Operations Consulting | Twilight Tech LLC</title>
 <meta name="description" content="I built my own AI operations agent — J-Bot. Now I help small businesses build theirs. Real calendar scheduling, email triage, ticket routing. Audit from $499.">
-<meta name="robots" content="index, follow">
-<meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="canonical" href="https://twilighttech.io/ai/">
-
-<!-- Open Graph -->
+<meta property="og:title" content="AI Operations Consulting | Twilight Tech LLC">
+<meta property="og:description" content="AI that performs operations, not just answers questions. Audit, build, and retainer engagements from a working multi-domain agent platform.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://twilighttech.io/ai/">
-<meta property="og:title" content="AI Operations Consulting | Twilight Tech LLC">
-<meta property="og:description" content="AI that performs operations, not just AI that answers questions. Audit, build, and retainer engagements from a working multi-domain agent platform.">
-<meta property="og:image" content="https://twilighttech.io/og-image.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:site_name" content="Twilight Tech LLC">
-<meta property="og:locale" content="en_US">
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:site" content="@TwilightTechio">
-<meta name="twitter:creator" content="@TwilightTechio">
-<meta name="twitter:title" content="AI Operations Consulting | Twilight Tech LLC">
-<meta name="twitter:description" content="I built J-Bot — a multi-domain AI agent that does the work, not just describes it. Audit + build engagements for SMBs and MSPs.">
-<meta name="twitter:image" content="https://twilighttech.io/og-image.png">
-
-<!-- Service JSON-LD for the consulting tiers -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "Twilight Tech LLC — AI Operations Consulting",
-  "url": "https://twilighttech.io/ai/",
-  "description": "AI operations consulting for small businesses and MSPs. Audit, deploy, and retainer engagements built on J-Bot, a working multi-domain agent platform.",
-  "areaServed": "United States",
-  "provider": {
-    "@type": "Organization",
-    "name": "Twilight Tech LLC",
-    "url": "https://twilighttech.io/"
-  },
-  "hasOfferCatalog": {
-    "@type": "OfferCatalog",
-    "name": "AI Consulting Services",
-    "itemListElement": [
-      {"@type": "Offer", "name": "AI Operations Audit", "price": "499", "priceCurrency": "USD", "description": "90-minute working session + written 48-hour report. Credit toward larger engagements."},
-      {"@type": "Offer", "name": "AI Operations Build", "priceSpecification": {"@type":"PriceSpecification","minPrice":"2500","maxPrice":"8000","priceCurrency":"USD"}, "description": "Custom J-Bot deployment, integrations, training. 2-6 weeks."},
-      {"@type": "Offer", "name": "AI Operations Retainer", "priceSpecification": {"@type":"PriceSpecification","minPrice":"499","maxPrice":"1499","priceCurrency":"USD","unitText":"MONTH"}, "description": "Monthly retainer for ongoing optimization, new workflows, model upgrades."}
-    ]
-  }
-}
-</script>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/logos/tt-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<script defer data-domain="twilighttech.io" src="https://plausible.io/js/pa-c0LpTwqFVP1lceRI6RQ_N.js"></script>
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --void:#04040f;--deep:#080818;--surface:rgba(8,8,28,0.92);--card:rgba(12,12,38,0.9);
-  --cyan:#00f0ff;--cyan-dim:rgba(0,240,255,0.12);--cyan-hover:rgba(0,240,255,0.28);
-  --magenta:#ff00e5;--green:#39ff14;--amber:#ffae00;
-  --blue:#4b7cf3;--blue-light:#6ea3ff;--purple:#7c5cbf;
-  --border:rgba(0,240,255,0.1);--border-h:rgba(0,240,255,0.3);
-  --text:#f0f4ff;--muted:#9aaac8;--grid:rgba(0,240,255,0.025);
-  --sans:'Rajdhani',sans-serif;--mono:'Share Tech Mono',monospace;--display:'Orbitron',sans-serif;
-}
-html{scroll-behavior:smooth;font-size:17px}
-body{background:var(--void);color:var(--text);font-family:var(--sans);overflow-x:hidden;line-height:1.65;font-size:1.05rem}
-@media (min-width:1100px){html{font-size:18px}}
-
-body::before{content:'';position:fixed;inset:0;background:
-  repeating-linear-gradient(0deg,rgba(0,240,255,0.012) 0,transparent 1px,transparent 4px),
-  repeating-linear-gradient(90deg,var(--grid) 0,transparent 1px,transparent 80px),
-  repeating-linear-gradient(0deg,var(--grid) 0,transparent 1px,transparent 80px);
-  pointer-events:none;z-index:1}
-body::after{content:'';position:fixed;inset:-50%;width:200%;height:200%;background:
-  radial-gradient(ellipse at 15% 20%,rgba(0,240,255,0.02) 0%,transparent 45%),
-  radial-gradient(ellipse at 85% 70%,rgba(255,0,229,0.015) 0%,transparent 40%),
-  radial-gradient(ellipse at 50% 95%,rgba(75,124,243,0.018) 0%,transparent 40%);
-  pointer-events:none;z-index:0;animation:nebula 40s ease-in-out infinite alternate}
-@keyframes nebula{0%{transform:translate(0,0) rotate(0deg)}100%{transform:translate(-2%,1.5%) rotate(2deg)}}
-
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(4,4,15,0.94);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
-.nav-inner{max-width:1280px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 2rem}
-.nav-logo{font-family:var(--display);font-weight:800;font-size:1rem;letter-spacing:2.5px;color:var(--cyan);text-shadow:0 0 18px rgba(0,240,255,0.3);text-decoration:none;display:flex;align-items:center;gap:0.5rem}
-.nav-logo-slash{color:var(--magenta);font-weight:400}
-.nav-links{display:flex;gap:0.1rem;align-items:center}
-.nav-links a{color:var(--muted);text-decoration:none;font-family:var(--mono);font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;padding:0.5rem 0.85rem;border:1px solid transparent;transition:all 0.25s}
-.nav-links a:hover{color:var(--cyan);border-color:var(--border);background:rgba(0,240,255,0.04)}
-.nav-cta{background:rgba(0,240,255,0.08)!important;border-color:rgba(0,240,255,0.3)!important;color:var(--cyan)!important}
-.nav-cta:hover{background:rgba(0,240,255,0.15)!important;box-shadow:0 0 16px rgba(0,240,255,0.12)}
-
-/* HERO */
-#hero{min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 2rem 4rem;position:relative;overflow:hidden;z-index:2}
-.hero-badge{display:inline-flex;align-items:center;gap:0.6rem;padding:0.4rem 1rem;border:1px solid rgba(57,255,20,0.3);background:rgba(57,255,20,0.04);color:var(--green);font-family:var(--mono);font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:2rem}
-.badge-blink{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 2s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
-.hero-h1{font-family:var(--display);font-size:clamp(1.8rem,5vw,3.6rem);font-weight:900;line-height:1.1;letter-spacing:-0.01em;background:linear-gradient(135deg,var(--cyan) 0%,#fff 45%,var(--magenta) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 30px rgba(0,240,255,0.2));max-width:920px;margin:0 auto}
-.hero-h2{font-family:var(--display);font-size:clamp(1.05rem,2vw,1.45rem);font-weight:600;color:var(--cyan);margin-top:1.5rem;max-width:820px;margin-left:auto;margin-right:auto;line-height:1.45}
-.hero-tagline{font-size:clamp(1.05rem,1.6vw,1.2rem);color:var(--muted);max-width:720px;margin:1.5rem auto 0;font-style:italic;line-height:1.65}
-.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem}
-
-/* BUTTONS */
-.btn{font-family:var(--mono);font-size:0.72rem;letter-spacing:2px;text-transform:uppercase;padding:0.85rem 2rem;border:1px solid var(--cyan);background:transparent;color:var(--cyan);text-decoration:none;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden;display:inline-block}
-.btn::before{content:'';position:absolute;inset:0;background:var(--cyan);opacity:0;transition:opacity 0.3s;z-index:-1}
-.btn:hover::before{opacity:0.08}
-.btn:hover{box-shadow:0 0 22px rgba(0,240,255,0.15)}
-.btn-solid{background:rgba(0,240,255,0.07);box-shadow:0 0 12px rgba(0,240,255,0.07)}
-.btn-mag{border-color:var(--magenta);color:var(--magenta)}
-.btn-mag:hover{box-shadow:0 0 22px rgba(255,0,229,0.15)}
-
-/* SECTIONS */
-section{position:relative;z-index:2;padding:5rem 2rem}
-.container{max-width:1100px;margin:0 auto}
-.sh{margin-bottom:2.5rem}
-.sh-label{font-family:var(--mono);color:var(--green);font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;margin-bottom:0.6rem}
-.sh-label::before{content:'// ';opacity:0.35}
-.sh-title{font-family:var(--display);font-size:clamp(1.4rem,3vw,2.2rem);font-weight:700;line-height:1.2}
-.sh-title .ac{color:var(--cyan)}.sh-title .am{color:var(--magenta)}.sh-title .ag{color:var(--green)}
-.sh-line{width:60px;height:2px;background:linear-gradient(90deg,var(--cyan),transparent);margin-top:0.8rem;box-shadow:0 0 8px rgba(0,240,255,0.2)}
-.sh-sub{color:var(--muted);font-size:1.08rem;margin-top:0.9rem;max-width:720px;line-height:1.7}
-.sec-dark{background:rgba(4,4,20,0.5);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-
-/* PROBLEM bullets */
-.prob-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin-top:2rem}
-.prob-item{padding:1.25rem 1.5rem;border:1px solid var(--border);background:var(--card);font-size:0.92rem;color:var(--muted);line-height:1.55}
-.prob-item strong{color:var(--text);display:block;margin-bottom:0.35rem;font-weight:600}
-.prob-call{margin-top:2.5rem;padding:1.75rem;border-left:3px solid var(--magenta);background:rgba(255,0,229,0.04);font-size:0.95rem;color:var(--muted);line-height:1.7}
-.prob-call strong{color:var(--magenta);font-weight:600}
-.cost-stack{margin-top:1rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.75rem}
-.cost-item{padding:0.85rem 1rem;border:1px solid var(--border);background:rgba(0,0,0,0.3);font-family:var(--mono);font-size:0.74rem;color:var(--muted);letter-spacing:0.5px}
-.cost-item .nm{color:var(--text);display:block;margin-bottom:0.2rem;font-family:var(--sans);font-size:0.92rem;letter-spacing:normal;font-weight:600}
+/* /ai page-specific components — chrome, tokens & base come from site.css */
+.sh-title .am{color:var(--magenta)} .sh-title .ag{color:var(--green)}
+.btn-mag{border-color:var(--magenta);color:var(--magenta)} .btn-mag:hover{background:rgba(255,0,229,.06);box-shadow:0 0 22px rgba(255,0,229,.15)}
+.hero-h1{font-family:var(--display);font-size:clamp(1.8rem,5vw,3.6rem);font-weight:900;line-height:1.1;letter-spacing:-.01em;background:linear-gradient(135deg,var(--cyan),#fff 45%,var(--magenta));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 30px rgba(0,240,255,.2));max-width:920px;margin:0 auto}
+.hero-h2{font-family:var(--display);font-size:clamp(1.05rem,2vw,1.45rem);font-weight:600;color:var(--cyan);margin:1.5rem auto 0;max-width:820px;line-height:1.45}
+.hero-tag{font-size:clamp(1.05rem,1.6vw,1.2rem);color:var(--muted);max-width:720px;margin:1.5rem auto 0;font-style:italic;line-height:1.65}
+.prob-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:2rem}
+.prob-item{padding:1.25rem 1.5rem;border:1px solid var(--border);background:var(--card);font-size:.9rem;color:var(--muted);line-height:1.55}
+.prob-item strong{color:var(--text);display:block;margin-bottom:.35rem}
+.prob-call{margin-top:2.5rem;padding:1.75rem;border-left:3px solid var(--magenta);background:rgba(255,0,229,.04);color:var(--muted);line-height:1.7}
+.prob-call strong{color:var(--magenta)}
+.cost-stack{margin-top:1rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.75rem}
+.cost-item{padding:.85rem 1rem;border:1px solid var(--border);background:rgba(0,0,0,.3);font-family:var(--mono);font-size:.74rem;color:var(--muted)}
+.cost-item .nm{color:var(--text);display:block;margin-bottom:.2rem;font-family:var(--sans);font-size:.92rem;font-weight:600}
 .cost-item .pr{color:var(--amber)}
-
-/* DIFFERENCE capability table */
-.cap-table-wrap{overflow-x:auto;margin-top:2rem}
+.cap-wrap{overflow-x:auto;margin-top:2rem}
 .cap-table{width:100%;border-collapse:separate;border-spacing:0;min-width:600px}
-.cap-table th{background:linear-gradient(180deg,rgba(0,240,255,0.1),var(--card));border:1px solid rgba(0,240,255,0.3);padding:0.9rem 1.1rem;font-family:var(--mono);font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);text-align:left}
-.cap-table td{border:1px solid var(--border);padding:0.95rem 1.1rem;font-size:1rem;color:var(--muted);vertical-align:top;line-height:1.55}
-.cap-table td:first-child{color:var(--text);font-weight:600;font-family:var(--display);font-size:0.95rem;width:150px}
-.cap-table tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+.cap-table th{background:linear-gradient(180deg,rgba(0,240,255,.1),var(--card));border:1px solid rgba(0,240,255,.3);padding:.9rem 1.1rem;font-family:var(--mono);font-size:.8rem;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);text-align:left}
+.cap-table td{border:1px solid var(--border);padding:.95rem 1.1rem;color:var(--muted);vertical-align:top;line-height:1.55}
+.cap-table td:first-child{color:var(--text);font-weight:600;font-family:var(--display);font-size:.95rem;width:150px}
 .diff-points{margin-top:2.5rem;display:flex;flex-direction:column;gap:1rem}
-.diff-point{padding:1.25rem 1.5rem;border:1px solid var(--border);background:var(--card);position:relative;padding-left:3.25rem}
+.diff-point{padding:1.25rem 1.5rem 1.25rem 3.25rem;border:1px solid var(--border);background:var(--card);position:relative}
 .diff-point::before{content:'';position:absolute;left:1.25rem;top:1.5rem;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
-.diff-point strong{color:var(--cyan);font-family:var(--display);font-size:1.05rem;display:block;margin-bottom:0.4rem;letter-spacing:0.3px}
-.diff-point span{color:var(--muted);font-size:1rem;line-height:1.65}
-.spoiler{font-style:italic;color:var(--magenta);font-size:0.92rem;margin-top:1rem;display:block}
-
-/* TIERS (services) */
-.tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-top:2rem}
-.tier-card{background:var(--card);border:1px solid var(--border);padding:2rem;position:relative;overflow:hidden;transition:all 0.35s;display:flex;flex-direction:column}
-.tier-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--purple));opacity:0;transition:opacity 0.3s}
-.tier-card:hover{border-color:var(--border-h);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.5),0 0 30px rgba(0,240,255,0.06)}
+.diff-point strong{color:var(--cyan);font-family:var(--display);font-size:1.05rem;display:block;margin-bottom:.4rem}
+.diff-point span{color:var(--muted);line-height:1.65}
+.spoiler{font-style:italic;color:var(--magenta);font-size:.92rem;margin-top:.6rem;display:block}
+.flow-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;margin-top:2rem}
+.flow-step{padding:1.75rem 1.5rem;border:1px solid var(--border);background:var(--card);position:relative;overflow:hidden}
+.flow-step::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),transparent)}
+.flow-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--cyan);background:rgba(0,240,255,.06);color:var(--cyan);font-family:var(--display);font-weight:700;margin-bottom:1rem}
+.flow-meta{font-family:var(--mono);font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--cyan);margin-bottom:.4rem}
+.flow-title{font-family:var(--display);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.5rem}
+.flow-time{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-bottom:1rem}
+.flow-time strong{color:var(--text)}
+.flow-desc{color:var(--muted);line-height:1.65;font-size:.95rem}
+.tier-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:1.5rem;margin-top:2rem}
+.tier-card{background:var(--card);border:1px solid var(--border);padding:2rem;position:relative;overflow:hidden;transition:all .35s;display:flex;flex-direction:column}
+.tier-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--purple));opacity:0;transition:opacity .3s}
+.tier-card:hover{border-color:var(--border-h);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,.5),0 0 30px rgba(0,240,255,.06)}
 .tier-card:hover::before,.tier-card.featured::before{opacity:1}
-.tier-card.featured{border-color:rgba(0,240,255,0.3);background:linear-gradient(180deg,rgba(0,240,255,0.05) 0%,var(--card) 40%)}
-.tier-badge{position:absolute;top:1rem;right:1rem;background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;font-family:var(--mono);font-size:0.58rem;padding:0.2rem 0.6rem;letter-spacing:1.5px;text-transform:uppercase}
-.tier-name{font-family:var(--display);font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:0.3rem}
-.tier-tag{font-family:var(--mono);font-size:0.72rem;color:var(--muted);letter-spacing:1px;margin-bottom:1.25rem}
-.tier-price{display:flex;align-items:baseline;gap:6px;margin-bottom:0.5rem}
-.tier-price .amt{font-family:var(--display);font-size:2.3rem;font-weight:800;color:var(--cyan);text-shadow:0 0 15px rgba(0,240,255,0.2);line-height:1}
-.tier-price .per{font-family:var(--mono);font-size:0.82rem;color:var(--muted)}
-.tier-cadence{font-family:var(--mono);font-size:0.74rem;color:var(--green);letter-spacing:0.5px;margin-bottom:1.25rem}
-.tier-desc{font-size:0.98rem;color:var(--muted);line-height:1.7;margin-bottom:1.25rem;flex:1}
-.tier-desc strong{color:var(--text);font-weight:600}
-.tier-features{list-style:none;display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1.5rem}
-.tier-features li{display:flex;align-items:flex-start;gap:10px;font-size:0.93rem;color:var(--muted);line-height:1.55}
-.tier-features li::before{content:'✦';color:var(--cyan);font-size:0.65rem;margin-top:5px;flex-shrink:0;opacity:0.7}
-.tier-cta{display:block;text-align:center;text-decoration:none;border:1px solid rgba(0,240,255,0.3);color:var(--cyan);padding:0.85rem;font-family:var(--mono);font-size:0.78rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;background:transparent;transition:all 0.25s;margin-top:auto}
-.tier-cta:hover{background:rgba(0,240,255,0.08);border-color:var(--cyan);box-shadow:0 0 14px rgba(0,240,255,0.1)}
-
-/* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:4rem;align-items:start;margin-top:2rem}
-.about-visual-card{background:var(--card);border:1px solid var(--border);padding:2.5rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.25rem;position:relative;overflow:hidden}
-.about-visual-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at center,rgba(0,240,255,0.05),transparent 70%);pointer-events:none}
-.about-avatar{width:90px;height:90px;border:2px solid rgba(0,240,255,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:2rem;font-weight:800;color:var(--cyan);background:rgba(0,240,255,0.05);box-shadow:0 0 25px rgba(0,240,255,0.1)}
-.about-name{font-family:var(--display);font-size:1rem;font-weight:700;color:#fff}
-.about-role{font-family:var(--mono);font-size:0.65rem;color:var(--cyan);letter-spacing:2px;text-transform:uppercase}
-.about-loc{font-family:var(--mono);font-size:0.62rem;color:var(--muted)}
-.cert-chips{display:flex;flex-wrap:wrap;gap:0.4rem;justify-content:center;margin-top:0.5rem}
-.cert-chip{border:1px solid var(--border);padding:0.3rem 0.65rem;font-family:var(--mono);font-size:0.58rem;color:var(--amber);letter-spacing:0.5px;background:rgba(0,0,0,0.3);transition:all 0.2s}
-.cert-chip:hover{border-color:var(--amber);box-shadow:0 0 10px rgba(255,174,0,0.08)}
-.about-text p{font-size:0.95rem;color:var(--muted);line-height:1.85;margin-bottom:1.1rem}
-.about-text p strong{color:var(--text);font-weight:600}
-.proj-block{margin-top:1.25rem;padding:1.25rem 1.5rem;border-left:2px solid var(--cyan);background:rgba(0,240,255,0.03)}
-.proj-block h4{font-family:var(--display);font-size:0.78rem;color:var(--cyan);letter-spacing:1px;margin-bottom:0.6rem;font-weight:700}
-.proj-block ul{list-style:none;display:flex;flex-direction:column;gap:0.45rem}
-.proj-block li{font-size:0.85rem;color:var(--muted);padding-left:0.8rem;position:relative;line-height:1.5}
-.proj-block li::before{content:'▸';position:absolute;left:0;color:var(--cyan);font-size:0.7rem;opacity:0.6}
-.proj-block strong{color:var(--text);font-weight:600}
-.builder-quote{margin-top:1.5rem;padding:1.25rem;border:1px solid var(--magenta);background:rgba(255,0,229,0.03);font-size:0.92rem;color:var(--text);line-height:1.7;font-style:italic}
-
-/* COMPARISON */
-.cmp-wrap{overflow-x:auto;margin-top:2rem}
-.cmp-table{width:100%;border-collapse:separate;border-spacing:0;min-width:640px}
-.cmp-table th{background:var(--card);border:1px solid var(--border);padding:1rem 1.1rem;font-family:var(--mono);font-size:0.8rem;letter-spacing:1px;text-transform:uppercase;color:var(--text);text-align:left}
-.cmp-table th.feat-col{background:linear-gradient(180deg,rgba(0,240,255,0.12),var(--card));border-color:rgba(0,240,255,0.35);color:var(--cyan)}
-.cmp-table td{border:1px solid var(--border);padding:0.95rem 1.1rem;font-size:0.96rem;color:var(--muted);vertical-align:top;line-height:1.55}
-.cmp-table td:first-child{color:var(--text);font-weight:500;font-family:var(--display);font-size:0.95rem}
-.cmp-table td.feat-col{background:rgba(0,240,255,0.04);border-color:rgba(0,240,255,0.18);color:var(--text)}
-.cmp-table tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
-.cmp-honest{margin-top:2rem;padding:1.5rem 1.75rem;border:1px solid var(--green);background:rgba(57,255,20,0.04);font-size:0.92rem;color:var(--text);line-height:1.7}
-.cmp-honest strong{color:var(--green);font-weight:600}
-
-/* DEPLOYMENT */
+.tier-card.featured{border-color:rgba(0,240,255,.3);background:linear-gradient(180deg,rgba(0,240,255,.05),var(--card) 40%)}
+.tier-badge{position:absolute;top:1rem;right:1rem;background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;font-family:var(--mono);font-size:.58rem;padding:.2rem .6rem;letter-spacing:1.5px;text-transform:uppercase}
+.tier-name{font-family:var(--display);font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:.3rem}
+.tier-tag{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-bottom:1.25rem}
+.tier-price{display:flex;align-items:baseline;gap:6px;margin-bottom:.5rem}
+.tier-price .amt{font-family:var(--display);font-size:2.3rem;font-weight:800;color:var(--cyan);text-shadow:0 0 15px rgba(0,240,255,.2);line-height:1}
+.tier-price .per{font-family:var(--mono);font-size:.82rem;color:var(--muted)}
+.tier-cadence{font-family:var(--mono);font-size:.74rem;color:var(--green);margin-bottom:1.25rem}
+.tier-desc{color:var(--muted);line-height:1.7;margin-bottom:1.25rem;flex:1;font-size:.95rem}
+.tier-desc strong{color:var(--text)}
+.tier-features{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.5rem}
+.tier-features li{display:flex;gap:10px;font-size:.92rem;color:var(--muted);line-height:1.55}
+.tier-features li::before{content:'\2726';color:var(--cyan);font-size:.6rem;margin-top:5px;flex-shrink:0;opacity:.7}
+.tier-cta{display:block;text-align:center;border:1px solid rgba(0,240,255,.3);color:var(--cyan);padding:.85rem;font-family:var(--mono);font-size:.74rem;letter-spacing:1.5px;text-transform:uppercase;margin-top:auto;transition:all .25s}
+.tier-cta:hover{background:rgba(0,240,255,.08);border-color:var(--cyan)}
+.audit-toc{margin-top:1.5rem;padding:2rem 2.25rem;border:1px solid rgba(0,240,255,.25);background:linear-gradient(135deg,rgba(0,240,255,.04),rgba(124,92,191,.04))}
+.audit-toc-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.audit-toc-icon{width:48px;height:48px;border:1px solid var(--cyan);background:rgba(0,240,255,.06);display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.5rem}
+.audit-toc-title{font-family:var(--display);font-size:1.15rem;font-weight:700;color:#fff}
+.audit-toc-sub{font-family:var(--mono);font-size:.74rem;color:var(--cyan);letter-spacing:1px;text-transform:uppercase}
+.audit-toc ol{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.85rem 1.5rem;list-style:none;counter-reset:t;margin-top:1rem}
+.audit-toc li{counter-increment:t;padding-left:2.25rem;position:relative;color:var(--muted);line-height:1.55;font-size:.95rem}
+.audit-toc li::before{content:counter(t,decimal-leading-zero);position:absolute;left:0;top:0;font-family:var(--mono);font-size:.78rem;color:var(--cyan);opacity:.7}
+.audit-toc li strong{color:var(--text);display:block;margin-bottom:.15rem}
+.audit-foot{margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid rgba(0,240,255,.15);color:var(--muted);line-height:1.6;font-style:italic}
+.audit-foot strong{color:var(--cyan);font-style:normal}
+.cmp-table th,.cmp-table td{text-align:left;vertical-align:top}
+.cmp-honest{margin-top:2rem;padding:1.5rem 1.75rem;border:1px solid var(--green);background:rgba(57,255,20,.04);color:var(--text);line-height:1.7;font-size:.95rem}
+.cmp-honest strong{color:var(--green)}
 .deploy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:2rem}
-.deploy-card{padding:1.5rem 1.75rem;border:1px solid var(--border);background:var(--card);transition:all 0.3s}
-.deploy-card:hover{border-color:var(--border-h)}
-.deploy-card h4{font-family:var(--display);font-size:0.9rem;color:var(--cyan);margin-bottom:0.6rem;font-weight:700}
-.deploy-card p{font-size:0.88rem;color:var(--muted);line-height:1.6}
-.deploy-card .tag{display:inline-block;font-family:var(--mono);font-size:0.6rem;color:var(--green);letter-spacing:1px;margin-bottom:0.4rem;text-transform:uppercase}
-.deploy-llms{margin-top:2.25rem;padding:1.5rem 1.75rem;border-left:3px solid var(--cyan);background:rgba(0,240,255,0.03);font-size:0.92rem;color:var(--muted);line-height:1.7}
-.deploy-llms strong{color:var(--cyan);font-weight:600}
-.deploy-llms .llm-tag{display:inline-block;padding:0.2rem 0.55rem;border:1px solid var(--border);background:rgba(0,0,0,0.3);color:var(--text);font-family:var(--mono);font-size:0.66rem;letter-spacing:0.5px;margin:0 0.25rem;border-radius:2px}
-
-/* HOW IT WORKS (timeline) */
-.flow-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.25rem;margin-top:2rem;position:relative}
-.flow-step{padding:1.75rem 1.5rem;border:1px solid var(--border);background:var(--card);position:relative;overflow:hidden;transition:all 0.3s}
-.flow-step:hover{border-color:var(--border-h);transform:translateY(-3px);box-shadow:0 12px 35px rgba(0,0,0,0.4)}
-.flow-step::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
-.flow-step.s1::before{background:linear-gradient(90deg,var(--green),transparent)}
-.flow-step.s2::before{background:linear-gradient(90deg,var(--cyan),transparent)}
-.flow-step.s3::before{background:linear-gradient(90deg,var(--magenta),transparent)}
-.flow-step.s4::before{background:linear-gradient(90deg,var(--amber),transparent)}
-.flow-num{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--cyan);background:rgba(0,240,255,0.06);color:var(--cyan);font-family:var(--display);font-weight:700;font-size:0.9rem;margin-bottom:1rem;box-shadow:0 0 12px rgba(0,240,255,0.1)}
-.s1 .flow-num{border-color:var(--green);color:var(--green);background:rgba(57,255,20,0.06);box-shadow:0 0 12px rgba(57,255,20,0.1)}
-.s2 .flow-num{border-color:var(--cyan);color:var(--cyan)}
-.s3 .flow-num{border-color:var(--magenta);color:var(--magenta);background:rgba(255,0,229,0.06);box-shadow:0 0 12px rgba(255,0,229,0.1)}
-.s4 .flow-num{border-color:var(--amber);color:var(--amber);background:rgba(255,174,0,0.06);box-shadow:0 0 12px rgba(255,174,0,0.1)}
-.flow-meta{font-family:var(--mono);font-size:0.7rem;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:0.4rem}
-.s1 .flow-meta{color:var(--green)}
-.s2 .flow-meta{color:var(--cyan)}
-.s3 .flow-meta{color:var(--magenta)}
-.s4 .flow-meta{color:var(--amber)}
-.flow-title{font-family:var(--display);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:0.5rem;line-height:1.25}
-.flow-time{font-family:var(--mono);font-size:0.72rem;color:var(--muted);margin-bottom:1rem;letter-spacing:0.5px}
-.flow-time strong{color:var(--text);font-weight:600}
-.flow-desc{font-size:0.95rem;color:var(--muted);line-height:1.65}
-
-/* AUDIT TOC */
-.audit-toc-wrap{margin-top:1.5rem;padding:2rem 2.25rem;border:1px solid rgba(0,240,255,0.25);background:linear-gradient(135deg,rgba(0,240,255,0.04),rgba(124,92,191,0.04));position:relative;overflow:hidden}
-.audit-toc-wrap::before{content:'';position:absolute;top:-80px;right:-80px;width:280px;height:280px;background:radial-gradient(circle,rgba(0,240,255,0.06),transparent 70%);pointer-events:none}
-.audit-toc-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
-.audit-toc-icon{width:48px;height:48px;border:1px solid var(--cyan);background:rgba(0,240,255,0.06);display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:1.5rem;flex-shrink:0;box-shadow:0 0 16px rgba(0,240,255,0.1)}
-.audit-toc-title{font-family:var(--display);font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:0.2rem}
-.audit-toc-sub{font-family:var(--mono);font-size:0.74rem;color:var(--cyan);letter-spacing:1px;text-transform:uppercase}
-.audit-toc-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:0.85rem 1.5rem;list-style:none;counter-reset:toc-counter;margin-top:1rem}
-.audit-toc-list li{counter-increment:toc-counter;padding-left:2.25rem;position:relative;font-size:0.95rem;color:var(--muted);line-height:1.55}
-.audit-toc-list li::before{content:counter(toc-counter,decimal-leading-zero);position:absolute;left:0;top:0;font-family:var(--mono);font-size:0.78rem;color:var(--cyan);opacity:0.7;letter-spacing:0.5px}
-.audit-toc-list li strong{color:var(--text);font-weight:600;display:block;margin-bottom:0.15rem}
-.audit-toc-foot{margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid rgba(0,240,255,0.15);font-size:0.92rem;color:var(--muted);line-height:1.6;font-style:italic}
-.audit-toc-foot strong{color:var(--cyan);font-style:normal;font-weight:600}
-
-/* FAQ */
-.faq-list{display:flex;flex-direction:column;gap:0.75rem;margin-top:2rem}
-.faq-item{border:1px solid var(--border);background:var(--card);overflow:hidden;transition:border-color 0.25s}
-.faq-item:hover{border-color:var(--border-h)}
-.faq-item[open]{border-color:rgba(0,240,255,0.25);background:linear-gradient(180deg,rgba(0,240,255,0.03),var(--card) 30%)}
-.faq-q{padding:1.1rem 1.5rem;cursor:pointer;font-family:var(--display);font-size:1rem;font-weight:600;color:var(--text);display:flex;align-items:center;justify-content:space-between;list-style:none;transition:color 0.2s}
+.deploy-card{padding:1.5rem 1.75rem;border:1px solid var(--border);background:var(--card)}
+.deploy-card .tag{display:inline-block;font-family:var(--mono);font-size:.6rem;color:var(--green);letter-spacing:1px;margin-bottom:.4rem;text-transform:uppercase}
+.deploy-card h4{font-family:var(--display);font-size:.9rem;color:var(--cyan);margin-bottom:.6rem}
+.deploy-card p{font-size:.88rem;color:var(--muted);line-height:1.6}
+.deploy-llms{margin-top:2.25rem;padding:1.5rem 1.75rem;border-left:3px solid var(--cyan);background:rgba(0,240,255,.03);color:var(--muted);line-height:1.7;font-size:.92rem}
+.deploy-llms strong{color:var(--cyan)}
+.llm-tag{display:inline-block;padding:.2rem .55rem;border:1px solid var(--border);background:rgba(0,0,0,.3);color:var(--text);font-family:var(--mono);font-size:.66rem;margin:0 .25rem}
+.faq-list{display:flex;flex-direction:column;gap:.75rem;margin-top:2rem}
+.faq-item{border:1px solid var(--border);background:var(--card)}
+.faq-item[open]{border-color:rgba(0,240,255,.25)}
+.faq-q{padding:1.1rem 1.5rem;cursor:pointer;font-family:var(--display);font-size:1rem;font-weight:600;color:var(--text);display:flex;justify-content:space-between;list-style:none}
 .faq-q::-webkit-details-marker{display:none}
-.faq-q:hover{color:var(--cyan)}
-.faq-q::after{content:'+';font-family:var(--mono);font-size:1.4rem;color:var(--cyan);font-weight:400;transition:transform 0.25s;line-height:1}
-.faq-item[open] .faq-q::after{content:'−'}
-.faq-a{padding:0 1.5rem 1.4rem;font-size:0.98rem;color:var(--muted);line-height:1.7}
-.faq-a strong{color:var(--text);font-weight:600}
-.faq-a code{font-family:var(--mono);font-size:0.88em;color:var(--cyan);background:rgba(0,240,255,0.06);padding:0.1rem 0.45rem;border:1px solid rgba(0,240,255,0.15);border-radius:2px}
-
-/* CTA FINAL */
-#cta{background:linear-gradient(135deg,rgba(0,240,255,0.06),rgba(75,124,243,0.06));border-top:1px solid rgba(0,240,255,0.2);border-bottom:1px solid rgba(0,240,255,0.2);text-align:center;padding:5rem 2rem}
-#cta::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at center top,rgba(0,240,255,0.08),transparent 70%);pointer-events:none}
-.cta-h{font-family:var(--display);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--blue-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem;line-height:1.25;max-width:780px;margin-left:auto;margin-right:auto}
-.cta-p{font-size:1rem;color:var(--muted);max-width:620px;margin:0 auto 2rem;line-height:1.7;font-style:italic}
-
-/* FOOTER */
-footer{padding:2.5rem 2rem;border-top:1px solid var(--border);text-align:center;font-family:var(--mono);font-size:0.7rem;color:var(--muted);letter-spacing:1px;background:rgba(0,0,0,0.4);position:relative;z-index:2}
-footer a{color:var(--cyan);text-decoration:none}
-footer a:hover{text-decoration:underline}
-
-/* RESPONSIVE */
-@media (max-width:760px){
-  .nav-links a:not(.nav-cta){display:none}
-  .about-grid{grid-template-columns:1fr;gap:2rem}
-  section{padding:3.5rem 1.25rem}
-  #hero{padding:100px 1.25rem 3rem;min-height:72vh}
-}
+.faq-q::after{content:'+';font-family:var(--mono);font-size:1.4rem;color:var(--cyan)}
+.faq-item[open] .faq-q::after{content:'\2212'}
+.faq-a{padding:0 1.5rem 1.4rem;color:var(--muted);line-height:1.7;font-size:.96rem}
+.faq-a strong{color:var(--text)}
+.about-visual{background:var(--card);border:1px solid var(--border);padding:2.5rem 2rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:1rem;position:relative;overflow:hidden;transition:transform .35s,border-color .35s}
+.about-visual::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--cyan),var(--magenta),var(--purple))}
+.about-visual::after{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(0,240,255,.08),transparent 70%);pointer-events:none}
+.about-visual:hover{transform:translateY(-4px);border-color:var(--border-h)}
+.about-avatar{position:relative}
+.about-avatar::before{content:'';position:absolute;inset:-8px;border:1px solid rgba(0,240,255,.25);border-radius:50%;animation:ring 3s ease-in-out infinite}
+@keyframes ring{0%,100%{transform:scale(1);opacity:.5}50%{transform:scale(1.08);opacity:.12}}
+.about-status{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);border:1px solid rgba(57,255,20,.3);background:rgba(57,255,20,.05);padding:.3rem .85rem;margin-top:.3rem}
+.about-status::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 2s ease-in-out infinite}
+.proj-block li{transition:color .2s}
+.proj-block li:hover{color:var(--text)}
+.pstatus{display:inline-block;font-family:var(--mono);font-size:.52rem;letter-spacing:1px;text-transform:uppercase;padding:.1rem .45rem;border:1px solid currentColor;margin-left:.35rem;border-radius:2px;vertical-align:middle}
+.ps-live{color:var(--green)} .ps-rev{color:var(--amber)} .ps-ship{color:var(--cyan)} .ps-beta{color:var(--magenta)}
+.about-avatar{width:90px;height:90px;border:2px solid rgba(0,240,255,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-size:2rem;font-weight:800;color:var(--cyan);background:rgba(0,240,255,.05)}
+.about-name{font-family:var(--display);font-size:1rem;font-weight:700;color:#fff}
+.about-role{font-family:var(--mono);font-size:.65rem;color:var(--cyan);letter-spacing:2px;text-transform:uppercase}
+.about-loc{font-family:var(--mono);font-size:.62rem;color:var(--muted)}
+.cert-chips{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:center}
+.cert-chip{border:1px solid var(--border);padding:.3rem .65rem;font-family:var(--mono);font-size:.58rem;color:var(--amber);background:rgba(0,0,0,.3)}
+.about-text p{color:var(--muted);line-height:1.85;margin-bottom:1.1rem;font-size:.95rem}
+.about-text p strong{color:var(--text)}
+.proj-block{margin-top:1.25rem;padding:1.25rem 1.5rem;border-left:2px solid var(--cyan);background:rgba(0,240,255,.03)}
+.proj-block h4{font-family:var(--display);font-size:.78rem;color:var(--cyan);letter-spacing:1px;margin-bottom:.6rem}
+.proj-block ul{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.proj-block li{font-size:.85rem;color:var(--muted);padding-left:.8rem;position:relative;line-height:1.5}
+.proj-block li::before{content:'\25B8';position:absolute;left:0;color:var(--cyan);opacity:.6}
+.proj-block strong{color:var(--text)}
+.builder-quote{margin-top:1.5rem;padding:1.25rem;border:1px solid var(--magenta);background:rgba(255,0,229,.03);color:var(--text);line-height:1.7;font-style:italic;font-size:.92rem}
+#cta-final{background:linear-gradient(135deg,rgba(0,240,255,.06),rgba(75,124,243,.06));border-top:1px solid rgba(0,240,255,.2);border-bottom:1px solid rgba(0,240,255,.2);text-align:center}
+.cta-h{font-family:var(--display);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--blue-light));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem;max-width:780px;margin-left:auto;margin-right:auto}
+.cta-p{color:var(--muted);max-width:620px;margin:0 auto 2rem;line-height:1.7;font-style:italic}
 </style>
-
-<!-- Privacy-friendly analytics by Plausible -->
-<script async src="https://plausible.io/js/pa-c0LpTwqFVP1lceRI6RQ_N.js"></script>
-<script>
-  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-  plausible.init()
-</script>
 </head>
 <body>
+<canvas id="global-particles"></canvas>
 
 <nav>
   <div class="nav-inner">
-    <a href="https://twilighttech.io/" class="nav-logo">TWILIGHT<span class="nav-logo-slash">//</span>TECH</a>
+    <a href="/" class="nav-logo"><img class="nav-mark" src="/assets/logos/tt-mark.svg" alt="Twilight Tech">TWILIGHT<span class="sl">//</span>TECH</a>
     <div class="nav-links">
-      <a href="https://twilighttech.io/#plans">MSP Plans</a>
-      <a href="https://twilighttech.io/#sentinel">Sentinel</a>
-      <a href="https://twilighttech.io/guides/">Study Guides</a>
-      <a href="https://twilighttech.io/strategy/">Strategy</a>
-      <a href="https://twilighttech.io/labs/">Labs</a>
-      <a href="#tiers" class="nav-cta">Book Audit</a>
+      <a href="/managed-it/">Managed IT</a>
+      <a href="/services/">Services</a>
+      <a href="/ai/" class="active">AI</a>
+      <a href="/guides/">Guides</a>
+      <a href="/labs/">Labs</a>
+      <a href="/#contact" class="nav-cta">Contact</a>
     </div>
+    <button class="mob-tog" aria-label="Menu">&#9776;</button>
   </div>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div>
-    <div class="hero-badge">
-      <span class="badge-blink"></span>
-      <span>Production AI · Atlanta · Twilight Tech LLC</span>
-    </div>
-    <h1 class="hero-h1">I built my own AI operations agent.<br>Now I help small businesses build theirs.</h1>
-    <h2 class="hero-h2">Most "AI for business" tools are chatbots in a wrapper.<br>J-Bot is different — it runs the operation.</h2>
-    <p class="hero-tagline">Real calendar scheduling. Real email triage. Real ticket routing. Real security monitoring. All from one chat — and trust-gated so it asks before it acts.</p>
-    <div class="hero-btns">
-      <a href="https://calendly.com/twilighttech-builds/30min?utm_source=site&utm_medium=ai_page&utm_campaign=hero" class="btn btn-solid">Book a 30-min demo · free</a>
-      <a href="#difference" class="btn btn-mag">See what it does</a>
-    </div>
-  </div>
-</section>
+<div class="shell">
 
-<!-- PROBLEM -->
-<section class="sec-dark">
-  <div class="container">
-    <div class="sh">
-      <div class="sh-label">The Problem</div>
-      <h2 class="sh-title">The <span class="am">15-25 hour</span> problem</h2>
-      <div class="sh-line"></div>
-      <p class="sh-sub">A typical small business or MSP spends 15-25 hours a week on operational coordination — context-switching between apps, re-entering information, holding multiple system states in your head at once.</p>
-    </div>
-    <div class="prob-grid">
-      <div class="prob-item"><strong>Email triage</strong>Sorting support emails into a ticketing system</div>
-      <div class="prob-item"><strong>Calendar wrangling</strong>Scheduling client meetings around conflicts</div>
-      <div class="prob-item"><strong>CRM hygiene</strong>Updating records when conversations move</div>
-      <div class="prob-item"><strong>SLA reporting</strong>Generating compliance reports on cadence</div>
-      <div class="prob-item"><strong>Health dashboards</strong>Monitoring across disconnected systems</div>
-      <div class="prob-item"><strong>Status updates</strong>Briefing yourself and your team daily</div>
-    </div>
-    <div class="prob-call">
-      <strong>The enterprise solutions are out of reach.</strong>
-      <div class="cost-stack">
-        <div class="cost-item"><span class="nm">ServiceNow ITSM</span>starts <span class="pr">~$50,000 / year</span></div>
-        <div class="cost-item"><span class="nm">Salesforce Einstein AI</span><span class="pr">$165 / user / month</span> + Enterprise license</div>
-        <div class="cost-item"><span class="nm">MS Copilot for M365</span>requires <span class="pr">E3 / E5</span> tier</div>
-      </div>
-      <p style="margin-top:1.25rem">Meanwhile, the 33 million small businesses and 40,000 MSPs that form the backbone of American IT get to choose between unaffordable enterprise platforms or "AI chatbots" that can describe a task but can't perform it.</p>
-    </div>
-  </div>
-</section>
-
-<!-- DIFFERENCE -->
-<section id="difference">
-  <div class="container">
-    <div class="sh">
-      <div class="sh-label">The Difference</div>
-      <h2 class="sh-title">AI that <span class="ac">performs operations</span>, not just AI that answers questions</h2>
-      <div class="sh-line"></div>
-      <p class="sh-sub">J-Bot is a unified AI assistant platform I've been building for the better part of a year. It's not a fork of an open-source agent framework or a wrapper around ChatGPT. It's a working multi-domain operations agent with trust-gated real-world actions, cross-domain context awareness, and production-grade reliability.</p>
-    </div>
-
-    <h3 style="font-family:var(--display);font-size:0.85rem;color:var(--cyan);letter-spacing:1.5px;margin-top:1.5rem;margin-bottom:0.5rem;text-transform:uppercase">What it actually does today</h3>
-    <div class="cap-table-wrap">
-      <table class="cap-table">
-        <thead>
-          <tr><th>Domain</th><th>Live capabilities</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Email</td><td>Triage, draft, send, search, label, schedule follow-ups via Gmail API</td></tr>
-          <tr><td>Calendar</td><td>Find free slots, schedule meetings, send invites, check today's agenda</td></tr>
-          <tr><td>Tasks</td><td>Create, assign, complete tasks via Google Tasks</td></tr>
-          <tr><td>Contacts</td><td>Search, augment with web context, push to CRM</td></tr>
-          <tr><td>Files</td><td>Read, write, search Google Drive</td></tr>
-          <tr><td>Security</td><td>8 Windows security sensors, SSL/TLS scanning, DNS posture, port analysis</td></tr>
-          <tr><td>Content</td><td>Drafts social posts, generates matching images, queues for approval</td></tr>
-          <tr><td>Memory</td><td>Pulls trusted context from a long-term knowledge vault</td></tr>
-          <tr><td>Voice</td><td>Push-to-talk speech in, voice out (where the device supports it)</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h3 style="font-family:var(--display);font-size:0.85rem;color:var(--cyan);letter-spacing:1.5px;margin-top:2.5rem;margin-bottom:0.75rem;text-transform:uppercase">What makes it different from the AI you've already tried</h3>
-    <div class="diff-points">
-      <div class="diff-point">
-        <strong>Trust-gated actions</strong>
-        <span>Every operation has a permission tier: autonomous, notify, confirm, authenticate, prohibited. You decide — per action, per context — what J-Bot can do without checking with you. Dangerous things always require explicit approval.</span>
-      </div>
-      <div class="diff-point">
-        <strong>Cross-domain context</strong>
-        <span>A support email automatically informs ticket priority. A calendar conflict influences how an email gets drafted. The agent doesn't lose track when you switch topics — it maintains state across the whole conversation.</span>
-      </div>
-      <div class="diff-point">
-        <strong>Production-grade</strong>
-        <span>200+ tool handlers, 14 internal subsystems, 4,300+ automated tests, multi-provider LLM with cost tracking and audit logging. It runs in production every day.<span class="spoiler">(Spoiler: it's running this site for me.)</span></span>
+  <section id="hero">
+    <div class="hero-inner">
+      <div class="hero-badge"><span class="badge-blink"></span> Production AI · Atlanta · Twilight Tech LLC</div>
+      <h1 class="hero-h1">I built my own AI operations agent. Now I help small businesses build theirs.</h1>
+      <h2 class="hero-h2">Most "AI for business" tools are chatbots in a wrapper. J-Bot is different — it runs the operation.</h2>
+      <p class="hero-tag">Real calendar scheduling. Real email triage. Real ticket routing. Real security monitoring. All from one chat — and trust-gated so it asks before it acts.</p>
+      <div class="hero-btns">
+        <a href="https://calendly.com/twilighttech-builds/30min?utm_source=site&utm_medium=ai_page&utm_campaign=hero" class="btn btn-solid">Book a 30-min demo · free</a>
+        <a href="#difference" class="btn btn-mag">See what it does</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- HOW IT WORKS -->
-<section id="how">
-  <div class="container">
-    <div class="sh">
-      <div class="sh-label">How it works</div>
-      <h2 class="sh-title">From <span class="ag">"hey"</span> to a working system in <span class="ac">six weeks</span></h2>
-      <div class="sh-line"></div>
-      <p class="sh-sub">No mystery process. Four steps, each with its own scope, deliverable, and exit door. You can stop after any of them.</p>
-    </div>
-    <div class="flow-grid">
-      <div class="flow-step s1">
-        <div class="flow-num">1</div>
-        <div class="flow-meta">Free · 15 min</div>
-        <h3 class="flow-title">Qualify</h3>
-        <p class="flow-time"><strong>Day 0</strong> · short call, no pressure</p>
-        <p class="flow-desc">A 15-minute call to figure out if there's a real fit. I ask about your stack, your worst day, your hard NO's. If we're not a match, I tell you who is.</p>
+  <section class="sec-dark">
+    <div class="container">
+      <div class="sh reveal"><div class="sh-label">// The Problem</div><h2 class="sh-title">The <span class="am">15–25 hour</span> problem</h2><div class="sh-line"></div><p class="sh-sub">A typical small business or MSP spends 15–25 hours a week on operational coordination — context-switching between apps, re-entering information, holding multiple system states in your head at once.</p></div>
+      <div class="prob-grid reveal">
+        <div class="prob-item"><strong>Email triage</strong>Sorting support emails into a ticketing system</div>
+        <div class="prob-item"><strong>Calendar wrangling</strong>Scheduling client meetings around conflicts</div>
+        <div class="prob-item"><strong>CRM hygiene</strong>Updating records when conversations move</div>
+        <div class="prob-item"><strong>SLA reporting</strong>Generating compliance reports on cadence</div>
+        <div class="prob-item"><strong>Health dashboards</strong>Monitoring across disconnected systems</div>
+        <div class="prob-item"><strong>Status updates</strong>Briefing yourself and your team daily</div>
       </div>
-      <div class="flow-step s2">
-        <div class="flow-num">2</div>
-        <div class="flow-meta">$499 · 90 min + report</div>
-        <h3 class="flow-title">Audit</h3>
-        <p class="flow-time"><strong>Day 3-9</strong> · session + 48hr deliverable</p>
-        <p class="flow-desc">Recorded working session. I watch how you actually spend your week. 48 hours later you get a 6-10 page engineering report with ranked AI opportunities and a 30-day plan.</p>
-      </div>
-      <div class="flow-step s3">
-        <div class="flow-num">3</div>
-        <div class="flow-meta">$2.5K - $8K · 2-6 weeks</div>
-        <h3 class="flow-title">Build</h3>
-        <p class="flow-time"><strong>Weeks 1-6</strong> · real software, your environment</p>
-        <p class="flow-desc">Custom J-Bot deployment with your business logic, integrations, trust gates, and team training. You own the configuration. 30 days of post-deployment tuning included.</p>
-      </div>
-      <div class="flow-step s4">
-        <div class="flow-num">4</div>
-        <div class="flow-meta">$499-$1.5K/mo · optional</div>
-        <h3 class="flow-title">Retain</h3>
-        <p class="flow-time"><strong>Ongoing</strong> · monthly cadence, no contract</p>
-        <p class="flow-desc">For businesses that want J-Bot as a continuous capability. Monthly check-in, new workflows added, model upgrades when they help, priority response on incidents.</p>
+      <div class="prob-call reveal">
+        <strong>The enterprise solutions are out of reach.</strong>
+        <div class="cost-stack">
+          <div class="cost-item"><span class="nm">ServiceNow ITSM</span>starts <span class="pr">~$50,000 / year</span></div>
+          <div class="cost-item"><span class="nm">Salesforce Einstein AI</span><span class="pr">$165 / user / month</span> + Enterprise license</div>
+          <div class="cost-item"><span class="nm">MS Copilot for M365</span>requires <span class="pr">E3 / E5</span> tier</div>
+        </div>
+        <p style="margin-top:1.25rem">Meanwhile, the 33 million small businesses and 40,000 MSPs that form the backbone of American IT get to choose between unaffordable enterprise platforms or "AI chatbots" that can describe a task but can't perform it.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- TIERS -->
-<section id="tiers" class="sec-dark">
-  <div class="container">
-    <div class="sh">
-      <div class="sh-label">Services</div>
-      <h2 class="sh-title">How I <span class="ac">work with you</span></h2>
-      <div class="sh-line"></div>
-      <p class="sh-sub">Three tiers, plus custom. Every engagement starts with the Audit so we both know what's worth building.</p>
+  <section id="difference">
+    <div class="container">
+      <div class="sh reveal"><div class="sh-label">// The Difference</div><h2 class="sh-title">AI that <span class="ac">performs operations</span>, not just answers questions</h2><div class="sh-line"></div><p class="sh-sub">J-Bot is a unified AI assistant platform I've been building for the better part of a year. Not a fork of an open-source framework or a wrapper around ChatGPT — a working multi-domain operations agent with trust-gated real-world actions, cross-domain context, and production-grade reliability.</p></div>
+      <div class="cap-wrap reveal">
+        <table class="cap-table">
+          <thead><tr><th>Domain</th><th>Live capabilities</th></tr></thead>
+          <tbody>
+            <tr><td>Email</td><td>Triage, draft, send, search, label, schedule follow-ups via Gmail API</td></tr>
+            <tr><td>Calendar</td><td>Find free slots, schedule meetings, send invites, check today's agenda</td></tr>
+            <tr><td>Tasks</td><td>Create, assign, complete tasks via Google Tasks</td></tr>
+            <tr><td>Contacts</td><td>Search, augment with web context, push to CRM</td></tr>
+            <tr><td>Files</td><td>Read, write, search Google Drive</td></tr>
+            <tr><td>Security</td><td>8 Windows security sensors, SSL/TLS scanning, DNS posture, port analysis</td></tr>
+            <tr><td>Content</td><td>Drafts social posts, generates matching images, queues for approval</td></tr>
+            <tr><td>Memory</td><td>Pulls trusted context from a long-term knowledge vault</td></tr>
+            <tr><td>Voice</td><td>Push-to-talk speech in, voice out (where the device supports it)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="diff-points reveal">
+        <div class="diff-point"><strong>Trust-gated actions</strong><span>Every operation has a permission tier: autonomous, notify, confirm, authenticate, prohibited. You decide — per action, per context — what J-Bot can do without checking with you. Dangerous things always require explicit approval.</span></div>
+        <div class="diff-point"><strong>Cross-domain context</strong><span>A support email automatically informs ticket priority. A calendar conflict influences how an email gets drafted. The agent maintains state across the whole conversation.</span></div>
+        <div class="diff-point"><strong>Production-grade</strong><span>200+ tool handlers, 14 internal subsystems, 4,300+ automated tests, multi-provider LLM with cost tracking and audit logging. It runs in production every day.<span class="spoiler">(Spoiler: it's running this site for me.)</span></span></div>
+      </div>
     </div>
-    <div class="tier-grid">
+  </section>
 
-      <div class="tier-card featured">
-        <span class="tier-badge">Start Here</span>
-        <div class="tier-name">AI Operations Audit</div>
-        <div class="tier-tag">90 min · written report in 48 hours</div>
-        <div class="tier-price"><span class="amt">$499</span><span class="per">one-time</span></div>
-        <div class="tier-cadence">Credit applied toward larger engagements</div>
-        <div class="tier-desc">I show up to a recorded 90-minute call. We walk through how your team actually spends its day: email handling, scheduling, ticket routing, status reporting. I leave with screen recordings + calendar history.</div>
-        <ul class="tier-features">
-          <li>Where AI can shave hours per week — ranked by ROI and risk</li>
-          <li>What you should <em>not</em> automate (because it's a relationship, not a task)</li>
-          <li>Specific tools that fit your stack — and the ones that don't</li>
-          <li>A concrete 30-day implementation plan</li>
-        </ul>
-        <a href="https://calendly.com/twilighttech-builds/30min?utm_source=site&utm_medium=ai_page&utm_campaign=tier_audit" class="tier-cta">Book the audit</a>
+  <section class="sec-dark">
+    <div class="container">
+      <div class="sh reveal"><div class="sh-label">// How It Works</div><h2 class="sh-title">From <span class="ag">"hey"</span> to a working system in <span class="ac">six weeks</span></h2><div class="sh-line"></div><p class="sh-sub">No mystery process. Four steps, each with its own scope, deliverable, and exit door. You can stop after any of them.</p></div>
+      <div class="flow-grid reveal">
+        <div class="flow-step"><div class="flow-num">1</div><div class="flow-meta">Free · 15 min</div><h3 class="flow-title">Qualify</h3><p class="flow-time"><strong>Day 0</strong> · short call</p><p class="flow-desc">A 15-minute call to find a real fit. I ask about your stack, your worst day, your hard NO's. If we're not a match, I tell you who is.</p></div>
+        <div class="flow-step"><div class="flow-num">2</div><div class="flow-meta">$499 · 90 min + report</div><h3 class="flow-title">Audit</h3><p class="flow-time"><strong>Day 3–9</strong> · session + 48hr deliverable</p><p class="flow-desc">Recorded working session. I watch how you actually spend your week. 48 hours later you get a 6–10 page engineering report with ranked AI opportunities and a 30-day plan.</p></div>
+        <div class="flow-step"><div class="flow-num">3</div><div class="flow-meta">$2.5K–$8K · 2–6 weeks</div><h3 class="flow-title">Build</h3><p class="flow-time"><strong>Weeks 1–6</strong> · real software, your environment</p><p class="flow-desc">Custom J-Bot deployment with your business logic, integrations, trust gates, and team training. You own the configuration. 30 days of tuning included.</p></div>
+        <div class="flow-step"><div class="flow-num">4</div><div class="flow-meta">$499–$1.5K/mo · optional</div><h3 class="flow-title">Retain</h3><p class="flow-time"><strong>Ongoing</strong> · monthly, no contract</p><p class="flow-desc">For businesses that want J-Bot as a continuous capability. Monthly check-in, new workflows added, model upgrades when they help, priority incident response.</p></div>
       </div>
-
-      <div class="tier-card">
-        <div class="tier-name">AI Operations Build</div>
-        <div class="tier-tag">2-6 weeks</div>
-        <div class="tier-price"><span class="amt">$2.5K</span><span class="per">– $8K</span></div>
-        <div class="tier-cadence">Fixed-scope, fixed-price</div>
-        <div class="tier-desc">I deploy a J-Bot Mini configured for your business. We pick 5-10 workflows — usually email triage, calendar scheduling, ticket coordination, plus one custom one specific to your operation.</div>
-        <ul class="tier-features">
-          <li>Custom domain pack for your business logic</li>
-          <li>Integrations: Microsoft 365, Google Workspace, ConnectWise, NinjaOne, Datto, custom APIs</li>
-          <li>30 days of post-deployment tuning included</li>
-          <li>Full audit trail of every AI action — you always see what happened</li>
-        </ul>
-        <a href="https://calendly.com/twilighttech-builds/30min?utm_source=site&utm_medium=ai_page&utm_campaign=tier_build" class="tier-cta">Discuss a build</a>
-      </div>
-
-      <div class="tier-card">
-        <div class="tier-name">AI Operations Retainer</div>
-        <div class="tier-tag">monthly · ongoing optimization</div>
-        <div class="tier-price"><span class="amt">$499</span><span class="per">– $1,499 / mo</span></div>
-        <div class="tier-cadence">No annual contract</div>
-        <div class="tier-desc">Monthly retainer for businesses that want J-Bot as a continuous capability, not a one-time install. New workflows added. Cost monitoring. Model upgrades when they help. Light support hours.</div>
-        <ul class="tier-features">
-          <li>Add new workflows as your operation evolves</li>
-          <li>Provider routing tuned monthly (NIM, Anthropic, local)</li>
-          <li>Cost + quality reporting each month</li>
-          <li>Priority response on incidents</li>
-        </ul>
-        <a href="https://calendly.com/twilighttech-builds/30min?utm_source=site&utm_medium=ai_page&utm_campaign=tier_retainer" class="tier-cta">Talk retainer</a>
-      </div>
-
-      <div class="tier-card">
-        <div class="tier-name">Custom Engagement</div>
-        <div class="tier-tag">research, white-label, novel domains</div>
-        <div class="tier-price"><span class="amt">By</span><span class="per">conversation</span></div>
-        <div class="tier-cadence">Starts with the Audit</div>
-        <div class="tier-desc">Building your own AI from scratch? Want to white-label J-Bot? Researching whether AI agents are right for an industry I haven't worked in yet? Book the audit, and we can talk through a custom engagement after.</div>
-        <ul class="tier-features">
-          <li>White-label J-Bot deployments</li>
-          <li>Industry-specific research engagements</li>
-          <li>Architecture review for in-house AI builds</li>
-          <li>Joint proposals for SBIR / grant-backed work</li>
-        </ul>
-        <a href="mailto:james@twilighttech.io?subject=Custom%20AI%20engagement" class="tier-cta">Email James</a>
-      </div>
-
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- AUDIT TOC -->
-<section id="audit-toc" class="sec-dark" style="padding-top:0;border-top:none">
-  <div class="container">
-    <div class="audit-toc-wrap">
-      <div class="audit-toc-header">
-        <div class="audit-toc-icon">▤</div>
-        <div>
-          <div class="audit-toc-title">What you actually get for $499</div>
-          <div class="audit-toc-sub">Sample audit report · 6-10 pages · PDF</div>
+  <section id="tiers">
+    <div class="container">
+      <div class="sh reveal"><div class="sh-label">// Services</div><h2 class="sh-title">How I <span class="ac">work with you</span></h2><div class="sh-line"></div><p class="sh-sub">Three tiers, plus custom. Every engagement starts with the Audit so we both know what's worth building.</p></div>
+      <div class="tier-grid">
+        <div class="tier-card featured reveal">
+          <span class="tier-badge">Start Here</span>
+          <div class="tier-name">AI Operations Audit</div>
+          <div class="tier-tag">90 min · written report in 48 hours</div>
+          <div class="tier-price"><span class="amt">$499</span><span class="per">one-time</span></div>
+          <div class="tier-cadence">Credit applied toward larger engagements</div>
+          <div class="tier-desc">A recorded 90-minute call. We walk through how your team actually spends its day — email, scheduling, ticket routing, reporting. I leave with screen recordings + calendar history.</div>
+          <ul class="tier-features"><li>Where AI can shave hours per week — ranked by ROI and risk</li><li>What you should <em>not</em> automate</li><li>Specific tools that fit your stack — and the ones that don't</li><li>A concrete 30-day implementation plan</li></ul>
+          <a href="https://calendly.com/twilighttech-builds/30min?utm_source=site&utm_medium=ai_page&utm_campaign=tier_audit" class="tier-cta">Book the Audit</a>
+        </div>
+        <div class="tier-card reveal">
+          <div class="tier-name">AI Operations Build</div>
+          <div class="tier-tag">2–6 weeks</div>
+          <div class="tier-price"><span class="amt">$2.5K</span><span class="per">– $8K</span></div>
+          <div class="tier-cadence">Fixed-scope, fixed-price</div>
+          <div class="tier-desc">I deploy a J-Bot Mini configured for your business. We pick 5–10 workflows — usually email triage, scheduling, ticket coordination, plus one custom to your operation.</div>
+          <ul class="tier-features"><li>Custom domain pack for your business logic</li><li>Integrations: M365, Google Workspace, ConnectWise, NinjaOne, Datto, custom APIs</li><li>30 days of post-deployment tuning included</li><li>Full audit trail of every AI action</li></ul>
+          <a href="https://calendly.com/twilighttech-builds/30min?utm_source=site&utm_medium=ai_page&utm_campaign=tier_build" class="tier-cta">Discuss a Build</a>
+        </div>
+        <div class="tier-card reveal">
+          <div class="tier-name">AI Operations Retainer</div>
+          <div class="tier-tag">monthly · ongoing optimization</div>
+          <div class="tier-price"><span class="amt">$499</span><span class="per">– $1,499 / mo</span></div>
+          <div class="tier-cadence">No annual contract</div>
+          <div class="tier-desc">For businesses that want J-Bot as a continuous capability. New workflows added, cost monitoring, model upgrades when they help, light support hours.</div>
+          <ul class="tier-features"><li>Add new workflows as your operation evolves</li><li>Provider routing tuned monthly (NIM, Anthropic, local)</li><li>Cost + quality reporting each month</li><li>Priority response on incidents</li></ul>
+          <a href="https://calendly.com/twilighttech-builds/30min?utm_source=site&utm_medium=ai_page&utm_campaign=tier_retainer" class="tier-cta">Talk Retainer</a>
+        </div>
+        <div class="tier-card reveal">
+          <div class="tier-name">Custom Engagement</div>
+          <div class="tier-tag">research, white-label, novel domains</div>
+          <div class="tier-price"><span class="amt">By</span><span class="per">conversation</span></div>
+          <div class="tier-cadence">Starts with the Audit</div>
+          <div class="tier-desc">Building your own AI from scratch? Want to white-label J-Bot? Researching whether AI agents fit an industry I haven't worked in yet? Book the audit and we can scope a custom engagement.</div>
+          <ul class="tier-features"><li>White-label J-Bot deployments</li><li>Industry-specific research engagements</li><li>Architecture review for in-house AI builds</li><li>Joint proposals for SBIR / grant-backed work</li></ul>
+          <a href="mailto:james@twilighttech.io?subject=Custom%20AI%20engagement" class="tier-cta">Email James</a>
         </div>
       </div>
-      <ol class="audit-toc-list">
-        <li><strong>Executive summary</strong>1 page. What I observed, top 3 opportunities, recommended path.</li>
-        <li><strong>Time audit</strong>Where your hours actually go — measured, not guessed.</li>
-        <li><strong>Ranked AI opportunities</strong>5-10 workflows, each scored on hours saved + risk + complexity.</li>
-        <li><strong>Anti-recommendations</strong>What you should <em>not</em> automate. The trust-building section.</li>
-        <li><strong>Stack-fit analysis</strong>What fits your tools (M365, Google, ConnectWise, etc.) — and what doesn't.</li>
-        <li><strong>30-day implementation plan</strong>Concrete milestones if you want to move forward.</li>
-        <li><strong>Build estimate</strong>Pricing for the next phase, based on what I actually saw.</li>
-      </ol>
-      <div class="audit-toc-foot">
-        <strong>Plus:</strong> a 30-min results walkthrough call to go through it together. The audit fee is credited toward any larger engagement, so it functions as a deposit, not a sunk cost.
-      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <div class="sh">
-      <div class="sh-label">About</div>
-      <h2 class="sh-title">Why <span class="am">me</span>, specifically</h2>
-      <div class="sh-line"></div>
-    </div>
-    <div class="about-grid">
-      <div class="about-visual-card">
-        <div class="about-avatar">JD</div>
-        <div>
-          <div class="about-name">James Destrades Jr</div>
-          <div class="about-role">Solo Founder · Twilight Tech LLC</div>
-          <div class="about-loc">Atlanta · Minority-Owned SMB</div>
+  <section class="sec-dark">
+    <div class="container">
+      <div class="audit-toc reveal">
+        <div class="audit-toc-head">
+          <div class="audit-toc-icon">▤</div>
+          <div><div class="audit-toc-title">What you actually get for $499</div><div class="audit-toc-sub">Sample audit report · 6–10 pages · PDF</div></div>
         </div>
-        <div class="cert-chips">
-          <span class="cert-chip">CompTIA A+</span>
-          <span class="cert-chip">ISC2 CC</span>
-          <span class="cert-chip">Google Cyber</span>
+        <ol>
+          <li><strong>Executive summary</strong>What I observed, top 3 opportunities, recommended path.</li>
+          <li><strong>Time audit</strong>Where your hours actually go — measured, not guessed.</li>
+          <li><strong>Ranked AI opportunities</strong>5–10 workflows, scored on hours saved + risk + complexity.</li>
+          <li><strong>Anti-recommendations</strong>What you should <em>not</em> automate. The trust-building section.</li>
+          <li><strong>Stack-fit analysis</strong>What fits your tools (M365, Google, ConnectWise) — and what doesn't.</li>
+          <li><strong>30-day plan</strong>Concrete milestones if you want to move forward.</li>
+          <li><strong>Build estimate</strong>Pricing for the next phase, based on what I actually saw.</li>
+        </ol>
+        <div class="audit-foot"><strong>Plus:</strong> a 30-min results walkthrough call. The audit fee is credited toward any larger engagement, so it functions as a deposit, not a sunk cost.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="container">
+      <div class="sh reveal"><div class="sh-label">// About</div><h2 class="sh-title">Why <span class="am">me</span>, specifically</h2><div class="sh-line"></div></div>
+      <div class="about-grid">
+        <div class="about-visual reveal">
+          <div class="about-avatar">JD</div>
+          <div><div class="about-name">James Destrades Jr</div><div class="about-role">Solo Founder · Twilight Tech LLC</div><div class="about-loc">Atlanta · Minority-Owned SMB</div></div>
+          <div class="cert-chips"><span class="cert-chip">CompTIA A+</span><span class="cert-chip">ISC2 CC</span><span class="cert-chip">Google Cyber</span></div>
+          <div style="font-family:var(--mono);font-size:.62rem;color:var(--muted);letter-spacing:1px;line-height:1.6;text-align:center">8+ yrs IT support<br>10+ yrs customer-facing<br>Atlanta-born + based</div>
+          <div class="about-status">Available for Audits</div>
         </div>
-        <div style="margin-top:0.5rem;font-family:var(--mono);font-size:0.62rem;color:var(--muted);letter-spacing:1px;line-height:1.5;text-align:center">
-          8+ yrs IT support<br>10+ yrs customer-facing<br>Atlanta-born + based
+        <div class="about-text reveal">
+          <p>I'm a solo founder in Atlanta. I built J-Bot from scratch because I needed it for my own MSP — running a small managed services business while shipping product, doing security work, and writing CompTIA study guides on the side. The standard answers (Copilot, ChatGPT Plus, ServiceNow) didn't fit a one-person operation. So I built what did.</p>
+          <div class="proj-block">
+            <h4>Active Projects</h4>
+            <ul>
+              <li><strong>J-Bot</strong> <span class="pstatus ps-live">Live</span> — the AI operations platform this page is about. Multi-provider, multi-domain, production-grade.</li>
+              <li><strong>NSF SBIR Phase I</strong> <span class="pstatus ps-rev">Under Review</span> — $275K, 12-month research project to formalize the architecture J-Bot pioneered.</li>
+              <li><strong>CompTIA A+ Study Guides</strong> <span class="pstatus ps-ship">Shipping</span> — Core 1 + Core 2 + Bundle. <a href="/guides/" style="color:var(--cyan)">Buy here</a></li>
+              <li><strong>Twilight Sentinel Scanner</strong> <span class="pstatus ps-beta">Beta</span> — small-business security scanning tool.</li>
+            </ul>
+          </div>
+          <p style="margin-top:1.25rem">I'm not a "vibes" consultant. I'm not going to sell you a 40-slide deck about "AI transformation." I'll spend 90 minutes watching how you actually work, then ship something that runs in production within weeks. The audit deliverable is a real engineering document, not a marketing artifact.</p>
+          <div class="builder-quote">If you want consulting that ends in a PDF, I'm the wrong choice. If you want consulting that ends in a working system you can audit, modify, and own — let's talk.</div>
         </div>
       </div>
-      <div class="about-text">
-        <p>I'm a solo founder in Atlanta. I built J-Bot from scratch because I needed it for my own MSP — running a small managed services business while shipping product, doing security work, and writing CompTIA study guides on the side. The standard answers (Microsoft Copilot, ChatGPT Plus, ServiceNow) didn't fit a one-person operation. So I built what did.</p>
-        <div class="proj-block">
-          <h4>Active Projects</h4>
-          <ul>
-            <li><strong>J-Bot</strong> — the AI operations platform this page is about. Multi-provider, multi-domain, production-grade.</li>
-            <li><strong>NSF SBIR Phase I proposal</strong> — $275K, 12-month research project to formalize the architecture J-Bot pioneered. Under NSF review.</li>
-            <li><strong>CompTIA A+ Study Guides</strong> — Core 1 + Core 2 + Bundle. <a href="/guides/" style="color:var(--cyan)">Buy here</a></li>
-            <li><strong>Twilight Sentinel Scanner</strong> — small-business security scanning tool.</li>
-          </ul>
-        </div>
-        <p style="margin-top:1.25rem">I'm not a "vibes" consultant. I'm not going to sell you a 40-slide deck about "AI transformation." I'm going to spend 90 minutes watching how you actually work, then ship something that runs in production within weeks. The audit deliverable is a real engineering document, not a marketing artifact. The build is real software that runs in your environment, not a Zapier flow with extra steps.</p>
-        <div class="builder-quote">If you want consulting that ends in a PDF, I'm the wrong choice. If you want consulting that ends in a working system you can audit, modify, and own — let's talk.</div>
+    </div>
+  </section>
+
+  <section class="sec-dark">
+    <div class="container">
+      <div class="sh reveal"><div class="sh-label">// Why Not Just Use…</div><h2 class="sh-title">The <span class="ag">honest</span> comparison</h2><div class="sh-line"></div><p class="sh-sub">Most of what's marketed as "AI for SMB" is one of these. Here's what J-Bot actually adds:</p></div>
+      <div class="table-wrap reveal">
+        <table class="cmp-table">
+          <thead><tr><th>What you're using now</th><th class="feat-col">What J-Bot adds</th></tr></thead>
+          <tbody>
+            <tr><td>ChatGPT / Claude / Gemini chat</td><td class="feat-col">They describe what to do; J-Bot <em>does</em> it — events created, emails sent, tickets routed</td></tr>
+            <tr><td>Microsoft Copilot for M365</td><td class="feat-col">Locked to MS; J-Bot works across Google Workspace, ConnectWise, NinjaOne, Datto, custom APIs</td></tr>
+            <tr><td>Zapier / Make.com</td><td class="feat-col">Brittle when conditions change; J-Bot reasons about context and asks before it acts</td></tr>
+            <tr><td>A custom internal AI build</td><td class="feat-col">I've already built the platform; you get years of architecture work as a starting point</td></tr>
+            <tr><td>Enterprise (ServiceNow, Einstein)</td><td class="feat-col">$50K–$200K/year; J-Bot is small-business priced and small-business shaped</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cmp-honest reveal"><strong>The honest line I'll never say:</strong> "AI replaces your team." That's not what this is for. J-Bot replaces the 15–25 hours/week your team spends on coordination, not the work they were hired to do.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="sh reveal"><div class="sh-label">// Where It Runs</div><h2 class="sh-title">In <span class="ac">your</span> environment, not someone else's data center</h2><div class="sh-line"></div><p class="sh-sub">J-Bot runs on hardware you control. Three deployment modes, depending on what fits.</p></div>
+      <div class="deploy-grid reveal">
+        <div class="deploy-card"><span class="tag">Most clients</span><h4>Self-hosted on Windows/Linux</h4><p>Runs on your existing infrastructure. Your data stays on your network. We deploy together; your team owns the config after.</p></div>
+        <div class="deploy-card"><span class="tag">Solo operators</span><h4>Local laptop / workstation</h4><p>Single-machine deployment. Good for one-person shops who want J-Bot at hand without server infrastructure.</p></div>
+        <div class="deploy-card"><span class="tag">No-infra option</span><h4>Cloud-managed by Twilight Tech</h4><p>For clients who don't want infrastructure. I host and maintain; you use the chat. Same trust gates, same audit trail.</p></div>
+      </div>
+      <div class="deploy-llms reveal"><strong>Multi-provider LLM design</strong> means you choose the brain: <span class="llm-tag">NVIDIA NIM</span> (cheap cloud), <span class="llm-tag">Anthropic Claude</span> (premium reasoning), or <span class="llm-tag">Local Ollama</span> (full data sovereignty). Change your mind later without touching your data.</div>
+    </div>
+  </section>
+
+  <section class="sec-dark">
+    <div class="container">
+      <div class="sh reveal"><div class="sh-label">// FAQ</div><h2 class="sh-title">Things <span class="am">people actually ask</span></h2><div class="sh-line"></div></div>
+      <div class="faq-list reveal">
+        <details class="faq-item"><summary class="faq-q">What if I'm not sure I need a Build after the Audit?</summary><div class="faq-a">That's the whole point of the audit being separate. You walk out with a written report you can act on (or not). About a third of audits conclude "you don't need a Build — here's a $50/month tool that solves 80% of this." The audit fee credits toward a Build if you want one, but it's not a contract.</div></details>
+        <details class="faq-item"><summary class="faq-q">Can I just hire you hourly for an existing problem?</summary><div class="faq-a">Not at this stage — I'm too small to support hourly engagements without losing the deeper builds. But the <strong>Custom</strong> tier covers most "I have one specific thing" cases as a fixed-price mini-engagement. Email me with the problem; I'll tell you within 24 hours if it fits.</div></details>
+        <details class="faq-item"><summary class="faq-q">What if my data can't leave my network?</summary><div class="faq-a">J-Bot supports a <strong>fully air-gapped deployment</strong> using local LLMs (Ollama on your hardware). Slower than cloud and capped at smaller models, but zero data leaves your network. Most regulated clients run a hybrid governed by trust gates you control.</div></details>
+        <details class="faq-item"><summary class="faq-q">How long until I see ROI?</summary><div class="faq-a">Realistic answer: <strong>4–8 weeks after Build</strong>. Week 1–2 your team learns to delegate to it; week 3–4 the agent learns your patterns; by month 2 the savings are measurable. I baseline at the start and re-measure at day 30.</div></details>
+        <details class="faq-item"><summary class="faq-q">What happens if a model breaks or the API changes?</summary><div class="faq-a">J-Bot is multi-provider by design — it fails over between NVIDIA NIM, Anthropic Claude, OpenAI, and local Ollama automatically. Provider outages don't take you down. Breaking changes are my problem, not yours.</div></details>
+        <details class="faq-item"><summary class="faq-q">Who owns the code and configuration after the Build?</summary><div class="faq-a"><strong>You do.</strong> The custom domain pack I build for your business is yours — your config, prompts, integrations, data. You can fire me and another engineer can take it over with the source.</div></details>
+        <details class="faq-item"><summary class="faq-q">What size businesses fit best?</summary><div class="faq-a"><strong>5–50 employees</strong> is the sweet spot. 50–200 is workable but integration scope grows. Solo operators often get more value from the local laptop deployment — the audit tells us which path fits.</div></details>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- COMPARISON -->
-<section class="sec-dark">
-  <div class="container">
-    <div class="sh">
-      <div class="sh-label">Why Not Just Use…</div>
-      <h2 class="sh-title">The <span class="ag">honest</span> comparison</h2>
-      <div class="sh-line"></div>
-      <p class="sh-sub">Most of what's marketed as "AI for SMB" is one of these. Here's what J-Bot actually adds:</p>
+  <section id="cta-final">
+    <div class="container">
+      <h2 class="cta-h">Want to see what J-Bot does for an actual SMB workflow?</h2>
+      <p class="cta-p">I'll share my screen and show you J-Bot doing real work — your calendar, your inbox, your tickets. No slideshow, no recorded demo.</p>
+      <a href="https://calendly.com/twilighttech-builds/30min?utm_source=site&utm_medium=ai_page&utm_campaign=footer_cta" class="btn btn-solid" style="padding:1.1rem 2.5rem">Book a free 30-minute demo →</a>
     </div>
-    <div class="cmp-wrap">
-      <table class="cmp-table">
-        <thead>
-          <tr>
-            <th>What you're using now</th>
-            <th class="feat-col">What J-Bot adds</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>ChatGPT / Claude / Gemini chat</td>
-            <td class="feat-col">They describe what to do; J-Bot <em>does</em> it — calendar events, emails sent, tickets routed</td>
-          </tr>
-          <tr>
-            <td>Microsoft Copilot for M365</td>
-            <td class="feat-col">Locked to MS ecosystem; J-Bot works across Google Workspace, ConnectWise, NinjaOne, Datto, custom APIs</td>
-          </tr>
-          <tr>
-            <td>Zapier / Make.com automations</td>
-            <td class="feat-col">Brittle when conditions change; J-Bot reasons about context and asks before it acts</td>
-          </tr>
-          <tr>
-            <td>A custom internal AI build</td>
-            <td class="feat-col">I've already built the platform; you get years of architecture work as a starting point</td>
-          </tr>
-          <tr>
-            <td>Enterprise platforms (ServiceNow, Salesforce Einstein)</td>
-            <td class="feat-col">$50K-$200K/year; J-Bot is small-business priced and small-business shaped</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="cmp-honest">
-      <strong>The honest line I'll never say:</strong> "AI replaces your team." That's not what this is for. J-Bot replaces the 15-25 hours per week your team spends on coordination, not the 20-30 hours doing the work they were actually hired to do.
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- DEPLOYMENT -->
-<section>
-  <div class="container">
-    <div class="sh">
-      <div class="sh-label">Where it runs</div>
-      <h2 class="sh-title">In <span class="ac">your</span> environment, not someone else's data center</h2>
-      <div class="sh-line"></div>
-      <p class="sh-sub">J-Bot runs on hardware you control. Three deployment modes, depending on what fits.</p>
-    </div>
-    <div class="deploy-grid">
-      <div class="deploy-card">
-        <span class="tag">Most clients</span>
-        <h4>Self-hosted on Windows/Linux</h4>
-        <p>Runs on your existing infrastructure. Your data stays on your network. We deploy together; your team owns the config after.</p>
-      </div>
-      <div class="deploy-card">
-        <span class="tag">Solo operators</span>
-        <h4>Local laptop / workstation</h4>
-        <p>Single-machine deployment. Good for one-person shops who want J-Bot at hand but don't need server infrastructure.</p>
-      </div>
-      <div class="deploy-card">
-        <span class="tag">No-infra option</span>
-        <h4>Cloud-managed by Twilight Tech</h4>
-        <p>For clients who don't want infrastructure. I host and maintain; you use the chat. Same trust gates, same audit trail.</p>
-      </div>
-    </div>
-    <div class="deploy-llms">
-      <strong>Multi-provider LLM design</strong> means you choose the brain:
-      <span class="llm-tag">NVIDIA NIM</span> (cheap cloud, $0.50/MTok),
-      <span class="llm-tag">Anthropic Claude</span> (premium reasoning), or
-      <span class="llm-tag">Local Ollama</span> (full data sovereignty).
-      You can change your mind later without touching your data.
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section id="faq" class="sec-dark">
-  <div class="container">
-    <div class="sh">
-      <div class="sh-label">FAQ</div>
-      <h2 class="sh-title">Things <span class="am">people actually ask</span></h2>
-      <div class="sh-line"></div>
-      <p class="sh-sub">If you have a question that isn't here, the audit call is free until I'm convinced we're not a fit. Ask anything.</p>
-    </div>
-    <div class="faq-list">
-      <details class="faq-item">
-        <summary class="faq-q">What if I'm not sure I need a Build after the Audit?</summary>
-        <div class="faq-a">That's the whole point of the audit being separate. You walk out with a written report you can act on (or not). About a third of audit deliverables include "you don't actually need a Build, here's a $50/month tool that solves 80% of this" — and I tell you that honestly. The audit fee credits toward a Build if you do want one, but it's not a contract.</div>
-      </details>
-      <details class="faq-item">
-        <summary class="faq-q">Can I just hire you hourly for an existing problem?</summary>
-        <div class="faq-a">Not at this stage — I'm too small to support hourly engagements without losing the deeper builds. But the <strong>Custom</strong> tier covers most "I have one specific thing" cases, and we can scope it as a fixed-price mini-engagement. Email me with the problem, I'll tell you within 24 hours if it fits.</div>
-      </details>
-      <details class="faq-item">
-        <summary class="faq-q">What if my data can't leave my network?</summary>
-        <div class="faq-a">J-Bot supports a <strong>fully air-gapped deployment</strong> using local LLMs (Ollama on your hardware). Slower than cloud and capped at smaller models, but zero data leaves your network. Most regulated clients use a hybrid: local model for sensitive operations, cloud for everything else, all governed by trust gates you control.</div>
-      </details>
-      <details class="faq-item">
-        <summary class="faq-q">How long until I see ROI?</summary>
-        <div class="faq-a">Realistic answer: <strong>4-8 weeks after Build</strong>. Week 1-2 is your team learning to delegate to it. Week 3-4 is the agent learning your patterns. By month 2 the time savings are measurable. I include a baseline measurement at the start of the Build and a re-measurement at day 30 so we're both looking at the same numbers.</div>
-      </details>
-      <details class="faq-item">
-        <summary class="faq-q">What happens if a model breaks or the API changes?</summary>
-        <div class="faq-a">J-Bot is multi-provider by design — it fails over between NVIDIA NIM, Anthropic Claude, OpenAI, and local Ollama automatically. Provider outages don't take you down. API breaking changes are my problem, not yours; I update the platform and your deployment gets the patch.</div>
-      </details>
-      <details class="faq-item">
-        <summary class="faq-q">Do you sign NDAs?</summary>
-        <div class="faq-a">Yes, before the audit if you need one. I have a mutual NDA template ready. The audit recording stays with you; I keep my notes for the duration of the engagement and delete them on request after.</div>
-      </details>
-      <details class="faq-item">
-        <summary class="faq-q">Who owns the code and configuration after the Build?</summary>
-        <div class="faq-a"><strong>You do.</strong> The custom domain pack I build for your business is yours. The base J-Bot platform is open under the Twilight Tech license, and I keep maintaining it for everyone — but your config, your prompts, your integrations, your data: yours. You can fire me and another engineer can take it over, and they'd have the source.</div>
-      </details>
-      <details class="faq-item">
-        <summary class="faq-q">What size businesses fit best?</summary>
-        <div class="faq-a"><strong>5-50 employees</strong> is the sweet spot. 50-200 is workable but the integration scope grows. Solo operators (1-4 people) often get more value from the local laptop deployment than a full Build — the audit tells us which path fits.</div>
-      </details>
-      <details class="faq-item">
-        <summary class="faq-q">Is this a SaaS subscription or do I install something?</summary>
-        <div class="faq-a">Neither, in the traditional sense. J-Bot is a <strong>platform you run</strong> — Windows or Linux service, your hardware (or a small VPS I help you provision). No SaaS fees from me. You pay for the Build, optionally a Retainer, and the underlying LLM provider you choose (typically $5-50/month at SMB scale).</div>
-      </details>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section id="cta">
-  <div class="container">
-    <h2 class="cta-h">Want to see what J-Bot does for an actual SMB workflow?</h2>
-    <p class="cta-p">I'll share my screen and show you J-Bot doing real work — your calendar, your inbox, your tickets. No slideshow, no recorded demo, no "let me follow up with our sales engineer."</p>
-    <a href="https://calendly.com/twilighttech-builds/30min?utm_source=site&utm_medium=ai_page&utm_campaign=footer_cta" class="btn btn-solid" style="font-size:0.85rem;padding:1.1rem 2.5rem">Book a free 30-minute demo →</a>
-  </div>
-</section>
+</div><!-- /shell -->
 
 <footer>
-  <div>TWILIGHT//TECH LLC · Atlanta, GA · <a href="mailto:james@twilighttech.io">james@twilighttech.io</a> · <a href="https://twilighttech.io/">Main site</a></div>
-  <div style="margin-top:0.6rem;opacity:0.7">© 2026 Twilight Tech LLC. Minority-owned small business.</div>
+  <div class="footer-inner">
+    <div>© 2026 <span class="nc">Twilight Tech LLC</span> · Atlanta, GA · Minority-Owned Small Business</div>
+    <div class="footer-status">All systems operational</div>
+  </div>
 </footer>
 
+<script src="/assets/site.js"></script>
 </body>
 </html>
