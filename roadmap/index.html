@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free: The Roadmap to Break Into IT — Twilight Tech</title>
+<meta name="description" content="A free 5-page roadmap: what to build to turn a CompTIA cert into real, hireable IT skills — using the laptop you own and software that costs nothing. From Twilight Technology.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://twilighttech.io/roadmap/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://twilighttech.io/roadmap/">
+<meta property="og:title" content="Free: The Roadmap to Break Into IT">
+<meta property="og:description" content="The 5-page map from 'I passed the cert' to 'I can do the job.' Free from Twilight Technology.">
+<meta property="og:image" content="https://twilighttech.io/roadmap/cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free: The Roadmap to Break Into IT">
+<meta name="twitter:description" content="The 5-page map from passing the cert to doing the job. Free.">
+<meta name="twitter:image" content="https://twilighttech.io/roadmap/cover.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/logos/tt-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<script defer data-domain="twilighttech.io" src="https://plausible.io/js/pa-c0LpTwqFVP1lceRI6RQ_N.js"></script>
+<style>
+/* /roadmap — lead-magnet landing. Chrome + tokens come from site.css. */
+.rm-wrap{max-width:var(--max);margin:0 auto;padding:128px 1.5rem 3rem;position:relative;z-index:2}
+.rm-hero{display:grid;grid-template-columns:1.3fr 0.7fr;gap:3rem;align-items:center}
+.rm-eyebrow{font-family:var(--mono);font-size:0.72rem;color:var(--green);letter-spacing:0.35em;text-transform:uppercase;margin-bottom:1.2rem}
+.rm-eyebrow::before{content:'// ';opacity:0.55}
+.rm-title{font-family:var(--display);font-size:clamp(2rem,5.4vw,3.4rem);font-weight:900;line-height:1.08;margin-bottom:1.1rem}
+.rm-title .ac{background:linear-gradient(135deg,var(--cyan) 0%,#fff 55%,var(--magenta) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.rm-sub{color:var(--muted);font-size:1.08rem;line-height:1.7;max-width:560px;margin-bottom:1.8rem}
+.rm-sub strong{color:var(--text)}
+.rm-coverwrap{text-align:center}
+.rm-coverwrap img{width:100%;max-width:300px;border:1px solid var(--border);box-shadow:0 18px 50px rgba(0,0,0,.55),0 0 30px rgba(0,240,255,.08);border-radius:4px}
+/* Capture card */
+.rm-card{background:linear-gradient(180deg,rgba(0,240,255,0.05) 0%,var(--card) 60%);border:1px solid rgba(0,240,255,0.28);padding:1.6rem 1.6rem;max-width:560px;position:relative;overflow:hidden}
+.rm-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--magenta))}
+.rm-form{display:flex;gap:0.6rem;flex-wrap:wrap}
+.rm-form input[type=email]{flex:1 1 240px;background:rgba(4,4,15,0.7);border:1px solid var(--border);color:var(--text);padding:0.9rem 1rem;font-family:var(--mono);font-size:0.95rem;outline:none;transition:border-color .2s,box-shadow .2s}
+.rm-form input[type=email]:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,240,255,.12)}
+.rm-form button{background:linear-gradient(135deg,var(--cyan),var(--blue));border:none;color:#03121a;padding:0.9rem 1.5rem;font-family:var(--mono);font-size:0.82rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .25s}
+.rm-form button:hover{box-shadow:0 0 22px rgba(0,240,255,.35);transform:translateY(-1px)}
+.rm-form button:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.rm-fine{font-family:var(--mono);font-size:0.68rem;color:var(--muted);letter-spacing:.04em;margin-top:0.9rem}
+.rm-status{font-family:var(--mono);font-size:0.85rem;margin-top:0.8rem;min-height:1.1em}
+.rm-status.error{color:var(--magenta)}
+.hp-field{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+/* Delivered state */
+.rm-deliver{display:none}
+.rm-deliver.show{display:block;animation:fadeUp .5s both}
+.rm-deliver h3{font-family:var(--display);color:var(--green);font-size:1.1rem;margin-bottom:.6rem}
+.rm-dl{display:inline-block;margin-top:.4rem;padding:0.95rem 1.6rem;border:1px solid var(--green);color:var(--green);font-family:var(--mono);font-size:0.85rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:all .25s}
+.rm-dl:hover{background:rgba(57,255,20,.1);box-shadow:0 0 20px rgba(57,255,20,.3)}
+/* Inside list */
+.rm-inside{max-width:var(--max);margin:1rem auto 0;padding:3rem 1.5rem;position:relative;z-index:2;border-top:1px solid var(--border)}
+.rm-inside .sh-label{font-family:var(--mono);font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:.8rem}
+.rm-inside h2{font-family:var(--display);font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:1.6rem}
+.rm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.1rem;counter-reset:p}
+.rm-item{background:var(--card);border:1px solid var(--border);padding:1.1rem 1.2rem;position:relative;padding-left:3rem;transition:border-color .2s}
+.rm-item:hover{border-color:var(--border-h)}
+.rm-item::before{counter-increment:p;content:'0' counter(p);position:absolute;left:1rem;top:1.1rem;font-family:var(--display);font-weight:800;color:var(--cyan);font-size:1rem;opacity:.7}
+.rm-item strong{display:block;color:var(--text);font-size:0.98rem;margin-bottom:.2rem}
+.rm-item span{color:var(--muted);font-size:0.86rem;line-height:1.5}
+/* Upsell band */
+.rm-upsell{max-width:920px;margin:1.5rem auto 0;padding:2rem 1.75rem;display:flex;gap:1.6rem;align-items:center;flex-wrap:wrap;justify-content:center;text-align:center;background:linear-gradient(180deg,rgba(255,0,229,0.05) 0%,var(--card) 60%);border:1px solid rgba(255,0,229,0.25);position:relative;overflow:hidden;z-index:2}
+.rm-upsell::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--magenta),var(--cyan))}
+.rm-upsell-text{flex:1 1 360px;min-width:260px;text-align:left}
+.rm-upsell-eyebrow{font-family:var(--mono);font-size:0.66rem;color:var(--magenta);letter-spacing:.3em;text-transform:uppercase;margin-bottom:.4rem}
+.rm-upsell h3{font-family:var(--display);font-size:1.15rem;font-weight:700;margin-bottom:.3rem}
+.rm-upsell p{color:var(--muted);font-size:0.92rem;line-height:1.5}
+@media(max-width:760px){.rm-hero{grid-template-columns:1fr}.rm-coverwrap{order:-1}.rm-coverwrap img{max-width:200px}}
+</style>
+</head>
+<body>
+<canvas id="global-particles"></canvas>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img class="nav-mark" src="/assets/logos/tt-mark.svg" alt="Twilight Tech">TWILIGHT<span class="sl">//</span>TECH</a>
+    <div class="nav-links">
+      <a href="/managed-it/">Managed IT</a>
+      <a href="/services/">Services</a>
+      <a href="/ai/">AI</a>
+      <a href="/guides/">Guides</a>
+      <a href="/labs/">Labs</a>
+      <a href="/#contact" class="nav-cta">Contact</a>
+    </div>
+    <button class="mob-tog" aria-label="Menu">&#9776;</button>
+  </div>
+</nav>
+
+<div class="shell">
+
+  <section class="rm-wrap reveal">
+    <div class="rm-hero">
+      <div>
+        <div class="rm-eyebrow">Free · From Cert to Career</div>
+        <h1 class="rm-title">The Roadmap to <span class="ac">Break Into IT</span></h1>
+        <p class="rm-sub">You passed the cert — or you're about to. <strong>Now what?</strong> This free 5-page roadmap shows you exactly what to <em>build</em> to prove you can do the job, using the laptop you already own and software that costs nothing.</p>
+
+        <div class="rm-card">
+          <form class="rm-form" id="rm-form" novalidate>
+            <input type="email" name="email" placeholder="name@you.com" required autocomplete="email" aria-label="Email address">
+            <input type="text" name="hp" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <button type="submit" id="rm-submit">Send me the roadmap →</button>
+          </form>
+          <div class="rm-fine">Free. No spam — one heads-up only if a new guide drops. Unsubscribe anytime.</div>
+          <div class="rm-status" id="rm-status" role="status" aria-live="polite"></div>
+          <div class="rm-deliver" id="rm-deliver">
+            <h3>✓ Here's your roadmap.</h3>
+            <p class="rm-fine" style="margin-bottom:.6rem">Click below to download. Build it, break it, get hired.</p>
+            <a class="rm-dl" id="rm-dl" href="/roadmap/build-it-break-it-roadmap.pdf" download>Download the roadmap (PDF) →</a>
+          </div>
+        </div>
+      </div>
+      <div class="rm-coverwrap">
+        <img src="/roadmap/cover.jpg" alt="Build It, Break It — the hands-on IT lab manual">
+      </div>
+    </div>
+  </section>
+
+  <section class="rm-inside reveal">
+    <div class="sh-label">// What's in the 5 pages</div>
+    <h2>The map before the territory</h2>
+    <div class="rm-grid">
+      <div class="rm-item"><strong>The mindset shift</strong><span>Why "I studied networking" loses to "I built a domain and broke it on purpose."</span></div>
+      <div class="rm-item"><strong>Bust the cost myth</strong><span>A real home lab on the machine you own — free, legal tools only. Not a server rack.</span></div>
+      <div class="rm-item"><strong>Why labs beat cramming</strong><span>The instinct that makes you fast: suspect the layer beneath the symptom.</span></div>
+      <div class="rm-item"><strong>The 18-project map</strong><span>Windows · Cloud · MSP Ops · Linux · capstones — the full build-it path on one page.</span></div>
+      <div class="rm-item"><strong>Turn labs into a job</strong><span>Runbooks → a public GitHub portfolio → interview stories that sound like experience.</span></div>
+    </div>
+  </section>
+
+  <section class="reveal" style="padding:0 1.5rem 3rem">
+    <div class="rm-upsell">
+      <div class="rm-upsell-text">
+        <div class="rm-upsell-eyebrow">When you're ready to build</div>
+        <h3>Build It, Break It — the full manual</h3>
+        <p>All 18 hands-on labs with every build step, every break-it-then-fix-it drill, and the portability notes that carry each skill anywhere. $39.</p>
+      </div>
+      <a href="/guides/" class="btn btn-solid">See the full edition →</a>
+    </div>
+  </section>
+
+</div><!-- /shell -->
+
+<footer>
+  <div class="footer-inner">
+    <div>© 2026 <span class="nc">Twilight Tech LLC</span> · Atlanta, GA · LLC Registered</div>
+    <div class="footer-status">All systems operational</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var form   = document.getElementById('rm-form');
+  var button = document.getElementById('rm-submit');
+  var status = document.getElementById('rm-status');
+  var deliver= document.getElementById('rm-deliver');
+  if (!form) return;
+
+  // Same self-hosted leads endpoint the /guides capture uses.
+  var ENDPOINT = 'https://testmachine.tail1dcfc5.ts.net/api/leads/';
+  function getParam(n){ return new URLSearchParams(window.location.search).get(n) || ''; }
+
+  function revealDownload() {
+    form.style.display = 'none';
+    deliver.classList.add('show');
+    if (window.plausible) window.plausible('Roadmap Lead', { props: { source: getParam('utm_source') || '(direct)' } });
+  }
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    status.className = 'rm-status'; status.textContent = '';
+    var fd = new FormData(form);
+    var email = (fd.get('email') || '').toString().trim();
+    var hp = (fd.get('hp') || '').toString();
+    if (!email) { status.className = 'rm-status error'; status.textContent = 'Drop an email above first.'; return; }
+
+    button.disabled = true; button.textContent = 'Sending…';
+    var payload = {
+      email: email, source_page: window.location.pathname,
+      utm_campaign: getParam('utm_campaign'), utm_medium: getParam('utm_medium'),
+      utm_source: getParam('utm_source'), utm_content: getParam('utm_content'),
+      referrer: document.referrer || '', hp: hp
+    };
+    fetch(ENDPOINT, { method:'POST', mode:'cors', cache:'no-cache',
+      headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(payload) })
+      .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+      .then(function () { revealDownload(); })
+      .catch(function () {
+        // Don't trap the reader behind a flaky network — still give them the file,
+        // and let them know we couldn't log it.
+        revealDownload();
+        status.className = 'rm-status'; status.textContent = '';
+        button.textContent = 'Send me the roadmap →'; button.disabled = false;
+      });
+  });
+})();
+</script>
+<script src="/assets/site.js"></script>
+</body>
+</html>
