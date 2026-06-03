@@ -118,6 +118,8 @@
 .card.featured::after{opacity:1}
 .card-badge{position:absolute;top:1rem;right:1rem;padding:0.3rem 0.7rem;background:rgba(255,0,229,0.12);border:1px solid rgba(255,0,229,0.4);border-radius:100px;font-family:var(--mono);font-size:0.62rem;color:var(--magenta);letter-spacing:0.12em;text-transform:uppercase}
 .card-icon{font-size:2.2rem;margin-bottom:0.8rem}
+.card-cover{display:block;width:auto;max-width:74%;max-height:230px;margin:0 auto 1.1rem;border:1px solid var(--border);border-radius:5px;box-shadow:0 12px 30px rgba(0,0,0,0.5)}
+.card:hover .card-cover{box-shadow:0 16px 40px rgba(0,0,0,0.6),0 0 22px rgba(0,240,255,0.12)}
 .card-title{font-family:var(--display);font-size:1.15rem;font-weight:700;margin-bottom:0.3rem;letter-spacing:0.01em}
 .card-tagline{color:var(--muted);font-size:0.92rem;margin-bottom:1.5rem;min-height:2.5em}
 .card-price-row{display:flex;align-items:baseline;gap:0.5rem;margin-bottom:1.2rem}
@@ -250,7 +252,7 @@
 
     <!-- Core 1 -->
     <div class="card reveal">
-      <div class="card-icon">🧰</div>
+      <img class="card-cover" src="/guides/covers/core1.jpg" alt="CompTIA A+ Core 1 study guide cover" loading="lazy">
       <div class="card-title">CompTIA A+ Core 1</div>
       <div class="card-tagline">Exam 220-1201 — hardware, networking, mobile, virtualization, troubleshooting.</div>
       <div class="card-price-row">
@@ -271,7 +273,7 @@
     <!-- Bundle (FEATURED) -->
     <div class="card featured reveal">
       <div class="card-badge">Best Value</div>
-      <div class="card-icon">📦</div>
+      <img class="card-cover" src="/guides/covers/bundle.jpg" alt="CompTIA A+ Complete Bundle cover" loading="lazy">
       <div class="card-title">A+ Complete Bundle</div>
       <div class="card-tagline">Core 1 + Core 2 together. Save $9 vs buying individually.</div>
       <div class="card-price-row">
@@ -291,7 +293,7 @@
 
     <!-- Core 2 -->
     <div class="card reveal">
-      <div class="card-icon">🛡️</div>
+      <img class="card-cover" src="/guides/covers/core2.jpg" alt="CompTIA A+ Core 2 study guide cover" loading="lazy">
       <div class="card-title">CompTIA A+ Core 2</div>
       <div class="card-tagline">Exam 220-1202 — operating systems, security, software troubleshooting, operational procedures.</div>
       <div class="card-price-row">
@@ -325,7 +327,7 @@
   <div class="cards-grid">
 
     <div class="card reveal">
-      <div class="card-icon">🧭</div>
+      <img class="card-cover" src="/guides/covers/starter-kit.jpg" alt="From Cert to Career — Real-World IT Starter Kit cover" loading="lazy">
       <div class="card-title">From Cert to Career</div>
       <div class="card-tagline">The Real-World IT Starter Kit for new help desk techs, career changers, and junior admins.</div>
       <div class="card-price-row">
@@ -344,7 +346,7 @@
     </div>
 
     <div class="card reveal">
-      <div class="card-icon">🧪</div>
+      <img class="card-cover" src="/guides/covers/build-it-break-it.jpg" alt="Build It, Break It — hands-on IT lab manual cover" loading="lazy">
       <div class="card-title">Build It, Break It</div>
       <div class="card-tagline">18 hands-on home-lab projects that turn a certificate into competence — build it, break it, fix it.</div>
       <div class="card-price-row">
