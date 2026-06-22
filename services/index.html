@@ -3,17 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>À La Carte IT Services — Twilight Tech | No Subscription</title>
-<meta name="description" content="One-time, flat-rate IT &amp; security services — no subscription. Dark web scans, device cleanups, M365 setup, migrations, incident response, and turnkey new-business bundles. From $50.">
+<title>À La Carte IT Services — Twilight Tech | Pay for the Fix</title>
+<meta name="description" content="One-time, flat-rate IT &amp; security fixes — no subscription. Tell us what's wrong, get a flat-rate quote, we fix it. Three doors: Try Twilight, Fix My Setup, Run My IT. $50–$999.">
 <link rel="canonical" href="https://twilighttech.io/services/">
 <meta property="og:title" content="À La Carte IT Services — Twilight Tech">
-<meta property="og:description" content="One-time, flat-rate, zero-commitment IT &amp; security services. From $50 — Day One Bulletproof $999.">
+<meta property="og:description" content="Pay for the fix, not a subscription. Flat-rate one-time IT &amp; security services in Atlanta. $50–$999.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="icon" href="/assets/logos/tt-mark.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/site.css">
 <script defer data-domain="twilighttech.io" src="https://plausible.io/js/pa-c0LpTwqFVP1lceRI6RQ_N.js"></script>
+<style>
+/* /services page-scoped — chrome, tokens & cards come from site.css */
+.svc-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1.5rem;counter-reset:s}
+.svc-step{position:relative;padding-top:2.6rem}
+.svc-step::before{counter-increment:s;content:'0' counter(s);position:absolute;top:0;left:0;font-family:var(--display);font-weight:800;font-size:1.7rem;color:var(--cyan);text-shadow:0 0 14px rgba(0,240,255,.25)}
+.svc-step h3{font-family:var(--display);font-size:1rem;font-weight:700;color:#fff;margin-bottom:.35rem}
+.svc-step p{color:var(--muted);font-size:.88rem;line-height:1.5}
+.door-ex{list-style:none;display:flex;flex-direction:column;gap:.4rem;margin:0 0 1.3rem}
+.door-ex li{font-size:.85rem;color:var(--muted);display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed rgba(255,255,255,.07);padding-bottom:.4rem}
+.door-ex li b{font-family:var(--mono);font-size:.78rem;color:var(--cyan);font-weight:400;white-space:nowrap}
+.door-link{font-family:var(--mono);font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--cyan);text-decoration:none;border:none;background:none;cursor:pointer;padding:0}
+.door-link:hover{text-decoration:underline}
+.svc-menu{border:1px solid var(--border);background:rgba(0,0,0,.18);margin-top:1rem}
+.svc-menu>summary{font-family:var(--mono);font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--cyan);padding:1.1rem 1.4rem;cursor:pointer;list-style:none;display:flex;align-items:center;gap:.6rem}
+.svc-menu>summary::-webkit-details-marker{display:none}
+.svc-menu>summary::before{content:'+';color:var(--green);font-weight:700;font-size:1.1rem}
+.svc-menu[open]>summary::before{content:'−'}
+.svc-menu-body{padding:.4rem 1.4rem 1.7rem}
+</style>
 </head>
 <body>
 <canvas id="global-particles"></canvas>
@@ -35,66 +54,120 @@
 
 <div class="shell">
 
-  <div class="page-head container">
-    <div class="sh-label">// À La Carte Services</div>
-    <h1 class="sh-title">No Subscription <span class="ac">Required</span></h1>
-    <div class="sh-line"></div>
-    <p class="sh-sub" style="margin:0 auto">Not ready for a managed plan? No pressure. Every service below is one-time, flat-rate, and zero commitment.</p>
+  <!-- 1 · HERO -->
+  <div class="page-head container reveal">
+    <div class="sh-label">// A la carte services</div>
+    <h1 class="sh-title">Pay for the fix, <span class="ac">not a subscription</span></h1>
+    <div class="sh-line" style="margin:1.2rem auto"></div>
+    <p class="sh-sub" style="margin:0 auto">Like calling a plumber — you call when something breaks, we quote it flat, and it's done. No contract, no retainer. Most clients start here, then go managed when it makes sense.</p>
+    <div class="xlink" style="margin-top:1.8rem">
+      <a href="/#contact" class="btn btn-solid">Get a quote</a>
+      <button class="btn" data-seeall="all">Browse all services</button>
+    </div>
   </div>
 
-  <section style="padding-top:2rem">
+  <!-- 2 · HOW IT WORKS (non-card strip) -->
+  <section style="padding-top:3rem">
     <div class="container">
-      <div class="callout reveal" style="border-left-color:var(--magenta);margin-bottom:2.5rem">
-        <h3 style="color:var(--magenta)">🔧 Think of it like calling a plumber.</h3>
-        <p>You don't pay a plumber monthly — you call when something breaks. <em>Twilight Tech works the same way.</em> One-time help, done right, no commitment. Most clients start here, then move to managed services when it makes sense.</p>
-      </div>
-
-      <div class="cat-tabs reveal">
-        <button class="cat-tab active" data-cat="all">⚡ All</button>
-        <button class="cat-tab" data-cat="try">🚪 Try Twilight</button>
-        <button class="cat-tab" data-cat="fix">🔧 Fix My Setup</button>
-        <button class="cat-tab" data-cat="run">🛰 Run My IT</button>
-      </div>
-
-      <div class="addons-grid">
-
-        <!-- TRY TWILIGHT -->
-        <div class="addon-card reveal" data-cats="try"><div class="addon-icon">💬</div><div class="addon-name">IT Consultation</div><div class="addon-tagline">Not sure what you need? A $50 consult gets you a clear plan — and the fee comes off any service you book.</div><div class="addon-price-row"><div class="addon-price">$50</div><div class="addon-price-label">/ hr · credited to any booking</div></div><ul class="addon-includes"><li>Current environment review</li><li>Prioritized recommendations</li><li>$50 credited to any service booked after</li><li>Written summary follow-up</li></ul><a href="https://buy.stripe.com/7sY9AT03A2yWeHo08YbAs08" class="addon-cta" target="_blank" rel="noopener">Book &amp; Pay — $50 →</a></div>
-        <div class="addon-card reveal" data-cats="try"><div class="addon-icon">🕵️</div><div class="addon-name">Dark Web Scan</div><div class="addon-tagline">Find out if your credentials are already for sale before it's too late.</div><div class="addon-price-row"><div class="addon-price">$79</div><div class="addon-price-label">scan &amp; report</div></div><ul class="addon-includes"><li>Domain &amp; email breach scan</li><li>Exposed credential identification</li><li>Breach source &amp; date documented</li><li>Branded report with action steps</li></ul><a href="https://buy.stripe.com/5kQ3cv03AflIgPwdZObAs06" class="addon-cta" target="_blank" rel="noopener">Get Your Scan →</a></div>
-        <div class="addon-card reveal" data-cats="try"><div class="addon-icon">💻</div><div class="addon-name">Device Cleanup &amp; Optimization</div><div class="addon-tagline">Your computer isn't old — it's just dirty. Get it running like new.</div><div class="addon-price-row"><div class="addon-price">$149</div><div class="addon-price-label">one-time</div></div><ul class="addon-includes"><li>Full malware &amp; adware removal</li><li>Startup optimization</li><li>Disk cleanup &amp; storage recovery</li><li>Driver &amp; OS updates applied</li></ul><a href="https://buy.stripe.com/7sYbJ12bI3D0gPw7BqbAs03" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
-
-        <!-- BUNDLES -->
-        <div class="addon-card is-bundle reveal" data-cats="fix"><span class="bundle-ribbon">SAVE $31</span><div class="addon-icon">🧑‍💼</div><div class="addon-name">New Hire Pack</div><div class="addon-tagline">User Onboarding + Laptop Setup — laptop ready their first Monday.</div><div class="addon-price-row"><div class="addon-price">$169</div><div class="addon-price-label">per new hire</div></div><div class="bundle-math">List <s>$200</s> · Bundle <strong>$169</strong></div><ul class="addon-includes"><li>User account + licensing + MFA</li><li>Laptop OS, Entra enrollment, Defender</li><li>Required software installed</li><li>Ready before their start date</li></ul><a href="https://buy.stripe.com/3cI14naIec9w6aS4pebAs0o" class="addon-cta" target="_blank" rel="noopener">Book Bundle — $169 →</a></div>
-        <div class="addon-card is-bundle reveal" data-cats="fix"><span class="bundle-ribbon">SAVE $39</span><div class="addon-icon">🛡️</div><div class="addon-name">Security Starter Bundle</div><div class="addon-tagline">Find your breaches. Lock the doors. The one-two punch every small biz needs.</div><div class="addon-price-row"><div class="addon-price">$239</div><div class="addon-price-label">all-in</div></div><div class="bundle-math">List <s>$278</s> · Bundle <strong>$239</strong></div><ul class="addon-includes"><li>Dark Web Scan + branded report</li><li>MFA enabled for all users</li><li>Conditional access policies applied</li><li>Admin accounts secured + hardened</li></ul><a href="https://buy.stripe.com/eVqbJ13fMflI7eWaNCbAs0p" class="addon-cta" target="_blank" rel="noopener">Book Bundle — $239 →</a></div>
-        <div class="addon-card is-bundle reveal" data-cats="fix"><span class="bundle-ribbon">SAVE $247</span><div class="addon-icon">🚀</div><div class="addon-name">Day One Bulletproof</div><div class="addon-tagline">You just incorporated. Everything ready by next Monday — for under a grand.</div><div class="addon-price-row"><div class="addon-price">$999</div><div class="addon-price-label">turnkey new business</div></div><div class="bundle-math">List <s>$1,246</s> · Bundle <strong>$999</strong></div><ul class="addon-includes"><li>New Business IT foundation</li><li>Microsoft 365 tenant fully configured</li><li>MFA + security baseline applied</li><li>Cloud backup configured + tested</li></ul><a href="https://buy.stripe.com/7sY14n7w27Tg42Kg7WbAs0q" class="addon-cta" target="_blank" rel="noopener">Book Bundle — $999 →</a></div>
-
-        <!-- FIX — INDIVIDUAL -->
-        <div class="addon-card reveal" data-cats="fix"><div class="addon-icon">👋</div><div class="addon-name">User Offboarding</div><div class="addon-tagline">Departing employee locked down immediately. Licenses recovered, data secured.</div><div class="addon-price-row"><div class="addon-price">$50</div><div class="addon-price-label">/ user</div></div><ul class="addon-includes"><li>Account disabled + access revoked</li><li>Data secured + retention configured</li><li>Licenses recovered + documented</li><li>Audit trail for compliance</li></ul><a href="https://buy.stripe.com/3cI5kD6rY3D07eWcVKbAs0h" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
-        <div class="addon-card reveal" data-cats="fix"><div class="addon-icon">👤</div><div class="addon-name">User Onboarding</div><div class="addon-tagline">New hire set up right — account, licensing, MFA, mailbox, group access.</div><div class="addon-price-row"><div class="addon-price">$75</div><div class="addon-price-label">/ user</div></div><ul class="addon-includes"><li>Account creation + licensing</li><li>MFA setup + verified</li><li>Group + mailbox access configured</li><li>Documented + ready before start date</li></ul><a href="https://buy.stripe.com/bJedR93fMa1o8j06xmbAs0g" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
-        <div class="addon-card reveal" data-cats="fix"><div class="addon-icon">💼</div><div class="addon-name">Laptop Setup for New Hires</div><div class="addon-tagline">Their laptop is ready Friday — enrolled, secured, documented — before Monday.</div><div class="addon-price-row"><div class="addon-price">$125</div><div class="addon-price-label">/ device</div></div><ul class="addon-includes"><li>OS configuration &amp; updates applied</li><li>Entra ID / domain enrollment</li><li>Required software installed</li><li>Defender &amp; backup agent deployed</li></ul><a href="https://buy.stripe.com/8x28wP6rY4H4ar87BqbAs0i" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
-        <div class="addon-card reveal" data-cats="fix"><div class="addon-icon">🔐</div><div class="addon-name">MFA &amp; Security Hardening</div><div class="addon-tagline">Enable MFA, lock down accounts, apply security policies across your environment.</div><div class="addon-price-row"><div class="addon-price">$199</div><div class="addon-price-label">one-time</div></div><ul class="addon-includes"><li>MFA enabled for all users</li><li>Conditional access policies applied</li><li>Admin accounts secured</li><li>Security baseline hardening</li></ul><a href="https://buy.stripe.com/9B6eVdbMiehE0Qy7BqbAs07" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
-        <div class="addon-card reveal" data-cats="fix"><div class="addon-icon">☁️</div><div class="addon-name">Cloud Backup Setup</div><div class="addon-tagline">Microsoft 365 doesn't back itself up. If Microsoft loses your email tomorrow, you'd want this yesterday.</div><div class="addon-price-row"><div class="addon-price">$249</div><div class="addon-price-label">one-time setup</div></div><ul class="addon-includes"><li>M365 mail, OneDrive, SharePoint backup</li><li>Endpoint backup for laptops/desktops</li><li>Daily backups + 30-day retention</li><li>Recovery tested before handoff</li></ul><a href="https://buy.stripe.com/14AcN5bMia1o7eW9JybAs0j" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
-        <div class="addon-card reveal" data-cats="fix"><div class="addon-icon">📊</div><div class="addon-name">Microsoft 365 Tenant Setup</div><div class="addon-tagline">You're paying for M365 — let's make sure it's actually configured and secured.</div><div class="addon-price-row"><div class="addon-price">$299</div><div class="addon-price-label">one-time</div></div><ul class="addon-includes"><li>Domain &amp; email routing configured</li><li>Users set up &amp; properly licensed</li><li>MFA enforced for all accounts</li><li>SharePoint, OneDrive &amp; admin secured</li></ul><a href="https://buy.stripe.com/cNicN54jQgpM2YG8FubAs05" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
-        <div class="addon-card reveal" data-cats="fix"><div class="addon-icon">🩺</div><div class="addon-name">Annual Security Posture Review</div><div class="addon-tagline">Yearly health-check for non-managed clients. Stay sharp without a contract.</div><div class="addon-price-row"><div class="addon-price">$399</div><div class="addon-price-label">flat · annual</div></div><ul class="addon-includes"><li>MFA + access audit</li><li>Vulnerability scan</li><li>Written report w/ prioritized remediation</li><li>Year-over-year tracking when repeated</li></ul><a href="https://buy.stripe.com/4gM7sL4jQ1uS56O8FubAs0l" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
-        <div class="addon-card reveal" data-cats="fix"><div class="addon-icon">🏢</div><div class="addon-name">New Business IT Setup</div><div class="addon-tagline">Everything your new business needs to launch with the right IT foundation.</div><div class="addon-price-row"><div class="addon-price">$499</div><div class="addon-price-label">one-time</div></div><ul class="addon-includes"><li>Microsoft 365 configured &amp; secured</li><li>Business email on your domain</li><li>MFA enforced from day one</li><li>Backup solution set up &amp; tested</li></ul><a href="https://buy.stripe.com/14A9AT2bI8XkeHo5tibAs04" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
-        <div class="addon-card reveal" data-cats="fix"><div class="addon-icon">🚨</div><div class="addon-name">Incident Response Block</div><div class="addon-tagline">Something went wrong. We respond, contain the damage, get you back online — fixed scope, fixed price.</div><div class="addon-price-row"><div class="addon-price">$499</div><div class="addon-price-label">up to 4hr block</div></div><ul class="addon-includes"><li>Available to non-managed clients</li><li>Malware, ransomware, breach response</li><li>Containment &amp; recovery</li><li>Post-incident documentation</li></ul><a href="https://buy.stripe.com/eVqaEXcQma1ofLsdZObAs0f" class="addon-cta" target="_blank" rel="noopener">Book Block — $499 →</a></div>
-        <div class="addon-card reveal" data-cats="fix"><div class="addon-icon">📬</div><div class="addon-name">G-Suite → M365 Migration</div><div class="addon-tagline">Move your team off Google to Microsoft 365 cleanly — mail, calendar, contacts, drive.</div><div class="addon-price-row"><div class="addon-price">$599</div><div class="addon-price-label">up to 5 mailboxes</div></div><ul class="addon-includes"><li>Mail, calendar, contacts migrated</li><li>Drive content migrated to OneDrive</li><li>Domain + MFA configured</li><li>6+ mailboxes quoted via consultation</li></ul><a href="https://buy.stripe.com/3cIfZhcQmflI6aSbRGbAs0k" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
-        <div class="addon-card reveal" data-cats="fix"><div class="addon-icon">🏥</div><div class="addon-name">Compliance Quick-Start — HIPAA</div><div class="addon-tagline">HIPAA fundamentals for small healthcare orgs. Templates + technical controls + 1hr Q&amp;A.</div><div class="addon-price-row"><div class="addon-price">$799</div><div class="addon-price-label">flat</div></div><ul class="addon-includes"><li>HIPAA policy templates delivered</li><li>MFA enforcement + access policies</li><li>Audit log baseline configured</li><li>1-hour live Q&amp;A session</li></ul><a href="https://buy.stripe.com/3cIbJ16rY4H4eHo2h6bAs0m" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
-        <div class="addon-card reveal" data-cats="fix"><div class="addon-icon">💳</div><div class="addon-name">Compliance Quick-Start — PCI</div><div class="addon-tagline">PCI DSS fundamentals for businesses handling card data. Templates + segmentation review + 1hr Q&amp;A.</div><div class="addon-price-row"><div class="addon-price">$799</div><div class="addon-price-label">flat</div></div><ul class="addon-includes"><li>PCI policy templates delivered</li><li>MFA enforcement + access policies</li><li>Network segmentation review</li><li>Scan baseline + 1hr live Q&amp;A</li></ul><a href="https://buy.stripe.com/4gM14neYuflIczgbRGbAs0n" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
-
-        <!-- RUN MY IT -->
-        <div class="addon-card is-bundle reveal" data-cats="run"><span class="bundle-ribbon" style="background:linear-gradient(135deg,var(--cyan),var(--blue))">ONGOING</span><div class="addon-icon">🛰</div><div class="addon-name">Run My IT</div><div class="addon-tagline">Done thinking about IT? Have it just run. Managed plans from $75/user/mo.</div><div class="addon-price-row"><div class="addon-price" style="color:var(--cyan)">$75–$175</div><div class="addon-price-label">/ user / month</div></div><ul class="addon-includes"><li>Twilight Essentials — $75/user/mo</li><li>Twilight Secure — $125/user/mo (⭐)</li><li>Twilight Sentinel — $175/user/mo (SOC-lite)</li><li>No contract · cancel anytime</li></ul><a href="/managed-it/" class="addon-cta">See Managed Plans →</a></div>
-
+      <div class="sh center reveal" style="margin-bottom:2.2rem"><div class="sh-label">// How it works</div><h2 class="sh-title">Four steps, <span class="ac">no surprises</span></h2><div class="sh-line" style="margin:1.2rem auto"></div></div>
+      <div class="svc-steps reveal">
+        <div class="svc-step"><h3>Tell us what's wrong</h3><p>One message. No discovery-call gauntlet, no sales deck.</p></div>
+        <div class="svc-step"><h3>Flat-rate quote</h3><p>Fixed scope, fixed price, up front. You approve before anything starts.</p></div>
+        <div class="svc-step"><h3>We fix it</h3><p>Done right, documented, handed back. Most jobs in days, not weeks.</p></div>
+        <div class="svc-step"><h3>Go managed if it fits</h3><p>Calling a lot? Roll into a plan — we credit the work toward it.</p></div>
       </div>
     </div>
   </section>
 
-  <section class="sec-dark" style="text-align:center">
+  <!-- 3 · THREE DOORS -->
+  <section class="sec-dark" style="padding-top:4rem">
     <div class="container">
-      <div class="sh center reveal" style="margin-bottom:1.5rem"><h2 class="sh-title">Still not sure <span class="ac">where to start?</span></h2><div class="sh-line"></div><p class="sh-sub" style="margin:0 auto">Book the $50 consult — we'll tell you exactly what you need, and the fee comes off whatever you book.</p></div>
-      <div class="xlink reveal">
-        <a href="https://buy.stripe.com/7sY9AT03A2yWeHo08YbAs08" class="btn" target="_blank" rel="noopener">Book the $50 Consult</a>
-        <a href="/#contact" class="btn btn-solid">Ask a Question</a>
+      <div class="sh center reveal" style="margin-bottom:2.2rem"><div class="sh-label">// Start here</div><h2 class="sh-title">Three doors, <span class="ac">not nineteen</span></h2><div class="sh-line" style="margin:1.2rem auto"></div><p class="sh-sub" style="margin:0 auto">Pick the door that matches where you are. Each opens the full menu, filtered.</p></div>
+
+      <div class="plans-grid reveal">
+
+        <div class="plan-card">
+          <div class="plan-name">Try Twilight</div>
+          <div class="plan-target">// a low-risk first look · $50–$149</div>
+          <ul class="door-ex">
+            <li>IT Consultation <b>$50</b></li>
+            <li>Dark Web Scan <b>$79</b></li>
+            <li>Device Cleanup <b>$149</b></li>
+          </ul>
+          <button class="door-link" data-seeall="try">See all 3 →</button>
+        </div>
+
+        <div class="plan-card featured">
+          <div class="plan-badge">Most booked</div>
+          <div class="plan-name">Fix My Setup</div>
+          <div class="plan-target">// one thing, fixed right · $50–$999</div>
+          <ul class="door-ex">
+            <li>MFA &amp; Security Hardening <b>$199</b></li>
+            <li>Microsoft 365 Tenant Setup <b>$299</b></li>
+            <li>G-Suite → M365 Migration <b>$599</b></li>
+          </ul>
+          <button class="door-link" data-seeall="fix">See all 15 →</button>
+        </div>
+
+        <div class="plan-card">
+          <div class="plan-name">Run My IT</div>
+          <div class="plan-target">// stop calling per-fix · from $75/user/mo</div>
+          <ul class="door-ex">
+            <li>Twilight Essentials <b>$75</b></li>
+            <li>Twilight Secure <b>$125</b></li>
+            <li>Twilight Sentinel <b>$175</b></li>
+          </ul>
+          <a href="/managed-it/" class="door-link">See Managed IT →</a>
+        </div>
+
+      </div>
+
+      <!-- 4 · FULL MENU (collapsed) -->
+      <details class="svc-menu reveal" id="svc-menu">
+        <summary>Browse all 18 one-time services · $50–$999</summary>
+        <div class="svc-menu-body">
+
+          <div class="cat-tabs">
+            <button class="cat-tab active" data-cat="all">⚡ All</button>
+            <button class="cat-tab" data-cat="try">🚪 Try Twilight</button>
+            <button class="cat-tab" data-cat="fix">🔧 Fix My Setup</button>
+          </div>
+
+          <div class="addons-grid">
+
+            <div class="addon-card" data-cats="try"><div class="addon-icon">💬</div><div class="addon-name">IT Consultation</div><div class="addon-tagline">Not sure what you need? A $50 consult gets you a clear plan — and the fee comes off any service you book.</div><div class="addon-price-row"><div class="addon-price">$50</div><div class="addon-price-label">/ hr · credited to any booking</div></div><ul class="addon-includes"><li>Current environment review</li><li>Prioritized recommendations</li><li>$50 credited to any service booked after</li><li>Written summary follow-up</li></ul><a href="https://buy.stripe.com/7sY9AT03A2yWeHo08YbAs08" class="addon-cta" target="_blank" rel="noopener">Book &amp; Pay — $50 →</a></div>
+            <div class="addon-card" data-cats="try"><div class="addon-icon">🕵️</div><div class="addon-name">Dark Web Scan</div><div class="addon-tagline">Find out if your credentials are already for sale before it's too late.</div><div class="addon-price-row"><div class="addon-price">$79</div><div class="addon-price-label">scan &amp; report</div></div><ul class="addon-includes"><li>Domain &amp; email breach scan</li><li>Exposed credential identification</li><li>Breach source &amp; date documented</li><li>Branded report with action steps</li></ul><a href="https://buy.stripe.com/5kQ3cv03AflIgPwdZObAs06" class="addon-cta" target="_blank" rel="noopener">Get Your Scan →</a></div>
+            <div class="addon-card" data-cats="try"><div class="addon-icon">💻</div><div class="addon-name">Device Cleanup &amp; Optimization</div><div class="addon-tagline">Your computer isn't old — it's just dirty. Get it running like new.</div><div class="addon-price-row"><div class="addon-price">$149</div><div class="addon-price-label">one-time</div></div><ul class="addon-includes"><li>Full malware &amp; adware removal</li><li>Startup optimization</li><li>Disk cleanup &amp; storage recovery</li><li>Driver &amp; OS updates applied</li></ul><a href="https://buy.stripe.com/7sYbJ12bI3D0gPw7BqbAs03" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
+
+            <div class="addon-card is-bundle" data-cats="fix"><span class="bundle-ribbon">SAVE $31</span><div class="addon-icon">🧑‍💼</div><div class="addon-name">New Hire Pack</div><div class="addon-tagline">User Onboarding + Laptop Setup — laptop ready their first Monday.</div><div class="addon-price-row"><div class="addon-price">$169</div><div class="addon-price-label">per new hire</div></div><div class="bundle-math">List <s>$200</s> · Bundle <strong>$169</strong></div><ul class="addon-includes"><li>User account + licensing + MFA</li><li>Laptop OS, Entra enrollment, Defender</li><li>Required software installed</li><li>Ready before their start date</li></ul><a href="https://buy.stripe.com/3cI14naIec9w6aS4pebAs0o" class="addon-cta" target="_blank" rel="noopener">Book Bundle — $169 →</a></div>
+            <div class="addon-card is-bundle" data-cats="fix"><span class="bundle-ribbon">SAVE $39</span><div class="addon-icon">🛡️</div><div class="addon-name">Security Starter Bundle</div><div class="addon-tagline">Find your breaches. Lock the doors. The one-two punch every small biz needs.</div><div class="addon-price-row"><div class="addon-price">$239</div><div class="addon-price-label">all-in</div></div><div class="bundle-math">List <s>$278</s> · Bundle <strong>$239</strong></div><ul class="addon-includes"><li>Dark Web Scan + branded report</li><li>MFA enabled for all users</li><li>Conditional access policies applied</li><li>Admin accounts secured + hardened</li></ul><a href="https://buy.stripe.com/eVqbJ13fMflI7eWaNCbAs0p" class="addon-cta" target="_blank" rel="noopener">Book Bundle — $239 →</a></div>
+            <div class="addon-card is-bundle" data-cats="fix"><span class="bundle-ribbon">SAVE $247</span><div class="addon-icon">🚀</div><div class="addon-name">Day One Bulletproof</div><div class="addon-tagline">You just incorporated. Everything ready by next Monday — for under a grand.</div><div class="addon-price-row"><div class="addon-price">$999</div><div class="addon-price-label">turnkey new business</div></div><div class="bundle-math">List <s>$1,246</s> · Bundle <strong>$999</strong></div><ul class="addon-includes"><li>New Business IT foundation</li><li>Microsoft 365 tenant fully configured</li><li>MFA + security baseline applied</li><li>Cloud backup configured + tested</li></ul><a href="https://buy.stripe.com/7sY14n7w27Tg42Kg7WbAs0q" class="addon-cta" target="_blank" rel="noopener">Book Bundle — $999 →</a></div>
+            <div class="addon-card" data-cats="fix"><div class="addon-icon">👋</div><div class="addon-name">User Offboarding</div><div class="addon-tagline">Departing employee locked down immediately. Licenses recovered, data secured.</div><div class="addon-price-row"><div class="addon-price">$50</div><div class="addon-price-label">/ user</div></div><ul class="addon-includes"><li>Account disabled + access revoked</li><li>Data secured + retention configured</li><li>Licenses recovered + documented</li><li>Audit trail for compliance</li></ul><a href="https://buy.stripe.com/3cI5kD6rY3D07eWcVKbAs0h" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
+            <div class="addon-card" data-cats="fix"><div class="addon-icon">👤</div><div class="addon-name">User Onboarding</div><div class="addon-tagline">New hire set up right — account, licensing, MFA, mailbox, group access.</div><div class="addon-price-row"><div class="addon-price">$75</div><div class="addon-price-label">/ user</div></div><ul class="addon-includes"><li>Account creation + licensing</li><li>MFA setup + verified</li><li>Group + mailbox access configured</li><li>Documented + ready before start date</li></ul><a href="https://buy.stripe.com/bJedR93fMa1o8j06xmbAs0g" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
+            <div class="addon-card" data-cats="fix"><div class="addon-icon">💼</div><div class="addon-name">Laptop Setup for New Hires</div><div class="addon-tagline">Their laptop is ready Friday — enrolled, secured, documented — before Monday.</div><div class="addon-price-row"><div class="addon-price">$125</div><div class="addon-price-label">/ device</div></div><ul class="addon-includes"><li>OS configuration &amp; updates applied</li><li>Entra ID / domain enrollment</li><li>Required software installed</li><li>Defender &amp; backup agent deployed</li></ul><a href="https://buy.stripe.com/8x28wP6rY4H4ar87BqbAs0i" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
+            <div class="addon-card" data-cats="fix"><div class="addon-icon">🔐</div><div class="addon-name">MFA &amp; Security Hardening</div><div class="addon-tagline">Enable MFA, lock down accounts, apply security policies across your environment.</div><div class="addon-price-row"><div class="addon-price">$199</div><div class="addon-price-label">one-time</div></div><ul class="addon-includes"><li>MFA enabled for all users</li><li>Conditional access policies applied</li><li>Admin accounts secured</li><li>Security baseline hardening</li></ul><a href="https://buy.stripe.com/9B6eVdbMiehE0Qy7BqbAs07" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
+            <div class="addon-card" data-cats="fix"><div class="addon-icon">☁️</div><div class="addon-name">Cloud Backup Setup</div><div class="addon-tagline">Microsoft 365 doesn't back itself up. If Microsoft loses your email tomorrow, you'd want this yesterday.</div><div class="addon-price-row"><div class="addon-price">$249</div><div class="addon-price-label">one-time setup</div></div><ul class="addon-includes"><li>M365 mail, OneDrive, SharePoint backup</li><li>Endpoint backup for laptops/desktops</li><li>Daily backups + 30-day retention</li><li>Recovery tested before handoff</li></ul><a href="https://buy.stripe.com/14AcN5bMia1o7eW9JybAs0j" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
+            <div class="addon-card" data-cats="fix"><div class="addon-icon">📊</div><div class="addon-name">Microsoft 365 Tenant Setup</div><div class="addon-tagline">You're paying for M365 — let's make sure it's actually configured and secured.</div><div class="addon-price-row"><div class="addon-price">$299</div><div class="addon-price-label">one-time</div></div><ul class="addon-includes"><li>Domain &amp; email routing configured</li><li>Users set up &amp; properly licensed</li><li>MFA enforced for all accounts</li><li>SharePoint, OneDrive &amp; admin secured</li></ul><a href="https://buy.stripe.com/cNicN54jQgpM2YG8FubAs05" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
+            <div class="addon-card" data-cats="fix"><div class="addon-icon">🩺</div><div class="addon-name">Annual Security Posture Review</div><div class="addon-tagline">Yearly health-check for non-managed clients. Stay sharp without a contract.</div><div class="addon-price-row"><div class="addon-price">$399</div><div class="addon-price-label">flat · annual</div></div><ul class="addon-includes"><li>MFA + access audit</li><li>Vulnerability scan</li><li>Written report w/ prioritized remediation</li><li>Year-over-year tracking when repeated</li></ul><a href="https://buy.stripe.com/4gM7sL4jQ1uS56O8FubAs0l" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
+            <div class="addon-card" data-cats="fix"><div class="addon-icon">🏢</div><div class="addon-name">New Business IT Setup</div><div class="addon-tagline">Everything your new business needs to launch with the right IT foundation.</div><div class="addon-price-row"><div class="addon-price">$499</div><div class="addon-price-label">one-time</div></div><ul class="addon-includes"><li>Microsoft 365 configured &amp; secured</li><li>Business email on your domain</li><li>MFA enforced from day one</li><li>Backup solution set up &amp; tested</li></ul><a href="https://buy.stripe.com/14A9AT2bI8XkeHo5tibAs04" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
+            <div class="addon-card" data-cats="fix"><div class="addon-icon">🚨</div><div class="addon-name">Incident Response Block</div><div class="addon-tagline">Something went wrong. We respond, contain the damage, get you back online — fixed scope, fixed price.</div><div class="addon-price-row"><div class="addon-price">$499</div><div class="addon-price-label">up to 4hr block</div></div><ul class="addon-includes"><li>Available to non-managed clients</li><li>Malware, ransomware, breach response</li><li>Containment &amp; recovery</li><li>Post-incident documentation</li></ul><a href="https://buy.stripe.com/eVqaEXcQma1ofLsdZObAs0f" class="addon-cta" target="_blank" rel="noopener">Book Block — $499 →</a></div>
+            <div class="addon-card" data-cats="fix"><div class="addon-icon">📬</div><div class="addon-name">G-Suite → M365 Migration</div><div class="addon-tagline">Move your team off Google to Microsoft 365 cleanly — mail, calendar, contacts, drive.</div><div class="addon-price-row"><div class="addon-price">$599</div><div class="addon-price-label">up to 5 mailboxes</div></div><ul class="addon-includes"><li>Mail, calendar, contacts migrated</li><li>Drive content migrated to OneDrive</li><li>Domain + MFA configured</li><li>6+ mailboxes quoted via consultation</li></ul><a href="https://buy.stripe.com/3cIfZhcQmflI6aSbRGbAs0k" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
+            <div class="addon-card" data-cats="fix"><div class="addon-icon">🏥</div><div class="addon-name">Compliance Quick-Start — HIPAA</div><div class="addon-tagline">HIPAA fundamentals for small healthcare orgs. Templates + technical controls + 1hr Q&amp;A.</div><div class="addon-price-row"><div class="addon-price">$799</div><div class="addon-price-label">flat</div></div><ul class="addon-includes"><li>HIPAA policy templates delivered</li><li>MFA enforcement + access policies</li><li>Audit log baseline configured</li><li>1-hour live Q&amp;A session</li></ul><a href="https://buy.stripe.com/3cIbJ16rY4H4eHo2h6bAs0m" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
+            <div class="addon-card" data-cats="fix"><div class="addon-icon">💳</div><div class="addon-name">Compliance Quick-Start — PCI</div><div class="addon-tagline">PCI DSS fundamentals for businesses handling card data. Templates + segmentation review + 1hr Q&amp;A.</div><div class="addon-price-row"><div class="addon-price">$799</div><div class="addon-price-label">flat</div></div><ul class="addon-includes"><li>PCI policy templates delivered</li><li>MFA enforcement + access policies</li><li>Network segmentation review</li><li>Scan baseline + 1hr live Q&amp;A</li></ul><a href="https://buy.stripe.com/4gM14neYuflIczgbRGbAs0n" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
+
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 5 · MANAGED CROSS-LINK (non-card comparison band) -->
+  <section style="padding-top:3.5rem">
+    <div class="container">
+      <div class="callout reveal">
+        <h3>Calling us more than twice a month?</h3>
+        <p>At that point a managed plan is usually cheaper than stacking one-time fixes — and you stop thinking about IT entirely. Same team, flat monthly rate, everything covered.</p>
+        <a href="/managed-it/" class="btn">See Managed IT →</a>
       </div>
     </div>
   </section>
@@ -109,5 +182,19 @@
 </footer>
 
 <script src="/assets/site.js"></script>
+<script>
+(function(){
+  var menu = document.getElementById('svc-menu');
+  document.querySelectorAll('[data-seeall]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      if (menu) menu.open = true;
+      var cat = b.getAttribute('data-seeall');
+      var tab = document.querySelector('.cat-tab[data-cat="' + cat + '"]');
+      if (tab) tab.click();
+      if (menu) menu.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+})();
+</script>
 </body>
 </html>
