@@ -101,28 +101,55 @@
 .guides-title{font-family:var(--display);font-size:clamp(2rem,6vw,3.6rem);font-weight:900;line-height:1.1;background:linear-gradient(135deg,var(--cyan) 0%,#fff 40%,var(--magenta) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 30px rgba(0,240,255,0.2));margin-bottom:1.2rem}
 .guides-subtitle{font-size:1.1rem;color:var(--muted);max-width:640px;margin:0 auto 1.5rem}
 .guides-pill{display:inline-block;padding:0.4rem 1rem;border:1px solid rgba(57,255,20,0.3);border-radius:100px;font-family:var(--mono);font-size:0.74rem;color:var(--green);letter-spacing:0.1em}
+.guides-cta-row{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.7rem}
+.btn-green{font-family:var(--mono);font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.85rem 1.8rem;border:1px solid var(--green);background:transparent;color:var(--green);text-decoration:none;display:inline-block;font-weight:700;transition:all 0.25s}
+.btn-green:hover{background:rgba(57,255,20,0.08);box-shadow:0 0 18px rgba(57,255,20,0.2);text-decoration:none}
+
+/* Value ladder (non-card strip) */
+.ladder-wrap{max-width:1000px;margin:0 auto;padding:1rem 1.5rem 3rem;position:relative;z-index:2}
+.ladder{display:flex;align-items:stretch;gap:0.4rem;flex-wrap:wrap;justify-content:center}
+.ladder-step{flex:1 1 170px;text-align:center;padding:1.1rem 0.8rem 1.2rem;border-bottom:2px solid var(--border)}
+.ladder-step .ls-num{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted)}
+.ladder-step h3{font-family:var(--display);font-size:0.98rem;font-weight:700;color:#fff;margin:0.35rem 0 0.15rem}
+.ladder-step .ls-price{font-family:var(--mono);font-size:0.78rem;color:var(--muted)}
+.ladder-step.here{border-bottom-color:var(--cyan)}
+.ladder-step.here h3{color:var(--cyan)}
+.ladder-step.here .ls-num,.ladder-step.here .ls-price{color:var(--cyan)}
+.ladder-here{display:block;font-family:var(--mono);font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--void);background:var(--cyan);padding:0.15rem 0.5rem;margin-top:0.5rem;border-radius:100px}
+.ladder-arrow{align-self:center;color:var(--muted);font-family:var(--mono);font-size:1rem}
+
+/* Split text+visual row */
+.split-row{max-width:1000px;margin:0 auto;padding:1rem 1.5rem 1rem;display:grid;grid-template-columns:1.2fr 0.8fr;gap:2.5rem;align-items:center;position:relative;z-index:2}
+.split-row img{width:100%;max-width:260px;margin:0 auto;display:block;border:1px solid var(--border);border-radius:4px;box-shadow:0 16px 40px rgba(0,0,0,0.5),0 0 26px rgba(0,240,255,0.08)}
+@media(max-width:760px){.split-row{grid-template-columns:1fr}.split-row img{order:-1}}
 
 /* Cards grid */
 .cards-section{max-width:1100px;margin:0 auto;padding:1rem 1.5rem 4rem;position:relative;z-index:2}
 .cards-section.tight{padding-top:0}
+.bundle-solo{max-width:460px;margin:0 auto}
 .section-heading{margin:0 auto 1.25rem;max-width:1100px;padding:0 1.5rem;position:relative;z-index:2}
+.section-heading.center{text-align:center}
 .section-kicker{color:var(--green);font-family:var(--mono);font-size:0.72rem;letter-spacing:0.24em;margin-bottom:0.8rem;text-transform:uppercase}
 .section-title{font-family:var(--display);font-size:clamp(1.5rem,4vw,2.1rem);font-weight:700}
 .section-subtitle{color:var(--muted);margin-top:0.55rem;max-width:760px}
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.section-heading.center .section-subtitle{margin-left:auto;margin-right:auto}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
 .card{background:var(--card);border:1px solid var(--border);padding:2rem;position:relative;overflow:hidden;transition:all 0.3s;display:flex;flex-direction:column}
 .card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--magenta));opacity:0;transition:opacity 0.3s}
 .card:hover{border-color:var(--border-h);transform:translateY(-3px);box-shadow:0 12px 35px rgba(0,0,0,0.4)}
 .card:hover::after{opacity:1}
 .card.featured{border-color:rgba(0,240,255,0.28);background:linear-gradient(180deg,rgba(0,240,255,0.04) 0%,var(--card) 50%)}
 .card.featured::after{opacity:1}
+.card.compact{padding:1.5rem}
+.card.compact .card-title{font-size:1.02rem}
 .card-badge{position:absolute;top:1rem;right:1rem;padding:0.3rem 0.7rem;background:rgba(255,0,229,0.12);border:1px solid rgba(255,0,229,0.4);border-radius:100px;font-family:var(--mono);font-size:0.62rem;color:var(--magenta);letter-spacing:0.12em;text-transform:uppercase}
 .card-icon{font-size:2.2rem;margin-bottom:0.8rem}
 .card-cover{display:block;width:auto;max-width:74%;max-height:230px;margin:0 auto 1.1rem;border:1px solid var(--border);border-radius:5px;box-shadow:0 12px 30px rgba(0,0,0,0.5)}
+.card.compact .card-cover{max-height:170px}
 .card:hover .card-cover{box-shadow:0 16px 40px rgba(0,0,0,0.6),0 0 22px rgba(0,240,255,0.12)}
 .card-title{font-family:var(--display);font-size:1.15rem;font-weight:700;margin-bottom:0.3rem;letter-spacing:0.01em}
 .card-tagline{color:var(--muted);font-size:0.92rem;margin-bottom:1.5rem;min-height:2.5em}
-.card-price-row{display:flex;align-items:baseline;gap:0.5rem;margin-bottom:1.2rem}
+.card-price-row{display:flex;align-items:baseline;gap:0.5rem;margin-bottom:1.2rem;flex-wrap:wrap}
 .card-price{font-family:var(--display);font-size:1.7rem;font-weight:700;color:var(--cyan);text-shadow:0 0 12px rgba(0,240,255,0.25)}
 .card-price-label{font-family:var(--mono);font-size:0.7rem;color:var(--muted)}
 .card-includes{list-style:none;display:flex;flex-direction:column;gap:0.45rem;margin-bottom:1.4rem;flex:1}
@@ -135,7 +162,7 @@
 .card-fineprint{display:block;text-align:center;margin-top:0.7rem;font-family:var(--mono);font-size:0.68rem;color:var(--muted);letter-spacing:0.05em}
 
 /* Inline "what's inside" details under a card */
-.inside-strip{max-width:1100px;margin:-2rem auto 3rem;padding:0 1.5rem;position:relative;z-index:2}
+.inside-strip{max-width:1100px;margin:0 auto 3rem;padding:0 1.5rem;position:relative;z-index:2}
 .inside-details{background:var(--card);border:1px solid var(--border);padding:1rem 1.4rem;cursor:pointer;transition:border-color 0.2s}
 .inside-details:hover{border-color:var(--border-h)}
 .inside-details summary{font-family:var(--mono);font-size:0.78rem;color:var(--cyan);letter-spacing:0.08em;text-transform:uppercase;list-style:none;outline:none;font-weight:600}
@@ -164,18 +191,7 @@
 .capture-status{margin-top:0.9rem;font-family:var(--mono);font-size:0.82rem;min-height:1.2em}
 .capture-status.success{color:var(--green)}
 .capture-status.error{color:var(--magenta)}
-/* Honeypot — hidden from humans, bait for bots */
 .capture-form .hp-field{position:absolute !important;left:-10000px !important;width:1px !important;height:1px !important;opacity:0 !important;pointer-events:none !important}
-
-/* Closing CTA */
-.closing-cta{max-width:1100px;margin:0 auto 1rem;padding:3rem 1.5rem;text-align:center;border-top:1px solid var(--border);position:relative;z-index:2}
-.closing-cta h2{font-family:var(--display);font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:0.8rem;background:linear-gradient(135deg,var(--cyan) 0%,#fff 50%,var(--magenta) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.closing-cta p{color:var(--muted);max-width:580px;margin:0 auto 1.75rem;font-size:1.02rem;line-height:1.65}
-.closing-cta-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.closing-cta-btn{padding:0.85rem 1.6rem;border:1px solid var(--cyan);color:var(--cyan);font-family:var(--mono);font-size:0.78rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;transition:all 0.25s}
-.closing-cta-btn:hover{background:rgba(0,240,255,0.1);box-shadow:0 0 18px rgba(0,240,255,0.25);text-decoration:none}
-.closing-cta-btn.mag{border-color:var(--magenta);color:var(--magenta)}
-.closing-cta-btn.mag:hover{background:rgba(255,0,229,0.1);box-shadow:0 0 18px rgba(255,0,229,0.25)}
 
 /* Trust strip */
 .trust-strip{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem;text-align:center;border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:2}
@@ -225,60 +241,78 @@
 
 <div class="shell">
 
+<!-- 1 · HERO — one primary CTA: the $49 bundle -->
 <section class="guides-hero reveal">
-  <div class="guides-eyebrow">// Study Guides + Career Kits</div>
+  <div class="guides-eyebrow">// Career products</div>
   <h1 class="guides-title">CompTIA A+ Guides + Career Launch Kits</h1>
   <p class="guides-subtitle">
     Build the exam foundation, then learn what the first real IT job actually looks like.
     Practical digital guides from Twilight Technology, built by an MSP instead of a publisher.
   </p>
   <span class="guides-pill">INSTANT DELIVERY · PDF + DOCX · BUILT BY AN MSP</span>
-  <div style="margin-top:1.7rem">
-    <a href="/roadmap/" class="btn btn-solid" style="text-decoration:none">Free — the 5-Page Roadmap to Break Into IT →</a>
+  <div class="guides-cta-row">
+    <a href="https://buy.stripe.com/00w00j5nU2yW0Qy6xmbAs0b" class="btn btn-solid" target="_blank" rel="noopener" style="text-decoration:none">Get the A+ Complete Bundle — $49 →</a>
+    <a href="/roadmap/" class="btn-green">Start with the free roadmap →</a>
   </div>
 </section>
 
-<div class="section-heading reveal">
-  <div class="section-kicker">// Exam Prep</div>
-  <h2 class="section-title">CompTIA A+ Study Guides</h2>
-  <p class="section-subtitle">
-    Mapped 1:1 to the official 2026 objectives with reference tables, practice questions,
-    exam tips, and clean editable files.
-  </p>
+<!-- 2 · VALUE LADDER (non-card strip, "you are here") -->
+<div class="ladder-wrap reveal">
+  <div class="ladder">
+    <div class="ladder-step">
+      <div class="ls-num">Step 0 · Free</div>
+      <h3>5-page roadmap</h3>
+      <div class="ls-price">email-gated PDF</div>
+    </div>
+    <div class="ladder-arrow">→</div>
+    <div class="ladder-step here">
+      <div class="ls-num">Step 1</div>
+      <h3>A+ Complete Bundle</h3>
+      <div class="ls-price">$49</div>
+      <span class="ladder-here">You are here</span>
+    </div>
+    <div class="ladder-arrow">→</div>
+    <div class="ladder-step">
+      <div class="ls-num">Step 2</div>
+      <h3>Career kits + cores</h3>
+      <div class="ls-price">$25–$69</div>
+    </div>
+    <div class="ladder-arrow">→</div>
+    <div class="ladder-step">
+      <div class="ls-num">Step 3</div>
+      <h3>Cert Strategy Session</h3>
+      <div class="ls-price">$99</div>
+    </div>
+  </div>
 </div>
 
-<section class="cards-section">
-  <div class="cards-grid">
+<!-- 3 · FREE-ROADMAP ON-RAMP (split text + visual) -->
+<div class="split-row reveal">
+  <div>
+    <div class="section-kicker">// Start free</div>
+    <h2 class="section-title">Not sure where you stand? Take the 60-second quiz.</h2>
+    <p class="section-subtitle">Answer three questions, get the free 5-page “Build It, Break It” roadmap, and we’ll point you to the right next step — no cost, no spam.</p>
+    <a href="/roadmap/" class="btn-green" style="margin-top:0.4rem">Take the quiz →</a>
+  </div>
+  <img src="/roadmap/cover.jpg" alt="The Roadmap to Break Into IT — cover" loading="lazy">
+</div>
 
-    <!-- Core 1 -->
-    <div class="card reveal">
-      <img class="card-cover" src="/guides/covers/core1.jpg" alt="CompTIA A+ Core 1 study guide cover" loading="lazy">
-      <div class="card-title">CompTIA A+ Core 1</div>
-      <div class="card-tagline">Exam 220-1201 — hardware, networking, mobile, virtualization, troubleshooting.</div>
-      <div class="card-price-row">
-        <span class="card-price">$29</span>
-        <span class="card-price-label">one-time</span>
-      </div>
-      <ul class="card-includes">
-        <li>1:1 with official objectives v2.0</li>
-        <li>50 practice questions + answer key</li>
-        <li>Reference tables and illustrations</li>
-        <li>Exam tips + domain score tracker</li>
-        <li>PDF + DOCX (editable)</li>
-      </ul>
-      <a href="https://buy.stripe.com/14A00jbMi5L86aSg7WbAs09" class="card-cta" target="_blank" rel="noopener">Buy Core 1 — $29 →</a>
-      <span class="card-fineprint">Secure checkout · Stripe</span>
-    </div>
-
-    <!-- Bundle (FEATURED) -->
+<!-- 4 · THE BUNDLE — single featured card, the most weight -->
+<div class="section-heading center reveal" id="bundle" style="margin-top:2rem">
+  <div class="section-kicker">// The one to get</div>
+  <h2 class="section-title">A+ Complete Bundle</h2>
+  <p class="section-subtitle">Everything you need to pass both A+ exams — in one download, for less than buying the cores apart.</p>
+</div>
+<section class="cards-section" style="padding-top:0">
+  <div class="bundle-solo">
     <div class="card featured reveal">
       <div class="card-badge">Best Value</div>
       <img class="card-cover" src="/guides/covers/bundle.jpg" alt="CompTIA A+ Complete Bundle cover" loading="lazy">
       <div class="card-title">A+ Complete Bundle</div>
-      <div class="card-tagline">Core 1 + Core 2 together. Save $9 vs buying individually.</div>
+      <div class="card-tagline">Core 1 (220-1201) + Core 2 (220-1202) together. The full exam foundation.</div>
       <div class="card-price-row">
         <span class="card-price">$49</span>
-        <span class="card-price-label">one-time · save $9</span>
+        <span class="card-price-label">one-time · <s>$58 separately</s> · save $9</span>
       </div>
       <ul class="card-includes">
         <li>Both Core 1 (220-1201) and Core 2 (220-1202)</li>
@@ -290,54 +324,28 @@
       <a href="https://buy.stripe.com/00w00j5nU2yW0Qy6xmbAs0b" class="card-cta" target="_blank" rel="noopener">Get the Bundle — $49 →</a>
       <span class="card-fineprint">Secure checkout · Stripe</span>
     </div>
-
-    <!-- Core 2 -->
-    <div class="card reveal">
-      <img class="card-cover" src="/guides/covers/core2.jpg" alt="CompTIA A+ Core 2 study guide cover" loading="lazy">
-      <div class="card-title">CompTIA A+ Core 2</div>
-      <div class="card-tagline">Exam 220-1202 — operating systems, security, software troubleshooting, operational procedures.</div>
-      <div class="card-price-row">
-        <span class="card-price">$29</span>
-        <span class="card-price-label">one-time</span>
-      </div>
-      <ul class="card-includes">
-        <li>1:1 with official objectives v2.0</li>
-        <li>50 practice questions + answer key</li>
-        <li>Reference tables and illustrations</li>
-        <li>Exam tips + domain score tracker</li>
-        <li>PDF + DOCX (editable)</li>
-      </ul>
-      <a href="https://buy.stripe.com/bJe00j8A65L8czg5tibAs0a" class="card-cta" target="_blank" rel="noopener">Buy Core 2 — $29 →</a>
-      <span class="card-fineprint">Secure checkout · Stripe</span>
-    </div>
-
   </div>
 </section>
 
+<!-- 5 · CAREER KITS + SINGLE CORES (secondary, under the bundle) -->
 <div class="section-heading reveal">
-  <div class="section-kicker">// Career Launch</div>
-  <h2 class="section-title">Real-World IT Starter Kits</h2>
+  <div class="section-kicker">// Add-ons & single cores</div>
+  <h2 class="section-title">Career kits &amp; individual guides</h2>
   <p class="section-subtitle">
-    For the moment after the exam — the first ticket queue, first escalation, the first production
-    change with your name on it, and the home-lab projects that prove you can do the work.
+    Already have your exam plan? Bridge to the real job, build a portfolio, or grab a single core.
   </p>
 </div>
-
 <section class="cards-section tight">
   <div class="cards-grid">
 
-    <div class="card reveal">
-      <img class="card-cover" src="/guides/covers/starter-kit.jpg" alt="From Cert to Career — Real-World IT Starter Kit cover" loading="lazy">
+    <div class="card compact reveal">
+      <img class="card-cover" src="/guides/covers/starter-kit.jpg" alt="From Cert to Career cover" loading="lazy">
       <div class="card-title">From Cert to Career</div>
-      <div class="card-tagline">The Real-World IT Starter Kit for new help desk techs, career changers, and junior admins.</div>
-      <div class="card-price-row">
-        <span class="card-price">$25</span>
-        <span class="card-price-label">one-time</span>
-      </div>
+      <div class="card-tagline">The Real-World IT Starter Kit for new techs and career changers.</div>
+      <div class="card-price-row"><span class="card-price">$25</span><span class="card-price-label">one-time</span></div>
       <ul class="card-includes">
         <li>5 practical modules for first-job survival</li>
         <li>30+ real ticket scenarios and workflows</li>
-        <li>Communication templates and escalation habits</li>
         <li>Production guardrails + tool maps</li>
         <li>PDF + DOCX (editable)</li>
       </ul>
@@ -345,42 +353,63 @@
       <span class="card-fineprint">Secure checkout · Stripe</span>
     </div>
 
-    <div class="card reveal">
-      <img class="card-cover" src="/guides/covers/build-it-break-it.jpg" alt="Build It, Break It — hands-on IT lab manual cover" loading="lazy">
+    <div class="card compact reveal">
+      <img class="card-cover" src="/guides/covers/build-it-break-it.jpg" alt="Build It, Break It cover" loading="lazy">
       <div class="card-title">Build It, Break It</div>
-      <div class="card-tagline">18 hands-on home-lab projects that turn a certificate into competence — build it, break it, fix it.</div>
-      <div class="card-price-row">
-        <span class="card-price">$39</span>
-        <span class="card-price-label">one-time</span>
-      </div>
+      <div class="card-tagline">18 hands-on home-lab projects — build it, break it, fix it.</div>
+      <div class="card-price-row"><span class="card-price">$39</span><span class="card-price-label">one-time</span></div>
       <ul class="card-includes">
         <li>18 guided build → break → fix labs</li>
         <li>5 tracks: Windows · Cloud &amp; Identity · MSP Ops · Linux · Capstones</li>
-        <li>A documented runbook + GitHub portfolio to show employers</li>
-        <li>Runs on the laptop you already own — free tools only</li>
+        <li>Runbook + GitHub portfolio to show employers</li>
         <li>PDF · full edition</li>
       </ul>
       <a href="https://buy.stripe.com/5kQ8wP4jQ5L81UC7BqbAs0r" class="card-cta" target="_blank" rel="noopener">Get Build It, Break It — $39 →</a>
       <span class="card-fineprint">Secure checkout · Stripe</span>
     </div>
 
-    <div class="card featured reveal">
-      <div class="card-badge">Complete Path</div>
+    <div class="card compact reveal">
       <div class="card-icon">🚀</div>
       <div class="card-title">A+ Career Launch Suite</div>
-      <div class="card-tagline">Exam prep plus the real-world bridge. The strongest way to go from studying to actually working.</div>
-      <div class="card-price-row">
-        <span class="card-price">$69</span>
-        <span class="card-price-label">one-time · $83 separately · save $14</span>
-      </div>
+      <div class="card-tagline">Core 1 + Core 2 + From Cert to Career. Exam prep plus the real-world bridge.</div>
+      <div class="card-price-row"><span class="card-price">$69</span><span class="card-price-label">one-time · $83 separately · save $14</span></div>
       <ul class="card-includes">
         <li>Core 1 + Core 2 + From Cert to Career</li>
         <li>100 A+ practice questions + answer keys</li>
-        <li>30+ first-job ticket scenarios and worksheets</li>
-        <li>Exam prep, workflow, and career direction in one library</li>
+        <li>30+ first-job ticket scenarios</li>
         <li>PDF + DOCX digital bundle</li>
       </ul>
       <a href="https://buy.stripe.com/4gM4gz4jQ2yW42K2h6bAs0d" class="card-cta" target="_blank" rel="noopener">Get the Full Suite — $69 →</a>
+      <span class="card-fineprint">Secure checkout · Stripe</span>
+    </div>
+
+    <div class="card compact reveal">
+      <img class="card-cover" src="/guides/covers/core1.jpg" alt="CompTIA A+ Core 1 study guide cover" loading="lazy">
+      <div class="card-title">A+ Core 1 (single)</div>
+      <div class="card-tagline">Exam 220-1201 — hardware, networking, mobile, virtualization, troubleshooting.</div>
+      <div class="card-price-row"><span class="card-price">$29</span><span class="card-price-label">one-time</span></div>
+      <ul class="card-includes">
+        <li>1:1 with official objectives v2.0</li>
+        <li>50 practice questions + answer key</li>
+        <li>Exam tips + domain score tracker</li>
+        <li>PDF + DOCX (editable)</li>
+      </ul>
+      <a href="https://buy.stripe.com/14A00jbMi5L86aSg7WbAs09" class="card-cta" target="_blank" rel="noopener">Buy Core 1 — $29 →</a>
+      <span class="card-fineprint">Secure checkout · Stripe</span>
+    </div>
+
+    <div class="card compact reveal">
+      <img class="card-cover" src="/guides/covers/core2.jpg" alt="CompTIA A+ Core 2 study guide cover" loading="lazy">
+      <div class="card-title">A+ Core 2 (single)</div>
+      <div class="card-tagline">Exam 220-1202 — operating systems, security, software troubleshooting, ops.</div>
+      <div class="card-price-row"><span class="card-price">$29</span><span class="card-price-label">one-time</span></div>
+      <ul class="card-includes">
+        <li>1:1 with official objectives v2.0</li>
+        <li>50 practice questions + answer key</li>
+        <li>Exam tips + domain score tracker</li>
+        <li>PDF + DOCX (editable)</li>
+      </ul>
+      <a href="https://buy.stripe.com/bJe00j8A65L8czg5tibAs0a" class="card-cta" target="_blank" rel="noopener">Buy Core 2 — $29 →</a>
       <span class="card-fineprint">Secure checkout · Stripe</span>
     </div>
 
@@ -399,6 +428,29 @@
     </ul>
   </details>
 </div>
+
+<section class="trust-strip reveal">
+  <h2>Built by people who do the work</h2>
+  <p>
+    Twilight Tech LLC is an Atlanta-based managed IT and cybersecurity practice.
+    The A+ guides help you pass the exam. From Cert to Career helps you survive the first real queue,
+    first escalation, and first production mistake without losing your footing.
+  </p>
+</section>
+
+<!-- Cross-sell: Guides reader → Strategy session (tertiary) -->
+<section class="cross-strip reveal" aria-label="Cert Strategy Session cross-sell">
+  <div class="cross-strip-text">
+    <div class="cross-strip-eyebrow">PRO MOVE</div>
+    <div class="cross-strip-headline">Studying right now? Get a custom 14-day plan.</div>
+    <div class="cross-strip-sub">
+      45-minute one-on-one strategy session — weak-area diagnosis, exam-day playbook,
+      and the day-by-day plan that fits your real week. $99, capped at 4 a month.
+    </div>
+  </div>
+  <a href="/strategy/?utm_campaign=guides-cross-sell&utm_medium=cross-sell&utm_source=guides-page"
+     class="cross-strip-cta">Book a session →</a>
+</section>
 
 <!-- Email capture — self-hosted via J-Bot, posts to Tailscale Funnel endpoint -->
 <section class="capture-strip reveal" aria-labelledby="capture-headline">
@@ -440,8 +492,6 @@
   // under the /api/leads prefix.
   var ENDPOINT = 'https://testmachine.tail1dcfc5.ts.net/api/leads/';
 
-  // Pull UTM params off the current URL so we attribute the capture
-  // back to whichever channel sent the visitor (see UTM Convention doc).
   function getParam(name) {
     var p = new URLSearchParams(window.location.search);
     return p.get(name) || '';
@@ -493,7 +543,6 @@
         form.reset();
         button.textContent = 'Notify me →';
         button.disabled = false;
-        // Plausible custom event so we can see funnel conversion
         if (window.plausible) {
           window.plausible('Lead Captured', { props: {
             source: payload.utm_source || '(direct)',
@@ -502,7 +551,6 @@
         }
       })
       .catch(function (err) {
-        // Friendly error — don't expose the URL or backend specifics
         status.className = 'capture-status error';
         status.textContent = "Couldn't reach the server. Try again in a sec, or email hello@twilighttech.io.";
         button.textContent = 'Notify me →';
@@ -511,29 +559,6 @@
   });
 })();
 </script>
-
-<section class="trust-strip reveal">
-  <h2>Built by people who do the work</h2>
-  <p>
-    Twilight Tech LLC is an Atlanta-based managed IT and cybersecurity practice.
-    The A+ guides help you pass the exam. From Cert to Career helps you survive the first real queue,
-    first escalation, and first production mistake without losing your footing.
-  </p>
-</section>
-
-<!-- Cross-sell: Guides reader → Strategy session -->
-<section class="cross-strip reveal" aria-label="Cert Strategy Session cross-sell">
-  <div class="cross-strip-text">
-    <div class="cross-strip-eyebrow">PRO MOVE</div>
-    <div class="cross-strip-headline">Studying right now? Get a custom 14-day plan.</div>
-    <div class="cross-strip-sub">
-      45-minute one-on-one strategy session — weak-area diagnosis, exam-day playbook,
-      and the day-by-day plan that fits your real week. $99, capped at 4 a month.
-    </div>
-  </div>
-  <a href="/strategy/?utm_campaign=guides-cross-sell&utm_medium=cross-sell&utm_source=guides-page"
-     class="cross-strip-cta">Book a session →</a>
-</section>
 
 <section class="faq-section reveal">
   <h2>Frequently asked</h2>
@@ -567,15 +592,6 @@
     <summary>Do you have other certifications planned?</summary>
     <p>More guides are in development. If there is a specific cert or career kit you want next (Network+, Security+, or something more advanced), let us know. Demand drives the roadmap.</p>
   </details>
-</section>
-
-<section class="closing-cta reveal">
-  <h2>Ready to start?</h2>
-  <p>Pick the path that fits where you are. The Suite is the strongest combo if you're going from "studying for the A+" to "actually working a queue." If you already know the cert side, just grab From Cert to Career.</p>
-  <div class="closing-cta-buttons">
-    <a href="https://buy.stripe.com/4gM4gz4jQ2yW42K2h6bAs0d" class="closing-cta-btn mag" target="_blank" rel="noopener">Get the Full Suite — $69</a>
-    <a href="https://buy.stripe.com/aFacN5dUqb5seHoaNCbAs0c" class="closing-cta-btn" target="_blank" rel="noopener">Just the Career Kit — $25</a>
-  </div>
 </section>
 
 </div><!-- /shell -->
