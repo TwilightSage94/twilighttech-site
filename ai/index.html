@@ -7,9 +7,40 @@
 <meta name="description" content="I built my own AI operations agent — J-Bot. Now I help small businesses build theirs. Real calendar scheduling, email triage, ticket routing. Audit from $499.">
 <link rel="canonical" href="https://twilighttech.io/ai/">
 <meta property="og:title" content="AI Operations Consulting | Twilight Tech LLC">
-<meta property="og:description" content="AI that performs operations, not just answers questions. Audit, build, and retainer engagements from a working multi-domain agent platform.">
+<meta property="og:description" content="AI that performs operations, not just answers questions. Talk to a live sandboxed J-Bot, then audit / build / retain. Audit from $499. Atlanta.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://twilighttech.io/ai/">
+<meta property="og:image" content="https://twilighttech.io/images/og-ai.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Twilight Tech — AI that performs operations. Talk to J-Bot live.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Operations Consulting | Twilight Tech LLC">
+<meta name="twitter:description" content="Talk to a live, sandboxed J-Bot, then audit / build / retain. Audit from $499. Built in Atlanta.">
+<meta name="twitter:image" content="https://twilighttech.io/images/og-ai.svg">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "AI Operations Consulting",
+  "provider": {
+    "@type": "ProfessionalService",
+    "name": "Twilight Tech LLC",
+    "url": "https://twilighttech.io",
+    "areaServed": "US",
+    "address": { "@type": "PostalAddress", "addressLocality": "Atlanta", "addressRegion": "GA", "addressCountry": "US" },
+    "founder": { "@type": "Person", "name": "James Destrades Jr" }
+  },
+  "name": "AI Operations Audit, Build & Retainer",
+  "description": "Custom AI operations agents for small businesses and MSPs — built on J-Bot, a production multi-domain agent platform. Trust-gated, owns-your-stack, small-business priced.",
+  "url": "https://twilighttech.io/ai/",
+  "offers": [
+    { "@type": "Offer", "name": "AI Operations Audit", "price": "499", "priceCurrency": "USD", "description": "90-minute recorded session + 6–10 page engineering report with ranked AI opportunities and a 30-day plan. Fee credits toward a Build." },
+    { "@type": "Offer", "name": "AI Operations Build", "priceCurrency": "USD", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "2500", "maxPrice": "8000", "priceCurrency": "USD" }, "description": "Custom J-Bot deployment configured for your business — 5–10 workflows, integrations, 30 days of tuning." },
+    { "@type": "Offer", "name": "AI Operations Retainer", "priceCurrency": "USD", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "499", "maxPrice": "1499", "priceCurrency": "USD", "unitText": "MONTH" }, "description": "Ongoing optimization, new workflows, cost monitoring. No annual contract." }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -134,6 +165,102 @@
 #cta-final{background:linear-gradient(135deg,rgba(0,240,255,.06),rgba(75,124,243,.06));border-top:1px solid rgba(0,240,255,.2);border-bottom:1px solid rgba(0,240,255,.2);text-align:center}
 .cta-h{font-family:var(--display);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--blue-light));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem;max-width:780px;margin-left:auto;margin-right:auto}
 .cta-p{color:var(--muted);max-width:620px;margin:0 auto 2rem;line-height:1.7;font-style:italic}
+
+/* ── J-Bot Demo live console widget ── */
+.jbd{max-width:760px;margin:2.5rem auto 0}
+.jbd-console{background:linear-gradient(180deg,rgba(0,240,255,.03),var(--card) 30%);border:1px solid var(--border);position:relative;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.55),0 0 40px rgba(0,240,255,.04)}
+.jbd-console::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--magenta),var(--purple))}
+.jbd-console::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:.4;background:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(0,240,255,.012) 3px,rgba(0,240,255,.012) 4px)}
+.jbd-head{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;border-bottom:1px solid var(--border);background:rgba(0,0,0,.35);position:relative;z-index:1}
+.jbd-id{display:flex;align-items:center;gap:.6rem}
+.jbd-dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:jbd-blink 2s ease-in-out infinite}
+@keyframes jbd-blink{0%,100%{opacity:1}50%{opacity:.25}}
+.jbd-name{font-family:var(--display);font-weight:800;font-size:.95rem;letter-spacing:1px}
+.jbd-slash{color:var(--magenta)}
+.jbd-status{font-family:var(--mono);font-size:.6rem;letter-spacing:1.5px;color:var(--cyan);border:1px solid var(--border-h);padding:.25rem .55rem;text-transform:uppercase}
+.jbd-mute{margin-left:.5rem;background:none;border:1px solid var(--border);color:var(--muted);cursor:pointer;padding:.2rem .45rem;font-size:.8rem;line-height:1}
+.jbd-log{height:380px;overflow-y:auto;padding:1.25rem;display:flex;flex-direction:column;gap:1rem;position:relative;z-index:1;scrollbar-width:thin;scrollbar-color:var(--border-h) transparent}
+.jbd-log::-webkit-scrollbar{width:8px}
+.jbd-log::-webkit-scrollbar-thumb{background:var(--border-h)}
+.jbd-msg{display:flex;flex-direction:column;gap:.3rem;max-width:88%}
+.jbd-msg.jbd-user{align-self:flex-end;align-items:flex-end}
+.jbd-who{font-family:var(--mono);font-size:.58rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+.jbd-bub{padding:.8rem 1rem;line-height:1.6;font-size:.95rem;border:1px solid var(--border)}
+.jbd-bot .jbd-bub{background:rgba(0,240,255,.04);border-color:rgba(0,240,255,.18);border-left:2px solid var(--cyan)}
+.jbd-user .jbd-bub{background:rgba(124,92,191,.10);border-color:rgba(124,92,191,.3)}
+.jbd-refused .jbd-bub{background:rgba(255,0,229,.05);border-color:rgba(255,0,229,.3);border-left:2px solid var(--magenta)}
+.jbd-bub a{color:var(--cyan);text-decoration:underline}
+.jbd-bub strong{color:#fff}
+.jbd-tools{display:flex;flex-wrap:wrap;gap:.5rem;align-self:flex-start}
+.jbd-chip{font-family:var(--mono);font-size:.7rem;color:var(--cyan);border:1px solid var(--border-h);background:rgba(0,240,255,.06);padding:.3rem .65rem;letter-spacing:.5px;opacity:0;transform:translateY(6px);animation:jbd-chip-in .35s ease forwards;box-shadow:0 0 14px rgba(0,240,255,.12)}
+@keyframes jbd-chip-in{to{opacity:1;transform:translateY(0)}}
+.jbd-typing{display:inline-flex;gap:5px;align-items:center}
+.jbd-typing i{width:6px;height:6px;border-radius:50%;background:var(--cyan);opacity:.4;animation:jbd-bounce 1.2s infinite ease-in-out}
+.jbd-typing i:nth-child(2){animation-delay:.18s}
+.jbd-typing i:nth-child(3){animation-delay:.36s}
+@keyframes jbd-bounce{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+.jbd-suggest{display:flex;flex-wrap:wrap;gap:.5rem;padding:0 1.25rem 1rem;position:relative;z-index:1}
+.jbd-suggest.jbd-hidden{display:none}
+.jbd-starter{font-family:var(--sans);font-size:.82rem;color:var(--muted);cursor:pointer;border:1px solid var(--border);background:rgba(255,255,255,.02);padding:.45rem .8rem;transition:all .2s}
+.jbd-starter:hover{border-color:var(--border-h);color:var(--text);background:rgba(0,240,255,.05)}
+.jbd-input{display:flex;gap:.5rem;padding:1rem 1.25rem;border-top:1px solid var(--border);background:rgba(0,0,0,.35);position:relative;z-index:1}
+.jbd-input input{flex:1;background:var(--void);border:1px solid var(--border);color:var(--text);font-family:var(--sans);font-size:.95rem;padding:.7rem .9rem;outline:none;transition:border-color .2s}
+.jbd-input input:focus{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(0,240,255,.1)}
+.jbd-input button{font-family:var(--mono);font-size:.78rem;letter-spacing:1.5px;background:var(--cyan);color:#04040f;border:none;padding:0 1.4rem;cursor:pointer;font-weight:700;transition:opacity .2s}
+.jbd-input button:hover{opacity:.85}
+.jbd-input button:disabled{opacity:.4;cursor:not-allowed}
+.jbd-lead{margin-top:1rem;border:1px solid rgba(0,240,255,.25);background:rgba(0,240,255,.03);padding:1.5rem}
+.jbd-lead.jbd-pop{animation:jbd-pop .4s ease}
+@keyframes jbd-pop{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.jbd-lead-h{font-family:var(--display);font-weight:700;color:var(--cyan);margin-bottom:.3rem}
+.jbd-lead-sub{color:var(--muted);font-size:.9rem;margin-bottom:1rem;line-height:1.6}
+.jbd-lead-form{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.jbd-lead-form input,.jbd-lead-form textarea{background:var(--void);border:1px solid var(--border);color:var(--text);font-family:var(--sans);padding:.6rem .75rem;outline:none;font-size:.9rem}
+.jbd-lead-form input:focus,.jbd-lead-form textarea:focus{border-color:var(--cyan)}
+.jbd-lead-form .jbd-full{grid-column:1/-1}
+.jbd-lead-form button{grid-column:1/-1;font-family:var(--mono);letter-spacing:1.5px;background:var(--cyan);color:#04040f;border:none;padding:.75rem;cursor:pointer;font-weight:700}
+.jbd-lead-done{color:var(--green);font-size:.95rem;line-height:1.6}
+.jbd-foot{text-align:center;font-family:var(--mono);font-size:.62rem;color:var(--muted);letter-spacing:1px;margin-top:1rem;opacity:.7}
+.jbd-turnstile{margin-top:1rem;display:flex;justify-content:center}
+@media(max-width:560px){.jbd-lead-form{grid-template-columns:1fr}.jbd-log{height:320px}}
+
+/* ── Demo → Build bridge ("this is the product") ── */
+.demo-bridge{max-width:760px;margin:1.25rem auto 0;padding:1.5rem 1.75rem;border:1px solid rgba(0,240,255,.25);background:linear-gradient(135deg,rgba(0,240,255,.05),rgba(124,92,191,.05));display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.demo-bridge-txt{color:var(--muted);line-height:1.65;font-size:.95rem;flex:1;min-width:260px}
+.demo-bridge-txt strong{color:#fff}
+.demo-bridge-cta{display:flex;gap:.6rem;flex-wrap:wrap}
+.demo-bridge-cta .btn{padding:.7rem 1.1rem;font-size:.82rem;white-space:nowrap}
+
+/* ── Capability table → demo tie-in ── */
+.cap-note{margin-top:1rem;font-family:var(--mono);font-size:.78rem;letter-spacing:.5px;color:var(--muted);text-align:center}
+.cap-note a{color:var(--cyan);text-decoration:none;border-bottom:1px solid rgba(0,240,255,.4)}
+.cap-note a:hover{color:#fff}
+
+/* ── Audit risk-reversal guarantee ── */
+.tier-guarantee{margin-bottom:1.25rem;padding:.8rem 1rem;border-left:2px solid var(--green);background:rgba(57,255,20,.05);color:var(--muted);font-size:.85rem;line-height:1.6}
+
+/* ── Custom engagement banner (pressure-relief valve below the tier grid) ── */
+.tier-banner{margin-top:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;padding:1.5rem 1.75rem;border:1px dashed rgba(0,240,255,.3);background:rgba(0,240,255,.03)}
+.tier-banner-name{font-family:var(--display);font-weight:700;color:#fff;font-size:1rem;margin-bottom:.3rem}
+.tier-banner-price{color:var(--cyan);font-family:var(--mono);font-size:.85rem;margin-left:.4rem}
+.tier-banner-desc{color:var(--muted);font-size:.9rem;line-height:1.6;max-width:680px}
+.tier-banner .tier-cta{margin:0;white-space:nowrap;padding:.85rem 1.5rem}
+
+/* ── Featured testimonial / mini case study ── */
+.case{max-width:880px;margin:2.5rem auto 0;display:grid;grid-template-columns:1.15fr .85fr;gap:1.5rem}
+.case-quote{background:linear-gradient(180deg,rgba(0,240,255,.04),var(--card) 35%);border:1px solid rgba(0,240,255,.2);padding:2.25rem 2rem;position:relative;overflow:hidden}
+.case-quote::before{content:'\201C';position:absolute;top:-.5rem;right:1rem;font-family:var(--display);font-size:7rem;line-height:1;color:rgba(0,240,255,.08)}
+.case-quote p{color:var(--text);font-size:1.05rem;line-height:1.8;position:relative;z-index:1;margin:0 0 1.4rem}
+.case-cite{font-family:var(--display);font-weight:700;color:#fff;font-size:.95rem;letter-spacing:.5px}
+.case-cite span{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);margin-top:.3rem;font-weight:400}
+.case-study{display:flex;flex-direction:column;gap:1rem}
+.case-step{border:1px solid var(--border);background:var(--card);padding:1.1rem 1.25rem;position:relative;padding-left:2.6rem}
+.case-step::before{content:attr(data-k);position:absolute;left:1rem;top:1.15rem;font-family:var(--mono);font-size:.6rem;letter-spacing:1px;text-transform:uppercase;color:var(--cyan);writing-mode:vertical-rl;transform:rotate(180deg)}
+.case-step h4{font-family:var(--display);font-size:.85rem;color:#fff;margin:0 0 .35rem}
+.case-step p{color:var(--muted);font-size:.88rem;line-height:1.55;margin:0}
+.case-step.out{border-color:rgba(57,255,20,.3)}
+.case-step.out h4{color:var(--green)}
+@media(max-width:760px){.case{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -163,8 +290,8 @@
       <h2 class="hero-h2">Most "AI for business" tools are chatbots in a wrapper. J-Bot is different — it runs the operation.</h2>
       <p class="hero-tag">Real calendar scheduling. Real email triage. Real ticket routing. Real security monitoring. All from one chat — and trust-gated so it asks before it acts.</p>
       <div class="hero-btns">
-        <a href="https://calendar.app.google/SnNJnQnkfpavbuvU9" class="btn btn-solid">Book a 30-min demo · free</a>
-        <a href="#difference" class="btn btn-mag">See what it does</a>
+        <a href="#demo" class="btn btn-solid">Talk to J-Bot now · live</a>
+        <a href="https://calendar.app.google/SnNJnQnkfpavbuvU9" class="btn btn-mag">Book a 30-min demo · free</a>
       </div>
     </div>
   </section>
@@ -199,41 +326,27 @@
         <table class="cap-table">
           <thead><tr><th>Domain</th><th>Live capabilities</th></tr></thead>
           <tbody>
-            <tr><td>Email</td><td>Triage, draft, send, search, label, schedule follow-ups via Gmail API</td></tr>
-            <tr><td>Calendar</td><td>Find free slots, schedule meetings, send invites, check today's agenda</td></tr>
-            <tr><td>Tasks</td><td>Create, assign, complete tasks via Google Tasks</td></tr>
-            <tr><td>Contacts</td><td>Search, augment with web context, push to CRM</td></tr>
-            <tr><td>Files</td><td>Read, write, search Google Drive</td></tr>
-            <tr><td>Security</td><td>8 Windows security sensors, SSL/TLS scanning, DNS posture, port analysis</td></tr>
-            <tr><td>Content</td><td>Drafts social posts, generates matching images, queues for approval</td></tr>
-            <tr><td>Memory</td><td>Pulls trusted context from a long-term knowledge vault</td></tr>
-            <tr><td>Voice</td><td>Push-to-talk speech in, voice out (where the device supports it)</td></tr>
+            <tr><td>Email</td><td>Triage, draft, send, search, schedule follow-ups — trust-gated before anything sends</td></tr>
+            <tr><td>Calendar</td><td>Find free slots, schedule meetings, send invites, brief you on the day</td></tr>
+            <tr><td>Tickets &amp; Tasks</td><td>Create, route by priority, assign, and close across your ticketing + task tools</td></tr>
+            <tr><td>Contacts &amp; CRM</td><td>Search, enrich with web context, keep records current</td></tr>
+            <tr><td>Security</td><td>Windows security sensors, SSL/TLS scanning, DNS posture, port analysis</td></tr>
+            <tr><td>Memory &amp; Context</td><td>Pulls trusted, cross-domain context from a long-term knowledge vault</td></tr>
           </tbody>
         </table>
+        <p class="cap-note">The Email and Calendar rows? <a href="#demo">Try them live in the J-Bot Demo&nbsp;↓</a></p>
       </div>
       <div class="diff-points reveal">
         <div class="diff-point"><strong>Trust-gated actions</strong><span>Every operation has a permission tier: autonomous, notify, confirm, authenticate, prohibited. You decide — per action, per context — what J-Bot can do without checking with you. Dangerous things always require explicit approval.</span></div>
         <div class="diff-point"><strong>Cross-domain context</strong><span>A support email automatically informs ticket priority. A calendar conflict influences how an email gets drafted. The agent maintains state across the whole conversation.</span></div>
-        <div class="diff-point"><strong>Production-grade</strong><span>200+ tool handlers, 14 internal subsystems, 4,300+ automated tests, multi-provider LLM with cost tracking and audit logging. It runs in production every day.<span class="spoiler">(Spoiler: it's running this site for me.)</span></span></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec-dark">
-    <div class="container">
-      <div class="sh reveal"><div class="sh-label">// How It Works</div><h2 class="sh-title">From <span class="ag">"hey"</span> to a working system in <span class="ac">six weeks</span></h2><div class="sh-line"></div><p class="sh-sub">No mystery process. Four steps, each with its own scope, deliverable, and exit door. You can stop after any of them.</p></div>
-      <div class="flow-grid reveal">
-        <div class="flow-step"><div class="flow-num">1</div><div class="flow-meta">Free · 15 min</div><h3 class="flow-title">Qualify</h3><p class="flow-time"><strong>Day 0</strong> · short call</p><p class="flow-desc">A 15-minute call to find a real fit. I ask about your stack, your worst day, your hard NO's. If we're not a match, I tell you who is.</p></div>
-        <div class="flow-step"><div class="flow-num">2</div><div class="flow-meta">$499 · 90 min + report</div><h3 class="flow-title">Audit</h3><p class="flow-time"><strong>Day 3–9</strong> · session + 48hr deliverable</p><p class="flow-desc">Recorded working session. I watch how you actually spend your week. 48 hours later you get a 6–10 page engineering report with ranked AI opportunities and a 30-day plan.</p></div>
-        <div class="flow-step"><div class="flow-num">3</div><div class="flow-meta">$2.5K–$8K · 2–6 weeks</div><h3 class="flow-title">Build</h3><p class="flow-time"><strong>Weeks 1–6</strong> · real software, your environment</p><p class="flow-desc">Custom J-Bot deployment with your business logic, integrations, trust gates, and team training. You own the configuration. 30 days of tuning included.</p></div>
-        <div class="flow-step"><div class="flow-num">4</div><div class="flow-meta">$499–$1.5K/mo · optional</div><h3 class="flow-title">Retain</h3><p class="flow-time"><strong>Ongoing</strong> · monthly, no contract</p><p class="flow-desc">For businesses that want J-Bot as a continuous capability. Monthly check-in, new workflows added, model upgrades when they help, priority incident response.</p></div>
+        <div class="diff-point"><strong>Production-grade</strong><span>300+ tool handlers, 15 internal subsystems, 8,000+ automated tests, multi-provider LLM with cost tracking and audit logging. It runs in production every day.<span class="spoiler">(Spoiler: it's running this site for me.)</span></span></div>
       </div>
     </div>
   </section>
 
   <section id="tiers">
     <div class="container">
-      <div class="sh reveal"><div class="sh-label">// Services</div><h2 class="sh-title">How I <span class="ac">work with you</span></h2><div class="sh-line"></div><p class="sh-sub">Three tiers, plus custom. Every engagement starts with the Audit so we both know what's worth building.</p></div>
+      <div class="sh reveal"><div class="sh-label">// Services</div><h2 class="sh-title">How I <span class="ac">work with you</span></h2><div class="sh-line"></div><p class="sh-sub">It starts with a free 15-minute fit call, then a $499 Audit — so we both know what's worth building before any Build quote. Each step has its own scope and exit door; you can stop after any of them.</p></div>
       <div class="tier-grid">
         <div class="tier-card featured reveal">
           <span class="tier-badge">Start Here</span>
@@ -243,15 +356,25 @@
           <div class="tier-cadence">Credit applied toward larger engagements</div>
           <div class="tier-desc">A recorded 90-minute call. We walk through how your team actually spends its day — email, scheduling, ticket routing, reporting. I leave with screen recordings + calendar history.</div>
           <ul class="tier-features"><li>Where AI can shave hours per week — ranked by ROI and risk</li><li>What you should <em>not</em> automate</li><li>Specific tools that fit your stack — and the ones that don't</li><li>A concrete 30-day implementation plan</li></ul>
+          <div class="tier-guarantee">No-fluff guarantee: if the report doesn't surface at least one workflow worth automating, it's free — and ~1 in 3 audits end with "you don't need a Build, here's a $50/mo tool." The fee credits toward any Build, so it's a deposit, not a sunk cost.</div>
           <a href="https://calendar.app.google/qeAHSWoSLsiL3DqW9" class="tier-cta">Book the Audit</a>
         </div>
         <div class="tier-card reveal">
-          <div class="tier-name">AI Operations Build</div>
-          <div class="tier-tag">2–6 weeks</div>
-          <div class="tier-price"><span class="amt">$2.5K</span><span class="per">– $8K</span></div>
-          <div class="tier-cadence">Fixed-scope, fixed-price</div>
-          <div class="tier-desc">I deploy a J-Bot Mini configured for your business. We pick 5–10 workflows — usually email triage, scheduling, ticket coordination, plus one custom to your operation.</div>
-          <ul class="tier-features"><li>Custom domain pack for your business logic</li><li>Integrations: M365, Google Workspace, ConnectWise, NinjaOne, Datto, custom APIs</li><li>30 days of post-deployment tuning included</li><li>Full audit trail of every AI action</li></ul>
+          <div class="tier-name">Starter Build</div>
+          <div class="tier-tag">2–3 weeks · fixed-scope, fixed-price</div>
+          <div class="tier-price"><span class="amt">$3.5K</span><span class="per">fixed</span></div>
+          <div class="tier-cadence">J-Bot running on your obvious wins</div>
+          <div class="tier-desc">A configured J-Bot deployment on the workflows that pay for themselves fastest — email triage, scheduling, ticket coordination.</div>
+          <ul class="tier-features"><li>Up to <strong>5 workflows</strong> from the standard menu</li><li>Up to <strong>2 integrations</strong> — Google Workspace <em>or</em> M365, plus one of ConnectWise / NinjaOne / Datto</li><li>One deployment mode (cloud-managed or single self-host)</li><li>Up to 5 seats · 1 training session · 30 days tuning</li></ul>
+          <a href="https://calendar.app.google/SnNJnQnkfpavbuvU9" class="tier-cta">Discuss a Build</a>
+        </div>
+        <div class="tier-card reveal">
+          <div class="tier-name">Pro Build</div>
+          <div class="tier-tag">4–6 weeks · fixed-scope, fixed-price</div>
+          <div class="tier-price"><span class="amt">$7.5K</span><span class="per">fixed</span></div>
+          <div class="tier-cadence">Shaped to how you actually operate</div>
+          <div class="tier-desc">A deeper deployment with bespoke business logic, more integrations, and any deployment mode — including air-gapped for regulated shops.</div>
+          <ul class="tier-features"><li>Up to <strong>10 workflows</strong>, including bespoke business-logic ones</li><li>Up to <strong>4 integrations, including one custom API</strong></li><li>Any deployment mode — cloud / self-host / hybrid / air-gapped</li><li>Up to 25 seats · team training · 30 days tuning + 2 check-ins</li></ul>
           <a href="https://calendar.app.google/SnNJnQnkfpavbuvU9" class="tier-cta">Discuss a Build</a>
         </div>
         <div class="tier-card reveal">
@@ -263,14 +386,94 @@
           <ul class="tier-features"><li>Add new workflows as your operation evolves</li><li>Provider routing tuned monthly (NIM, Anthropic, local)</li><li>Cost + quality reporting each month</li><li>Priority response on incidents</li></ul>
           <a href="https://calendar.app.google/SnNJnQnkfpavbuvU9" class="tier-cta">Talk Retainer</a>
         </div>
-        <div class="tier-card reveal">
-          <div class="tier-name">Custom Engagement</div>
-          <div class="tier-tag">research, white-label, novel domains</div>
-          <div class="tier-price"><span class="amt">By</span><span class="per">conversation</span></div>
-          <div class="tier-cadence">Starts with the Audit</div>
-          <div class="tier-desc">Building your own AI from scratch? Want to white-label J-Bot? Researching whether AI agents fit an industry I haven't worked in yet? Book the audit and we can scope a custom engagement.</div>
-          <ul class="tier-features"><li>White-label J-Bot deployments</li><li>Industry-specific research engagements</li><li>Architecture review for in-house AI builds</li><li>Joint proposals for SBIR / grant-backed work</li></ul>
-          <a href="mailto:james@twilighttech.io?subject=Custom%20AI%20engagement" class="tier-cta">Email James</a>
+      </div>
+      <div class="tier-banner reveal">
+        <div>
+          <div class="tier-banner-name">Need more than Pro? → Custom Engagement <span class="tier-banner-price">$9K+</span></div>
+          <div class="tier-banner-desc">15+ workflows, multiple custom APIs, multi-site or air-gapped rollouts, white-label J-Bot, or research engagements. Anything past Pro's walls is its own scoped quote — not Pro plus favors.</div>
+        </div>
+        <a href="mailto:james@twilighttech.io?subject=Custom%20AI%20engagement" class="tier-cta">Email James</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE DEMO — J-Bot Demo console -->
+  <section id="demo">
+    <div class="container">
+      <div class="sh center reveal">
+        <div class="sh-label">// Live Demo · running on this page right now</div>
+        <h2 class="sh-title">Don't take my word for it — <span class="ac">talk to it</span></h2>
+        <div class="sh-line"></div>
+        <p class="sh-sub">Most AI consultants hand you a slide deck. This is a <strong>real J-Bot agent, live on this page</strong> — go ahead and poke it. It's sandboxed here (fake data, can't touch real accounts), but it thinks and acts exactly like the one I build into a business. Ask it to check a calendar or draft an email and watch which tools it reaches for.</p>
+      </div>
+
+      <div class="jbd reveal" data-api-base="https://book.twilighttech.io/demobot" data-turnstile-sitekey="0x4AAAAAADqfI0hQJLUlqBCS">
+        <div class="jbd-console">
+          <div class="jbd-head">
+            <div class="jbd-id">
+              <span class="jbd-dot"></span>
+              <span class="jbd-name">J-BOT<span class="jbd-slash">//</span>DEMO</span>
+            </div>
+            <div style="display:flex;align-items:center">
+              <span class="jbd-status">Sandboxed · Read-only</span>
+              <button class="jbd-mute" id="jbd-mute" aria-pressed="false" title="Toggle sound" type="button">&#128266;</button>
+            </div>
+          </div>
+          <div class="jbd-log" id="jbd-log"></div>
+          <div class="jbd-suggest" id="jbd-suggest">
+            <button class="jbd-starter" type="button" data-q="What's on the calendar today?">What's on the calendar today?</button>
+            <button class="jbd-starter" type="button" data-q="Draft a follow-up email to a client about tomorrow's call.">Draft a client email</button>
+            <button class="jbd-starter" type="button" data-q="What can the real J-Bot do?">What can the real J-Bot do?</button>
+          </div>
+          <form class="jbd-input" id="jbd-form">
+            <input type="text" id="jbd-text" placeholder="Ask J-Bot Demo something…" autocomplete="off" aria-label="Message J-Bot Demo">
+            <button type="submit" id="jbd-send">SEND</button>
+          </form>
+        </div>
+
+        <div class="jbd-lead" id="jbd-lead" hidden>
+          <div class="jbd-lead-h">Want the real thing?</div>
+          <div class="jbd-lead-sub">Drop your details and James reaches out personally — no autoresponder, no sales sequence.</div>
+          <form class="jbd-lead-form" id="jbd-lead-form">
+            <input name="name" placeholder="Name" required>
+            <input name="email" type="email" placeholder="Email" required>
+            <input name="business" placeholder="Business name" class="jbd-full">
+            <textarea name="use_case" placeholder="What would you want J-Bot to handle?" rows="2" class="jbd-full"></textarea>
+            <button type="submit">Send to James</button>
+          </form>
+        </div>
+
+        <div class="jbd-turnstile" id="jbd-turnstile"></div>
+        <div class="jbd-foot">Sandboxed demo · no real accounts touched · conversations are rate-limited</div>
+      </div>
+
+      <div class="demo-bridge reveal">
+        <div class="demo-bridge-txt"><strong>What you're talking to is the product.</strong> The J-Bot I build runs this on <em>your</em> real calendar, inbox, and tickets — in your environment, trust-gated, yours to own. This very chatbot is a J-Bot, deployed live on this site.</div>
+        <div class="demo-bridge-cta">
+          <a href="#tiers" class="btn btn-solid">See Build options</a>
+          <a href="https://calendar.app.google/qeAHSWoSLsiL3DqW9" class="btn btn-mag">Book the $499 Audit</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF — featured reference client + mini case study -->
+  <section class="sec-dark" id="proof">
+    <div class="container">
+      <div class="sh center reveal">
+        <div class="sh-label">// Reference Client</div>
+        <h2 class="sh-title">A real studio, <span class="ac">launched on this</span></h2>
+        <div class="sh-line"></div>
+      </div>
+      <div class="case reveal">
+        <div class="case-quote">
+          <p>"Their consultant work and J-Bot showed us how to point the right tools at the right problems — that made all the difference in the early going. Because of their help, we were able to build better AI tools of our own, the kind that now manage the studio day to day. If you're staring at a wall of tech and wondering where to even start, these are the people to call."</p>
+          <div class="case-cite">Skywell Studios, LLC<span>Reference client · AI launch + J-Bot direction</span></div>
+        </div>
+        <div class="case-study">
+          <div class="case-step" data-k="Problem"><h4>A wall of tech, no blueprint</h4><p>A vision, a handful of AI tools, and no real plan for how to make them work together.</p></div>
+          <div class="case-step" data-k="What I did"><h4>Pointed the right tools at the right problems</h4><p>Mapped their stack, set the J-Bot direction for their operation, and got them past the early-going bottleneck.</p></div>
+          <div class="case-step out" data-k="Outcome"><h4>They run their own AI now</h4><p>Skywell builds and runs the AI tooling that manages the studio day-to-day — and found their footing far faster than they would have alone.</p></div>
         </div>
       </div>
     </div>
@@ -314,7 +517,7 @@
             <h4>Active Projects</h4>
             <ul>
               <li><strong>J-Bot</strong> <span class="pstatus ps-live">Live</span> — the AI operations platform this page is about. Multi-provider, multi-domain, production-grade.</li>
-              <li><strong>NSF SBIR Phase I</strong> <span class="pstatus ps-rev">Under Review</span> — $275K, 12-month research project to formalize the architecture J-Bot pioneered.</li>
+              <li><strong>Skywell Studios</strong> <span class="pstatus ps-live">Shipped</span> — helped a studio launch their own AI tooling; J-Bot + consulting pointed the right tools at the right problems. (Reference client.)</li>
               <li><strong>CompTIA A+ Study Guides</strong> <span class="pstatus ps-ship">Shipping</span> — Core 1 + Core 2 + Bundle. <a href="/guides/" style="color:var(--cyan)">Buy here</a></li>
               <li><strong>Twilight Sentinel Scanner</strong> <span class="pstatus ps-beta">Beta</span> — small-business security scanning tool.</li>
             </ul>
@@ -364,6 +567,7 @@
         <details class="faq-item"><summary class="faq-q">What if I'm not sure I need a Build after the Audit?</summary><div class="faq-a">That's the whole point of the audit being separate. You walk out with a written report you can act on (or not). About a third of audits conclude "you don't need a Build — here's a $50/month tool that solves 80% of this." The audit fee credits toward a Build if you want one, but it's not a contract.</div></details>
         <details class="faq-item"><summary class="faq-q">Can I just hire you hourly for an existing problem?</summary><div class="faq-a">Not at this stage — I'm too small to support hourly engagements without losing the deeper builds. But the <strong>Custom</strong> tier covers most "I have one specific thing" cases as a fixed-price mini-engagement. Email me with the problem; I'll tell you within 24 hours if it fits.</div></details>
         <details class="faq-item"><summary class="faq-q">What if my data can't leave my network?</summary><div class="faq-a">J-Bot supports a <strong>fully air-gapped deployment</strong> using local LLMs (Ollama on your hardware). Slower than cloud and capped at smaller models, but zero data leaves your network. Most regulated clients run a hybrid governed by trust gates you control.</div></details>
+        <details class="faq-item"><summary class="faq-q">How is my data handled — and what about the demo above?</summary><div class="faq-a"><strong>The demo touches nothing real.</strong> It's a sandboxed twin on fake data — it can't send email, read your calendar, or store what you type. For real engagements, your data stays in <strong>your</strong> environment: self-hosted on your infrastructure, on a local workstation, or cloud-managed by me with the same trust gates and a full audit trail of every action. You own the config and can take it elsewhere any time. No training on your data, ever.</div></details>
         <details class="faq-item"><summary class="faq-q">How long until I see ROI?</summary><div class="faq-a">Realistic answer: <strong>4–8 weeks after Build</strong>. Week 1–2 your team learns to delegate to it; week 3–4 the agent learns your patterns; by month 2 the savings are measurable. I baseline at the start and re-measure at day 30.</div></details>
         <details class="faq-item"><summary class="faq-q">What happens if a model breaks or the API changes?</summary><div class="faq-a">J-Bot is multi-provider by design — it fails over between NVIDIA NIM, Anthropic Claude, OpenAI, and local Ollama automatically. Provider outages don't take you down. Breaking changes are my problem, not yours.</div></details>
         <details class="faq-item"><summary class="faq-q">Who owns the code and configuration after the Build?</summary><div class="faq-a"><strong>You do.</strong> The custom domain pack I build for your business is yours — your config, prompts, integrations, data. You can fire me and another engineer can take it over with the source.</div></details>
@@ -390,5 +594,6 @@
 </footer>
 
 <script src="/assets/site.js"></script>
+<script src="/assets/demobot-widget.js"></script>
 </body>
 </html>

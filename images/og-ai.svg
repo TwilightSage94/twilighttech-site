@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="'Orbitron','Rajdhani',sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#06061a"/>
+      <stop offset="1" stop-color="#04040f"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00f0ff"/>
+      <stop offset="0.55" stop-color="#ff00e5"/>
+      <stop offset="1" stop-color="#7c5cbf"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.78" cy="0.28" r="0.5">
+      <stop offset="0" stop-color="#00f0ff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#00f0ff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#00f0ff" stroke-opacity="0.04" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="8" fill="url(#accent)"/>
+
+  <!-- wordmark -->
+  <text x="80" y="120" font-size="30" font-weight="800" fill="#f0f4ff" letter-spacing="3">TWILIGHT<tspan fill="#ff00e5">//</tspan>TECH</text>
+  <text x="80" y="150" font-family="'Share Tech Mono',monospace" font-size="15" fill="#00f0ff" letter-spacing="4">ATLANTA · AI ENGINEERING</text>
+
+  <!-- headline -->
+  <text x="80" y="300" font-size="74" font-weight="900" fill="#ffffff" letter-spacing="-1">AI that <tspan fill="#00f0ff">performs</tspan></text>
+  <text x="80" y="384" font-size="74" font-weight="900" fill="#ffffff" letter-spacing="-1">operations.</text>
+
+  <!-- subline -->
+  <text x="80" y="452" font-family="'Rajdhani',sans-serif" font-size="30" fill="#bcc8e8">Not a chatbot in a wrapper — it runs the operation.</text>
+
+  <!-- chips -->
+  <g font-family="'Share Tech Mono',monospace" font-size="18">
+    <rect x="80" y="500" width="280" height="50" fill="none" stroke="#00f0ff" stroke-opacity="0.4"/>
+    <text x="100" y="532" fill="#00f0ff">▸ Talk to J-Bot · live</text>
+    <rect x="380" y="500" width="220" height="50" fill="none" stroke="#ffffff" stroke-opacity="0.14"/>
+    <text x="400" y="532" fill="#bcc8e8">Audit from $499</text>
+    <rect x="620" y="500" width="300" height="50" fill="none" stroke="#ffffff" stroke-opacity="0.14"/>
+    <text x="640" y="532" fill="#bcc8e8">300+ tools · 8,000+ tests</text>
+  </g>
+
+  <!-- terminal motif, right -->
+  <g transform="translate(880,150)">
+    <rect width="240" height="180" fill="#0d1117" stroke="#00f0ff" stroke-opacity="0.25"/>
+    <rect width="240" height="3" fill="url(#accent)"/>
+    <circle cx="20" cy="28" r="5" fill="#39ff14"/>
+    <text x="36" y="33" font-family="'Orbitron',sans-serif" font-size="13" font-weight="800" fill="#f0f4ff">J-BOT<tspan fill="#ff00e5">//</tspan>DEMO</text>
+    <g font-family="'Share Tech Mono',monospace" font-size="12" fill="#00f0ff">
+      <text x="20" y="78">▸ demo_calendar_today</text>
+      <text x="20" y="104" fill="#bcc8e8">9:00 Strategy · 11:00 Call</text>
+      <text x="20" y="138">▸ demo_email_draft</text>
+      <text x="20" y="162" fill="#bcc8e8">Draft ready — not sent ✓</text>
+    </g>
+  </g>
+</svg>
