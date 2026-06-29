@@ -198,6 +198,9 @@
 .capture-fineprint{font-family:var(--mono);font-size:0.7rem;color:var(--muted);letter-spacing:0.04em}
 .capture-status{margin-top:0.9rem;font-family:var(--mono);font-size:0.82rem;min-height:1.2em}
 .capture-status.success{color:var(--green)}
+.magnet-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;max-width:var(--max);margin:0 auto 3rem;padding:0 2rem}
+.magnet-grid .capture-strip{margin:0;max-width:none}
+@media(max-width:760px){.magnet-grid{grid-template-columns:1fr}}
 .capture-status.error{color:var(--magenta)}
 .capture-form .hp-field{position:absolute !important;left:-10000px !important;width:1px !important;height:1px !important;opacity:0 !important;pointer-events:none !important}
 
@@ -303,6 +306,39 @@
     <a href="/roadmap/" class="btn-green" style="margin-top:0.4rem">Take the quiz →</a>
   </div>
   <img src="/roadmap/cover.jpg" alt="The Roadmap to Break Into IT — cover" loading="lazy">
+</div>
+
+<!-- 3b · TWO MORE FREE PACKS — magnet capture (A+ exam + homelab) -->
+<div class="section-heading center reveal" style="margin-top:2.4rem">
+  <div class="section-kicker">// Grab a pack</div>
+  <h2 class="section-title">Two more free packs — straight to your inbox.</h2>
+  <p class="section-subtitle">Pick your lane. Drop your email and the PDF lands instantly — no cost, no spam.</p>
+</div>
+<div class="magnet-grid reveal">
+  <section class="capture-strip" aria-labelledby="cap-cheat-h">
+    <div class="capture-eyebrow">FREE · A+ EXAM PREP</div>
+    <h3 class="capture-headline" id="cap-cheat-h">A+ V15 Cheat-Sheet Pack</h3>
+    <p class="capture-sub">Both cores on a few dense pages — ports, RAID levels, malware types, the 7-step troubleshooting + 6-step change procedures. The night-before recall card.</p>
+    <form class="capture-form" data-source="cheat-sheet" data-download="/guides/magnets/a-plus-v15-cheat-sheet.pdf" novalidate>
+      <input type="email" name="email" placeholder="name@you.com" required autocomplete="email" aria-label="Email address" />
+      <input type="text" name="hp" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <button type="submit">Send me the pack →</button>
+    </form>
+    <div class="capture-fineprint">One email. Zero spam. Yours to keep.</div>
+    <div class="capture-status" role="status" aria-live="polite"></div>
+  </section>
+  <section class="capture-strip" aria-labelledby="cap-homelab-h">
+    <div class="capture-eyebrow">FREE · HOMELAB BUILD</div>
+    <h3 class="capture-headline" id="cap-homelab-h">Homelab Starter</h3>
+    <p class="capture-sub">Your first build that actually gets you hired — stand up a domain controller, break it on purpose, and turn the fix into an interview story.</p>
+    <form class="capture-form" data-source="homelab-starter" data-download="/guides/magnets/homelab-starter.pdf" novalidate>
+      <input type="email" name="email" placeholder="name@you.com" required autocomplete="email" aria-label="Email address" />
+      <input type="text" name="hp" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <button type="submit">Send me the guide →</button>
+    </form>
+    <div class="capture-fineprint">One email. Zero spam. Yours to keep.</div>
+    <div class="capture-status" role="status" aria-live="polite"></div>
+  </section>
 </div>
 
 <!-- 4 · THE BUNDLE — single featured card, the most weight -->
@@ -548,11 +584,6 @@
 
 <script>
 (function () {
-  var form    = document.getElementById('capture-form');
-  var button  = document.getElementById('capture-submit');
-  var status  = document.getElementById('capture-status');
-  if (!form) return;
-
   // J-Bot Tailscale Funnel endpoint (testmachine = canonical Prime).
   // Trailing slash matters — the FastAPI route is defined as POST "/"
   // under the /api/leads prefix.
@@ -563,65 +594,80 @@
     return p.get(name) || '';
   }
 
-  form.addEventListener('submit', function (ev) {
-    ev.preventDefault();
-    status.className = 'capture-status';
-    status.textContent = '';
+  // Every .capture-form is wired the same. A magnet form carries
+  // data-source (so the backend matches the right lead-magnet) + data-download
+  // (the PDF to reveal instantly on success). The newsletter form has neither →
+  // posts the real pathname and shows the list message.
+  Array.prototype.forEach.call(document.querySelectorAll('.capture-form'), function (form) {
+    var button     = form.querySelector('button[type="submit"]');
+    var status     = (form.parentElement || form).querySelector('.capture-status');
+    var defaultLbl = button ? button.textContent : 'Send →';
 
-    var fd      = new FormData(form);
-    var email   = (fd.get('email') || '').toString().trim();
-    var hp      = (fd.get('hp')    || '').toString();
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      if (status) { status.className = 'capture-status'; status.innerHTML = ''; }
 
-    if (!email) {
-      status.className = 'capture-status error';
-      status.textContent = 'Drop an email above first.';
-      return;
-    }
+      var fd    = new FormData(form);
+      var email = (fd.get('email') || '').toString().trim();
+      var hp    = (fd.get('hp')    || '').toString();
 
-    button.disabled    = true;
-    button.textContent = 'Sending…';
+      if (!email) {
+        if (status) { status.className = 'capture-status error'; status.textContent = 'Drop an email above first.'; }
+        return;
+      }
 
-    var payload = {
-      email:        email,
-      source_page:  window.location.pathname,
-      utm_campaign: getParam('utm_campaign'),
-      utm_medium:   getParam('utm_medium'),
-      utm_source:   getParam('utm_source'),
-      utm_content:  getParam('utm_content'),
-      referrer:     document.referrer || '',
-      hp:           hp
-    };
+      if (button) { button.disabled = true; button.textContent = 'Sending…'; }
 
-    fetch(ENDPOINT, {
-      method:      'POST',
-      mode:        'cors',
-      cache:       'no-cache',
-      headers:     { 'Content-Type': 'application/json' },
-      body:        JSON.stringify(payload)
-    })
-      .then(function (resp) {
-        if (!resp.ok) throw new Error('HTTP ' + resp.status);
-        return resp.json();
+      var payload = {
+        email:        email,
+        source_page:  form.getAttribute('data-source') || window.location.pathname,
+        utm_campaign: getParam('utm_campaign'),
+        utm_medium:   getParam('utm_medium'),
+        utm_source:   getParam('utm_source'),
+        utm_content:  getParam('utm_content'),
+        referrer:     document.referrer || '',
+        hp:           hp
+      };
+
+      fetch(ENDPOINT, {
+        method:      'POST',
+        mode:        'cors',
+        cache:       'no-cache',
+        headers:     { 'Content-Type': 'application/json' },
+        body:        JSON.stringify(payload)
       })
-      .then(function (data) {
-        status.className = 'capture-status success';
-        status.textContent = '✓ ' + (data && data.message ? data.message : "You're on the list.");
-        form.reset();
-        button.textContent = 'Notify me →';
-        button.disabled = false;
-        if (window.plausible) {
-          window.plausible('Lead Captured', { props: {
-            source: payload.utm_source || '(direct)',
-            page:   payload.source_page
-          }});
-        }
-      })
-      .catch(function (err) {
-        status.className = 'capture-status error';
-        status.textContent = "Couldn't reach the server. Try again in a sec, or email hello@twilighttech.io.";
-        button.textContent = 'Notify me →';
-        button.disabled = false;
-      });
+        .then(function (resp) {
+          if (!resp.ok) throw new Error('HTTP ' + resp.status);
+          return resp.json();
+        })
+        .then(function (data) {
+          var dl = form.getAttribute('data-download');
+          if (status) {
+            status.className = 'capture-status success';
+            if (dl) {
+              status.innerHTML = '✓ Sent to your inbox — or grab it now: <a href="' + dl +
+                '" target="_blank" rel="noopener" style="color:var(--green);text-decoration:underline">download the PDF →</a>';
+            } else {
+              status.textContent = '✓ ' + (data && data.message ? data.message : "You're on the list.");
+            }
+          }
+          form.reset();
+          if (button) { button.textContent = defaultLbl; button.disabled = false; }
+          if (window.plausible) {
+            window.plausible('Lead Captured', { props: {
+              source: payload.utm_source || '(direct)',
+              page:   payload.source_page
+            }});
+          }
+        })
+        .catch(function (err) {
+          if (status) {
+            status.className = 'capture-status error';
+            status.textContent = "Couldn't reach the server. Try again in a sec, or email hello@twilighttech.io.";
+          }
+          if (button) { button.textContent = defaultLbl; button.disabled = false; }
+        });
+    });
   });
 })();
 </script>
