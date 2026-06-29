@@ -661,9 +661,21 @@
           }
         })
         .catch(function (err) {
+          // A slow/dropped response (Prime under load) usually still saved the lead — the request
+          // landed, the reply just didn't make it back in time. For a magnet, hand over the file
+          // anyway so a slow turn never costs the user their download or scares them off.
+          var dl = form.getAttribute('data-download');
           if (status) {
-            status.className = 'capture-status error';
-            status.textContent = "Couldn't reach the server. Try again in a sec, or email hello@twilighttech.io.";
+            if (dl) {
+              status.className = 'capture-status success';
+              status.innerHTML = '✓ You\'re on the list — grab your copy now: <a href="' + dl +
+                '" target="_blank" rel="noopener" style="color:var(--green);text-decoration:underline">download the PDF →</a>' +
+                '<br><span style="font-size:0.85em;color:var(--muted)">Check your inbox too — the email is on its way.</span>';
+              form.reset();
+            } else {
+              status.className = 'capture-status error';
+              status.textContent = "Hmm — that didn't go through. Try once more, or email hello@twilighttech.io.";
+            }
           }
           if (button) { button.textContent = defaultLbl; button.disabled = false; }
         });
