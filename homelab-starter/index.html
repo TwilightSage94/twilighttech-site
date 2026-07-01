@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free: Homelab Starter — Your First Build That Gets You Hired · Twilight Tech</title>
+<meta name="description" content="Build a real homelab on the laptop you already own, with free tools — the first hands-on project that turns a CompTIA cert into a job. Free from Twilight Technology.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://twilighttech.io/homelab-starter/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://twilighttech.io/homelab-starter/">
+<meta property="og:title" content="Free: Homelab Starter — Your First Build That Gets You Hired">
+<meta property="og:description" content="A real homelab on the laptop you own, with free tools. The build that turns a cert into a job. Free from Twilight Technology.">
+<meta property="og:image" content="https://twilighttech.io/roadmap/cover.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Free: Homelab Starter">
+<meta name="twitter:description" content="Your first homelab — the build that turns a cert into a job. Free.">
+<meta name="twitter:image" content="https://twilighttech.io/roadmap/cover.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/logos/tt-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<script defer data-domain="twilighttech.io" src="https://plausible.io/js/pa-c0LpTwqFVP1lceRI6RQ_N.js"></script>
+<style>
+/* /homelab-starter — single-purpose lead magnet. Chrome + tokens from site.css. */
+.rm-wrap{max-width:var(--max);margin:0 auto;padding:128px 1.5rem 2rem;position:relative;z-index:2}
+.rm-hero{display:grid;grid-template-columns:1.25fr 0.75fr;gap:3rem;align-items:center}
+.rm-eyebrow{font-family:var(--mono);font-size:0.72rem;color:var(--green);letter-spacing:0.32em;text-transform:uppercase;margin-bottom:1.2rem}
+.rm-eyebrow::before{content:'// ';opacity:0.55}
+.rm-title{font-family:var(--display);font-size:clamp(2rem,5.4vw,3.4rem);font-weight:900;line-height:1.08;margin-bottom:1.1rem;color:#fff}
+.rm-title .c{color:var(--cyan);text-shadow:0 0 22px rgba(0,240,255,0.3)}
+.rm-title .m{color:var(--magenta);text-shadow:0 0 22px rgba(255,0,229,0.3)}
+.rm-sub{color:var(--muted);font-size:1.08rem;line-height:1.7;max-width:560px;margin-bottom:1.6rem}
+.rm-sub strong{color:var(--text)}
+.rm-card{background:linear-gradient(180deg,rgba(0,240,255,0.05) 0%,var(--card) 60%);border:1px solid rgba(0,240,255,0.28);padding:1.5rem 1.6rem;max-width:560px;position:relative;overflow:hidden}
+.rm-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--magenta))}
+.qz-eyebrow{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--cyan);margin-bottom:0.4rem}
+.qz-headline{font-family:var(--display);font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:0.7rem}
+.rm-form{display:flex;gap:0.6rem;flex-wrap:wrap}
+.rm-form input[type=email]{flex:1 1 230px;background:rgba(4,4,15,0.7);border:1px solid var(--border);color:var(--text);padding:0.9rem 1rem;font-family:var(--mono);font-size:0.95rem;outline:none;transition:border-color .2s,box-shadow .2s}
+.rm-form input[type=email]:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,240,255,.12)}
+.rm-form button{background:linear-gradient(135deg,var(--cyan),var(--blue));border:none;color:#03121a;padding:0.9rem 1.5rem;font-family:var(--mono);font-size:0.82rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .25s}
+.rm-form button:hover{box-shadow:0 0 22px rgba(0,240,255,.35);transform:translateY(-1px)}
+.rm-form button:disabled{opacity:.55;cursor:not-allowed;transform:none}
+.rm-fine{font-family:var(--mono);font-size:0.68rem;color:var(--muted);letter-spacing:.04em;margin-top:0.9rem}
+.rm-status{font-family:var(--mono);font-size:0.85rem;margin-top:0.8rem;min-height:1.1em}
+.rm-status.error{color:var(--magenta)}
+.hp-field{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+.rm-deliver{display:none}
+.rm-deliver.show{display:block;animation:fadeUp .5s both}
+.rm-deliver h3{font-family:var(--display);color:var(--green);font-size:1.1rem;margin-bottom:.5rem}
+.rm-dl{display:inline-block;margin-top:.3rem;padding:0.95rem 1.6rem;border:1px solid var(--green);color:var(--green);font-family:var(--mono);font-size:0.85rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none;transition:all .25s}
+.rm-dl:hover{background:rgba(57,255,20,.1);box-shadow:0 0 20px rgba(57,255,20,.3)}
+.rm-next{margin-top:1.2rem;padding-top:1rem;border-top:1px solid var(--border)}
+.rm-next-label{font-family:var(--mono);font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
+.rm-next a{font-family:var(--mono);font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--magenta);text-decoration:none}
+.rm-next a:hover{text-decoration:underline}
+.cs-card{background:rgba(4,4,15,.6);border:1px solid var(--border);border-radius:4px;padding:1.1rem 1.2rem;font-family:var(--mono);font-size:0.82rem;line-height:1.9;box-shadow:0 18px 50px rgba(0,0,0,.55),0 0 30px rgba(0,240,255,.06);max-width:320px;margin:0 auto}
+.cs-card .k{color:var(--cyan)} .cs-card .v{color:var(--muted)} .cs-card .h{color:var(--green);letter-spacing:.14em;text-transform:uppercase;font-size:.62rem;display:block;margin:.3rem 0 .5rem}
+.cs-card .row{display:flex;justify-content:space-between;border-bottom:1px dashed rgba(255,255,255,.06);padding:.05rem 0}
+.rm-inside{max-width:var(--max);margin:1rem auto 0;padding:3rem 1.5rem;position:relative;z-index:2;border-top:1px solid var(--border)}
+.inside-split{display:grid;grid-template-columns:1.15fr 0.85fr;gap:2.8rem;align-items:center}
+.rm-inside .sh-label{font-family:var(--mono);font-size:0.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:.8rem}
+.rm-inside h2{font-family:var(--display);font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:1.4rem}
+.rm-list{list-style:none;display:flex;flex-direction:column;gap:0.9rem;counter-reset:p}
+.rm-list li{counter-increment:p;padding-left:2.6rem;position:relative}
+.rm-list li::before{content:'0' counter(p);position:absolute;left:0;top:0;font-family:var(--display);font-weight:800;color:var(--cyan);font-size:1.05rem;opacity:.75}
+.rm-list strong{display:block;color:var(--text);font-size:1rem;margin-bottom:.15rem}
+.rm-list span{color:var(--muted);font-size:0.9rem;line-height:1.5}
+@media(max-width:760px){.rm-hero{grid-template-columns:1fr}.inside-split{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<canvas id="global-particles"></canvas>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img class="nav-mark" src="/assets/logos/tt-mark.svg" alt="Twilight Tech">TWILIGHT<span class="sl">//</span>TECH</a>
+    <div class="nav-links">
+      <a href="/managed-it/">Managed IT</a>
+      <a href="/services/">Services</a>
+      <a href="/ai/">AI</a>
+      <a href="/guides/">Guides</a>
+      <a href="/labs/">Labs</a>
+      <a href="/#contact" class="nav-cta">Contact</a>
+    </div>
+    <button class="mob-tog" aria-label="Menu">&#9776;</button>
+  </div>
+</nav>
+
+<div class="shell">
+
+  <!-- 1 · HERO -->
+  <section class="rm-wrap reveal">
+    <div class="rm-hero">
+      <div>
+        <div class="rm-eyebrow">Free · Build it, break it</div>
+        <h1 class="rm-title">Your First <span class="c">Homelab</span> — The Build That Gets You <span class="m">Hired</span></h1>
+        <p class="rm-sub">No server rack. No cloud bill. Build a real homelab on the <strong>laptop you already own</strong>, with free tools — the first hands-on project that turns "I passed the cert" into "I can do the job."</p>
+
+        <div class="rm-card">
+          <div id="capbody"><p class="rm-fine">Loading…</p></div>
+        </div>
+      </div>
+      <div class="rm-coverwrap">
+        <svg viewBox="0 0 340 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Homelab Starter cover" style="width:100%;max-width:300px;display:block;margin:0 auto;border-radius:5px;box-shadow:0 18px 50px rgba(0,0,0,.6),0 0 30px rgba(0,240,255,.08)">
+          <defs>
+            <linearGradient id="hlbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0c1226"/><stop offset="1" stop-color="#05060f"/></linearGradient>
+            <linearGradient id="hledge" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#00f0ff"/><stop offset="1" stop-color="#ff00e5"/></linearGradient>
+          </defs>
+          <rect width="340" height="460" rx="5" fill="url(#hlbg)"/>
+          <rect x="0.5" y="0.5" width="339" height="459" rx="5" fill="none" stroke="#1b2440"/>
+          <rect width="340" height="4" fill="url(#hledge)"/>
+          <rect x="26" y="30" width="56" height="20" rx="3" fill="none" stroke="#39ff14"/>
+          <text x="54" y="44" font-family="'Share Tech Mono',monospace" font-size="10" fill="#39ff14" text-anchor="middle" letter-spacing="2">FREE</text>
+          <text x="314" y="44" font-family="'Share Tech Mono',monospace" font-size="8.5" fill="#5f6b8a" text-anchor="end" letter-spacing="1">TWILIGHT // TECH</text>
+          <text x="26" y="82" font-family="'Share Tech Mono',monospace" font-size="10" fill="#39ff14" letter-spacing="3">// BUILD IT · BREAK IT</text>
+          <text x="26" y="132" font-family="Orbitron,sans-serif" font-weight="900" font-size="34" fill="#00f0ff">HOMELAB</text>
+          <text x="26" y="170" font-family="Orbitron,sans-serif" font-weight="800" font-size="30" fill="#ff00e5">STARTER</text>
+          <text x="26" y="198" font-family="Rajdhani,sans-serif" font-size="14" fill="#7f8db0">The build that gets you hired.</text>
+          <rect x="26" y="220" width="288" height="180" rx="4" fill="rgba(4,4,15,.55)" stroke="#1b2440"/>
+          <text x="42" y="244" font-family="'Share Tech Mono',monospace" font-size="9" fill="#39ff14" letter-spacing="2">// YOUR FIRST LAB</text>
+          <g stroke="#00f0ff" stroke-width="1.2" fill="none" opacity="0.7">
+            <path d="M170 286 L170 306 M62 306 L278 306 M62 306 L62 322 M278 306 L278 322"/>
+          </g>
+          <g font-family="'Share Tech Mono',monospace" font-size="11">
+            <rect x="132" y="262" width="76" height="24" rx="3" fill="rgba(0,240,255,.08)" stroke="#00f0ff"/>
+            <text x="170" y="278" fill="#00f0ff" text-anchor="middle">pfSense</text>
+            <rect x="42" y="322" width="88" height="26" rx="3" fill="rgba(255,255,255,.03)" stroke="#33405f"/>
+            <text x="86" y="339" fill="#c8d2ea" text-anchor="middle">DC01 · AD</text>
+            <rect x="210" y="322" width="88" height="26" rx="3" fill="rgba(255,255,255,.03)" stroke="#33405f"/>
+            <text x="254" y="339" fill="#c8d2ea" text-anchor="middle">CLIENT01</text>
+          </g>
+          <text x="42" y="380" font-family="'Share Tech Mono',monospace" font-size="10.5" fill="#ff5a8a">then break it →<tspan fill="#6b7799"> build the instinct</tspan></text>
+          <text x="26" y="434" font-family="'Share Tech Mono',monospace" font-size="10" fill="#5f6b8a" letter-spacing="1">On the laptop you own · $0</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · WHAT'S INSIDE -->
+  <section class="rm-inside reveal">
+    <div class="inside-split">
+      <div>
+        <div class="sh-label">// What's in the starter</div>
+        <h2>The first build, start to finish</h2>
+        <ul class="rm-list">
+          <li><strong>The zero-cost setup</strong><span>Virtualization on the machine you own — the free tools and ISOs, no rack, no cloud bill.</span></li>
+          <li><strong>Your first lab</strong><span>Stand up a Windows domain + client + firewall — the environment every entry IT job assumes you've touched.</span></li>
+          <li><strong>Break it on purpose</strong><span>The drills that build the instinct interviewers hire for: suspect the layer beneath the symptom.</span></li>
+          <li><strong>Turn it into proof</strong><span>Runbooks → a public GitHub portfolio → interview stories that sound like real experience.</span></li>
+          <li><strong>Your next three builds</strong><span>Where to go after lab one — the path from first VM to a portfolio that gets callbacks.</span></li>
+        </ul>
+      </div>
+      <div>
+        <div class="cs-card">
+          <span class="h">// turn it into a job</span>
+          <div class="row"><span class="k">runbook.md</span><span class="v">document it</span></div>
+          <div class="row"><span class="k">github</span><span class="v">make it public</span></div>
+          <div class="row"><span class="k">"tell me about..."</span><span class="v">you have a story</span></div>
+          <span class="h">// the shift</span>
+          <div class="row"><span class="k">studied it</span><span class="v">&rarr; built + broke it</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /shell -->
+
+<footer>
+  <div class="footer-inner">
+    <div>© 2026 <span class="nc">Twilight Tech LLC</span> · Atlanta, GA · LLC Registered</div>
+    <div class="footer-status">All systems operational</div>
+  </div>
+</footer>
+
+<script src="/assets/site.js"></script>
+<script>
+(function () {
+  var ENDPOINT = 'https://testmachine.tail1dcfc5.ts.net/api/leads/';
+  function getParam(n){ return new URLSearchParams(window.location.search).get(n) || ''; }
+  var body = document.getElementById('capbody');
+
+  function drawCapture(){
+    var h='<div class="qz-eyebrow">// Instant download</div><div class="qz-headline">Where should we send your Homelab Starter?</div>';
+    h+='<form class="rm-form" id="rm-form" novalidate>';
+    h+='<input type="email" name="email" placeholder="name@you.com" required autocomplete="email" aria-label="Email address">';
+    h+='<input type="text" name="hp" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">';
+    h+='<button type="submit" id="rm-submit">Send me the starter &rarr;</button></form>';
+    h+='<div class="rm-fine">Free. No spam — one heads-up only if a new guide drops. Unsubscribe anytime.</div>';
+    h+='<div class="rm-status" id="rm-status" role="status" aria-live="polite"></div>';
+    h+='<div class="rm-deliver" id="rm-deliver">';
+    h+='<h3>&#10003; Here&rsquo;s your Homelab Starter.</h3>';
+    h+='<p class="rm-fine" style="margin-bottom:.6rem">Click below to download. Build it, break it, get hired.</p>';
+    h+='<a class="rm-dl" href="/guides/magnets/homelab-starter.pdf" download>Download the starter (PDF) &rarr;</a>';
+    h+='<div class="rm-next"><div class="rm-next-label">Your next step</div><a href="/guides/">Build It, Break It — all 18 labs &rarr;</a></div>';
+    h+='</div>';
+    body.innerHTML=h;
+    wireForm();
+  }
+
+  function wireForm(){
+    var form=document.getElementById('rm-form'), button=document.getElementById('rm-submit'),
+        status=document.getElementById('rm-status'), deliver=document.getElementById('rm-deliver');
+    function reveal(){ form.style.display='none'; deliver.classList.add('show'); if(window.plausible) window.plausible('Homelab Lead', { props:{ source:getParam('utm_source')||'(direct)' } }); }
+    form.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      status.className='rm-status'; status.textContent='';
+      var fd=new FormData(form), email=(fd.get('email')||'').toString().trim(), hp=(fd.get('hp')||'').toString();
+      if(!email){ status.className='rm-status error'; status.textContent='Drop an email above first.'; return; }
+      button.disabled=true; button.textContent='Sending…';
+      var payload={ email:email, source_page:window.location.pathname, utm_campaign:getParam('utm_campaign'), utm_medium:getParam('utm_medium'), utm_source:getParam('utm_source'), utm_content:getParam('utm_content'), referrer:document.referrer||'', hp:hp };
+      fetch(ENDPOINT,{ method:'POST', mode:'cors', cache:'no-cache', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) })
+        .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+        .then(function(){ reveal(); })
+        .catch(function(){ reveal(); status.className='rm-status'; status.textContent=''; });
+    });
+  }
+
+  drawCapture();
+})();
+</script>
+</body>
+</html>
