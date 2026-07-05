@@ -114,21 +114,56 @@
     return row;
   }
 
-  function addToolChips(tools) {
-    if (!tools || !tools.length) return;
+  // Light-markdown the tool output for the reveal panel: **bold**, _italic_,
+  // --- rules, newlines. HTML-escaped FIRST (jbdSafe) so raw tool text can
+  // never inject markup.
+  function jbdRenderOut(text) {
+    var s = jbdSafe(String(text || ""));
+    s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    s = s.replace(/^\s*---\s*$/gm, '<hr class="jbd-out-hr">');
+    s = s.replace(/_([^_]+)_/g, "<em>$1</em>");
+    s = s.replace(/\n/g, "<br>");
+    return s;
+  }
+
+  // Accepts the new [{name, result}] shape (chip EXPANDS to the real output)
+  // and the legacy ["name"] shape (name-only chip, back-compat).
+  function addToolChips(calls) {
+    if (!calls || !calls.length) return;
+    var norm = calls.map(function (c) {
+      return (typeof c === "string") ? { name: c, result: "" } : (c || {});
+    });
     var wrap = document.createElement("div");
     wrap.className = "jbd-tools";
-    tools.forEach(function (t, i) {
-      var chip = document.createElement("span");
-      chip.className = "jbd-chip";
-      chip.textContent = "▸ " + t;
+    var outs = document.createElement("div");
+    outs.className = "jbd-outs";
+    norm.forEach(function (c, i) {
+      var name = c.name || "tool";
+      var result = c.result || "";
+      var chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "jbd-chip" + (result ? " jbd-chip-x" : "");
+      chip.innerHTML = "▸ " + jbdSafe(name) +
+        (result ? ' <span class="jbd-caret">▾</span>' : "");
       wrap.appendChild(chip);
-      if (!reduceMotion) {
-        chip.style.animationDelay = (i * 110) + "ms";
-        setTimeout(ping, i * 110);
-      } else { ping(); }
+      if (!reduceMotion) { chip.style.animationDelay = (i * 110) + "ms"; setTimeout(ping, i * 110); }
+      else { ping(); }
+      if (result) {
+        var out = document.createElement("div");
+        out.className = "jbd-out";  // auto-expanded — the prospect SEES it produce
+        out.innerHTML =
+          '<div class="jbd-out-label">' + jbdSafe(name) + " · output</div>" +
+          '<div class="jbd-out-body">' + jbdRenderOut(result) + "</div>";
+        outs.appendChild(out);
+        chip.addEventListener("click", function () {
+          var hidden = out.classList.toggle("jbd-hidden");
+          var car = chip.querySelector(".jbd-caret");
+          if (car) car.textContent = hidden ? "▸" : "▾";
+        });
+      }
     });
     logEl.appendChild(wrap);
+    if (outs.childNodes.length) logEl.appendChild(outs);
     scrollLog();
   }
 
@@ -181,7 +216,8 @@
             : "";
           addMsg("bot", jbdSafe(detail) + extra, { refused: true });
         } else {
-          if (b.tools_used && b.tools_used.length) addToolChips(b.tools_used);
+          var calls = (b.tool_calls && b.tool_calls.length) ? b.tool_calls : (b.tools_used || []);
+          if (calls.length) addToolChips(calls);
           addMsg("bot", jbdSafe(b.text || ""), { refused: !!b.refused });
           if (b.suggest_lead_form && !leadShown) revealLead();
         }

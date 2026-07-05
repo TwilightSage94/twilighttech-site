@@ -192,8 +192,20 @@
 .jbd-bub a{color:var(--cyan);text-decoration:underline}
 .jbd-bub strong{color:#fff}
 .jbd-tools{display:flex;flex-wrap:wrap;gap:.5rem;align-self:flex-start}
-.jbd-chip{font-family:var(--mono);font-size:.7rem;color:var(--cyan);border:1px solid var(--border-h);background:rgba(0,240,255,.06);padding:.3rem .65rem;letter-spacing:.5px;opacity:0;transform:translateY(6px);animation:jbd-chip-in .35s ease forwards;box-shadow:0 0 14px rgba(0,240,255,.12)}
+.jbd-chip{font-family:var(--mono);font-size:.7rem;color:var(--cyan);border:1px solid var(--border-h);background:rgba(0,240,255,.06);padding:.3rem .65rem;letter-spacing:.5px;opacity:0;transform:translateY(6px);animation:jbd-chip-in .35s ease forwards;box-shadow:0 0 14px rgba(0,240,255,.12);appearance:none;-webkit-appearance:none;line-height:1.4;text-align:left}
 @keyframes jbd-chip-in{to{opacity:1;transform:translateY(0)}}
+.jbd-chip.jbd-chip-x{cursor:pointer}
+.jbd-chip.jbd-chip-x:hover{background:rgba(0,240,255,.12);box-shadow:0 0 18px rgba(0,240,255,.22)}
+.jbd-chip:focus-visible{outline:1px solid var(--cyan);outline-offset:2px}
+.jbd-chip .jbd-caret{opacity:.65;font-size:.6rem;margin-left:.15rem}
+.jbd-outs{display:flex;flex-direction:column;gap:.5rem;align-self:flex-start;width:100%;max-width:88%}
+.jbd-out{border:1px solid var(--border-h);border-left:2px solid var(--cyan);background:linear-gradient(180deg,rgba(0,240,255,.05),rgba(0,0,0,.22));opacity:0;transform:translateY(6px);animation:jbd-chip-in .4s ease forwards}
+.jbd-out.jbd-hidden{display:none}
+.jbd-out-label{font-family:var(--mono);font-size:.55rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--cyan);padding:.4rem .8rem;border-bottom:1px solid var(--border);background:rgba(0,0,0,.3)}
+.jbd-out-body{font-family:var(--mono);font-size:.76rem;line-height:1.7;color:#cfe6f5;padding:.7rem .9rem;white-space:pre-wrap;word-break:break-word;overflow-x:auto}
+.jbd-out-body strong{color:#fff}
+.jbd-out-body em{color:var(--muted);font-style:italic}
+.jbd-out-hr{border:0;border-top:1px dashed var(--border-h);margin:.55rem 0}
 .jbd-typing{display:inline-flex;gap:5px;align-items:center}
 .jbd-typing i{width:6px;height:6px;border-radius:50%;background:var(--cyan);opacity:.4;animation:jbd-bounce 1.2s infinite ease-in-out}
 .jbd-typing i:nth-child(2){animation-delay:.18s}
