@@ -3,26 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Operations Consulting | Twilight Tech LLC</title>
-<meta name="description" content="I built my own AI operations agent — J-Bot. Now I help small businesses build theirs. Real calendar scheduling, email triage, ticket routing. Audit from $499.">
+<title>Private AI On Your Network | Twilight Tech LLC</title>
+<meta name="description" content="We build private AI that lives on your network — sized to what you need, trained on your documents. Nothing leaves the building. Law firms first. Plus J-Bot operations agents. Atlanta.">
 <link rel="canonical" href="https://twilighttech.io/ai/">
-<meta property="og:title" content="AI Operations Consulting | Twilight Tech LLC">
-<meta property="og:description" content="AI that performs operations, not just answers questions. Talk to a live sandboxed J-Bot, then audit / build / retain. Audit from $499. Atlanta.">
+<meta property="og:title" content="Private AI On Your Network | Twilight Tech LLC">
+<meta property="og:description" content="A box on your network. An AI that read your documents. Nothing leaves the building. Talk to a live sandboxed J-Bot, then audit / build / care. Atlanta.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://twilighttech.io/ai/">
 <meta property="og:image" content="https://twilighttech.io/images/og-ai.svg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Twilight Tech — AI that performs operations. Talk to J-Bot live.">
+<meta property="og:image:alt" content="Twilight Tech — private AI on your network. Nothing leaves the building.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AI Operations Consulting | Twilight Tech LLC">
-<meta name="twitter:description" content="Talk to a live, sandboxed J-Bot, then audit / build / retain. Audit from $499. Built in Atlanta.">
+<meta name="twitter:title" content="Private AI On Your Network | Twilight Tech LLC">
+<meta name="twitter:description" content="A box on your network. An AI that read your documents. Nothing leaves the building. Audit from $499. Built in Atlanta.">
 <meta name="twitter:image" content="https://twilighttech.io/images/og-ai.svg">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Service",
-  "serviceType": "AI Operations Consulting",
+  "serviceType": "Private AI Deployment & AI Operations",
   "provider": {
     "@type": "ProfessionalService",
     "name": "Twilight Tech LLC",
@@ -31,11 +31,12 @@
     "address": { "@type": "PostalAddress", "addressLocality": "Atlanta", "addressRegion": "GA", "addressCountry": "US" },
     "founder": { "@type": "Person", "name": "James Destrades Jr" }
   },
-  "name": "AI Operations Audit, Build & Retainer",
-  "description": "Custom AI operations agents for small businesses and MSPs — built on J-Bot, a production multi-domain agent platform. Trust-gated, owns-your-stack, small-business priced.",
+  "name": "Private AI Appliance, AI Operations Build & Care",
+  "description": "On-premises private AI appliances and custom AI operations agents for small businesses, law firms, and MSPs — built on J-Bot, a production multi-domain agent platform. Your documents, your network, nothing leaves the building.",
   "url": "https://twilighttech.io/ai/",
   "offers": [
-    { "@type": "Offer", "name": "AI Operations Audit", "price": "499", "priceCurrency": "USD", "description": "90-minute recorded session + 6–10 page engineering report with ranked AI opportunities and a 30-day plan. Fee credits toward a Build." },
+    { "@type": "Offer", "name": "AI Readiness Audit", "price": "499", "priceCurrency": "USD", "description": "90-minute recorded session + 6–10 page engineering report with ranked AI opportunities, document-estate scoping, and a 30-day plan. Fee credits toward a Build." },
+    { "@type": "Offer", "name": "Private AI Appliance Build", "priceCurrency": "USD", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "7500", "priceCurrency": "USD" }, "description": "An on-premises AI appliance on the client's own network — local model + retrieval over the client's documents. Client-owned hardware; includes ongoing Bot Care." },
     { "@type": "Offer", "name": "AI Operations Build", "priceCurrency": "USD", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "2500", "maxPrice": "8000", "priceCurrency": "USD" }, "description": "Custom J-Bot deployment configured for your business — 5–10 workflows, integrations, 30 days of tuning." },
     { "@type": "Offer", "name": "AI Operations Retainer", "priceCurrency": "USD", "priceSpecification": { "@type": "PriceSpecification", "minPrice": "499", "maxPrice": "1499", "priceCurrency": "USD", "unitText": "MONTH" }, "description": "Ongoing optimization, new workflows, cost monitoring. No annual contract." }
   ]
@@ -165,6 +166,39 @@
 #cta-final{background:linear-gradient(135deg,rgba(0,240,255,.06),rgba(75,124,243,.06));border-top:1px solid rgba(0,240,255,.2);border-bottom:1px solid rgba(0,240,255,.2);text-align:center}
 .cta-h{font-family:var(--display);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800;background:linear-gradient(135deg,var(--cyan),var(--blue-light));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem;max-width:780px;margin-left:auto;margin-right:auto}
 .cta-p{color:var(--muted);max-width:620px;margin:0 auto 2rem;line-height:1.7;font-style:italic}
+
+/* ── Private AI appliance (Offer A wedge) ── */
+.pai-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:2rem;margin-top:2.5rem;align-items:start}
+@media(max-width:860px){.pai-wrap{grid-template-columns:1fr}}
+.pai-box{border:1px solid rgba(57,255,20,.35);background:linear-gradient(180deg,rgba(57,255,20,.04),var(--card) 40%);position:relative;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.5),0 0 40px rgba(57,255,20,.05)}
+.pai-box::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--green),var(--cyan),transparent)}
+.pai-box-head{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.25rem;border-bottom:1px solid var(--border);background:rgba(0,0,0,.35)}
+.pai-box-id{display:flex;align-items:center;gap:.6rem;font-family:var(--display);font-weight:800;font-size:.95rem;letter-spacing:1px;color:#fff}
+.pai-box-id .pai-slash{color:var(--green)}
+.pai-led{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green);animation:jbd-blink 2s ease-in-out infinite}
+.pai-box-net{font-family:var(--mono);font-size:.6rem;letter-spacing:1.5px;color:var(--green);border:1px solid rgba(57,255,20,.3);padding:.25rem .55rem;text-transform:uppercase}
+.pai-rows{padding:.5rem 0}
+.pai-row{display:flex;gap:1rem;padding:.85rem 1.25rem;border-bottom:1px dashed var(--border);font-family:var(--mono);font-size:.78rem;line-height:1.6}
+.pai-row:last-child{border-bottom:0}
+.pai-row .k{color:var(--green);flex-shrink:0;width:110px;letter-spacing:.5px;text-transform:uppercase;font-size:.62rem;padding-top:.2rem}
+.pai-row .v{color:#cfe6f5}
+.pai-row .v strong{color:#fff}
+.pai-boundary{margin:.75rem 1.25rem 1.25rem;padding:.85rem 1rem;border:1px solid rgba(255,0,229,.35);background:rgba(255,0,229,.04);font-family:var(--mono);font-size:.68rem;letter-spacing:1px;color:var(--magenta);text-align:center;text-transform:uppercase}
+.pai-points{display:flex;flex-direction:column;gap:1rem}
+.pai-point{padding:1.25rem 1.5rem 1.25rem 3.25rem;border:1px solid var(--border);background:var(--card);position:relative}
+.pai-point::before{content:'';position:absolute;left:1.25rem;top:1.5rem;width:8px;height:8px;background:var(--green);box-shadow:0 0 10px var(--green)}
+.pai-point strong{color:var(--green);font-family:var(--display);font-size:1.02rem;display:block;margin-bottom:.4rem}
+.pai-point span{color:var(--muted);line-height:1.65;font-size:.95rem}
+.pai-point .honest{color:var(--text)}
+.pai-compliance{margin-top:2.25rem;padding:1.6rem 1.75rem;border-left:3px solid var(--green);background:rgba(57,255,20,.04);color:var(--muted);line-height:1.75;font-size:.98rem}
+.pai-compliance strong{color:var(--green)}
+.pai-offers{overflow-x:auto;margin-top:2.5rem}
+.pai-offers table{width:100%;border-collapse:separate;border-spacing:0;min-width:560px}
+.pai-offers th{background:linear-gradient(180deg,rgba(57,255,20,.08),var(--card));border:1px solid rgba(57,255,20,.25);padding:.9rem 1.1rem;font-family:var(--mono);font-size:.78rem;letter-spacing:1px;text-transform:uppercase;color:var(--green);text-align:left}
+.pai-offers th:first-child{background:transparent;border-color:transparent}
+.pai-offers th.opb{color:var(--cyan);background:linear-gradient(180deg,rgba(0,240,255,.08),var(--card));border-color:rgba(0,240,255,.25)}
+.pai-offers td{border:1px solid var(--border);padding:.9rem 1.1rem;color:var(--muted);vertical-align:top;line-height:1.55;font-size:.9rem}
+.pai-offers td:first-child{color:var(--text);font-weight:600;font-family:var(--mono);font-size:.7rem;letter-spacing:1px;text-transform:uppercase;width:110px}
 
 /* ── J-Bot Demo live console widget ── */
 .jbd{max-width:760px;margin:2.5rem auto 0}
@@ -302,20 +336,69 @@
 
   <section id="hero">
     <div class="hero-inner">
-      <div class="hero-badge"><span class="badge-blink"></span> Production AI · Atlanta · Twilight Tech LLC</div>
-      <h1 class="hero-h1">I built my own AI operations agent. Now I help small businesses build theirs.</h1>
-      <h2 class="hero-h2">Most "AI for business" tools are chatbots in a wrapper. J-Bot is different — it runs the operation.</h2>
-      <p class="hero-tag">Real calendar scheduling. Real email triage. Real ticket routing. Real security monitoring. All from one chat — and trust-gated so it asks before it acts.</p>
+      <div class="hero-badge"><span class="badge-blink"></span> Private AI · Atlanta · Twilight Tech LLC</div>
+      <h1 class="hero-h1">We build private AI that lives on your network.</h1>
+      <h2 class="hero-h2">Sized to what you need. Trained on your documents. Nothing leaves the building.</h2>
+      <p class="hero-tag">Cloud AI runs on someone else's computer — so your team censors what it tells it. We put the AI on <em>your</em> computer, where you can finally hand it the real work. It's not a policy promise. It's geography.</p>
       <div class="hero-btns">
-        <a href="#demo" class="btn btn-solid">Talk to J-Bot now · live</a>
-        <a href="https://calendar.app.google/SnNJnQnkfpavbuvU9" class="btn btn-mag">Book a 30-min demo · free</a>
+        <a href="#private-ai" class="btn btn-solid">See the appliance</a>
+        <a href="#demo" class="btn btn-mag">Talk to a live J-Bot</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFER A — PRIVATE AI APPLIANCE (flagship wedge) -->
+  <section id="private-ai">
+    <div class="container">
+      <div class="sh reveal">
+        <div class="sh-label">// The Flagship — Private AI</div>
+        <h2 class="sh-title">A box in your closet. An AI that read <span class="ag">your documents</span>. <span class="am">Nothing leaves.</span></h2>
+        <div class="sh-line"></div>
+        <p class="sh-sub">A quiet appliance on your own network, running an AI trained on your firm's documents. Your team asks it questions all day; it answers from your files, with receipts. And because the model physically lives in your office, client data doesn't leave your network — not as a promise, as a fact of where the wires go.</p>
+      </div>
+
+      <div class="pai-wrap">
+        <div class="pai-box reveal">
+          <div class="pai-box-head">
+            <div class="pai-box-id"><span class="pai-led"></span>PRIVATE-AI<span class="pai-slash">//</span>APPLIANCE</div>
+            <div class="pai-box-net">On your network</div>
+          </div>
+          <div class="pai-rows">
+            <div class="pai-row"><span class="k">The metal</span><span class="v">A single quiet box — closet, not datacenter. <strong>You buy it, you own it.</strong> I spec it, build it, and keep it healthy.</span></div>
+            <div class="pai-row"><span class="k">The brain</span><span class="v">A local AI model + retrieval over <strong>your document estate</strong> — matters, contracts, records, SOPs. Every answer cites the file it came from.</span></div>
+            <div class="pai-row"><span class="k">The team</span><span class="v">Everyone installs it <strong>straight from the box</strong> — phones and desktops, no app store, no cloud accounts. Pull the internet cable and it keeps answering.</span></div>
+            <div class="pai-row"><span class="k">The care</span><span class="v">Ships with <strong>Bot Care</strong> — updates, model upgrades, backups, and a human who answers the phone. From $999/mo for regulated practices.</span></div>
+          </div>
+          <div class="pai-boundary">⟵ your network boundary · no client data crosses this line ⟶</div>
+        </div>
+
+        <div class="pai-points reveal">
+          <div class="pai-point"><strong>Built for privilege-bound work</strong><span>Law firms first — family, elder, immigration, litigation — then any practice where client files can't ride to a third party: advisors, CPAs, medical-adjacent. If confidentiality is an obligation and not a preference, this was built for you.</span></div>
+          <div class="pai-point"><strong>Your team is already using AI. This makes it defensible.</strong><span>Most small firms have staff quietly pasting work into public chatbots, and most have no policy for it. The appliance replaces shadow AI with a system you can stand behind — every question answered inside your walls, with an audit trail.</span></div>
+          <div class="pai-point"><strong>Scope honesty</strong><span class="honest">It reads your documents and does your document work — drafting, summarizing, finding, answering from your files. It doesn't replace your research subscriptions, and I'll tell you up front where a cloud model is still smarter. That line is a feature.</span></div>
+        </div>
+      </div>
+
+      <div class="pai-compliance reveal">
+        <strong>Everyone else writes policies around the cloud. We remove the cloud.</strong> Cloud AI vendors will show you their security page; it's still their computer. Consultants will sell you an AI-use policy binder; your files still travel. The appliance answers the confidentiality question with architecture — and it comes with a one-page AI policy for your firm, written to match.
+      </div>
+
+      <div class="pai-offers reveal">
+        <table>
+          <thead><tr><th></th><th>Offer A · Private AI Appliance</th><th class="opb">Offer B · J-Bot Operations</th></tr></thead>
+          <tbody>
+            <tr><td>What</td><td>A box on your network that answers from your documents — nothing leaves the building</td><td>An agent that runs your coordination work — email triage, scheduling, tickets — trust-gated</td></tr>
+            <tr><td>For</td><td>Privilege-bound, document-heavy practices — law firms first</td><td>Any SMB or MSP losing 15–25 hrs/week to coordination</td></tr>
+            <tr><td>Runs</td><td>On-prem only. Your hardware, full stop.</td><td>Self-hosted or cloud-managed — your call</td></tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
 
   <section class="sec-dark">
     <div class="container">
-      <div class="sh reveal"><div class="sh-label">// The Problem</div><h2 class="sh-title">The <span class="am">15–25 hour</span> problem</h2><div class="sh-line"></div><p class="sh-sub">A typical small business or MSP spends 15–25 hours a week on operational coordination — context-switching between apps, re-entering information, holding multiple system states in your head at once.</p></div>
+      <div class="sh reveal"><div class="sh-label">// Offer B — J-Bot Operations</div><h2 class="sh-title">The <span class="am">15–25 hour</span> problem</h2><div class="sh-line"></div><p class="sh-sub">The second thing we build: an operations agent. A typical small business or MSP spends 15–25 hours a week on operational coordination — context-switching between apps, re-entering information, holding multiple system states in your head at once.</p></div>
       <div class="prob-grid reveal">
         <div class="prob-item"><strong>Email triage</strong>Sorting support emails into a ticketing system</div>
         <div class="prob-item"><strong>Calendar wrangling</strong>Scheduling client meetings around conflicts</div>
@@ -338,7 +421,7 @@
 
   <section id="difference">
     <div class="container">
-      <div class="sh reveal"><div class="sh-label">// The Difference</div><h2 class="sh-title">AI that <span class="ac">performs operations</span>, not just answers questions</h2><div class="sh-line"></div><p class="sh-sub">J-Bot is a unified AI assistant platform I've been building for the better part of a year. Not a fork of an open-source framework or a wrapper around ChatGPT — a working multi-domain operations agent with trust-gated real-world actions, cross-domain context, and production-grade reliability.</p></div>
+      <div class="sh reveal"><div class="sh-label">// The Brain</div><h2 class="sh-title">AI that <span class="ac">performs operations</span>, not just answers questions</h2><div class="sh-line"></div><p class="sh-sub">Both offers run on the same brain. I built my own AI operations agent — J-Bot — because I needed it, and it's been in production for over a year. Not a fork of an open-source framework or a wrapper around ChatGPT: a working multi-domain agent with trust-gated real-world actions, cross-domain context, and production-grade reliability. The appliance is this brain, sealed inside your walls.</p></div>
       <div class="cap-wrap reveal">
         <table class="cap-table">
           <thead><tr><th>Domain</th><th>Live capabilities</th></tr></thead>
@@ -367,11 +450,11 @@
       <div class="tier-grid">
         <div class="tier-card featured reveal">
           <span class="tier-badge">Start Here</span>
-          <div class="tier-name">AI Operations Audit</div>
+          <div class="tier-name">AI Readiness Audit</div>
           <div class="tier-tag">90 min · written report in 48 hours</div>
           <div class="tier-price"><span class="amt">$499</span><span class="per">one-time</span></div>
           <div class="tier-cadence">Credit applied toward larger engagements</div>
-          <div class="tier-desc">A recorded 90-minute call. We walk through how your team actually spends its day — email, scheduling, ticket routing, reporting. I leave with screen recordings + calendar history.</div>
+          <div class="tier-desc">A recorded 90-minute call. We walk through how your team actually spends its day — email, scheduling, documents, reporting. For Private-AI prospects it also scopes your document estate, so an appliance quote is grounded in what the box will actually read.</div>
           <ul class="tier-features"><li>Where AI can shave hours per week — ranked by ROI and risk</li><li>What you should <em>not</em> automate</li><li>Specific tools that fit your stack — and the ones that don't</li><li>A concrete 30-day implementation plan</li></ul>
           <div class="tier-guarantee">No-fluff guarantee: if the report doesn't surface at least one workflow worth automating, it's free — and ~1 in 3 audits end with "you don't need a Build, here's a $50/mo tool." The fee credits toward any Build, so it's a deposit, not a sunk cost.</div>
           <a href="https://calendar.app.google/qeAHSWoSLsiL3DqW9" class="tier-cta">Book the Audit</a>
@@ -390,16 +473,16 @@
           <div class="tier-tag">4–6 weeks · fixed-scope, fixed-price</div>
           <div class="tier-price"><span class="amt">$7.5K</span><span class="per">fixed</span></div>
           <div class="tier-cadence">Shaped to how you actually operate</div>
-          <div class="tier-desc">A deeper deployment with bespoke business logic, more integrations, and any deployment mode — including air-gapped for regulated shops.</div>
-          <ul class="tier-features"><li>Up to <strong>10 workflows</strong>, including bespoke business-logic ones</li><li>Up to <strong>4 integrations, including one custom API</strong></li><li>Any deployment mode — cloud / self-host / hybrid / air-gapped</li><li>Up to 25 seats · team training · 30 days tuning + 2 check-ins</li></ul>
+          <div class="tier-desc">A deeper deployment with bespoke business logic, more integrations, and any deployment mode. <strong>Private AI appliance builds land here</strong> — retrieval over your documents is the #1 Pro trigger.</div>
+          <ul class="tier-features"><li>Up to <strong>10 workflows</strong>, including bespoke business-logic ones</li><li>Up to <strong>4 integrations, including one custom API</strong></li><li>Any deployment mode — cloud, self-host, or fully offline on-prem (updates applied by hand, on-site)</li><li>Up to 25 seats · team training · 30 days tuning + 2 check-ins</li></ul>
           <a href="https://calendar.app.google/SnNJnQnkfpavbuvU9" class="tier-cta">Discuss a Build</a>
         </div>
         <div class="tier-card reveal">
-          <div class="tier-name">AI Operations Retainer</div>
-          <div class="tier-tag">monthly · ongoing optimization</div>
+          <div class="tier-name">Retainer / Bot Care</div>
+          <div class="tier-tag">monthly · ongoing optimization &amp; care</div>
           <div class="tier-price"><span class="amt">$499</span><span class="per">– $1,499 / mo</span></div>
-          <div class="tier-cadence">No annual contract</div>
-          <div class="tier-desc">For businesses that want J-Bot as a continuous capability. New workflows added, cost monitoring, model upgrades when they help, light support hours.</div>
+          <div class="tier-cadence">No annual contract on ops retainers</div>
+          <div class="tier-desc">For businesses that want J-Bot as a continuous capability. New workflows added, cost monitoring, model upgrades when they help, light support hours. <strong>Every Private AI appliance ships with Bot Care</strong> — you're not buying a gadget, you're keeping a maintained system with a human on the hook (from $999/mo for regulated practices).</div>
           <ul class="tier-features"><li>Add new workflows as your operation evolves</li><li>Provider routing tuned monthly (NIM, Anthropic, local)</li><li>Cost + quality reporting each month</li><li>Priority response on incidents</li></ul>
           <a href="https://calendar.app.google/SnNJnQnkfpavbuvU9" class="tier-cta">Talk Retainer</a>
         </div>
@@ -407,7 +490,7 @@
       <div class="tier-banner reveal">
         <div>
           <div class="tier-banner-name">Need more than Pro? → Custom Engagement <span class="tier-banner-price">$9K+</span></div>
-          <div class="tier-banner-desc">15+ workflows, multiple custom APIs, multi-site or air-gapped rollouts, white-label J-Bot, or research engagements. Anything past Pro's walls is its own scoped quote — not Pro plus favors.</div>
+          <div class="tier-banner-desc">15+ workflows, multiple custom APIs, multi-site or fully offline rollouts, white-label J-Bot, or research engagements. Regulated verticals (legal, medical-adjacent) usually land here. Anything past Pro's walls is its own scoped quote — not Pro plus favors.</div>
         </div>
         <a href="mailto:james@twilighttech.io?subject=Custom%20AI%20engagement" class="tier-cta">Email James</a>
       </div>
@@ -534,7 +617,8 @@
           <div class="about-status">Available for Audits</div>
         </div>
         <div class="about-text reveal">
-          <p>I'm a solo founder in Atlanta. I built J-Bot from scratch because I needed it for my own MSP — running a small managed services business while shipping product, doing security work, and writing CompTIA study guides on the side. The standard answers (Copilot, ChatGPT Plus, ServiceNow) didn't fit a one-person operation. So I built what did.</p>
+          <p>I'm a solo founder in Atlanta. I built J-Bot from scratch because I needed it for my own MSP — running a small managed services business while shipping product, doing security work, and writing CompTIA study guides on the side. The standard answers (Copilot, ChatGPT Plus, ServiceNow) didn't fit a one-person operation. So I built what did. Every appliance I sell is a scaled version of what I run myself, every day, across my own multi-machine fleet.</p>
+          <p><strong>Why this combination is rare:</strong> most AI consultants can't rack the hardware. Most IT shops can't build the AI. This work is designing the AI <em>and</em> building the box <em>and</em> living on your network <em>and</em> patching it <em>and</em> answering the phone on Monday — four jobs at once, and the reason the confidentiality promise holds is that one accountable person owns the whole stack.</p>
           <div class="proj-block">
             <h4>Active Projects</h4>
             <ul>
@@ -559,6 +643,7 @@
           <thead><tr><th>What you're using now</th><th class="feat-col">What J-Bot adds</th></tr></thead>
           <tbody>
             <tr><td>ChatGPT / Claude / Gemini chat</td><td class="feat-col">They describe what to do; J-Bot <em>does</em> it — events created, emails sent, tickets routed</td></tr>
+            <tr><td>Cloud legal/vertical AI ($150–400 per user, per month)</td><td class="feat-col">They know the domain but not <em>your</em> files — and your files travel to their cloud. The appliance reads your documents and stays home, at a flat monthly for the whole firm</td></tr>
             <tr><td>Microsoft Copilot for M365</td><td class="feat-col">Locked to MS; J-Bot works across Google Workspace, ConnectWise, NinjaOne, Datto, custom APIs</td></tr>
             <tr><td>Zapier / Make.com</td><td class="feat-col">Brittle when conditions change; J-Bot reasons about context and asks before it acts</td></tr>
             <tr><td>A custom internal AI build</td><td class="feat-col">I've already built the platform; you get years of architecture work as a starting point</td></tr>
@@ -572,11 +657,12 @@
 
   <section>
     <div class="container">
-      <div class="sh reveal"><div class="sh-label">// Where It Runs</div><h2 class="sh-title">In <span class="ac">your</span> environment, not someone else's data center</h2><div class="sh-line"></div><p class="sh-sub">J-Bot runs on hardware you control. Three deployment modes, depending on what fits.</p></div>
+      <div class="sh reveal"><div class="sh-label">// Where It Runs</div><h2 class="sh-title">In <span class="ac">your</span> environment, not someone else's data center</h2><div class="sh-line"></div><p class="sh-sub">J-Bot runs on hardware you control. Four deployment modes — but note which offer each belongs to.</p></div>
       <div class="deploy-grid reveal">
-        <div class="deploy-card"><span class="tag">Most clients</span><h4>Self-hosted on Windows/Linux</h4><p>Runs on your existing infrastructure. Your data stays on your network. We deploy together; your team owns the config after.</p></div>
-        <div class="deploy-card"><span class="tag">Solo operators</span><h4>Local laptop / workstation</h4><p>Single-machine deployment. Good for one-person shops who want J-Bot at hand without server infrastructure.</p></div>
-        <div class="deploy-card"><span class="tag">No-infra option</span><h4>Cloud-managed by Twilight Tech</h4><p>For clients who don't want infrastructure. I host and maintain; you use the chat. Same trust gates, same audit trail.</p></div>
+        <div class="deploy-card" style="border-color:rgba(57,255,20,.35)"><span class="tag">Offer A · flagship</span><h4>Private AI appliance</h4><p>A dedicated box on your network, serving your whole team. On-prem only, by definition — this mode never has a cloud option. <a href="#private-ai" style="color:var(--green)">The appliance ↑</a></p></div>
+        <div class="deploy-card"><span class="tag">Offer B · most ops clients</span><h4>Self-hosted on Windows/Linux</h4><p>Runs on your existing infrastructure. Your data stays on your network. We deploy together; your team owns the config after.</p></div>
+        <div class="deploy-card"><span class="tag">Offer B · solo operators</span><h4>Local laptop / workstation</h4><p>Single-machine deployment. Good for one-person shops who want J-Bot at hand without server infrastructure.</p></div>
+        <div class="deploy-card"><span class="tag">Offer B only · no-infra</span><h4>Cloud-managed by Twilight Tech</h4><p>For ops clients who don't want infrastructure. I host and maintain; you use the chat. Same trust gates, same audit trail. <strong>Never offered on Private AI</strong> — that would defeat the point.</p></div>
       </div>
       <div class="deploy-llms reveal"><strong>Multi-provider LLM design</strong> means you choose the brain: <span class="llm-tag">NVIDIA NIM</span> (cheap cloud), <span class="llm-tag">Anthropic Claude</span> (premium reasoning), or <span class="llm-tag">Local Ollama</span> (full data sovereignty). Change your mind later without touching your data.</div>
     </div>
@@ -588,7 +674,8 @@
       <div class="faq-list reveal">
         <details class="faq-item"><summary class="faq-q">What if I'm not sure I need a Build after the Audit?</summary><div class="faq-a">That's the whole point of the audit being separate. You walk out with a written report you can act on (or not). About a third of audits conclude "you don't need a Build — here's a $50/month tool that solves 80% of this." The audit fee credits toward a Build if you want one, but it's not a contract.</div></details>
         <details class="faq-item"><summary class="faq-q">Can I just hire you hourly for an existing problem?</summary><div class="faq-a">Not at this stage — I'm too small to support hourly engagements without losing the deeper builds. But the <strong>Custom</strong> tier covers most "I have one specific thing" cases as a fixed-price mini-engagement. Email me with the problem; I'll tell you within 24 hours if it fits.</div></details>
-        <details class="faq-item"><summary class="faq-q">What if my data can't leave my network?</summary><div class="faq-a">J-Bot supports a <strong>fully air-gapped deployment</strong> using local LLMs (Ollama on your hardware). Slower than cloud and capped at smaller models, but zero data leaves your network. Most regulated clients run a hybrid governed by trust gates you control.</div></details>
+        <details class="faq-item"><summary class="faq-q">What if my data can't leave my network?</summary><div class="faq-a">Then you're the person the <a href="#private-ai" style="color:var(--cyan)">Private AI appliance</a> was built for. The model runs on a box you own, inside your walls; documents don't leave your network because there's nowhere for them to go. For fully offline deployments, updates are applied by hand, on-site, on a schedule we agree to — that's the actual process, not a buzzword. Local models are the trade: excellent at reading and answering from <em>your</em> documents, not a replacement for frontier cloud reasoning — and I'll draw that line for you honestly before you buy anything.</div></details>
+        <details class="faq-item"><summary class="faq-q">My team already uses ChatGPT. Is that a problem?</summary><div class="faq-a">It's the most common situation there is, and pretending otherwise doesn't help you. Most small firms have people quietly pasting work into public AI tools with no policy in place. The fix isn't a ban — bans just push it further into the shadows. The fix is giving your team a sanctioned tool that's <em>better for the actual work</em> because it knows your documents — running where your confidentiality obligations are met by architecture. Every appliance engagement includes a one-page AI-use policy for your firm, written to match what we deploy.</div></details>
         <details class="faq-item"><summary class="faq-q">How is my data handled — and what about the demo above?</summary><div class="faq-a"><strong>The demo touches nothing real.</strong> It's a sandboxed twin on fake data — it can't send email, read your calendar, or store what you type. For real engagements, your data stays in <strong>your</strong> environment: self-hosted on your infrastructure, on a local workstation, or cloud-managed by me with the same trust gates and a full audit trail of every action. You own the config and can take it elsewhere any time. No training on your data, ever.</div></details>
         <details class="faq-item"><summary class="faq-q">How long until I see ROI?</summary><div class="faq-a">Realistic answer: <strong>4–8 weeks after Build</strong>. Week 1–2 your team learns to delegate to it; week 3–4 the agent learns your patterns; by month 2 the savings are measurable. I baseline at the start and re-measure at day 30.</div></details>
         <details class="faq-item"><summary class="faq-q">What happens if a model breaks or the API changes?</summary><div class="faq-a">J-Bot is multi-provider by design — it fails over between NVIDIA NIM, Anthropic Claude, OpenAI, and local Ollama automatically. Provider outages don't take you down. Breaking changes are my problem, not yours.</div></details>
@@ -600,8 +687,8 @@
 
   <section id="cta-final">
     <div class="container">
-      <h2 class="cta-h">Want to see what J-Bot does for an actual SMB workflow?</h2>
-      <p class="cta-p">I'll share my screen and show you J-Bot doing real work — your calendar, your inbox, your tickets. No slideshow, no recorded demo.</p>
+      <h2 class="cta-h">Want AI your client files are allowed to touch?</h2>
+      <p class="cta-p">I'll show you live — private AI answering from documents on my own hardware, or J-Bot running an actual SMB workflow. No slideshow, no recorded demo.</p>
       <a href="https://calendar.app.google/SnNJnQnkfpavbuvU9" class="btn btn-solid" style="padding:1.1rem 2.5rem">Book a free 30-minute demo →</a>
     </div>
   </section>
