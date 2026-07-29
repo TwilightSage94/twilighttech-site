@@ -83,6 +83,35 @@
   const links = document.querySelector('.nav-links');
   if (tog && links) tog.addEventListener('click', () => links.classList.toggle('open'));
 
+  // ── DECLARATIVE PLAUSIBLE EVENTS ──
+  // Add data-track="Event Name" to clicks and data-track-view="Event Name"
+  // to sections that should fire once when at least half-visible.
+  function track(name, el) {
+    if (!name || typeof window.plausible !== 'function') return;
+    const props = {};
+    ['location', 'offer', 'destination'].forEach(key => {
+      const value = el && el.dataset ? el.dataset[key] : '';
+      if (value) props[key] = value;
+    });
+    window.plausible(name, Object.keys(props).length ? { props } : undefined);
+  }
+
+  document.querySelectorAll('[data-track]').forEach(el => {
+    el.addEventListener('click', () => track(el.dataset.track, el));
+  });
+
+  const viewTargets = document.querySelectorAll('[data-track-view]');
+  if (viewTargets.length) {
+    const viewObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        track(entry.target.dataset.trackView, entry.target);
+        viewObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.5 });
+    viewTargets.forEach(el => viewObserver.observe(el));
+  }
+
   // ── A LA CARTE CATEGORY FILTER ──
   const catTabs = document.querySelectorAll('.cat-tab');
   if (catTabs.length) {
