@@ -201,6 +201,26 @@
 .pai-offers td:first-child{color:var(--text);font-weight:600;font-family:var(--mono);font-size:.7rem;letter-spacing:1px;text-transform:uppercase;width:110px}
 
 /* ── J-Bot Demo live console widget ── */
+.private-demo-shell{max-width:1180px;margin:2.5rem auto 0;padding:8px;border:1px solid rgba(57,255,20,.28);background:linear-gradient(135deg,rgba(57,255,20,.045),rgba(0,240,255,.035));box-shadow:0 28px 80px rgba(0,0,0,.48);position:relative}
+.private-demo-shell::before{content:'';position:absolute;top:-1px;left:-1px;right:-1px;height:2px;background:linear-gradient(90deg,var(--green),var(--cyan),var(--magenta))}
+.private-demo-frame{display:block;width:100%;height:780px;border:0;background:#050811}
+.private-demo-proof{max-width:1180px;margin:1rem auto 0;display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);background:rgba(0,0,0,.22)}
+.private-demo-proof div{padding:1rem 1.2rem;border-right:1px solid var(--border);color:var(--muted);font-size:.84rem;line-height:1.55}
+.private-demo-proof div:last-child{border-right:0}
+.private-demo-proof strong{display:block;color:var(--green);font-family:var(--mono);font-size:.66rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:.3rem}
+.private-demo-cta{max-width:1180px;margin:1rem auto 0;padding:1.5rem 1.75rem;border:1px solid rgba(0,240,255,.25);background:linear-gradient(135deg,rgba(0,240,255,.05),rgba(124,92,191,.05));display:flex;align-items:center;justify-content:space-between;gap:1.5rem}
+.private-demo-cta p{margin:0;color:var(--muted);line-height:1.65;max-width:720px}
+.private-demo-cta strong{color:#fff}
+.private-demo-cta .btn{white-space:nowrap}
+@media(max-width:760px){
+  .private-demo-frame{height:1040px}
+  .private-demo-proof{grid-template-columns:1fr}
+  .private-demo-proof div{border-right:0;border-bottom:1px solid var(--border)}
+  .private-demo-proof div:last-child{border-bottom:0}
+  .private-demo-cta{align-items:flex-start;flex-direction:column}
+}
+
+/* Legacy J-Bot operations-demo styles retained for archived embeds. */
 .jbd{max-width:760px;margin:2.5rem auto 0}
 .jbd-console{background:linear-gradient(180deg,rgba(0,240,255,.03),var(--card) 30%);border:1px solid var(--border);position:relative;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.55),0 0 40px rgba(0,240,255,.04)}
 .jbd-console::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--magenta),var(--purple))}
@@ -342,7 +362,7 @@
       <p class="hero-tag">Cloud AI runs on someone else's computer — so your team censors what it tells it. We put the AI on <em>your</em> computer, where you can finally hand it the real work. It's not a policy promise. It's geography.</p>
       <div class="hero-btns">
         <a href="#private-ai" class="btn btn-solid">See the appliance</a>
-        <a href="#demo" class="btn btn-mag">Talk to a live J-Bot</a>
+        <a href="#demo" class="btn btn-mag">Try the document demo</a>
       </div>
     </div>
   </section>
@@ -396,6 +416,40 @@
     </div>
   </section>
 
+  <!-- LIVE DEMO — the Private AI flagship proof -->
+  <section id="demo" class="sec-dark">
+    <div class="container">
+      <div class="sh center reveal">
+        <div class="sh-label">// Live Private AI Demo · fictional legal matter</div>
+        <h2 class="sh-title">Ask a matter file. Get an answer <span class="ag">with receipts.</span></h2>
+        <div class="sh-line"></div>
+        <p class="sh-sub">This is the appliance experience in miniature: a private document room that searches only the allowed matter packet, cites the exact files it used, and refuses to invent support that is not there. The documents and client are fictional; the retrieval, guardrails, and answer trace are real.</p>
+      </div>
+
+      <div class="private-demo-shell reveal">
+        <iframe
+          class="private-demo-frame"
+          src="https://book.twilighttech.io/private-ai-demo/preview"
+          title="Twilight Tech Private AI legal document demo"
+          loading="eager"
+          referrerpolicy="strict-origin-when-cross-origin"
+          sandbox="allow-forms allow-same-origin allow-scripts"
+        ></iframe>
+      </div>
+
+      <div class="private-demo-proof reveal" aria-label="Private AI demo safeguards">
+        <div><strong>Bounded context</strong>It can search this matter packet—not the open internet or your real files.</div>
+        <div><strong>Cited answers</strong>Open every source chip to inspect the page, section, and supporting excerpt.</div>
+        <div><strong>Cite or refuse</strong>Ask it to promise a win or override its instructions and watch the boundary hold.</div>
+      </div>
+
+      <div class="private-demo-cta reveal">
+        <p><strong>Want this on your own document estate?</strong> The $499 Private AI Readiness Audit maps the files, permissions, hardware, and highest-value workflows before you buy a box. The fee credits toward a build.</p>
+        <a href="https://calendar.app.google/qeAHSWoSLsiL3DqW9" class="btn btn-solid">Book the $499 Audit</a>
+      </div>
+    </div>
+  </section>
+
   <section class="sec-dark">
     <div class="container">
       <div class="sh reveal"><div class="sh-label">// Offer B — J-Bot Operations</div><h2 class="sh-title">The <span class="am">15–25 hour</span> problem</h2><div class="sh-line"></div><p class="sh-sub">The second thing we build: an operations agent. A typical small business or MSP spends 15–25 hours a week on operational coordination — context-switching between apps, re-entering information, holding multiple system states in your head at once.</p></div>
@@ -434,7 +488,7 @@
             <tr><td>Memory &amp; Context</td><td>Pulls trusted, cross-domain context from a long-term knowledge vault</td></tr>
           </tbody>
         </table>
-        <p class="cap-note">The Email and Calendar rows? <a href="#demo">Try them live in the J-Bot Demo&nbsp;↓</a></p>
+        <p class="cap-note">The document-retrieval claim? <a href="#demo">Try the cited Private AI demo&nbsp;↑</a></p>
       </div>
       <div class="diff-points reveal">
         <div class="diff-point"><strong>Trust-gated actions</strong><span>Every operation has a permission tier: autonomous, notify, confirm, authenticate, prohibited. You decide — per action, per context — what J-Bot can do without checking with you. Dangerous things always require explicit approval.</span></div>
@@ -493,66 +547,6 @@
           <div class="tier-banner-desc">15+ workflows, multiple custom APIs, multi-site or fully offline rollouts, white-label J-Bot, or research engagements. Regulated verticals (legal, medical-adjacent) usually land here. Anything past Pro's walls is its own scoped quote — not Pro plus favors.</div>
         </div>
         <a href="mailto:james@twilighttech.io?subject=Custom%20AI%20engagement" class="tier-cta">Email James</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- LIVE DEMO — J-Bot Demo console -->
-  <section id="demo">
-    <div class="container">
-      <div class="sh center reveal">
-        <div class="sh-label">// Live Demo · running on this page right now</div>
-        <h2 class="sh-title">Don't take my word for it — <span class="ac">talk to it</span></h2>
-        <div class="sh-line"></div>
-        <p class="sh-sub">Most AI consultants hand you a slide deck. This is a <strong>real J-Bot agent, live on this page</strong> — go ahead and poke it. It's sandboxed here (fake data, can't touch real accounts), but it thinks and acts exactly like the one I build into a business. Ask it to check a calendar or draft an email and watch which tools it reaches for.</p>
-      </div>
-
-      <div class="jbd reveal" data-api-base="https://book.twilighttech.io/demobot" data-turnstile-sitekey="0x4AAAAAADqfI0hQJLUlqBCS">
-        <div class="jbd-console">
-          <div class="jbd-head">
-            <div class="jbd-id">
-              <span class="jbd-dot"></span>
-              <span class="jbd-name">J-BOT<span class="jbd-slash">//</span>DEMO</span>
-            </div>
-            <div style="display:flex;align-items:center">
-              <span class="jbd-status">Sandboxed · Read-only</span>
-              <button class="jbd-mute" id="jbd-mute" aria-pressed="false" title="Toggle sound" type="button">&#128266;</button>
-            </div>
-          </div>
-          <div class="jbd-log" id="jbd-log"></div>
-          <div class="jbd-suggest" id="jbd-suggest">
-            <button class="jbd-starter" type="button" data-q="What's on the calendar today?">What's on the calendar today?</button>
-            <button class="jbd-starter" type="button" data-q="Draft a follow-up email to a client about tomorrow's call.">Draft a client email</button>
-            <button class="jbd-starter" type="button" data-q="What can the real J-Bot do?">What can the real J-Bot do?</button>
-          </div>
-          <form class="jbd-input" id="jbd-form">
-            <input type="text" id="jbd-text" placeholder="Ask J-Bot Demo something…" autocomplete="off" aria-label="Message J-Bot Demo">
-            <button type="submit" id="jbd-send">SEND</button>
-          </form>
-        </div>
-
-        <div class="jbd-lead" id="jbd-lead" hidden>
-          <div class="jbd-lead-h">Want the real thing?</div>
-          <div class="jbd-lead-sub">Drop your details and James reaches out personally — no autoresponder, no sales sequence.</div>
-          <form class="jbd-lead-form" id="jbd-lead-form">
-            <input name="name" placeholder="Name" required>
-            <input name="email" type="email" placeholder="Email" required>
-            <input name="business" placeholder="Business name" class="jbd-full">
-            <textarea name="use_case" placeholder="What would you want J-Bot to handle?" rows="2" class="jbd-full"></textarea>
-            <button type="submit">Send to James</button>
-          </form>
-        </div>
-
-        <div class="jbd-turnstile" id="jbd-turnstile"></div>
-        <div class="jbd-foot">Sandboxed demo · no real accounts touched · conversations are rate-limited</div>
-      </div>
-
-      <div class="demo-bridge reveal">
-        <div class="demo-bridge-txt"><strong>What you're talking to is the product.</strong> The J-Bot I build runs this on <em>your</em> real calendar, inbox, and tickets — in your environment, trust-gated, yours to own. This very chatbot is a J-Bot, deployed live on this site.</div>
-        <div class="demo-bridge-cta">
-          <a href="#tiers" class="btn btn-solid">See Build options</a>
-          <a href="https://calendar.app.google/qeAHSWoSLsiL3DqW9" class="btn btn-mag">Book the $499 Audit</a>
-        </div>
       </div>
     </div>
   </section>
@@ -703,6 +697,5 @@
 </footer>
 
 <script src="/assets/site.js"></script>
-<script src="/assets/demobot-widget.js"></script>
 </body>
 </html>
