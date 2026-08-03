@@ -321,6 +321,13 @@
   };
 
   var RESOURCE_ROUTES = {
+    'site-chat': {
+      title: 'Website Front Desk Build',
+      copy: 'See exactly what ships, what it costs, and why this front desk stays useful without becoming an AI free-for-all.',
+      links: [
+        { label: 'See the $999 build', href: 'https://twilighttech.io/site-chat/' }
+      ]
+    },
     'guides': {
       title: 'Guides & freebies',
       copy: 'Grab the useful thing first. You can still leave James a note afterward.',
