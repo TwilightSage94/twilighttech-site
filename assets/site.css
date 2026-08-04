@@ -178,6 +178,8 @@ section{padding:6rem 0;position:relative;z-index:2}
 footer{position:relative;z-index:2;border-top:1px solid var(--border);background:rgba(0,0,0,.35);padding:2rem 0}
 .footer-inner{max-width:var(--max);margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;font-family:var(--mono);font-size:.66rem;letter-spacing:1px;color:var(--muted)}
 .footer-inner .nc{color:var(--cyan)}
+.footer-link{color:var(--muted);border-bottom:1px solid rgba(0,240,255,.25);transition:color .2s,border-color .2s}
+.footer-link:hover{color:var(--cyan);border-color:var(--cyan)}
 .footer-status{display:flex;align-items:center;gap:.5rem}
 .footer-status::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 2s ease-in-out infinite}
 
