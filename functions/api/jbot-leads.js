@@ -1,5 +1,3 @@
-const DEFAULT_LEADS_ENDPOINT = 'https://testmachine.tail1dcfc5.ts.net/api/leads/';
-const DEFAULT_EMAIL_ENDPOINT = 'https://formspree.io/f/xnjodljr';
 const RATE_WINDOW_MS = 60_000;
 const RATE_MAX = 5;
 
@@ -186,28 +184,13 @@ function checkRateLimit(key) {
   return fresh.length <= RATE_MAX;
 }
 
-function buildLeadPayload(lead, request) {
-  const url = new URL(request.url);
-  return {
-    email: lead.email,
-    source_page: `jbot-frontdesk:${lead.lane_slug}`,
-    utm_campaign: neutralize(url.searchParams.get('utm_campaign') || 'jbot-frontdesk', 120),
-    utm_medium: neutralize(url.searchParams.get('utm_medium') || 'site-chat', 80),
-    utm_source: neutralize(url.searchParams.get('utm_source') || lead.page || url.pathname, 160),
-    utm_content: neutralize(url.searchParams.get('utm_content') || compactSummary(lead), 450),
-    referrer: neutralize(request.headers.get('Referer') || '', 300),
-    hp: lead.hp,
-  };
-}
-
-function buildEmailPayload(lead) {
+function buildGooglePayload(lead, request, sharedSecret) {
   const safetyNote = lead.safety_note || (lead.sensitive_flag
     ? 'Sensitive terms detected. Review before replying.'
     : 'No sensitive files requested in chat.');
 
   return {
-    _subject: `New J-Bot Lead - ${lead.lane}`,
-    source: 'J-Bot Front Desk',
+    shared_secret: sharedSecret,
     name: lead.name,
     email: lead.email,
     lane: lead.lane,
@@ -217,26 +200,28 @@ function buildEmailPayload(lead) {
     summary: lead.summary || compactSummary(lead),
     next_step: lead.next_step,
     safety_note: safetyNote,
-    sensitive_flag: lead.sensitive_flag ? 'yes' : 'no',
+    sensitive_flag: lead.sensitive_flag,
+    referrer: neutralize(request.headers.get('Referer') || '', 300),
   };
 }
 
-async function postJson(url, payload) {
-  return fetch(url, {
+async function deliverToGoogle(endpoint, payload) {
+  const response = await fetch(endpoint, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify(payload),
   });
-}
-
-async function postForm(url, payload) {
-  const fd = new FormData();
-  Object.keys(payload).forEach((key) => fd.append(key, payload[key] || ''));
-  return fetch(url, {
-    method: 'POST',
-    headers: { Accept: 'application/json' },
-    body: fd,
-  });
+  let result;
+  try {
+    result = await response.json();
+  } catch (error) {
+    return { ok: false, lead_saved: false, email_sent: false };
+  }
+  return {
+    ok: response.ok && result.ok === true,
+    lead_saved: result.lead_saved === true,
+    email_sent: result.email_sent === true,
+  };
 }
 
 async function verifyTurnstile(secret, token, remoteIp) {
@@ -301,16 +286,22 @@ export async function onRequestPost(context) {
     return json({ ok: false, error: 'Too many submissions. Please wait and try again.' }, 429, headers);
   }
 
-  const leadsEndpoint = env.JBOT_LEADS_ENDPOINT || DEFAULT_LEADS_ENDPOINT;
-  const emailEndpoint = env.JBOT_EMAIL_ENDPOINT || DEFAULT_EMAIL_ENDPOINT;
+  if (!env.JBOT_GOOGLE_ENDPOINT || !env.JBOT_GOOGLE_SECRET) {
+    return json({ ok: false, error: 'Google lead delivery is not configured.' }, 503, headers);
+  }
 
-  const deliveries = await Promise.allSettled([
-    postJson(leadsEndpoint, buildLeadPayload(lead, request)),
-    postForm(emailEndpoint, buildEmailPayload(lead)),
-  ]);
+  let delivery;
+  try {
+    delivery = await deliverToGoogle(
+      env.JBOT_GOOGLE_ENDPOINT,
+      buildGooglePayload(lead, request, env.JBOT_GOOGLE_SECRET),
+    );
+  } catch (error) {
+    return json({ ok: false, error: 'Google lead delivery is unavailable.' }, 503, headers);
+  }
 
-  const leadSaved = deliveries[0].status === 'fulfilled' && deliveries[0].value.ok;
-  const emailSent = deliveries[1].status === 'fulfilled' && deliveries[1].value.ok;
+  const leadSaved = delivery.ok && delivery.lead_saved;
+  const emailSent = delivery.ok && delivery.email_sent;
 
   if (!leadSaved && !emailSent) {
     return json({ ok: false, error: 'Delivery failed.' }, 502, headers);

@@ -682,7 +682,7 @@
   }
 
   function finishLocalPreview(chat, input, send) {
-    appendCard(chat, 'lead-card', 'Preview complete', 'The guided flow works. On twilighttech.io, this final click sends the note to Leads and your email. Nothing was sent from this local preview.');
+    appendCard(chat, 'lead-card', 'Preview complete', 'The guided flow works. On twilighttech.io, this final click sends the note to Google Leads and Gmail. Nothing was sent from this local preview.');
     uiState.stage = 'done';
     uiState.submitting = false;
     setInput(input, send, 'Preview complete - choose another lane above...', true);
@@ -710,8 +710,8 @@
 
     submitLead(leadFromState(hp)).then(function (result) {
       var destinations = [];
-      if (result.lead_saved) destinations.push('Leads');
-      if (result.email_sent) destinations.push('email');
+      if (result.lead_saved) destinations.push('Google Leads');
+      if (result.email_sent) destinations.push('Gmail');
       var destinationText = destinations.length ? destinations.join(' + ') : 'the front desk';
       clearTurnstileWidget();
       appendCard(chat, 'lead-card', 'Desk note filed', 'Your note reached ' + destinationText + '. James has what he needs and normally replies within one business day.');
