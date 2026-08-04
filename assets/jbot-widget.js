@@ -81,7 +81,7 @@
     if (document.querySelector('link[data-jbot-style]')) return;
     var link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = '/assets/jbot-widget.css';
+    link.href = '/assets/jbot-widget.css?v=20260804-google';
     link.dataset.jbotStyle = 'true';
     document.head.appendChild(link);
   }
@@ -92,7 +92,7 @@
       return;
     }
     var script = document.createElement('script');
-    script.src = '/assets/jbot-frontdesk.js';
+    script.src = '/assets/jbot-frontdesk.js?v=20260804-google';
     script.defer = true;
     document.body.appendChild(script);
   }
