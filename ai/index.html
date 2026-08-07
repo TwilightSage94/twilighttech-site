@@ -56,6 +56,13 @@
     },
     {
       "@type": "Offer",
+      "name": "Private AI 90-Day Pilot",
+      "priceCurrency": "USD",
+      "priceSpecification": {"@type": "PriceSpecification", "minPrice": "2500", "priceCurrency": "USD"},
+      "description": "A controlled 90-day validation of one approved document collection, one workflow, and up to five users before an appliance commitment."
+    },
+    {
+      "@type": "Offer",
       "name": "Private AI System Care & Improvement",
       "priceCurrency": "USD",
       "priceSpecification": {"@type": "PriceSpecification", "minPrice": "999", "priceCurrency": "USD", "unitText": "MONTH"},
@@ -132,7 +139,7 @@
 .fit-card p{color:var(--muted);line-height:1.65;font-size:.94rem}
 .fit-note{margin-top:1.2rem;padding:1.25rem 1.5rem;border:1px solid var(--border);color:var(--muted);line-height:1.7;background:rgba(0,0,0,.22)}
 .fit-note strong{color:var(--amber)}
-.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.tier-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.1rem}
 .tier-card{background:var(--card);border:1px solid var(--border);padding:1.8rem;position:relative;display:flex;flex-direction:column}
 .tier-card.featured{border-color:rgba(0,240,255,.35);background:linear-gradient(180deg,rgba(0,240,255,.05),var(--card) 38%)}
 .tier-badge{position:absolute;top:1rem;right:1rem;background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;font-family:var(--mono);font-size:.56rem;padding:.2rem .55rem;letter-spacing:1.2px;text-transform:uppercase}
@@ -146,7 +153,7 @@
 .tier-card li::before{content:'✦';position:absolute;left:0;color:var(--green);font-size:.55rem;top:.25rem}
 .tier-card li strong{color:var(--text)}
 .tier-cta{display:block;text-align:center;border:1px solid rgba(0,240,255,.3);color:var(--cyan);padding:.8rem;font-family:var(--mono);font-size:.7rem;letter-spacing:1.3px;text-transform:uppercase;margin-top:auto}
-.path-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:1.25rem}
+.path-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:1.25rem}
 .path-step{background:var(--deep);padding:1.3rem}
 .path-step span{font-family:var(--mono);color:var(--cyan);font-size:.62rem;letter-spacing:1px}
 .path-step strong{display:block;color:#fff;font-family:var(--display);font-size:.86rem;margin:.35rem 0}
@@ -324,7 +331,7 @@
     <div class="container">
       <div class="sh reveal">
         <div class="sh-label">// The engagement</div>
-        <h2 class="sh-title">Audit first. Then <span class="ac">size the box.</span></h2>
+        <h2 class="sh-title">Audit first. Prove one workflow. Then <span class="ac">size the box.</span></h2>
         <div class="sh-line"></div>
         <p class="sh-sub">No appliance quote should be based on vibes. We start with the document estate, permissions, users, workflows, and risk boundary—then build only what the evidence supports.</p>
       </div>
@@ -338,6 +345,15 @@
           <ul><li>Document-estate and permissions map</li><li>Ranked workflows by value and risk</li><li>Hardware and deployment recommendation</li><li>Build estimate and 30-day path</li></ul>
           <a href="https://calendar.app.google/qeAHSWoSLsiL3DqW9" class="tier-cta" data-track="Private AI Audit Click" data-location="pricing" data-offer="private-ai">Book the Audit</a>
         </article>
+        <article class="tier-card featured reveal">
+          <span class="tier-badge">Validate next</span>
+          <div class="tier-name">Private AI 90-Day Pilot</div>
+          <div class="tier-tag">one collection · one workflow · up to five users</div>
+          <div class="tier-price">From $2.5K <span>/ 90 days</span></div>
+          <p>Test the highest-value use case inside a controlled boundary before committing to the permanent appliance.</p>
+          <ul><li>One organization and one controlled environment</li><li>One approved document collection and workflow</li><li>Initial ingestion, retrieval, citations, and refusal behavior</li><li>Up to five users and 20 benchmark questions</li><li>Training, weekly quality checks, and final report</li><li>Pilot fee credits toward an appliance signed within 30 days</li></ul>
+          <a href="https://calendar.app.google/SnNJnQnkfpavbuvU9" class="tier-cta" data-track="Private AI Pilot Call Click" data-location="pricing" data-offer="private-ai">Scope the Pilot</a>
+        </article>
         <article class="tier-card reveal">
           <div class="tier-name">Private AI Appliance</div>
           <div class="tier-tag">scoped after the audit</div>
@@ -348,17 +364,18 @@
         </article>
         <article class="tier-card reveal">
           <div class="tier-name">System Care & Improvement</div>
-          <div class="tier-tag">maintenance, tuning, and support</div>
+          <div class="tier-tag">month-to-month maintenance, tuning, and support</div>
           <div class="tier-price">From $999 <span>/ month</span></div>
-          <p>The appliance remains a maintained system instead of becoming an abandoned box in a closet. Smaller teams can scope care after the audit so they are not buying more support than the system needs.</p>
+          <p>The appliance remains a maintained system instead of becoming an abandoned box in a closet. Care is month-to-month after launch; no automatic 12-month lock.</p>
           <ul><li>Updates, backups, and health monitoring</li><li>Retrieval tuning and answer-quality reviews</li><li>Model upgrades and local performance checks</li><li>New document collections and workflows</li><li>Quarterly improvement review</li><li>Priority human support</li></ul>
           <a href="mailto:james@twilighttech.io?subject=Private%20AI%20System%20Care%20and%20Improvement" class="tier-cta" data-track="Private AI System Care Click" data-location="pricing" data-offer="private-ai">Ask About System Care</a>
         </article>
       </div>
       <div class="path-strip reveal">
         <div class="path-step"><span>01 · Observe</span><strong>Map the real work</strong><p>Files, permissions, users, repeat questions, and risk.</p></div>
-        <div class="path-step"><span>02 · Build</span><strong>Install inside the boundary</strong><p>Hardware, model, retrieval, access, and training.</p></div>
-        <div class="path-step"><span>03 · Care</span><strong>Keep it useful</strong><p>Measure quality, update safely, and expand deliberately.</p></div>
+        <div class="path-step"><span>02 · Pilot</span><strong>Prove one workflow</strong><p>Ninety days, one approved collection, visible quality checks.</p></div>
+        <div class="path-step"><span>03 · Build</span><strong>Install inside the boundary</strong><p>Hardware, model, retrieval, access, and training.</p></div>
+        <div class="path-step"><span>04 · Care</span><strong>Keep it useful</strong><p>Measure quality, update safely, and expand deliberately.</p></div>
       </div>
     </div>
   </section>
