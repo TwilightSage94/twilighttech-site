@@ -149,6 +149,13 @@
 .section-title{font-family:var(--display);font-size:clamp(1.5rem,4vw,2.1rem);font-weight:700}
 .section-subtitle{color:var(--muted);margin-top:0.55rem;max-width:760px}
 .section-heading.center .section-subtitle{margin-left:auto;margin-right:auto}
+.breakroom-band{max-width:1000px;margin:1rem auto 4rem;padding:1.7rem 1.8rem;position:relative;z-index:2;display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:center;border:1px solid rgba(255,0,229,.3);background:linear-gradient(115deg,rgba(255,0,229,.07),rgba(0,240,255,.035) 55%,rgba(7,10,22,.92));box-shadow:0 18px 50px rgba(0,0,0,.28)}
+.breakroom-band .br-kicker{color:var(--magenta);font:700 .68rem var(--mono);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.45rem}
+.breakroom-band h2{font-family:var(--display);font-size:clamp(1.3rem,3vw,1.8rem);color:#fff;margin-bottom:.35rem}
+.breakroom-band p{color:var(--muted);line-height:1.55;max-width:690px}
+.breakroom-band .btn-green{border-color:var(--magenta);color:#ffd7fb;white-space:nowrap}
+.breakroom-band .btn-green:hover{background:rgba(255,0,229,.08);box-shadow:0 0 18px rgba(255,0,229,.2)}
+@media(max-width:720px){.breakroom-band{grid-template-columns:1fr;margin-left:1.5rem;margin-right:1.5rem}.breakroom-band .btn-green{text-align:center}}
 .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
 .card{background:var(--card);border:1px solid var(--border);padding:2rem;position:relative;overflow:hidden;transition:all 0.3s;display:flex;flex-direction:column}
 .card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--magenta));opacity:0;transition:opacity 0.3s}
@@ -720,6 +727,15 @@
   });
 })();
 </script>
+
+<section class="breakroom-band reveal" aria-labelledby="breakroom-title">
+  <div>
+    <div class="br-kicker">// Keep building with people</div>
+    <h2 id="breakroom-title">The BreakRoom is the community side of the Guides desk.</h2>
+    <p>Grab the free resources, compare notes, ask the question you thought was too basic, and keep moving with other people entering and growing in IT.</p>
+  </div>
+  <a class="btn-green" href="https://discord.gg/QKGsTZRWMx" target="_blank" rel="noopener" onclick="if(window.plausible)window.plausible('Join Break Room');">Join the BreakRoom →</a>
+</section>
 
 <section class="faq-section reveal">
   <h2>Frequently asked</h2>

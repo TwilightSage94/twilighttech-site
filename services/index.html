@@ -32,6 +32,17 @@
 .svc-menu>summary::before{content:'+';color:var(--green);font-weight:700;font-size:1.1rem}
 .svc-menu[open]>summary::before{content:'−'}
 .svc-menu-body{padding:.4rem 1.4rem 1.7rem}
+.flagship-wrap{margin-top:3.4rem;padding-top:2.8rem;border-top:1px solid var(--border)}
+.flagship-head{max-width:780px;margin:0 auto 1.6rem;text-align:center}
+.flagship-head p{color:var(--muted);line-height:1.6;margin:.7rem auto 0}
+.flagship-grid{margin-bottom:1.2rem}
+.flagship-grid .addon-card{border-color:rgba(0,240,255,.22);background:linear-gradient(180deg,rgba(0,240,255,.045),var(--card) 34%)}
+.flagship-grid .addon-card:nth-child(2){border-color:rgba(57,255,20,.32);background:linear-gradient(180deg,rgba(57,255,20,.055),var(--card) 34%)}
+.flagship-grid .addon-card:nth-child(3){border-color:rgba(255,0,229,.28);background:linear-gradient(180deg,rgba(255,0,229,.045),var(--card) 34%)}
+.flagship-label{display:inline-block;margin-bottom:.8rem;color:var(--green);font:700 .62rem var(--mono);letter-spacing:1.5px;text-transform:uppercase}
+.flagship-note{color:var(--muted);font-size:.84rem;line-height:1.55;text-align:center;margin:0 auto 2rem;max-width:760px}
+.flagship-section{padding:2.5rem 0 4rem}
+.flagship-section .flagship-wrap{margin-top:0}
 </style>
 </head>
 <body>
@@ -66,7 +77,53 @@
     </div>
   </div>
 
-  <!-- 2 · HOW IT WORKS (non-card strip) -->
+  <!-- 2 · FLAGSHIP FIXES -->
+  <section class="sec-dark flagship-section">
+    <div class="container">
+      <div class="flagship-wrap reveal">
+        <div class="flagship-head">
+          <div class="sh-label">// Fix My Setup · flagship projects</div>
+          <h2 class="sh-title">The business IT work we lead with</h2>
+          <p>Three clearly bounded projects for preparing a new employee, reclaiming control of Microsoft 365, or launching a small business on a secure foundation.</p>
+        </div>
+
+        <div class="addons-grid flagship-grid">
+          <article class="addon-card">
+            <span class="flagship-label">01 / Employee setup</span>
+            <div class="addon-icon">🧑‍💼</div>
+            <div class="addon-name">Employee Ready</div>
+            <div class="addon-tagline">One employee gets a working, secured account and prepared company laptop before the agreed start date.</div>
+            <div class="addon-price-row"><div class="addon-price">$169</div><div class="addon-price-label">per standard new hire</div></div>
+            <ul class="addon-includes"><li>Identity, mailbox, licensing, and MFA</li><li>Approved groups and shared-mailbox access</li><li>One Windows laptop enrolled and secured</li><li>Up to five standard business applications</li></ul>
+            <a href="https://buy.stripe.com/3cI14naIec9w6aS4pebAs0o" class="addon-cta" target="_blank" rel="noopener">Prepare a New Hire — $169 →</a>
+          </article>
+
+          <article class="addon-card">
+            <span class="flagship-label">02 / Tenant control</span>
+            <div class="addon-icon">🔐</div>
+            <div class="addon-name">Microsoft 365 Secure Reset</div>
+            <div class="addon-tagline">Know what you own, reduce privileged access, and leave with a documented Microsoft 365 security baseline.</div>
+            <div class="addon-price-row"><div class="addon-price">$999</div><div class="addon-price-label">up to 5 users · $1,499 for 6–15</div></div>
+            <ul class="addon-includes"><li>Tenant, license, and admin-role inventory</li><li>MFA and conditional-access baseline</li><li>Mail flow, domain, groups, and storage review</li><li>Findings report plus 60-minute handoff</li></ul>
+            <a href="/#contact" class="addon-cta">Scope My Secure Reset →</a>
+          </article>
+
+          <article class="addon-card">
+            <span class="flagship-label">03 / New business launch</span>
+            <div class="addon-icon">🚀</div>
+            <div class="addon-name">Day One Business IT</div>
+            <div class="addon-tagline">Launch a small business with Microsoft 365, identity, security, backup, devices, and the handoff documentation accounted for.</div>
+            <div class="addon-price-row"><div class="addon-price">$999</div><div class="addon-price-label">Q4 founding build · $1,499+ standard</div></div>
+            <ul class="addon-includes"><li>One tenant and domain · up to five users</li><li>Up to three supported Windows devices</li><li>MFA, Defender, and backup baseline</li><li>Environment diagram and admin handoff</li></ul>
+            <a href="https://buy.stripe.com/7sY14n7w27Tg42Kg7WbAs0q" class="addon-cta" target="_blank" rel="noopener">Book Founding Build — $999 →</a>
+          </article>
+        </div>
+        <p class="flagship-note">Need only one smaller task? The full one-time menu below still includes tenant setup, onboarding, offboarding, migrations, security hardening, backup, and other bounded fixes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · HOW IT WORKS (non-card strip) -->
   <section style="padding-top:3rem">
     <div class="container">
       <div class="sh center reveal" style="margin-bottom:2.2rem"><div class="sh-label">// How it works</div><h2 class="sh-title">Four steps, <span class="ac">no surprises</span></h2><div class="sh-line" style="margin:1.2rem auto"></div></div>
@@ -79,7 +136,7 @@
     </div>
   </section>
 
-  <!-- 3 · THREE DOORS -->
+  <!-- 4 · THREE DOORS -->
   <section class="sec-dark" style="padding-top:4rem">
     <div class="container">
       <div class="sh center reveal" style="margin-bottom:2.2rem"><div class="sh-label">// Start here</div><h2 class="sh-title">Three doors, <span class="ac">not nineteen</span></h2><div class="sh-line" style="margin:1.2rem auto"></div><p class="sh-sub" style="margin:0 auto">Pick the door that matches where you are. Each opens the full menu, filtered.</p></div>
@@ -102,9 +159,9 @@
           <div class="plan-name">Fix My Setup</div>
           <div class="plan-target">// one thing, fixed right · $50–$999</div>
           <ul class="door-ex">
-            <li>MFA &amp; Security Hardening <b>$199</b></li>
-            <li>Microsoft 365 Tenant Setup <b>$299</b></li>
-            <li>G-Suite → M365 Migration <b>$599</b></li>
+            <li>Employee Ready <b>$169</b></li>
+            <li>Microsoft 365 Secure Reset <b>from $999</b></li>
+            <li>Day One Business IT <b>$999 founding</b></li>
           </ul>
           <button class="door-link" data-seeall="fix">See all 16 →</button>
         </div>
@@ -122,7 +179,7 @@
 
       </div>
 
-      <!-- 4 · FULL MENU (collapsed) -->
+      <!-- 5 · FULL MENU (collapsed) -->
       <details class="svc-menu reveal" id="svc-menu">
         <summary>Browse all 20 one-time services · $50–$1,500</summary>
         <div class="svc-menu-body">
@@ -141,9 +198,9 @@
             <div class="addon-card" data-cats="try"><div class="addon-icon">🕵️</div><div class="addon-name">Dark Web Scan</div><div class="addon-tagline">Find out if your credentials are already for sale before it's too late.</div><div class="addon-price-row"><div class="addon-price">$79</div><div class="addon-price-label">scan &amp; report</div></div><ul class="addon-includes"><li>Domain &amp; email breach scan</li><li>Exposed credential identification</li><li>Breach source &amp; date documented</li><li>Branded report with action steps</li></ul><a href="https://buy.stripe.com/5kQ3cv03AflIgPwdZObAs06" class="addon-cta" target="_blank" rel="noopener">Get Your Scan →</a></div>
             <div class="addon-card" data-cats="try"><div class="addon-icon">💻</div><div class="addon-name">Device Cleanup &amp; Optimization</div><div class="addon-tagline">Your computer isn't old — it's just dirty. Get it running like new.</div><div class="addon-price-row"><div class="addon-price">$149</div><div class="addon-price-label">one-time</div></div><ul class="addon-includes"><li>Full malware &amp; adware removal</li><li>Startup optimization</li><li>Disk cleanup &amp; storage recovery</li><li>Driver &amp; OS updates applied</li></ul><a href="https://buy.stripe.com/7sYbJ12bI3D0gPw7BqbAs03" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
 
-            <div class="addon-card is-bundle" data-cats="fix"><span class="bundle-ribbon">SAVE $31</span><div class="addon-icon">🧑‍💼</div><div class="addon-name">New Hire Pack</div><div class="addon-tagline">User Onboarding + Laptop Setup — laptop ready their first Monday.</div><div class="addon-price-row"><div class="addon-price">$169</div><div class="addon-price-label">per new hire</div></div><div class="bundle-math">List <s>$200</s> · Bundle <strong>$169</strong></div><ul class="addon-includes"><li>User account + licensing + MFA</li><li>Laptop OS, Entra enrollment, Defender</li><li>Required software installed</li><li>Ready before their start date</li></ul><a href="https://buy.stripe.com/3cI14naIec9w6aS4pebAs0o" class="addon-cta" target="_blank" rel="noopener">Book Bundle — $169 →</a></div>
+            <div class="addon-card is-bundle" data-cats="fix"><span class="bundle-ribbon">EMPLOYEE SETUP</span><div class="addon-icon">🧑‍💼</div><div class="addon-name">Employee Ready</div><div class="addon-tagline">One employee account and company laptop prepared, secured, verified, and ready before the agreed start date.</div><div class="addon-price-row"><div class="addon-price">$169</div><div class="addon-price-label">per standard new hire</div></div><ul class="addon-includes"><li>User account + licensing + MFA</li><li>Laptop OS, Entra enrollment, Defender</li><li>Up to five standard applications</li><li>Completion checklist before handoff</li></ul><a href="https://buy.stripe.com/3cI14naIec9w6aS4pebAs0o" class="addon-cta" target="_blank" rel="noopener">Prepare a New Hire — $169 →</a></div>
             <div class="addon-card is-bundle" data-cats="fix"><span class="bundle-ribbon">SAVE $39</span><div class="addon-icon">🛡️</div><div class="addon-name">Security Starter Bundle</div><div class="addon-tagline">Find your breaches. Lock the doors. The one-two punch every small biz needs.</div><div class="addon-price-row"><div class="addon-price">$239</div><div class="addon-price-label">all-in</div></div><div class="bundle-math">List <s>$278</s> · Bundle <strong>$239</strong></div><ul class="addon-includes"><li>Dark Web Scan + branded report</li><li>MFA enabled for all users</li><li>Conditional access policies applied</li><li>Admin accounts secured + hardened</li></ul><a href="https://buy.stripe.com/eVqbJ13fMflI7eWaNCbAs0p" class="addon-cta" target="_blank" rel="noopener">Book Bundle — $239 →</a></div>
-            <div class="addon-card is-bundle" data-cats="fix"><span class="bundle-ribbon">SAVE $247</span><div class="addon-icon">🚀</div><div class="addon-name">Day One Bulletproof</div><div class="addon-tagline">You just incorporated. Everything ready by next Monday — for under a grand.</div><div class="addon-price-row"><div class="addon-price">$999</div><div class="addon-price-label">turnkey new business</div></div><div class="bundle-math">List <s>$1,246</s> · Bundle <strong>$999</strong></div><ul class="addon-includes"><li>New Business IT foundation</li><li>Microsoft 365 tenant fully configured</li><li>MFA + security baseline applied</li><li>Cloud backup configured + tested</li></ul><a href="https://buy.stripe.com/7sY14n7w27Tg42Kg7WbAs0q" class="addon-cta" target="_blank" rel="noopener">Book Bundle — $999 →</a></div>
+            <div class="addon-card is-bundle" data-cats="fix"><span class="bundle-ribbon">Q4 FOUNDING</span><div class="addon-icon">🚀</div><div class="addon-name">Day One Business IT</div><div class="addon-tagline">Launch a new small business with Microsoft 365, identity, security, backup, devices, and the admin handoff accounted for.</div><div class="addon-price-row"><div class="addon-price">$999</div><div class="addon-price-label">founding build</div></div><div class="bundle-math">Standard <s>$1,499+</s> · Founding <strong>$999</strong></div><ul class="addon-includes"><li>One tenant and domain · up to five users</li><li>Up to three supported Windows devices</li><li>MFA, Defender, and backup baseline</li><li>Environment diagram + admin handoff</li></ul><a href="https://buy.stripe.com/7sY14n7w27Tg42Kg7WbAs0q" class="addon-cta" target="_blank" rel="noopener">Book Founding Build — $999 →</a></div>
             <div class="addon-card" data-cats="fix"><div class="addon-icon">👋</div><div class="addon-name">User Offboarding</div><div class="addon-tagline">Departing employee locked down immediately. Licenses recovered, data secured.</div><div class="addon-price-row"><div class="addon-price">$50</div><div class="addon-price-label">/ user</div></div><ul class="addon-includes"><li>Account disabled + access revoked</li><li>Data secured + retention configured</li><li>Licenses recovered + documented</li><li>Audit trail for compliance</li></ul><a href="https://buy.stripe.com/3cI5kD6rY3D07eWcVKbAs0h" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
             <div class="addon-card" data-cats="fix"><div class="addon-icon">👤</div><div class="addon-name">User Onboarding</div><div class="addon-tagline">New hire set up right — account, licensing, MFA, mailbox, group access.</div><div class="addon-price-row"><div class="addon-price">$75</div><div class="addon-price-label">/ user</div></div><ul class="addon-includes"><li>Account creation + licensing</li><li>MFA setup + verified</li><li>Group + mailbox access configured</li><li>Documented + ready before start date</li></ul><a href="https://buy.stripe.com/bJedR93fMa1o8j06xmbAs0g" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
             <div class="addon-card" data-cats="fix"><div class="addon-icon">💼</div><div class="addon-name">Laptop Setup for New Hires</div><div class="addon-tagline">Their laptop is ready Friday — enrolled, secured, documented — before Monday.</div><div class="addon-price-row"><div class="addon-price">$125</div><div class="addon-price-label">/ device</div></div><ul class="addon-includes"><li>OS configuration &amp; updates applied</li><li>Entra ID / domain enrollment</li><li>Required software installed</li><li>Defender &amp; backup agent deployed</li></ul><a href="https://buy.stripe.com/8x28wP6rY4H4ar87BqbAs0i" class="addon-cta" target="_blank" rel="noopener">Book This Service →</a></div>
@@ -164,7 +221,7 @@
     </div>
   </section>
 
-  <!-- 5 · MANAGED CROSS-LINK (non-card comparison band) -->
+  <!-- 6 · MANAGED CROSS-LINK (non-card comparison band) -->
   <section style="padding-top:3.5rem">
     <div class="container">
       <div class="callout reveal">
