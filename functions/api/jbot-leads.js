@@ -1,5 +1,14 @@
 const RATE_WINDOW_MS = 60_000;
 const RATE_MAX = 5;
+const MAX_BODY_BYTES = 16_384;
+const DELIVERY_TIMEOUT_MS = 8_000;
+const DEFAULT_ALLOWED_ORIGINS = [
+  'https://twilighttech.io',
+  'https://www.twilighttech.io',
+  'http://localhost:8000',
+  'http://127.0.0.1:8000',
+];
+const DEFAULT_TURNSTILE_HOSTNAMES = ['twilighttech.io', 'www.twilighttech.io'];
 
 const ALLOWED_LANES = {
   'private-ai': 'Private AI',
@@ -48,35 +57,53 @@ function json(body, status = 200, headers = {}) {
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       'Cache-Control': 'no-store',
+      'X-Content-Type-Options': 'nosniff',
+      'Referrer-Policy': 'strict-origin-when-cross-origin',
+      'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
       ...headers,
     },
   });
 }
 
+function configuredList(value, defaults) {
+  const items = String(value || '').split(',').map((item) => item.trim()).filter(Boolean);
+  return items.length ? items : defaults;
+}
+
+function allowedOrigins(env) {
+  return configuredList(env.JBOT_ALLOWED_ORIGINS, DEFAULT_ALLOWED_ORIGINS);
+}
+
+function originAllowed(request, env) {
+  const origin = request.headers.get('Origin') || '';
+  return !origin || allowedOrigins(env).includes(origin);
+}
+
 function corsHeaders(request, env) {
   const origin = request.headers.get('Origin') || '';
-  const configured = (env.JBOT_ALLOWED_ORIGINS || 'https://twilighttech.io,http://localhost:8000,http://127.0.0.1:8000')
-    .split(',')
-    .map((item) => item.trim())
-    .filter(Boolean);
-
-  if (!origin || configured.includes(origin)) {
-    return {
-      'Access-Control-Allow-Origin': origin || 'https://twilighttech.io',
-      'Vary': 'Origin',
-      'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, Accept',
-      'Access-Control-Max-Age': '600',
-    };
-  }
-
-  return {
-    'Access-Control-Allow-Origin': 'https://twilighttech.io',
+  const headers = {
     'Vary': 'Origin',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type, Accept',
     'Access-Control-Max-Age': '600',
   };
+  if (originAllowed(request, env)) {
+    headers['Access-Control-Allow-Origin'] = origin || allowedOrigins(env)[0];
+  }
+  return headers;
+}
+
+function newRequestId() {
+  if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+  return `jbot-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+
+async function readJsonBody(request) {
+  const declaredSize = Number(request.headers.get('Content-Length') || 0);
+  if (declaredSize > MAX_BODY_BYTES) throw new Error('request-too-large');
+  const raw = await request.text();
+  if (new TextEncoder().encode(raw).byteLength > MAX_BODY_BYTES) throw new Error('request-too-large');
+  return JSON.parse(raw);
 }
 
 function truncate(value, max) {
@@ -175,7 +202,7 @@ function rateLimitKey(request, lead) {
   return `${ip}:${lead.email || 'no-email'}`;
 }
 
-function checkRateLimit(key) {
+function checkMemoryRateLimit(key) {
   const now = Date.now();
   const existing = buckets.get(key) || [];
   const fresh = existing.filter((stamp) => now - stamp < RATE_WINDOW_MS);
@@ -184,13 +211,47 @@ function checkRateLimit(key) {
   return fresh.length <= RATE_MAX;
 }
 
-function buildGooglePayload(lead, request, sharedSecret) {
+async function hashRateLimitKey(key) {
+  if (typeof crypto === 'undefined' || !crypto.subtle) return key.slice(0, 64);
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(key));
+  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('');
+}
+
+async function checkRateLimit(context, key) {
+  const hashedKey = await hashRateLimitKey(key);
+  const limiter = context.env.JBOT_RATE_LIMITER;
+  if (limiter && typeof limiter.limit === 'function') {
+    try {
+      const result = await limiter.limit({ key: hashedKey });
+      return result.success !== false;
+    } catch (error) {
+      console.warn(JSON.stringify({ event: 'jbot_rate_limit_fallback', request_id: context.requestId }));
+    }
+  }
+  const kv = context.env.JBOT_RATE_LIMIT_KV;
+  if (kv && typeof kv.get === 'function' && typeof kv.put === 'function') {
+    try {
+      const windowId = Math.floor(Date.now() / RATE_WINDOW_MS);
+      const storageKey = `jbot-rate:${windowId}:${hashedKey}`;
+      const count = Number(await kv.get(storageKey)) || 0;
+      if (count >= RATE_MAX) return false;
+      await kv.put(storageKey, String(count + 1), { expirationTtl: 120 });
+      return true;
+    } catch (error) {
+      console.warn(JSON.stringify({ event: 'jbot_rate_limit_kv_fallback', request_id: context.requestId }));
+    }
+  }
+  return checkMemoryRateLimit(key);
+}
+
+function buildGooglePayload(lead, request, sharedSecret, requestId) {
   const safetyNote = lead.safety_note || (lead.sensitive_flag
     ? 'Sensitive terms detected. Review before replying.'
     : 'No sensitive files requested in chat.');
 
   return {
     shared_secret: sharedSecret,
+    request_id: requestId,
     name: lead.name,
     email: lead.email,
     lane: lead.lane,
@@ -205,12 +266,20 @@ function buildGooglePayload(lead, request, sharedSecret) {
   };
 }
 
-async function deliverToGoogle(endpoint, payload) {
-  const response = await fetch(endpoint, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify(payload),
-  });
+async function deliverToGoogle(endpoint, payload, timeoutMs) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  let response;
+  try {
+    response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload),
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timeout);
+  }
   let result;
   try {
     result = await response.json();
@@ -242,29 +311,55 @@ async function verifyTurnstile(secret, token, remoteIp) {
   return response.json();
 }
 
+function turnstileResultAllowed(result, env) {
+  if (!result || result.success !== true || result.action !== 'jbot_lead') return false;
+  const allowedHostnames = configuredList(env.TURNSTILE_ALLOWED_HOSTNAMES, DEFAULT_TURNSTILE_HOSTNAMES);
+  return !result.hostname || allowedHostnames.includes(result.hostname);
+}
+
+function deliveryTimeout(env) {
+  const configured = Number(env.JBOT_DELIVERY_TIMEOUT_MS || DELIVERY_TIMEOUT_MS);
+  if (!Number.isFinite(configured)) return DELIVERY_TIMEOUT_MS;
+  return Math.max(1_000, Math.min(configured, 15_000));
+}
+
 export async function onRequestOptions(context) {
+  if (!originAllowed(context.request, context.env)) {
+    return json({ ok: false, error: 'Origin not allowed.' }, 403, corsHeaders(context.request, context.env));
+  }
   return new Response(null, { status: 204, headers: corsHeaders(context.request, context.env) });
 }
 
 export async function onRequestPost(context) {
   const { request, env } = context;
-  const headers = corsHeaders(request, env);
+  const requestId = newRequestId();
+  context.requestId = requestId;
+  const headers = { ...corsHeaders(request, env), 'X-JBot-Request-ID': requestId };
+
+  if (!originAllowed(request, env)) {
+    return json({ ok: false, error: 'Origin not allowed.', request_id: requestId }, 403, headers);
+  }
 
   let body;
   try {
-    body = await request.json();
+    body = await readJsonBody(request);
   } catch (error) {
-    return json({ ok: false, error: 'Invalid JSON.' }, 400, headers);
+    const tooLarge = error && error.message === 'request-too-large';
+    return json({ ok: false, error: tooLarge ? 'Request is too large.' : 'Invalid JSON.', request_id: requestId }, tooLarge ? 413 : 400, headers);
   }
 
   const lead = normalizeLead(body || {});
   const validation = validateLead(lead);
   if (!validation.ok) {
-    return json({ ok: false, errors: validation.errors }, 400, headers);
+    return json({ ok: false, errors: validation.errors, request_id: requestId }, 400, headers);
+  }
+
+  if (!await checkRateLimit(context, rateLimitKey(request, lead))) {
+    return json({ ok: false, error: 'Too many submissions. Please wait and try again.', request_id: requestId }, 429, { ...headers, 'Retry-After': '60' });
   }
 
   if (!env.TURNSTILE_SECRET_KEY) {
-    return json({ ok: false, error: 'Security verification is unavailable.' }, 503, headers);
+    return json({ ok: false, error: 'Security verification is unavailable.', request_id: requestId }, 503, headers);
   }
 
   let turnstileResult;
@@ -275,43 +370,45 @@ export async function onRequestPost(context) {
       request.headers.get('CF-Connecting-IP') || '',
     );
   } catch (error) {
-    return json({ ok: false, error: 'Security verification is unavailable.' }, 503, headers);
+    return json({ ok: false, error: 'Security verification is unavailable.', request_id: requestId }, 503, headers);
   }
 
-  if (!turnstileResult.success) {
-    return json({ ok: false, error: 'Security verification failed. Please try again.' }, 403, headers);
-  }
-
-  if (!checkRateLimit(rateLimitKey(request, lead))) {
-    return json({ ok: false, error: 'Too many submissions. Please wait and try again.' }, 429, headers);
+  if (!turnstileResultAllowed(turnstileResult, env)) {
+    return json({ ok: false, error: 'Security verification failed. Please try again.', request_id: requestId }, 403, headers);
   }
 
   if (!env.JBOT_GOOGLE_ENDPOINT || !env.JBOT_GOOGLE_SECRET) {
-    return json({ ok: false, error: 'Google lead delivery is not configured.' }, 503, headers);
+    return json({ ok: false, error: 'Google lead delivery is not configured.', request_id: requestId }, 503, headers);
   }
 
   let delivery;
   try {
     delivery = await deliverToGoogle(
       env.JBOT_GOOGLE_ENDPOINT,
-      buildGooglePayload(lead, request, env.JBOT_GOOGLE_SECRET),
+      buildGooglePayload(lead, request, env.JBOT_GOOGLE_SECRET, requestId),
+      deliveryTimeout(env),
     );
   } catch (error) {
-    return json({ ok: false, error: 'Google lead delivery is unavailable.' }, 503, headers);
+    console.error(JSON.stringify({ event: 'jbot_delivery_unavailable', request_id: requestId }));
+    return json({ ok: false, error: 'Google lead delivery is unavailable.', request_id: requestId }, 503, headers);
   }
 
   const leadSaved = delivery.ok && delivery.lead_saved;
   const emailSent = delivery.ok && delivery.email_sent;
 
   if (!leadSaved && !emailSent) {
-    return json({ ok: false, error: 'Delivery failed.' }, 502, headers);
+    console.error(JSON.stringify({ event: 'jbot_delivery_failed', request_id: requestId }));
+    return json({ ok: false, error: 'Delivery failed.', request_id: requestId }, 502, headers);
   }
+
+  console.log(JSON.stringify({ event: 'jbot_delivery_complete', request_id: requestId, lead_saved: leadSaved, email_sent: emailSent }));
 
   return json({
     ok: true,
     lead_saved: leadSaved,
     email_sent: emailSent,
     warnings: validation.warnings,
+    request_id: requestId,
   }, 200, headers);
 }
 
