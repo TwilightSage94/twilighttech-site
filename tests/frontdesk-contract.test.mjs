@@ -115,6 +115,7 @@ test('the compact widget keeps keyboard focus and avoids surprise touch keyboard
   assert.match(widget, /window\.addEventListener\('resize'/);
   assert.match(widget, /pointer: coarse/);
   assert.match(widget, /aria-describedby="jbot-consent"/);
+  assert.match(widget, /aria-label="Open Twilight Tech front desk"/);
   assert.match(widget, /enterkeyhint="send"/);
 });
 
@@ -131,8 +132,8 @@ test('the widget fails into a usable direct-contact state', () => {
 test('all production pages request the current widget version', () => {
   productionPages.forEach((path) => {
     const html = readFileSync(resolve(root, path), 'utf8');
-    assert.match(html, /jbot-frontdesk-content\.js\?v=20260811-frontdesk-v3/);
-    assert.match(html, /jbot-widget\.js\?v=20260811-frontdesk-v3/);
+    assert.match(html, /jbot-frontdesk-content\.js\?v=20260811-frontdesk-v3a/);
+    assert.match(html, /jbot-widget\.js\?v=20260811-frontdesk-v3a/);
     assert.ok(
       html.indexOf('jbot-frontdesk-content.js') < html.indexOf('jbot-widget.js'),
       `content must load before widget: ${path}`,

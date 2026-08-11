@@ -2,7 +2,7 @@
   'use strict';
 
   var OPEN_KEY = 'tt_jbot_open_v1';
-  var ASSET_VERSION = '20260811-frontdesk-v3';
+  var ASSET_VERSION = '20260811-frontdesk-v3a';
   var CONTENT = window.TwilightFrontDeskContent;
 
   if (!CONTENT) return;
@@ -69,7 +69,7 @@
         '</div>' +
         '<div class="jbot-consent" id="jbot-consent">' + shell.consent + '</div>' +
       '</div>' +
-      '<button type="button" class="jbot-launcher" id="jbot-launcher" aria-controls="jbot-panel" aria-expanded="false">' +
+      '<button type="button" class="jbot-launcher" id="jbot-launcher" aria-label="Open Twilight Tech front desk" aria-controls="jbot-panel" aria-expanded="false">' +
         '<span class="jbot-launch-label"><strong>' + shell.launcherTitle + '</strong>' + shell.launcherCopy + '</span>' +
         '<span class="jbot-launch-orb">' + faceMarkup() + '</span>' +
       '</button>' +
