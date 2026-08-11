@@ -1,8 +1,18 @@
 # J-Bot Front Desk security rails
 
-J-Bot v1 is intentionally a guided intake widget, not a free-form LLM agent.
+J-Bot Front Desk is intentionally a guided intake widget, not a free-form LLM agent.
 
-## Current client-side rails
+## Deterministic runtime contract
+
+- The public widget has no model client, model endpoint, provider key, prompt, or token budget.
+- Page context selects from a fixed route table; it never asks a model where to send a visitor.
+- Visitor state advances through explicit stages: route, contact, need, timing, review, security, and completion.
+- Service explanations are approved site copy, labeled as such in the interface.
+- The final handoff contains only the reviewed intake fields, not a generated summary or hidden transcript.
+- Loading, verification, success, and failure labels are driven by real application state.
+- A future model may only be added after a deterministic route completes, behind its own explicit consent, fallback, and observability boundary. It must not own routing, validation, permissions, pricing, or submission.
+
+## Client-side rails
 
 - Allowed route list only:
   - Private AI

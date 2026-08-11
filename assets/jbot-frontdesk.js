@@ -291,13 +291,13 @@
   window.TwilightJBot.submitLead = submitLead;
 
   var LANE_PROMPTS = {
-    'private-ai': 'Private AI it is. What should I call you?',
-    'site-chat': 'A site chat build. Nice. What should I call you?',
-    'system-care': 'Tech chaos has entered the front desk. What should I call you?',
-    'guides': 'Guides and freebies. I can route you there now.',
-    'breakroom': 'BreakRoom route selected. Community doors are this way.',
-    'aptsu': 'A Place To Show Up route selected. I have the right door.',
-    'general': 'I can route that. What should I call you?'
+    'private-ai': 'Private AI selected. Here is the approved path.',
+    'site-chat': 'Website Front Desk selected. Here is what ships.',
+    'system-care': 'System Care selected. Here are the support doors.',
+    'guides': 'Guides selected. I can route you there now.',
+    'breakroom': 'BreakRoom selected. Community doors are this way.',
+    'aptsu': 'A Place To Show Up selected. I have the right door.',
+    'general': 'I can route that and prepare a clean note for James.'
   };
 
   var CAPTURE_NAME_PROMPTS = {
@@ -321,11 +321,28 @@
   };
 
   var RESOURCE_ROUTES = {
+    'private-ai': {
+      title: 'Private AI',
+      copy: 'Private document systems built around approved sources, citations, controlled access, and clear data boundaries.',
+      links: [
+        { label: 'Explore Private AI', href: 'https://twilighttech.io/ai/' },
+        { label: 'Try the document demo', href: 'https://twilighttech.io/ai/#demo' },
+        { label: 'Book the $499 audit', href: 'https://calendar.app.google/qeAHSWoSLsiL3DqW9' }
+      ]
+    },
     'site-chat': {
       title: 'Website Front Desk Build',
       copy: 'See exactly what ships, what it costs, and why this front desk stays useful without becoming an AI free-for-all.',
       links: [
         { label: 'See the $999 build', href: 'https://twilighttech.io/site-chat/' }
+      ]
+    },
+    'system-care': {
+      title: 'System Care',
+      copy: 'Practical support for the systems your team depends on, from one-time cleanup to ongoing managed IT and security.',
+      links: [
+        { label: 'See Managed IT', href: 'https://twilighttech.io/managed-it/' },
+        { label: 'Browse technical services', href: 'https://twilighttech.io/services/' }
       ]
     },
     'guides': {
@@ -363,6 +380,37 @@
     urgency: '',
     submitting: false
   };
+
+  var STAGE_PRESENTATION = {
+    idle: { status: 'Ready', step: 'Choose a route' },
+    resource: { status: 'Routed', step: 'Use an approved next step' },
+    name: { status: 'Desk note', step: 'Add your name' },
+    email: { status: 'Desk note', step: 'Add a reply email' },
+    need: { status: 'Fit check', step: 'Describe the need' },
+    urgency: { status: 'Fit check', step: 'Choose the timing' },
+    confirm: { status: 'Review', step: 'Verify and send' },
+    submitting: { status: 'Sending', step: 'Filing the desk note' },
+    done: { status: 'Complete', step: 'Choose another route' },
+    security: { status: 'Security', step: 'Complete verification' },
+    error: { status: 'Paused', step: 'Use a safe fallback' }
+  };
+
+  function announceState(stage, overrides) {
+    var presentation = STAGE_PRESENTATION[stage] || STAGE_PRESENTATION.idle;
+    var detail = overrides || {};
+    document.dispatchEvent(new CustomEvent('twilight:jbot-state', {
+      detail: {
+        stage: stage,
+        status: detail.status || presentation.status,
+        step: detail.step || presentation.step
+      }
+    }));
+  }
+
+  function setStage(stage, overrides) {
+    uiState.stage = stage;
+    announceState(stage, overrides);
+  }
   var activeChat = null;
   var baseChatMarkup = '';
   var turnstileState = {
@@ -431,6 +479,7 @@
     clearTurnstileWidget();
     turnstileState.actionButton = actionButton;
     actionButton.disabled = true;
+    announceState('security');
 
     var box = document.createElement('div');
     box.className = 'jbot-turnstile-box';
@@ -448,6 +497,7 @@
       turnstileState.token = 'local-preview-only';
       actionButton.disabled = false;
       status.textContent = 'Turnstile activates on the HTTP or live preview.';
+      announceState('confirm', { status: 'Preview', step: 'Review the desk note' });
       return;
     }
 
@@ -465,6 +515,7 @@
           turnstileState.token = token;
           actionButton.disabled = false;
           status.textContent = 'Verified by Cloudflare. Ready to send.';
+          announceState('confirm', { status: 'Verified', step: 'Send the desk note' });
           trackEvent('J-Bot Security Verified', { lane: uiState.lane || 'general' });
           persistConversation(activeChat);
         },
@@ -472,18 +523,21 @@
           turnstileState.token = '';
           actionButton.disabled = true;
           status.textContent = 'Security check expired. Verifying again...';
+          announceState('security', { status: 'Expired', step: 'Verify again' });
           turnstile.reset(turnstileState.widgetId);
         },
         'error-callback': function () {
           turnstileState.token = '';
           actionButton.disabled = true;
           status.textContent = 'Security check unavailable. Please try again.';
+          announceState('error', { status: 'Security paused', step: 'Try again or email' });
           trackEvent('J-Bot Security Failed', { lane: uiState.lane || 'general' });
         }
       });
     }).catch(function () {
       actionButton.disabled = true;
       status.textContent = 'Security check unavailable. Email Twilight Tech instead.';
+      announceState('error', { status: 'Security paused', step: 'Use the email fallback' });
       trackEvent('J-Bot Security Failed', { lane: uiState.lane || 'general' });
     });
   }
@@ -558,6 +612,15 @@
     return card;
   }
 
+  function appendReceipt(card, message) {
+    var receipt = document.createElement('div');
+    receipt.className = 'jbot-receipt';
+    receipt.textContent = message;
+    card.appendChild(receipt);
+    persistConversation(activeChat);
+    return receipt;
+  }
+
   function addActions(card, actions) {
     var row = document.createElement('div');
     row.className = 'chat-actions';
@@ -595,7 +658,7 @@
 
   function resetState() {
     clearTurnstileWidget();
-    uiState.stage = 'idle';
+    setStage('idle');
     uiState.lane = '';
     uiState.name = '';
     uiState.email = '';
@@ -607,13 +670,14 @@
   function showResources(chat, lane) {
     var route = RESOURCE_ROUTES[lane];
     var card = appendCard(chat, 'link-card', route.title, route.copy);
+    appendReceipt(card, 'Approved site copy - no generated answer');
     var actions = route.links.slice();
     actions.push({ label: 'Leave James a note', action: 'capture', value: lane, className: 'alt' });
     addActions(card, actions);
   }
 
   function beginCapture(chat, input, send, lane) {
-    uiState.stage = 'name';
+    setStage('name');
     uiState.lane = lane || uiState.lane || 'general';
     uiState.name = '';
     uiState.email = '';
@@ -633,6 +697,7 @@
     if (RESOURCE_ROUTES[lane]) {
       appendMessage(chat, 'bot', LANE_PROMPTS[lane]);
       showResources(chat, lane);
+      setStage('resource');
       setInput(input, send, 'You can also tell J-Bot what you need...', false);
       return;
     }
@@ -641,7 +706,7 @@
   }
 
   function askUrgency(chat, input, send) {
-    uiState.stage = 'urgency';
+    setStage('urgency');
     var bubble = appendMessage(chat, 'bot', 'Last little routing flag: what is the timing?');
     addActions(bubble, [
       { label: 'Just exploring', action: 'urgency', value: 'Exploring' },
@@ -652,10 +717,11 @@
   }
 
   function showConfirmation(chat, input, send) {
-    uiState.stage = 'confirm';
+    setStage('confirm');
     var laneName = ALLOWED_LANES[uiState.lane] || ALLOWED_LANES.general;
     var summary = 'Lane: ' + laneName + ' | Name: ' + uiState.name + ' | Email: ' + uiState.email + ' | Need: ' + uiState.need + ' | Timing: ' + uiState.urgency;
     var card = appendCard(chat, 'lead-card', 'Ready for the desk', summary);
+    appendReceipt(card, 'Built from the answers above - review before sending');
     var actionRow = addActions(card, [
       { label: 'Send desk note', action: 'submit', className: 'primary' },
       { label: 'Start over', action: 'restart' }
@@ -683,7 +749,7 @@
 
   function finishLocalPreview(chat, input, send) {
     appendCard(chat, 'lead-card', 'Preview complete', 'The guided flow works. On twilighttech.io, this final click sends the note to Google Leads and Gmail. Nothing was sent from this local preview.');
-    uiState.stage = 'done';
+    setStage('done', { status: 'Preview complete', step: 'Nothing was sent' });
     uiState.submitting = false;
     setInput(input, send, 'Preview complete - choose another lane above...', true);
     persistConversation(chat);
@@ -696,7 +762,7 @@
       return;
     }
     uiState.submitting = true;
-    uiState.stage = 'submitting';
+    setStage('submitting');
     trackEvent('J-Bot Note Attempted', { lane: uiState.lane || 'general', page: window.location.pathname });
     setInput(input, send, 'Filing the desk note...', true);
     appendMessage(chat, 'bot', 'One second. I am filing the note and ringing James\' email bell.');
@@ -718,7 +784,7 @@
       if (result.warnings && result.warnings.length) {
         appendMessage(chat, 'bot', result.warnings.join(' '));
       }
-      uiState.stage = 'done';
+      setStage('done', { status: 'Delivered', step: 'James has the desk note' });
       uiState.submitting = false;
       trackEvent('J-Bot Note Filed', { lane: uiState.lane || 'general', lead_saved: result.lead_saved ? 'yes' : 'no', email_sent: result.email_sent ? 'yes' : 'no' });
       setInput(input, send, 'Desk note sent - choose another lane above...', true);
@@ -732,6 +798,7 @@
       ]);
       prepareTurnstile(card, retryRow.querySelector('[data-jbot-action="retry"]'));
       uiState.stage = 'confirm';
+      announceState('error');
       uiState.submitting = false;
       trackEvent('J-Bot Note Failed', { lane: uiState.lane || 'general', page: window.location.pathname });
       setInput(input, send, 'Use the options above...', true);
@@ -765,7 +832,7 @@
         return;
       }
       appendMessage(chat, 'user', uiState.name);
-      uiState.stage = 'email';
+      setStage('email');
       appendMessage(chat, 'bot', 'Good to meet you, ' + uiState.name + '. What email should James use to reply?');
       setInput(input, send, 'you@example.com', false);
       return;
@@ -782,7 +849,7 @@
       if (uiState.need) {
         askUrgency(chat, input, send);
       } else {
-        uiState.stage = 'need';
+        setStage('need');
         appendMessage(chat, 'bot', (NEED_PROMPTS[uiState.lane] || NEED_PROMPTS.general) + ' Keep it high-level - no client files, passwords, medical details, or private records.');
         setInput(input, send, 'A short, high-level description...', false);
       }
@@ -830,18 +897,23 @@
     if (restored) {
       if (uiState.stage === 'submitting') {
         uiState.stage = 'confirm';
+        announceState('error', { status: 'Paused', step: 'Review and send again' });
         uiState.submitting = false;
         var recovery = appendCard(chat, 'link-card', 'Desk note paused', 'The page changed while I was filing. Nothing is lost - use the button below to send it again.');
         var recoveryRow = addActions(recovery, [{ label: 'Send desk note', action: 'retry', className: 'primary' }]);
         prepareTurnstile(recovery, recoveryRow.querySelector('[data-jbot-action="retry"]'));
         setInput(input, send, 'Use the retry button above...', true);
       } else if (uiState.stage === 'name') {
+        announceState('name');
         setInput(input, send, 'Your name...', false);
       } else if (uiState.stage === 'email') {
+        announceState('email');
         setInput(input, send, 'you@example.com', false);
       } else if (uiState.stage === 'need') {
+        announceState('need');
         setInput(input, send, 'A short, high-level description...', false);
       } else if (uiState.stage === 'urgency') {
+        announceState('urgency');
         setInput(input, send, 'Or type your timing...', false);
       } else if (uiState.stage === 'confirm') {
         var restoredSubmitButtons = chat.querySelectorAll('[data-jbot-action="submit"], [data-jbot-action="retry"]');
@@ -851,10 +923,14 @@
         }
         setInput(input, send, 'Confirm above or start over...', true);
       } else if (uiState.stage === 'done') {
+        announceState('done');
         setInput(input, send, 'Desk note sent - choose another lane above...', true);
+      } else {
+        announceState('idle');
       }
       scrollChat(chat);
     } else {
+      announceState('idle');
       persistConversation(chat);
     }
 
@@ -898,6 +974,7 @@
           uiState.lane = widget.dataset.jbotDefaultLane;
         }
         setInput(input, send, 'Pick a lane or tell J-Bot what you need...', false);
+        announceState('idle');
         scrollChat(chat);
       }
     });
