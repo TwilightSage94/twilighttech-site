@@ -2,8 +2,8 @@
   var JBOT_PROXY_ENDPOINT = '/api/jbot-leads';
   var RATE_KEY = 'tt_jbot_last_submit_at';
   var RATE_WINDOW_MS = 45000;
-  var CHAT_KEY = 'tt_jbot_chat_v1';
-  var STATE_KEY = 'tt_jbot_state_v1';
+  var CHAT_KEY = 'tt_jbot_chat_frontdesk_v2';
+  var STATE_KEY = 'tt_jbot_state_frontdesk_v2';
   var TURNSTILE_TEST_SITEKEY = '1x00000000000000000000AA';
 
   var ALLOWED_LANES = {
@@ -291,7 +291,7 @@
   window.TwilightJBot.submitLead = submitLead;
 
   var LANE_PROMPTS = {
-    'private-ai': 'Private AI selected. Here is the approved path.',
+    'private-ai': 'Private AI selected. Here is what Twilight Tech offers.',
     'site-chat': 'Website Front Desk selected. Here is what ships.',
     'system-care': 'System Care selected. Here are the support doors.',
     'guides': 'Guides selected. I can route you there now.',
@@ -332,7 +332,7 @@
     },
     'site-chat': {
       title: 'Website Front Desk Build',
-      copy: 'See exactly what ships, what it costs, and why this front desk stays useful without becoming an AI free-for-all.',
+      copy: 'See exactly what ships, what it costs, and how the front desk keeps every visitor on a clear next step.',
       links: [
         { label: 'See the $999 build', href: 'https://twilighttech.io/site-chat/' }
       ]
@@ -383,7 +383,7 @@
 
   var STAGE_PRESENTATION = {
     idle: { status: 'Ready', step: 'Choose a route' },
-    resource: { status: 'Routed', step: 'Use an approved next step' },
+    resource: { status: 'Ready', step: 'Choose a next step' },
     name: { status: 'Desk note', step: 'Add your name' },
     email: { status: 'Desk note', step: 'Add a reply email' },
     need: { status: 'Fit check', step: 'Describe the need' },
@@ -670,7 +670,6 @@
   function showResources(chat, lane) {
     var route = RESOURCE_ROUTES[lane];
     var card = appendCard(chat, 'link-card', route.title, route.copy);
-    appendReceipt(card, 'Approved site copy - no generated answer');
     var actions = route.links.slice();
     actions.push({ label: 'Leave James a note', action: 'capture', value: lane, className: 'alt' });
     addActions(card, actions);

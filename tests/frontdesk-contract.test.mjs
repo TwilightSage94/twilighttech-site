@@ -51,7 +51,7 @@ test('the only visitor submission path is the bounded lead proxy', () => {
   assert.match(leadProxy, /checkRateLimit/);
 });
 
-test('every public visitor lane has an approved deterministic route', () => {
+test('every public visitor lane has a deterministic route', () => {
   [
     'private-ai',
     'site-chat',
@@ -62,19 +62,22 @@ test('every public visitor lane has an approved deterministic route', () => {
   ].forEach((lane) => {
     assert.match(desk, new RegExp(`['"]${lane}['"]\\s*:\\s*\\{`));
   });
-  assert.match(desk, /Approved site copy - no generated answer/);
+  assert.match(desk, /RESOURCE_ROUTES/);
 });
 
 test('the widget exposes truthful deterministic stages', () => {
-  assert.match(widget, /Guided front desk &middot; no open-ended AI/);
+  assert.match(widget, /Twilight Tech front desk/);
   assert.match(widget, /twilight:jbot-state/);
   assert.match(desk, /twilight:jbot-state/);
-  assert.match(desk, /Code-owned path|no generated answer/);
+  assert.match(desk, /tt_jbot_chat_frontdesk_v2/);
+  assert.match(desk, /tt_jbot_state_frontdesk_v2/);
+  assert.match(desk, /Built from the answers above - review before sending/);
+  assert.doesNotMatch(runtime, /no open-ended AI|Code-owned path|no model response generated|Approved site copy/);
 });
 
 test('all production pages request the current widget version', () => {
   productionPages.forEach((path) => {
     const html = readFileSync(resolve(root, path), 'utf8');
-    assert.match(html, /jbot-widget\.js\?v=20260810-deterministic/);
+    assert.match(html, /jbot-widget\.js\?v=20260810-frontdesk-v2-live/);
   });
 });

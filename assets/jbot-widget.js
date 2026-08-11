@@ -2,7 +2,7 @@
   'use strict';
 
   var OPEN_KEY = 'tt_jbot_open_v1';
-  var ASSET_VERSION = '20260810-deterministic';
+  var ASSET_VERSION = '20260810-frontdesk-v2-live';
 
   function trackWidgetEvent(name, props) {
     if (typeof window.plausible !== 'function') return;
@@ -34,7 +34,7 @@
         lane: 'private-ai',
         label: 'Private AI',
         step: 'Explore private systems',
-        message: 'You are in the Private AI wing. I can show you the approved offers, open the working demo, or help you leave James a high-level fit note.'
+        message: 'You are in the Private AI wing. I can show you the services, open the working demo, or help you leave James a high-level fit note.'
       };
     }
     if (path.indexOf('/services') === 0 || path.indexOf('/managed-it') === 0) {
@@ -95,18 +95,17 @@
       '<div class="jbot-panel" id="jbot-panel" role="dialog" aria-modal="false" aria-labelledby="jbot-title" aria-hidden="true">' +
         '<header class="jbot-head">' +
           '<span class="jbot-avatar">' + faceMarkup() + '</span>' +
-          '<span class="jbot-head-copy"><span class="jbot-name" id="jbot-title">J-Bot</span><span class="jbot-sub">Guided front desk &middot; no open-ended AI</span></span>' +
+          '<span class="jbot-head-copy"><span class="jbot-name" id="jbot-title">J-Bot</span><span class="jbot-sub">Twilight Tech front desk</span></span>' +
           '<span class="jbot-live"><span class="jbot-status" aria-hidden="true"></span><span id="jbot-state-text">Ready</span></span>' +
           '<button type="button" class="jbot-close" id="jbot-close" aria-label="Close J-Bot" title="Close chat">&times;</button>' +
         '</header>' +
         '<div class="jbot-context"><span>' + context.label + '</span><strong id="jbot-step">' + context.step + '</strong></div>' +
         '<div class="jbot-chat" id="jbot-chat" aria-live="polite">' +
-          '<div class="jbot-overline">Approved site routes</div>' +
+          '<div class="jbot-overline">Start here</div>' +
           '<div class="bubble bot"><span class="msg-jbot" aria-hidden="true"><span class="tiny-ant"></span><span class="tiny-eye left"></span><span class="tiny-eye right"></span></span>' + context.message + '</div>' +
-          '<div class="jbot-front-card"><strong>What should we do next?</strong><span>Choose a route. Every answer, link, question, and handoff is approved in advance.</span></div>' +
+          '<div class="jbot-front-card"><strong>What should we do next?</strong><span>Choose what you need and I\'ll take you to the right place.</span></div>' +
           '<div class="jbot-safe">Please do not paste private client files, child or custody details, health information, passwords, or urgent crisis details here.</div>' +
           '<div class="jbot-quick-grid">' + quickMarkup(context.lane) + '</div>' +
-          '<div class="jbot-mini-status"><span>Code-owned path</span> &middot; no model response generated</div>' +
         '</div>' +
         '<div class="jbot-input-row">' +
           '<label class="jbot-hp" for="jbot-company">Leave this field blank</label>' +
