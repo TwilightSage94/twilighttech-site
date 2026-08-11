@@ -37,16 +37,14 @@ J-Bot Front Desk is intentionally a guided intake widget, not a free-form LLM ag
 
 `twilighttech.io` widget -> `/api/jbot-leads` -> private lead service + email alert
 
-The browser helper now posts to `/api/jbot-leads` instead of directly exposing the lead endpoint and Formspree endpoint.
+The browser helper posts to `/api/jbot-leads` instead of exposing the Google delivery endpoint or shared secret.
 
 ### Expected production environment variables
 
-- `JBOT_LEADS_ENDPOINT`
-  - Private lead API endpoint.
-  - Falls back to the current testmachine endpoint if unset.
-- `JBOT_EMAIL_ENDPOINT`
-  - Email delivery/Formspree endpoint.
-  - Falls back to the current Formspree form if unset.
+- `JBOT_GOOGLE_ENDPOINT`
+  - Private Google Apps Script delivery endpoint.
+- `JBOT_GOOGLE_SECRET`
+  - Shared delivery secret; never returned to the browser.
 - `JBOT_ALLOWED_ORIGINS`
   - Comma-separated origin allowlist.
   - Example: `https://twilighttech.io,https://www.twilighttech.io`
@@ -54,6 +52,10 @@ The browser helper now posts to `/api/jbot-leads` instead of directly exposing t
   - Public Turnstile sitekey returned to the widget through `/api/jbot-config`.
 - `TURNSTILE_SECRET_KEY`
   - Private Turnstile secret used only by the Cloudflare function for Siteverify.
+- `TURNSTILE_ALLOWED_HOSTNAMES`
+  - Comma-separated Turnstile hostname allowlist.
+- `JBOT_RATE_LIMIT_KV`
+  - Optional Pages KV binding for hashed cross-isolate rate limiting.
 
 ## Must also be enforced server-side/private service
 
@@ -70,6 +72,8 @@ The public proxy now mirrors the browser-side validation. The private Lead API s
 - Prefer storing a short summary over full chat transcripts.
 - Keep Turnstile hostname restrictions limited to the production Twilight Tech domains.
 - Monitor Turnstile validation failures and rotate the secret if it is ever exposed.
+
+See `docs/jbot-frontdesk-runbook.md` for the complete production health, analytics, deployment, and incident checklist.
 
 ## Remaining production note
 

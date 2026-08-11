@@ -11,3 +11,8 @@ The production website for [Twilight Technology](https://twilighttech.io), prese
 - **Guided intake** — Routes visitors through approved, page-aware answers and structured next steps.
 - **Secure lead capture** — Uses edge validation and server-side handoff into the business records and notification workflow.
 - **Human handoff** — Keeps customer communication bounded, predictable, and connected to Twilight Technology's real operations.
+
+## Front Desk operations
+
+- Front Desk operating guide: `docs/jbot-frontdesk-runbook.md`
+- Front Desk security contract: `docs/jbot-security-rails.md`

@@ -22,6 +22,9 @@
 .jbot-widget button,
 .jbot-widget input { font: inherit; }
 
+html.jbot-mobile-open,
+html.jbot-mobile-open body { overflow: hidden; overscroll-behavior: none; }
+
 .jbot-widget.is-open::before {
   content: "";
   position: fixed;
@@ -645,7 +648,7 @@
   background: #081219;
 }
 
-.jbot-input-row input[type="text"] {
+.jbot-input-row #jbot-input {
   width: 100%;
   min-width: 0;
   min-height: 43px;
@@ -658,8 +661,8 @@
   font-size: .83rem;
 }
 
-.jbot-input-row input[type="text"]::placeholder { color: #637984; }
-.jbot-input-row input[type="text"]:focus { border-color: #3a98a7; box-shadow: 0 0 0 3px rgba(50, 209, 223, .065); }
+.jbot-input-row #jbot-input::placeholder { color: #637984; }
+.jbot-input-row #jbot-input:focus { border-color: #3a98a7; box-shadow: 0 0 0 3px rgba(50, 209, 223, .065); }
 .jbot-input-row input:disabled { opacity: .5; cursor: not-allowed; }
 
 .jbot-widget .send {
