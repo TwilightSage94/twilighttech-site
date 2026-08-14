@@ -11,6 +11,7 @@ const productionPages = [
   'about/index.html',
   'ai/index.html',
   'ai/operations/index.html',
+  'ai/yours/index.html',
   'cheat-sheet/index.html',
   'guides/index.html',
   'homelab-starter/index.html',
@@ -91,6 +92,13 @@ test('every public visitor lane has a deterministic route', () => {
   laneSlugs.forEach((lane) => assert.ok(content.resources[lane], `missing resource route: ${lane}`));
   assert.match(desk, /CONTENT\.resources/);
   assert.doesNotMatch(desk, /\$999|discord\.gg|calendar\.app\.google/);
+});
+
+test('the personal AI idea page uses the existing bounded lead lane', () => {
+  const lane = content.lanes.find((item) => item.slug === 'personal-ai');
+  assert.equal(lane.leadLabel, 'Personal AI Assistant');
+  assert.equal(Boolean(lane.icon), false, 'the campaign lane should not alter the public Front Desk menu');
+  assert.match(leadProxy, /'personal-ai': 'Personal AI Assistant'/);
 });
 
 test('the widget exposes truthful deterministic stages', () => {

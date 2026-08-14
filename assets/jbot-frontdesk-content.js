@@ -28,6 +28,7 @@
       { slug: 'guides', icon: 'PDF', label: 'Guides', leadLabel: 'Guides / Freebies', detail: 'Learning and free resources', className: 'guides' },
       { slug: 'breakroom', icon: 'BR', label: 'BreakRoom', leadLabel: 'BreakRoom', detail: 'Community', className: 'breakroom' },
       { slug: 'aptsu', icon: 'UP', label: 'A Place To Show Up', leadLabel: 'A Place To Show Up', detail: 'Community platform', className: 'aptsu' },
+      { slug: 'personal-ai', label: 'Personal AI Assistant', leadLabel: 'Personal AI Assistant' },
       { slug: 'general', label: 'General', leadLabel: 'General' }
     ],
     pageContexts: [
