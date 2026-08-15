@@ -73,7 +73,7 @@ test('the edge proxy is bounded, origin-aware, and observable without storing ch
   );
   assert.match(healthFunction, /google_delivery/);
   assert.match(healthFunction, /isolate-fallback/);
-  assert.deepEqual(functionRoutes.include, ['/api/*']);
+  assert.deepEqual(functionRoutes.include, ['/api/*', '/labs', '/labs/']);
 
   const analyticsCalls = desk.split(/\r?\n/).filter((line) => /trackEvent\(/.test(line)).join('\n');
   assert.doesNotMatch(analyticsCalls, /uiState\.(name|email|need)|input\.value/);
