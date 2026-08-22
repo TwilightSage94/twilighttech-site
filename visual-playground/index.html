@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Visual Playground | Twilight Technology</title>
+<meta name="description" content="An experimental Twilight Technology homepage showing how HTML, CSS, JavaScript, and SVG change the same page.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/logos/tt-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/visual-playground.css">
+</head>
+<body class="visual-playground" data-visual-stage="enter">
+<canvas id="global-particles" aria-hidden="true"></canvas>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img class="nav-mark" src="/assets/logos/tt-mark.svg" alt="">TWILIGHT<span class="sl">//</span>TECH</a>
+    <div class="nav-links">
+      <a href="#language-lab">Language Lab</a>
+      <a href="#paths">Three Stages</a>
+      <a href="#working-now">Working Now</a>
+      <a href="/" class="nav-cta">Return to Production</a>
+    </div>
+    <button class="mob-tog" aria-label="Menu" aria-expanded="false">&#9776;</button>
+  </div>
+</nav>
+
+<main class="shell">
+  <section id="hero" class="visual-hero" aria-labelledby="visual-title">
+    <div class="visual-hero-glow" aria-hidden="true"></div>
+    <div class="container visual-hero-grid">
+      <div class="visual-hero-copy">
+        <div class="hero-badge"><span class="badge-blink"></span> Experiment branch &middot; production untouched</div>
+        <p class="visual-kicker">// One company &middot; three operating modes</p>
+        <h1 id="visual-title">Technology should feel like a world you can <span>enter.</span></h1>
+        <p class="visual-lede">This page is a controlled visual experiment. The structure is HTML, the atmosphere is CSS, the reactions are JavaScript, and the stage map is SVG.</p>
+        <div class="hero-btns visual-actions">
+          <button class="btn btn-solid" type="button" data-stage-jump>Cycle the Stages</button>
+          <button class="btn visual-arise-trigger" type="button" data-open-system>Arise // System View</button>
+        </div>
+        <div class="visual-telemetry" aria-label="Experiment status">
+          <span><b>Branch</b> experiment/visual-playground</span>
+          <span><b>Stack</b> HTML + CSS + JS + SVG</span>
+          <span><b>Build step</b> none</span>
+        </div>
+      </div>
+
+      <section class="stage-console" aria-labelledby="console-title" data-stage-console>
+        <header class="stage-console-head">
+          <div>
+            <p class="console-label">// Twilight pathway console</p>
+            <h2 id="console-title">Choose a stage</h2>
+          </div>
+          <p class="console-readout">Active: <strong data-stage-label>ENTER</strong></p>
+        </header>
+
+        <div class="stage-tabs" role="tablist" aria-label="Twilight Technology stages">
+          <button type="button" role="tab" aria-selected="true" class="stage-tab is-active" data-stage="enter">
+            <span>01</span> Enter
+          </button>
+          <button type="button" role="tab" aria-selected="false" class="stage-tab" data-stage="sustain">
+            <span>02</span> Sustain
+          </button>
+          <button type="button" role="tab" aria-selected="false" class="stage-tab" data-stage="further">
+            <span>03</span> Further
+          </button>
+        </div>
+
+        <div class="stage-console-body">
+          <div class="stage-copy" aria-live="polite">
+            <p class="stage-eyebrow" data-stage-eyebrow>Stage 01 // Access</p>
+            <h3 data-stage-title>Enter the system.</h3>
+            <p data-stage-copy>Learn by operating smaller, realistic systems. Build confidence through guided work, visible consequences, and proof you can explain.</p>
+            <a class="stage-cta" data-stage-link href="/guides/">Explore the guides <span>&rarr;</span></a>
+          </div>
+
+          <figure class="stage-map">
+            <img src="/assets/visual-path.svg" alt="Animated path connecting Enter, Sustain, and Further">
+            <figcaption>SVG stays sharp at every screen size and carries animation without a canvas or image export.</figcaption>
+          </figure>
+        </div>
+
+        <footer class="stage-console-foot">
+          <span data-stage-status>Learning route online</span>
+          <span>Shift + A opens System View</span>
+        </footer>
+      </section>
+    </div>
+  </section>
+
+  <section id="language-lab" class="language-lab">
+    <div class="container">
+      <div class="sh center reveal">
+        <div class="sh-label">// What each language changed</div>
+        <h2 class="sh-title">Same page. <span class="ac">Different powers.</span></h2>
+        <div class="sh-line"></div>
+        <p class="sh-sub">Each card points to a visible layer on this page. Nothing here requires a framework or cloud runtime.</p>
+      </div>
+
+      <div class="language-grid">
+        <article class="language-card reveal" data-language="html">
+          <p class="language-code">&lt;/&gt;</p>
+          <p class="language-label">HTML</p>
+          <h3>Structure</h3>
+          <p>Creates the navigation, hero, stage console, buttons, sections, headings, links, and accessible reading order.</p>
+          <span class="language-proof">Look for: the actual content and controls</span>
+        </article>
+        <article class="language-card reveal" data-language="css">
+          <p class="language-code">{ }</p>
+          <p class="language-label">CSS</p>
+          <h3>Atmosphere</h3>
+          <p>Creates the glass panels, stage colors, glow, layout, motion, responsive behavior, and the visual feeling of a living system.</p>
+          <span class="language-proof">Look for: everything that feels designed</span>
+        </article>
+        <article class="language-card reveal" data-language="javascript">
+          <p class="language-code">=&gt;</p>
+          <p class="language-label">JavaScript</p>
+          <h3>Reaction</h3>
+          <p>Changes the active stage, updates copy and links, opens System View, manages keyboard controls, and adds pointer-responsive depth.</p>
+          <span class="language-proof">Try: stage buttons and “Arise”</span>
+        </article>
+        <article class="language-card reveal" data-language="svg">
+          <p class="language-code">&lt;svg&gt;</p>
+          <p class="language-label">SVG</p>
+          <h3>Graphic system</h3>
+          <p>Draws the animated three-stage route as scalable vector paths, labels, nodes, and a moving signal pulse.</p>
+          <span class="language-proof">Look for: the pathway map in the console</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="paths" class="visual-paths">
+    <div class="container">
+      <div class="sh reveal">
+        <div class="sh-label">// One company &middot; three stages</div>
+        <h2 class="sh-title">The site changes with <span class="ac">the visitor's position.</span></h2>
+        <div class="sh-line"></div>
+        <p class="sh-sub">Hover, focus, or click a stage. JavaScript changes the global state; CSS translates that state into color, depth, and emphasis.</p>
+      </div>
+
+      <div class="visual-path-grid">
+        <article class="visual-path-card enter reveal" data-stage-card="enter" tabindex="0">
+          <p class="path-number">01</p>
+          <p class="path-kicker">Access</p>
+          <h3>Enter Technology</h3>
+          <p>Guides, hands-on labs, simulated support work, community, and the first repeatable systems that turn concepts into experience.</p>
+          <a href="/guides/">Open Enter <span>&rarr;</span></a>
+        </article>
+        <article class="visual-path-card sustain reveal" data-stage-card="sustain" tabindex="0">
+          <p class="path-number">02</p>
+          <p class="path-kicker">Stability</p>
+          <h3>Sustain Technology</h3>
+          <p>Managed operations, documentation, recovery, security, support, and the daily discipline that keeps real systems useful.</p>
+          <a href="/managed-it/">Open Sustain <span>&rarr;</span></a>
+        </article>
+        <article class="visual-path-card further reveal" data-stage-card="further" tabindex="0">
+          <p class="path-number">03</p>
+          <p class="path-kicker">Possibility</p>
+          <h3>Further Technology</h3>
+          <p>Private AI, automation, Twilight Labs, Sentinel, and the systems that extend what people and organizations can build next.</p>
+          <a href="/ai/">Open Further <span>&rarr;</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="working-now" class="working-now">
+    <div class="container">
+      <div class="sh center reveal">
+        <div class="sh-label">// Working now</div>
+        <h2 class="sh-title">Cinematic does not have to mean <span class="ac">confusing.</span></h2>
+        <div class="sh-line"></div>
+        <p class="sh-sub">The visual layer can become dramatic while the actions remain obvious, the copy remains readable, and production behavior remains untouched.</p>
+      </div>
+
+      <div class="working-grid">
+        <article class="working-card reveal">
+          <p class="working-tag">Sustain</p>
+          <h3>Website Front Desk</h3>
+          <p>A guided visitor experience with deterministic answers, a clear lead handoff, and visible boundaries.</p>
+          <a class="btn" href="/site-chat/">Open Front Desk</a>
+        </article>
+        <article class="working-card reveal">
+          <p class="working-tag further-tag">Further</p>
+          <h3>Private AI</h3>
+          <p>Local-first systems that answer from approved sources and keep control close to the people operating them.</p>
+          <a class="btn" href="/ai/">Explore Private AI</a>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="system-overlay" data-system-overlay hidden>
+  <div class="system-backdrop" data-close-system></div>
+  <section class="system-panel" role="dialog" aria-modal="true" aria-labelledby="system-title">
+    <header class="system-panel-head">
+      <div>
+        <p>// Twilight Tech system</p>
+        <h2 id="system-title">Visual Playground</h2>
+      </div>
+      <button type="button" class="system-close" data-close-system aria-label="Close System View">&times;</button>
+    </header>
+    <div class="system-panel-grid">
+      <article>
+        <p class="system-label">Current campaign</p>
+        <strong>Make the site feel alive</strong>
+      </article>
+      <article>
+        <p class="system-label">Active stage</p>
+        <strong data-system-stage>Enter</strong>
+      </article>
+      <article>
+        <p class="system-label">Unlocked powers</p>
+        <strong>Structure &middot; Atmosphere &middot; Reaction &middot; Vector Art</strong>
+      </article>
+      <article>
+        <p class="system-label">Production risk</p>
+        <strong>None &middot; isolated branch</strong>
+      </article>
+    </div>
+    <div class="system-quest">
+      <p class="system-label">Next quest</p>
+      <h3>Choose which visual mechanic deserves a second pass.</h3>
+      <p>This is presentation only. It does not report live Twilight runtime state or grant any capability.</p>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>&copy; 2026 <span class="nc">Twilight Technology LLC</span> &middot; Visual Playground</div>
+    <div class="footer-status">Experiment branch online</div>
+  </div>
+</footer>
+
+<script src="/assets/site.js"></script>
+<script src="/assets/visual-playground.js" defer></script>
+</body>
+</html>
