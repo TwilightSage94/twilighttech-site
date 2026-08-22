@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Three-Gate Gateway | Twilight Technology Visual Playground</title>
+<meta name="description" content="A focused Twilight Technology homepage experiment where Enter, Sustain, and Further become the three interactive front doors.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/logos/tt-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<link rel="stylesheet" href="/assets/visual-gateway.css">
+</head>
+<body class="visual-gateway" data-gateway-stage="idle">
+<canvas id="gateway-stars" aria-hidden="true"></canvas>
+
+<nav class="gateway-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img class="nav-mark" src="/assets/logos/tt-mark.svg" alt="">
+      TWILIGHT<span class="sl">//</span>TECH
+    </a>
+    <div class="gateway-nav-actions">
+      <a href="/visual-playground/">First Pass</a>
+      <a href="/" class="gateway-production-link">Production</a>
+    </div>
+  </div>
+</nav>
+
+<main class="gateway-shell">
+  <section class="gateway-hero" aria-labelledby="gateway-title">
+    <h1 id="gateway-title" class="sr-only">Choose how you want to move through Twilight Technology</h1>
+
+    <div class="gateway-frame" aria-hidden="true"></div>
+
+    <div class="gateway-stack" role="group" aria-label="Choose a Twilight Technology path">
+      <button class="gateway-line enter" type="button" data-gateway-choice="enter" aria-expanded="false">
+        <span class="gate-index">01</span>
+        <span class="gate-verb">Enter</span>
+        <span class="gate-noun">Technology<span class="gate-period">.</span></span>
+        <span class="gate-whisper">Learn · Practice · Get in</span>
+      </button>
+
+      <button class="gateway-line sustain" type="button" data-gateway-choice="sustain" aria-expanded="false">
+        <span class="gate-index">02</span>
+        <span class="gate-verb">Sustain</span>
+        <span class="gate-noun">Technology<span class="gate-period">.</span></span>
+        <span class="gate-whisper">Operate · Protect · Recover</span>
+      </button>
+
+      <button class="gateway-line further" type="button" data-gateway-choice="further" aria-expanded="false">
+        <span class="gate-index">03</span>
+        <span class="gate-verb">Further</span>
+        <span class="gate-noun">Technology<span class="gate-period">.</span></span>
+        <span class="gate-whisper">Build · Extend · Create next</span>
+      </button>
+    </div>
+
+    <p class="gateway-instruction" data-gateway-instruction>
+      Hover to preview · click to choose · arrows move between gates
+    </p>
+
+    <section class="gateway-route-drawer" data-route-drawer hidden aria-live="polite">
+      <div class="route-copy">
+        <p class="route-eyebrow" data-route-eyebrow>Stage 01 // Access</p>
+        <h2 data-route-title>Enter Technology</h2>
+        <p data-route-copy>Learn by operating realistic systems, then turn that work into confidence and proof.</p>
+      </div>
+      <nav class="route-links" aria-label="Selected stage destinations" data-route-links></nav>
+      <button class="route-close" type="button" data-route-close aria-label="Close selected stage">&times;</button>
+    </section>
+
+    <div class="gateway-corner gateway-corner-left" aria-hidden="true">
+      <span>Visual experiment</span>
+      <b>Production untouched</b>
+    </div>
+    <div class="gateway-corner gateway-corner-right" aria-hidden="true">
+      <span>Current mode</span>
+      <b data-gateway-mode>Idle</b>
+    </div>
+
+    <noscript>
+      <div class="gateway-noscript">
+        <a href="/guides/">Enter</a>
+        <a href="/managed-it/">Sustain</a>
+        <a href="/ai/">Further</a>
+      </div>
+    </noscript>
+  </section>
+</main>
+
+<script src="/assets/visual-gateway.js" defer></script>
+</body>
+</html>
