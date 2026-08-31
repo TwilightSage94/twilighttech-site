@@ -18,6 +18,7 @@ const ALLOWED_LANES = {
   'breakroom': 'BreakRoom',
   'aptsu': 'A Place To Show Up',
   'personal-ai': 'Personal AI Assistant',
+  'solutions': 'Twilight Tech Solutions',
   'general': 'General',
 };
 

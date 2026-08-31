@@ -29,9 +29,14 @@
       { slug: 'breakroom', icon: 'BR', label: 'BreakRoom', leadLabel: 'BreakRoom', detail: 'Community', className: 'breakroom' },
       { slug: 'aptsu', icon: 'UP', label: 'A Place To Show Up', leadLabel: 'A Place To Show Up', detail: 'Community platform', className: 'aptsu' },
       { slug: 'personal-ai', label: 'Personal AI Assistant', leadLabel: 'Personal AI Assistant' },
+      { slug: 'solutions', label: 'Custom Operational Systems', leadLabel: 'Twilight Tech Solutions' },
       { slug: 'general', label: 'General', leadLabel: 'General' }
     ],
     pageContexts: [
+      {
+        prefixes: ['/ai/yours'], lane: 'solutions', label: 'Twilight Tech Solutions', step: 'Map the operating problem',
+        message: 'You are looking at purpose-built operational systems. I can show you the proof in Labs or help you leave James one clear operating problem.'
+      },
       {
         prefixes: ['/site-chat'], lane: 'site-chat', label: 'Website Front Desk', step: 'Explore the guided build',
         message: 'You are looking at the Front Desk itself. I can show you what it does, what ships, or help you leave James a clean build note.'

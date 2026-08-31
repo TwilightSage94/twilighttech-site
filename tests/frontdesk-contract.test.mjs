@@ -27,6 +27,7 @@ const widget = readFileSync(new URL('../assets/jbot-widget.js', import.meta.url)
 const desk = readFileSync(new URL('../assets/jbot-frontdesk.js', import.meta.url), 'utf8');
 const contentSource = readFileSync(new URL('../assets/jbot-frontdesk-content.js', import.meta.url), 'utf8');
 const leadProxy = readFileSync(new URL('../functions/api/jbot-leads.js', import.meta.url), 'utf8');
+const solutionsIntake = readFileSync(new URL('../assets/solutions-intake.js', import.meta.url), 'utf8');
 const healthFunction = readFileSync(new URL('../functions/api/jbot-health.js', import.meta.url), 'utf8');
 const functionRoutes = JSON.parse(readFileSync(new URL('../_routes.json', import.meta.url), 'utf8'));
 const runtime = `${contentSource}\n${widget}\n${desk}\n${leadProxy}`;
@@ -94,11 +95,22 @@ test('every public visitor lane has a deterministic route', () => {
   assert.doesNotMatch(desk, /\$999|discord\.gg|calendar\.app\.google/);
 });
 
-test('the personal AI idea page uses the existing bounded lead lane', () => {
+test('the legacy personal AI lane remains bounded and hidden', () => {
   const lane = content.lanes.find((item) => item.slug === 'personal-ai');
   assert.equal(lane.leadLabel, 'Personal AI Assistant');
   assert.equal(Boolean(lane.icon), false, 'the campaign lane should not alter the public Front Desk menu');
   assert.match(leadProxy, /'personal-ai': 'Personal AI Assistant'/);
+});
+
+test('the Solutions campaign has a hidden bounded lead lane', () => {
+  const lane = content.lanes.find((item) => item.slug === 'solutions');
+  assert.equal(lane.leadLabel, 'Twilight Tech Solutions');
+  assert.equal(Boolean(lane.icon), false, 'the campaign lane should not alter the public Front Desk menu');
+  assert.match(leadProxy, /'solutions': 'Twilight Tech Solutions'/);
+  const page = readFileSync(resolve(root, 'ai/yours/index.html'), 'utf8');
+  assert.match(page, /What operation is your team still holding together by hand\?/);
+  assert.match(solutionsIntake, /lane: 'solutions'/);
+  assert.match(page, /https:\/\/twilighttech\.io\/ai\/yours\//);
 });
 
 test('the widget exposes truthful deterministic stages', () => {
