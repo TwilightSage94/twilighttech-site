@@ -98,13 +98,13 @@
         links: [
           { label: 'Explore Private AI', href: 'https://twilighttech.io/ai/' },
           { label: 'Try the document demo', href: 'https://twilighttech.io/ai/#demo' },
-          { label: 'Book the $499 audit', href: 'https://calendar.app.google/qeAHSWoSLsiL3DqW9' }
+          { label: 'Discuss the Private AI path', href: 'https://calendar.app.google/qeAHSWoSLsiL3DqW9' }
         ]
       },
       'site-chat': {
         title: 'Website Front Desk Build',
         copy: 'See exactly what ships, what it costs, and how the front desk keeps every visitor on a clear next step.',
-        links: [{ label: 'See the $999 build', href: 'https://twilighttech.io/site-chat/' }]
+        links: [{ label: 'Explore the Website Front Desk', href: 'https://twilighttech.io/site-chat/' }]
       },
       'system-care': {
         title: 'System Care',

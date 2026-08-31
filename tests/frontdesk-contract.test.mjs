@@ -156,6 +156,17 @@ test('managed plans and one-time fixes share one service desk', () => {
   assert.match(legacyPage, /location\.replace\('\/services\/#managed-plans'\)/);
 });
 
+test('public pages scope commercial work without publishing price points', () => {
+  productionPages.forEach((path) => {
+    const html = readFileSync(resolve(root, path), 'utf8');
+    assert.doesNotMatch(html, /\$\s*\d/, `public price point found: ${path}`);
+    assert.doesNotMatch(html, /buy\.stripe\.com/, `direct checkout found: ${path}`);
+    assert.doesNotMatch(html, /"price(?:Currency|Specification)?"\s*:/, `price metadata found: ${path}`);
+  });
+
+  assert.doesNotMatch(contentSource, /\$\s*\d/);
+});
+
 test('the widget exposes truthful deterministic stages', () => {
   assert.equal(content.shell.subtitle, 'Twilight Tech front desk');
   assert.match(widget, /twilight:jbot-state/);
