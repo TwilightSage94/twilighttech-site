@@ -131,7 +131,9 @@ test('the primary navigation stays condensed to five public doors', () => {
       priorIndex = labelIndex;
     });
 
-    ['/services/', '/ai/', '/site-chat/', '/about/'].forEach((legacyTopLevelRoute) => {
+    assert.match(nav, /href="\/services\/"[^>]*>Managed IT Services<\/a>/);
+
+    ['/managed-it/', '/ai/', '/site-chat/', '/about/'].forEach((legacyTopLevelRoute) => {
       assert.equal(
         nav.includes(`href="${legacyTopLevelRoute}"`),
         false,
@@ -139,6 +141,19 @@ test('the primary navigation stays condensed to five public doors', () => {
       );
     });
   });
+});
+
+test('managed plans and one-time fixes share one service desk', () => {
+  const page = readFileSync(resolve(root, 'services/index.html'), 'utf8');
+  const legacyPage = readFileSync(resolve(root, 'managed-it/index.html'), 'utf8');
+
+  assert.match(page, /id="managed-plans"/);
+  assert.match(page, /Choose Your <span class="ac">Protection Level<\/span>/);
+  assert.match(page, /id="one-time-services"/);
+  assert.match(page, /Pay for the fix, <span class="ac">not a subscription<\/span>/);
+  assert.match(page, /id="svc-menu"/);
+  assert.match(legacyPage, /url=\/services\/#managed-plans/);
+  assert.match(legacyPage, /location\.replace\('\/services\/#managed-plans'\)/);
 });
 
 test('the widget exposes truthful deterministic stages', () => {
