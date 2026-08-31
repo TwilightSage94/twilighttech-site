@@ -22,6 +22,10 @@ const productionPages = [
   'site-chat/index.html',
   'strategy/index.html',
 ];
+const primaryNavPages = [
+  ...productionPages.filter((path) => path !== 'labs/index.html'),
+  'labs/workshop/index.html',
+];
 
 const widget = readFileSync(new URL('../assets/jbot-widget.js', import.meta.url), 'utf8');
 const desk = readFileSync(new URL('../assets/jbot-frontdesk.js', import.meta.url), 'utf8');
@@ -111,6 +115,30 @@ test('the Solutions campaign has a hidden bounded lead lane', () => {
   assert.match(page, /What operation is your team still holding together by hand\?/);
   assert.match(solutionsIntake, /lane: 'solutions'/);
   assert.match(page, /https:\/\/twilighttech\.io\/ai\/yours\//);
+});
+
+test('the primary navigation stays condensed to five public doors', () => {
+  const labels = ['Managed IT Services', 'AI Solutions', 'Labs', 'Guides', 'Contact'];
+
+  primaryNavPages.forEach((path) => {
+    const html = readFileSync(resolve(root, path), 'utf8');
+    const nav = html.match(/<div class="nav-links">([\s\S]*?)<\/div>/)?.[1] || '';
+    let priorIndex = -1;
+
+    labels.forEach((label) => {
+      const labelIndex = nav.indexOf(label);
+      assert.ok(labelIndex > priorIndex, `${label} is missing or out of order: ${path}`);
+      priorIndex = labelIndex;
+    });
+
+    ['/services/', '/ai/', '/site-chat/', '/about/'].forEach((legacyTopLevelRoute) => {
+      assert.equal(
+        nav.includes(`href="${legacyTopLevelRoute}"`),
+        false,
+        `legacy top-level route leaked into primary navigation: ${path}`,
+      );
+    });
+  });
 });
 
 test('the widget exposes truthful deterministic stages', () => {
