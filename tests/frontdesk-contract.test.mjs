@@ -33,6 +33,8 @@ const contentSource = readFileSync(new URL('../assets/jbot-frontdesk-content.js'
 const leadProxy = readFileSync(new URL('../functions/api/jbot-leads.js', import.meta.url), 'utf8');
 const solutionsIntake = readFileSync(new URL('../assets/solutions-intake.js', import.meta.url), 'utf8');
 const healthFunction = readFileSync(new URL('../functions/api/jbot-health.js', import.meta.url), 'utf8');
+const homePage = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+const siteStyles = readFileSync(new URL('../assets/site.css', import.meta.url), 'utf8');
 const functionRoutes = JSON.parse(readFileSync(new URL('../_routes.json', import.meta.url), 'utf8'));
 const runtime = `${contentSource}\n${widget}\n${desk}\n${leadProxy}`;
 const contentSandbox = { window: {} };
@@ -161,6 +163,14 @@ test('AI Solutions opens with the offer name and a stable campaign intake link',
   assert.doesNotMatch(page, /six tabs and one person's head/i);
   assert.match(page, /<section[^>]+id="start"/);
   assert.match(page, /href="#start"/);
+});
+
+test('the homepage headline and navigation stay inside narrow phone viewports', () => {
+  assert.match(homePage, /font-size:clamp\(1\.15rem,6\.3vw,1\.75rem\)/);
+  assert.match(homePage, /\.mission-line\{width:100%;white-space:nowrap\}/);
+  assert.match(homePage, /site\.css\?v=20260901-mobile-home/);
+  assert.match(siteStyles, /\.nav-inner\{padding:0 1rem\}/);
+  assert.match(siteStyles, /\.nav-logo\{font-size:\.86rem;letter-spacing:1\.8px\}/);
 });
 
 test('managed plans and one-time fixes share one service desk', () => {

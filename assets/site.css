@@ -247,4 +247,11 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border);background
   .contact-grid{grid-template-columns:1fr;gap:2.5rem}
   .hero-stats{gap:1.8rem}
 }
-@media(max-width:600px){.form-row{grid-template-columns:1fr}section{padding:4rem 0}.container{padding:0 1.3rem}}
+@media(max-width:600px){
+  .nav-inner{padding:0 1rem}
+  .nav-logo{font-size:.86rem;letter-spacing:1.8px}
+  .nav-mark{height:26px;margin-right:.4rem}
+  .form-row{grid-template-columns:1fr}
+  section{padding:4rem 0}
+  .container{padding:0 1.3rem}
+}
