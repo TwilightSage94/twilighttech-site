@@ -118,7 +118,7 @@ test('the Solutions campaign has a hidden bounded lead lane', () => {
 });
 
 test('the primary navigation stays condensed to five public doors', () => {
-  const labels = ['Managed IT Services', 'AI Solutions', 'Labs', 'Guides', 'Contact'];
+  const labels = ['Managed IT', 'AI Solutions', 'Labs', 'Guides', 'Contact'];
 
   primaryNavPages.forEach((path) => {
     const html = readFileSync(resolve(root, path), 'utf8');
@@ -131,7 +131,7 @@ test('the primary navigation stays condensed to five public doors', () => {
       priorIndex = labelIndex;
     });
 
-    assert.match(nav, /href="\/services\/"[^>]*>Managed IT Services<\/a>/);
+    assert.match(nav, /href="\/services\/"[^>]*>Managed IT<\/a>/);
 
     ['/managed-it/', '/ai/', '/site-chat/', '/about/'].forEach((legacyTopLevelRoute) => {
       assert.equal(
@@ -141,6 +141,26 @@ test('the primary navigation stays condensed to five public doors', () => {
       );
     });
   });
+});
+
+test('the homepage turns Enter, Sustain, and Further into real gateways', () => {
+  const page = readFileSync(resolve(root, 'index.html'), 'utf8');
+  assert.match(page, /class="mission-line enter"><a href="#enter"/);
+  assert.match(page, /class="mission-line sustain"><a href="#sustain"/);
+  assert.match(page, /class="mission-line further"><a href="#further"/);
+  assert.match(page, /class="pathway enter" id="enter"/);
+  assert.match(page, /class="path-link primary" href="\/guides\/">Enter through Guides/);
+  assert.match(page, /class="path-link primary" href="\/services\/">Enter Managed IT/);
+  assert.match(page, /class="path-link primary" href="\/ai\/yours\/">Enter AI Solutions/);
+});
+
+test('AI Solutions opens with the offer name and a stable campaign intake link', () => {
+  const page = readFileSync(resolve(root, 'ai/yours/index.html'), 'utf8');
+  assert.match(page, /<div class="sol-kicker">Twilight Technology · Atlanta<\/div>/);
+  assert.match(page, /<h1 class="sol-title"><span class="glow">AI Solutions<\/span><\/h1>/);
+  assert.doesNotMatch(page, /six tabs and one person's head/i);
+  assert.match(page, /<section[^>]+id="start"/);
+  assert.match(page, /href="#start"/);
 });
 
 test('managed plans and one-time fixes share one service desk', () => {

@@ -23,6 +23,8 @@
 .mission-kicker::after{transform:scaleX(-1)}
 .mission-stack{margin:0 auto;display:flex;flex-direction:column;align-items:center;font-family:var(--display);font-size:clamp(2.3rem,6.7vw,6.35rem);font-weight:900;line-height:.93;letter-spacing:-.045em;text-transform:uppercase;color:#f4fbff}
 .mission-line{display:block;white-space:nowrap;animation:fadeUp .8s both}
+.mission-line a{display:inline-flex;align-items:baseline;color:inherit;cursor:pointer;transition:transform .2s ease,filter .2s ease}
+.mission-line a:hover,.mission-line a:focus-visible{transform:translateX(10px);filter:brightness(1.18);outline:none}
 .mission-line:nth-child(1){animation-delay:.35s}.mission-line:nth-child(2){animation-delay:.5s}.mission-line:nth-child(3){animation-delay:.65s}
 .mission-verb{display:inline-block;letter-spacing:-.055em}
 .mission-line.enter .mission-verb{color:var(--cyan);text-shadow:0 0 36px rgba(0,240,255,.3)}
@@ -37,7 +39,9 @@
 .mission-meta span:nth-child(2)::before{background:var(--green);box-shadow:0 0 8px var(--green)}.mission-meta span:nth-child(3)::before{background:var(--magenta);box-shadow:0 0 8px var(--magenta)}
 .identity-ticker .ticker-item:nth-child(3n+1)::before{background:var(--cyan)}.identity-ticker .ticker-item:nth-child(3n+2)::before{background:var(--green)}.identity-ticker .ticker-item:nth-child(3n)::before{background:var(--magenta)}
 .pathway-shell{display:grid;grid-template-columns:repeat(3,1fr);margin-top:3rem;border:1px solid var(--border);background:linear-gradient(145deg,rgba(10,16,31,.92),rgba(5,6,17,.94));box-shadow:0 28px 80px rgba(0,0,0,.35)}
-.pathway{position:relative;display:flex;flex-direction:column;min-height:500px;padding:2.5rem 2.2rem;overflow:hidden}
+.pathway{position:relative;display:flex;flex-direction:column;min-height:500px;padding:2.5rem 2.2rem;overflow:hidden;scroll-margin-top:90px;transition:transform .22s ease,background .22s ease,box-shadow .22s ease}
+.pathway:target{background:linear-gradient(155deg,color-mix(in srgb,var(--stage) 8%,transparent),rgba(8,10,22,.94));box-shadow:inset 0 0 0 1px var(--stage),0 0 42px color-mix(in srgb,var(--stage) 14%,transparent)}
+.pathway:hover{transform:translateY(-4px);background:rgba(255,255,255,.018)}
 .pathway+.pathway{border-left:1px solid var(--border)}
 .pathway::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--stage),transparent 80%)}
 .pathway::after{content:attr(data-step);position:absolute;right:1rem;top:.1rem;font-family:var(--display);font-size:7.5rem;font-weight:900;color:rgba(255,255,255,.025);line-height:1;pointer-events:none}
@@ -51,6 +55,8 @@
 .path-actions{position:relative;z-index:1;margin-top:auto;display:flex;flex-direction:column;align-items:flex-start;gap:.7rem}
 .path-link{font-family:var(--mono);font-size:.66rem;letter-spacing:1.4px;text-transform:uppercase;color:var(--stage);border-bottom:1px solid rgba(255,255,255,.14);padding-bottom:.18rem;transition:all .2s}
 .path-link:hover{color:#fff;border-color:var(--stage);transform:translateX(4px)}
+.path-link.primary{display:inline-flex;align-items:center;gap:.55rem;margin-bottom:.35rem;padding:.72rem .85rem;border:1px solid var(--stage);background:color-mix(in srgb,var(--stage) 7%,transparent);color:#fff}
+.path-link.primary:hover{background:color-mix(in srgb,var(--stage) 14%,transparent)}
 .live-section{background:linear-gradient(180deg,rgba(0,240,255,.025),transparent 35%),var(--deep)}
 .live-stack{margin-top:2.7rem;border-top:1px solid var(--border)}
 .live-offer{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:2rem;align-items:center;padding:2rem 0;border-bottom:1px solid var(--border)}
@@ -71,7 +77,7 @@
   <div class="nav-inner">
     <a href="/" class="nav-logo"><img class="nav-mark" src="/assets/logos/tt-mark.svg" alt="Twilight Tech">TWILIGHT<span class="sl">//</span>TECH</a>
     <div class="nav-links">
-      <a href="/services/">Managed IT Services</a>
+      <a href="/services/">Managed IT</a>
       <a href="/ai/yours/">AI Solutions</a>
       <a href="/labs/">Labs</a>
       <a href="/guides/">Guides</a>
@@ -88,9 +94,9 @@
       <div class="hero-badge"><span class="badge-blink"></span> Atlanta, GA &middot; Remote-First &middot; Nationwide</div>
       <div class="mission-kicker">Twilight Technology helps people</div>
       <h1 class="mission-stack">
-        <span class="mission-line enter"><span class="mission-verb">Enter</span> Technology<span class="mission-period">.</span></span>
-        <span class="mission-line sustain"><span class="mission-verb">Sustain</span> Technology<span class="mission-period">.</span></span>
-        <span class="mission-line further"><span class="mission-verb">Further</span> Technology<span class="mission-period">.</span></span>
+        <span class="mission-line enter"><a href="#enter"><span class="mission-verb">Enter</span>&nbsp;Technology<span class="mission-period">.</span></a></span>
+        <span class="mission-line sustain"><a href="#sustain"><span class="mission-verb">Sustain</span>&nbsp;Technology<span class="mission-period">.</span></a></span>
+        <span class="mission-line further"><a href="#further"><span class="mission-verb">Further</span>&nbsp;Technology<span class="mission-period">.</span></a></span>
       </h1>
       <p class="mission-copy">From your first confident step into IT, through the systems your business depends on, to <strong>private AI and what comes next.</strong></p>
       <div class="hero-btns">
@@ -117,7 +123,7 @@
         <p class="sh-sub">Twilight Tech is not four unrelated businesses. It is one technology journey: helping people get in, helping organizations stay steady, and building the next layer when they are ready.</p>
       </div>
       <div class="pathway-shell reveal">
-        <article class="pathway enter" data-step="01">
+        <article class="pathway enter" id="enter" data-step="01">
           <div class="path-kicker">Stage 01 &middot; Access</div>
           <h3>Enter Technology</h3>
           <p>Build the skills, confidence, and community to step into technology without pretending the path is obvious.</p>
@@ -128,12 +134,12 @@
             <div class="path-offer">A Place To Show Up</div>
           </div>
           <div class="path-actions">
-            <a class="path-link" href="/guides/">Explore the Guides &rarr;</a>
+            <a class="path-link primary" href="/guides/">Enter through Guides &rarr;</a>
             <a class="path-link" href="https://discord.gg/QKGsTZRWMx" target="_blank" rel="noopener">Join the BreakRoom &rarr;</a>
             <a class="path-link" href="https://aplacetoshowup.com/" target="_blank" rel="noopener">Visit A Place To Show Up &rarr;</a>
           </div>
         </article>
-        <article class="pathway sustain" data-step="02">
+        <article class="pathway sustain" id="sustain" data-step="02">
           <div class="path-kicker">Stage 02 &middot; Stability</div>
           <h3>Sustain Technology</h3>
           <p>Keep people working, systems documented, and the business protected with support that stays practical.</p>
@@ -143,11 +149,11 @@
             <div class="path-offer">Website Front Desk builds</div>
           </div>
           <div class="path-actions">
-            <a class="path-link" href="/services/">Explore Managed IT Services &rarr;</a>
+            <a class="path-link primary" href="/services/">Enter Managed IT &rarr;</a>
             <a class="path-link" href="/site-chat/">Meet the Front Desk &rarr;</a>
           </div>
         </article>
-        <article class="pathway further" data-step="03">
+        <article class="pathway further" id="further" data-step="03">
           <div class="path-kicker">Stage 03 &middot; Possibility</div>
           <h3>Further Technology</h3>
           <p>Turn hard-won knowledge into private systems, useful automation, and technology shaped around the people using it.</p>
@@ -157,7 +163,7 @@
             <div class="path-offer">J-Bot &amp; Twilight Tech Labs</div>
           </div>
           <div class="path-actions">
-            <a class="path-link" href="/ai/yours/">Explore Custom Solutions &rarr;</a>
+            <a class="path-link primary" href="/ai/yours/">Enter AI Solutions &rarr;</a>
             <a class="path-link" href="/ai/">Explore Private AI &rarr;</a>
             <a class="path-link" href="/ai/operations/">See AI Operations &rarr;</a>
             <a class="path-link" href="/labs/">Enter the Labs &rarr;</a>
