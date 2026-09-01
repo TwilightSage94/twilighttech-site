@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+  <title id="title">Enter, Sustain, Further pathway</title>
+  <desc id="desc">Three connected technology stages with an animated signal moving between them.</desc>
+  <defs>
+    <linearGradient id="route" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00f0ff"/>
+      <stop offset=".5" stop-color="#39ff14"/>
+      <stop offset="1" stop-color="#ff00e5"/>
+    </linearGradient>
+    <radialGradient id="nodeEnter">
+      <stop offset="0" stop-color="#00f0ff" stop-opacity=".48"/>
+      <stop offset="1" stop-color="#00f0ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nodeSustain">
+      <stop offset="0" stop-color="#39ff14" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#39ff14" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nodeFurther">
+      <stop offset="0" stop-color="#ff00e5" stop-opacity=".46"/>
+      <stop offset="1" stop-color="#ff00e5" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-70%" y="-70%" width="240%" height="240%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <path id="signalPath" d="M140 225 C265 120 330 120 450 225 S640 330 760 225"/>
+    <style>
+      .grid{stroke:#00f0ff;stroke-opacity:.08;stroke-width:1}
+      .route-base{fill:none;stroke:#b7c7ff;stroke-opacity:.16;stroke-width:12}
+      .route-live{fill:none;stroke:url(#route);stroke-width:3;stroke-linecap:round;stroke-dasharray:12 13;animation:dash 3.8s linear infinite}
+      .node-ring{fill:#070a16;stroke-width:2}
+      .node-label{fill:#f4fbff;font:700 24px Orbitron,system-ui,sans-serif;letter-spacing:2px;text-anchor:middle}
+      .node-sub{fill:#aebbd9;font:14px "Share Tech Mono",monospace;letter-spacing:2px;text-anchor:middle}
+      .number{fill:#ffffff;fill-opacity:.045;font:900 82px Orbitron,system-ui,sans-serif;text-anchor:middle}
+      @keyframes dash{to{stroke-dashoffset:-50}}
+      @media (prefers-reduced-motion:reduce){.route-live{animation:none}}
+    </style>
+  </defs>
+
+  <g opacity=".8">
+    <path class="grid" d="M0 70H900M0 140H900M0 210H900M0 280H900M0 350H900"/>
+    <path class="grid" d="M90 0V420M180 0V420M270 0V420M360 0V420M450 0V420M540 0V420M630 0V420M720 0V420M810 0V420"/>
+  </g>
+
+  <use href="#signalPath" class="route-base"/>
+  <use href="#signalPath" class="route-live"/>
+
+  <g transform="translate(140 225)">
+    <circle r="96" fill="url(#nodeEnter)"/>
+    <circle class="node-ring" r="54" stroke="#00f0ff"/>
+    <path d="M-18 7 0-21 18 7 0 27Z" fill="none" stroke="#00f0ff" stroke-width="3"/>
+    <text class="number" y="-76">01</text>
+    <text class="node-label" y="91">ENTER</text>
+    <text class="node-sub" y="119">ACCESS</text>
+  </g>
+
+  <g transform="translate(450 225)">
+    <circle r="96" fill="url(#nodeSustain)"/>
+    <circle class="node-ring" r="54" stroke="#39ff14"/>
+    <path d="M-22-8H22V8H-22ZM-12-22H12M-12 22H12" fill="none" stroke="#39ff14" stroke-width="3"/>
+    <text class="number" y="-76">02</text>
+    <text class="node-label" y="91">SUSTAIN</text>
+    <text class="node-sub" y="119">STABILITY</text>
+  </g>
+
+  <g transform="translate(760 225)">
+    <circle r="96" fill="url(#nodeFurther)"/>
+    <circle class="node-ring" r="54" stroke="#ff00e5"/>
+    <path d="M-24 18 0-25 24 18M-13 18 0-4 13 18" fill="none" stroke="#ff00e5" stroke-width="3"/>
+    <text class="number" y="-76">03</text>
+    <text class="node-label" y="91">FURTHER</text>
+    <text class="node-sub" y="119">POSSIBILITY</text>
+  </g>
+
+  <circle r="7" fill="#ffffff" filter="url(#glow)">
+    <animateMotion dur="5.4s" repeatCount="indefinite" rotate="auto">
+      <mpath href="#signalPath"/>
+    </animateMotion>
+  </circle>
+</svg>
