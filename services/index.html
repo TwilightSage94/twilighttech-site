@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Managed IT Services — Twilight Tech | Plans &amp; One-Time Fixes</title>
-<meta name="description" content="Managed IT plans with cybersecurity built in, plus one-time flat-rate IT and security services. Choose ongoing protection or pay for the fix—without lock-in tricks.">
+<title>Sustain Technology | Managed Operations — Twilight Tech</title>
+<meta name="description" content="Keep identity, devices, security, recovery, and support dependable through bounded IT projects or an ongoing Twilight managed-operations relationship.">
 <link rel="canonical" href="https://twilighttech.io/services/">
-<meta property="og:title" content="Managed IT Services — Twilight Tech">
-<meta property="og:description" content="One service desk for managed protection and flat-rate IT fixes. Choose the support model that fits your business.">
+<meta property="og:title" content="Sustain Technology | Managed Operations — Twilight Tech">
+<meta property="og:description" content="One operations floor for identity, devices, security, recovery, and support. Stabilize one problem or operate the environment with Twilight.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -43,95 +43,182 @@
 .flagship-note{color:var(--muted);font-size:.84rem;line-height:1.55;text-align:center;margin:0 auto 2rem;max-width:760px}
 .flagship-section{padding:2.5rem 0 4rem}
 .flagship-section .flagship-wrap{margin-top:0}
+
+/* Sustain operations-floor mockup */
+.skip-link{position:fixed;z-index:1000;left:1rem;top:1rem;transform:translateY(-180%);padding:.7rem 1rem;background:#fff;color:#02050c;font:700 .72rem var(--mono);letter-spacing:1px;text-transform:uppercase}
+.skip-link:focus{transform:translateY(0);outline:3px solid var(--cyan);outline-offset:3px}
+.sustain-hero{position:relative;min-height:calc(100vh - 65px);display:grid;align-items:center;padding:clamp(6.5rem,10vw,9rem) 0 clamp(3.5rem,6vw,5.5rem);overflow:hidden;border-bottom:1px solid rgba(0,240,255,.16)}
+.sustain-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(rgba(0,240,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,240,255,.03) 1px,transparent 1px),radial-gradient(circle at 77% 44%,rgba(57,255,20,.07),transparent 25%),radial-gradient(circle at 15% 40%,rgba(0,240,255,.07),transparent 32%);background-size:56px 56px,56px 56px,auto,auto;mask-image:linear-gradient(to bottom,rgba(0,0,0,.9),transparent 96%);pointer-events:none}
+.sustain-hero::after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan) 30%,var(--green) 70%,transparent);animation:sustain-scan 5s ease-in-out infinite;transform-origin:left}
+@keyframes sustain-scan{0%,100%{transform:scaleX(.18);opacity:.3}50%{transform:scaleX(1);opacity:.9}}
+.sustain-hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.04fr) minmax(410px,.96fr);gap:clamp(2.5rem,6vw,6.5rem);align-items:center}
+.sustain-kicker{display:flex;align-items:center;gap:.75rem;margin-bottom:1.3rem;color:var(--green);font:700 .67rem var(--mono);letter-spacing:2.2px;text-transform:uppercase}
+.sustain-kicker::before{content:'';width:30px;height:1px;background:var(--green);box-shadow:0 0 12px rgba(57,255,20,.7)}
+.sustain-title{max-width:760px;margin:0;color:#f4f7ff;font:800 clamp(3rem,6.2vw,6.25rem)/.93 var(--display);letter-spacing:-.055em}
+.sustain-title .steady{display:block;color:transparent;background:linear-gradient(100deg,var(--cyan),#b8fff0 48%,var(--green));-webkit-background-clip:text;background-clip:text;text-shadow:0 0 34px rgba(0,240,255,.08)}
+.sustain-lead{max-width:690px;margin:1.6rem 0 0;color:#c5d0e8;font-size:clamp(1.03rem,1.55vw,1.25rem);line-height:1.68}
+.sustain-lead strong{color:#fff;font-weight:700}
+.sustain-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+.sustain-proofline{display:flex;flex-wrap:wrap;gap:.65rem 1.4rem;margin-top:1.7rem;color:#8999b9;font:700 .61rem var(--mono);letter-spacing:1.15px;text-transform:uppercase}
+.sustain-proofline span{display:flex;align-items:center;gap:.5rem}.sustain-proofline span::before{content:'';width:6px;height:6px;border:1px solid var(--green);transform:rotate(45deg)}
+.continuity-board{position:relative;min-height:490px;padding:.8rem;overflow:hidden}
+.continuity-board::before{content:'';position:absolute;inset:6%;border-radius:50%;background:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px),radial-gradient(circle,rgba(0,240,255,.055),transparent 67%);background-size:32px 32px;mask-image:radial-gradient(circle,#000 0 66%,transparent 74%);pointer-events:none}
+.board-head,.board-foot{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:1rem;color:#7e90b4;font:700 .55rem var(--mono);letter-spacing:1.35px;text-transform:uppercase}
+.board-head strong{color:var(--cyan);font-weight:700}.board-led{display:inline-flex;align-items:center;gap:.45rem;color:var(--green)}
+.board-led::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 11px var(--green);animation:board-pulse 2.4s ease-in-out infinite}
+@keyframes board-pulse{50%{opacity:.35;box-shadow:0 0 3px var(--green)}}
+.board-map{position:relative;min-height:415px}.board-orbit{position:absolute;left:50%;top:50%;width:292px;height:292px;border:1px solid rgba(0,240,255,.22);border-radius:50%;transform:translate(-50%,-50%)}
+.board-orbit::before,.board-orbit::after{content:'';position:absolute;border-radius:50%;inset:42px;border:1px dashed rgba(57,255,20,.2)}.board-orbit::after{inset:92px;border-style:solid;border-color:rgba(255,255,255,.08)}
+.board-core{position:absolute;left:50%;top:50%;z-index:1;width:145px;height:145px;display:grid;place-content:center;gap:.35rem;text-align:center;border:1px solid var(--cyan);background:rgba(4,12,27,.94);transform:translate(-50%,-50%) rotate(45deg);box-shadow:0 0 34px rgba(0,240,255,.1)}
+.board-core>*{transform:rotate(-45deg)}.board-core span{color:var(--cyan);font:700 .52rem var(--mono);letter-spacing:1.5px;text-transform:uppercase}.board-core strong{max-width:102px;color:#fff;font:800 .76rem/1.35 var(--display);letter-spacing:.65px;text-transform:uppercase}
+.orbit-label{--node-color:var(--cyan);position:absolute;z-index:2;width:150px;color:#aebbd5;font-size:.72rem;line-height:1.35}
+.orbit-label::before{content:'';display:block;width:28px;height:1px;margin-bottom:.55rem;background:var(--node-color);box-shadow:0 0 10px var(--node-color)}
+.orbit-label .node-code{display:block;margin-bottom:.24rem;color:var(--node-color);font:700 .5rem var(--mono);letter-spacing:1.25px;text-transform:uppercase}.orbit-label strong{display:block;color:#fff;font:800 .8rem var(--display);letter-spacing:.4px;text-transform:uppercase}
+.orbit-label.identity{top:3rem;left:0}.orbit-label.endpoints{--node-color:#9f83ff;top:5.2rem;right:0;text-align:right}.orbit-label.endpoints::before,.orbit-label.support::before{margin-left:auto}.orbit-label.recovery{--node-color:#ffcc63;bottom:4.3rem;left:0}.orbit-label.support{--node-color:var(--green);right:0;bottom:2.4rem;text-align:right}
+.board-foot{position:absolute;left:.8rem;right:.8rem;bottom:.3rem}.board-foot span:last-child{color:#cbd6eb}
+.ops-summary{border-bottom:1px solid var(--border);background:linear-gradient(90deg,rgba(0,240,255,.035),rgba(57,255,20,.025),transparent)}.ops-summary-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.ops-summary-item{position:relative;padding:1.05rem 1.3rem;border-right:1px solid var(--border)}.ops-summary-item:last-child{border-right:0}.ops-summary-item span{display:block;color:var(--green);font:700 .55rem var(--mono);letter-spacing:1.4px;text-transform:uppercase}.ops-summary-item strong{display:block;margin-top:.3rem;color:#fff;font:700 .9rem var(--display)}.ops-summary-item p{margin:.3rem 0 0;color:#98a8c7;font-size:.76rem;line-height:1.4}
+.engagement-grid{display:grid;grid-template-columns:1fr 1fr;border-block:1px solid var(--border)}
+.engagement-path{position:relative;padding:clamp(1.6rem,4vw,3rem);overflow:hidden}.engagement-path+ .engagement-path{border-left:1px solid var(--border)}
+.engagement-label{color:var(--cyan);font:700 .6rem var(--mono);letter-spacing:1.5px;text-transform:uppercase}.engagement-path:last-child .engagement-label{color:var(--green)}
+.engagement-path h3{max-width:520px;margin:.8rem 0;color:#fff;font:800 clamp(1.55rem,3vw,2.5rem)/1.08 var(--display)}.engagement-path p{max-width:560px;color:#aebbd5;line-height:1.6}
+.engagement-path ul{display:grid;gap:.5rem;margin:1.2rem 0 1.5rem;padding:0;list-style:none}.engagement-path li{color:#d7e0f1;font-size:.86rem}.engagement-path li::before{content:'◆';margin-right:.55rem;color:var(--cyan);font-size:.55rem}.engagement-path:last-child li::before{color:var(--green)}
+.receipt-strip{margin-top:1rem;border-bottom:1px solid var(--border)}.receipt-strip>summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem 0;cursor:pointer;list-style:none;color:#fff;font:700 .76rem var(--mono);letter-spacing:1.2px;text-transform:uppercase}.receipt-strip>summary::-webkit-details-marker{display:none}.receipt-strip>summary::after{content:'+';color:var(--green);font-size:1.1rem}.receipt-strip[open]>summary::after{content:'−'}
+.receipt-note{max-width:780px;margin:0 0 1rem;color:#98a8c7;font-size:.8rem;line-height:1.5}.receipt-grid{display:grid;grid-template-columns:repeat(3,1fr);padding-bottom:1.2rem}.receipt{padding:.7rem 1rem .7rem 0;color:#d9e2f2;font-size:.8rem}.receipt span{display:block;margin-bottom:.25rem;color:var(--green);font:700 .5rem var(--mono);letter-spacing:1.2px;text-transform:uppercase}
+.plans-arrival{padding-bottom:1.6rem;text-align:center}.plans-arrival p{max-width:720px;margin:.75rem auto 0;color:#aebbd5;line-height:1.6}.plans-note{color:var(--cyan)!important;font-size:.85rem}
+.plan-comparison{border-block:1px solid var(--border)}.plan-comparison>summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.25rem 0;cursor:pointer;list-style:none;color:#fff;font:700 .8rem var(--mono);letter-spacing:1.4px;text-transform:uppercase}.plan-comparison>summary::-webkit-details-marker{display:none}.plan-comparison>summary::after{content:'+';color:var(--cyan);font-size:1.2rem}.plan-comparison[open]>summary::after{content:'−'}.plan-comparison-body{padding:1.5rem 0 0}
+.compact-menu{padding-top:3rem!important}.compact-menu-head{max-width:760px;margin-bottom:1.4rem}.compact-menu-head h2{margin:.5rem 0;color:#fff;font:800 clamp(1.7rem,3vw,2.7rem) var(--display)}.compact-menu-head p{color:#aebbd5;line-height:1.6}
+.plan-disclosure{padding:1.35rem}.plan-disclosure>summary,.project-disclosure>summary{position:relative;cursor:pointer;list-style:none}.plan-disclosure>summary::-webkit-details-marker,.project-disclosure>summary::-webkit-details-marker{display:none}.plan-disclosure>summary::after,.project-disclosure>summary::after{content:'+';position:absolute;right:0;top:0;color:var(--cyan);font:700 1.15rem var(--mono)}.plan-disclosure[open]>summary::after,.project-disclosure[open]>summary::after{content:'−'}.plan-disclosure.featured>summary::after{color:var(--green)}.plan-disclosure .lever-icon{font-size:1.2rem;margin-bottom:.65rem}.plan-disclosure .plan-target{margin-bottom:.8rem;padding-right:1.25rem}.plan-disclosure .plan-price{margin-bottom:0}.plan-disclosure .plan-price .amt{font-size:1.75rem}.plan-disclosure .plan-price .per{max-width:9rem;font-size:.62rem}.plan-disclosure .plan-badge{position:static;display:inline-block;margin:0 1.6rem .75rem 0}.plan-body,.project-body{padding-top:1rem;border-top:1px solid var(--border);margin-top:1rem}.project-disclosure{align-self:start}.project-disclosure .addon-icon{margin-top:.6rem}.project-disclosure .addon-tagline{padding-right:1.5rem}
+@media(max-width:1080px){.sustain-hero-grid{grid-template-columns:1fr}.continuity-board{max-width:680px;width:100%;margin:auto}}
+@media(max-width:720px){.sustain-hero{padding-top:7rem}.sustain-title{font-size:clamp(2.65rem,13vw,4.4rem)}.continuity-board{min-height:510px}.board-map{min-height:440px}.board-orbit{width:245px;height:245px}.board-core{width:125px;height:125px}.orbit-label{width:125px;font-size:.66rem}.orbit-label.identity{top:2rem}.orbit-label.endpoints{top:5.1rem}.orbit-label.recovery{bottom:4.5rem}.orbit-label.support{bottom:1.8rem}.board-foot{display:none}.ops-summary-grid{grid-template-columns:repeat(2,1fr)}.engagement-grid,.receipt-grid{grid-template-columns:1fr}.ops-summary-item{border-bottom:1px solid var(--border)}.ops-summary-item:nth-child(2n){border-right:0}.ops-summary-item:nth-child(n+3){border-bottom:0}.engagement-path+.engagement-path{border-left:0;border-top:1px solid var(--border)}.receipt{padding-right:0}}
+@media(max-width:430px){.sustain-actions .btn{width:100%;text-align:center}.continuity-board{min-height:475px;padding:.2rem}.board-head span:not(.board-led){display:none}.board-map{min-height:420px}.board-orbit{width:210px;height:210px}.board-core{width:108px;height:108px}.board-core strong{font-size:.66rem}.orbit-label{width:112px;font-size:.61rem}.orbit-label.identity{top:1.6rem}.orbit-label.endpoints{top:5rem}.orbit-label.recovery{bottom:4.8rem}.orbit-label.support{bottom:1.9rem}}
+@media(prefers-reduced-motion:reduce){.sustain-hero::after,.board-led::before{animation:none}}
 </style>
 </head>
-<body>
+<body class="stage-sustain">
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <canvas id="global-particles"></canvas>
 
-<nav>
+<nav aria-label="Primary">
   <div class="nav-inner">
-    <a href="/" class="nav-logo"><img class="nav-mark" src="/assets/logos/tt-mark.svg" alt="Twilight Tech">TWILIGHT<span class="sl">//</span>TECH</a>
+    <a href="/" class="nav-logo" aria-label="Twilight Technology home"><img class="nav-mark" src="/assets/logos/tt-mark.svg" alt="">TWILIGHT<span class="sl">//</span>TECH</a>
     <div class="nav-links">
-      <a href="/services/" class="active">Managed IT</a>
-      <a href="/ai/yours/">AI Solutions</a>
+      <a href="/enter/">Enter</a>
+      <a href="/services/" class="active" aria-current="page">Sustain</a>
+      <a href="/further/">Further</a>
       <a href="/labs/">Labs</a>
-      <a href="/guides/">Guides</a>
       <a href="/#contact" class="nav-cta">Contact</a>
     </div>
-    <button class="mob-tog" aria-label="Menu">&#9776;</button>
+    <button class="mob-tog" type="button" aria-label="Open menu">&#9776;</button>
   </div>
 </nav>
 
-<div class="shell">
+<main class="shell" id="main-content" tabindex="-1">
 
-  <!-- 1 · COMBINED HERO -->
-  <div class="page-head container reveal">
-    <div class="sh-label">// Managed IT Services</div>
-    <h1 class="sh-title">Ongoing protection or <span class="ac">one clear fix</span></h1>
-    <div class="sh-line" style="margin:1.2rem auto"></div>
-    <p class="sh-sub" style="margin:0 auto">One service desk, two ways to work with us. Choose a managed plan when you want ongoing care, or book a bounded one-time project when you only need the problem fixed.</p>
-    <div class="xlink" style="margin-top:1.8rem">
-      <a href="#managed-plans" class="btn btn-solid">Compare managed plans</a>
-      <a href="#one-time-services" class="btn">Browse one-time services</a>
+  <!-- 1 · SUSTAIN OPERATIONS FLOOR -->
+  <section class="sustain-hero">
+    <div class="container sustain-hero-grid">
+      <div class="reveal">
+        <div class="sustain-kicker">Stage 02 // Sustain Technology</div>
+        <h1 class="sustain-title">Keep the business running <span class="steady">after the handoff.</span></h1>
+        <p class="sustain-lead">Identity, devices, security, recovery, and support should not live in five dashboards and one person's memory. Twilight turns the environment into <strong>an owned, documented operating system.</strong></p>
+        <div class="sustain-actions">
+          <a href="#one-time-services" class="btn">Stabilize one problem</a>
+          <a href="#managed-plans" class="btn btn-solid">Operate it with us</a>
+        </div>
+        <div class="sustain-proofline" aria-label="Sustain operating principles">
+          <span>Known environment</span><span>Named ownership</span><span>Recovery path</span><span>Visible next step</span>
+        </div>
+      </div>
+
+      <div class="continuity-board reveal" role="img" aria-label="Illustrative continuity board showing identity controlled, endpoints accounted for, recovery tested, and support owned">
+        <div class="board-head"><strong>Continuity board // operating model</strong><span class="board-led">System cared for</span></div>
+        <div class="board-map">
+          <div class="board-orbit" aria-hidden="true"></div>
+          <div class="board-core"><span>Sustain core</span><strong>Known. Protected. Recoverable.</strong></div>
+          <div class="orbit-label identity"><span class="node-code">01 / Identity</span><strong>Controlled</strong><span>Access has a path.</span></div>
+          <div class="orbit-label endpoints"><span class="node-code">02 / Endpoints</span><strong>Accounted for</strong><span>Health stays visible.</span></div>
+          <div class="orbit-label recovery"><span class="node-code">03 / Recovery</span><strong>Testable</strong><span>Restore is understood.</span></div>
+          <div class="orbit-label support"><span class="node-code">04 / Support</span><strong>Owned</strong><span>Escalation is named.</span></div>
+        </div>
+        <div class="board-foot"><span>Illustrative operating model</span><span>Actual state follows scoped assessment</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ops-summary" aria-label="Sustain outcomes">
+    <div class="container ops-summary-grid">
+      <div class="ops-summary-item"><span>01 / Know</span><strong>See the environment</strong><p>Accounts, devices, vendors, dependencies, and ownership.</p></div>
+      <div class="ops-summary-item"><span>02 / Protect</span><strong>Reduce preventable risk</strong><p>Access controls, security baselines, monitoring, and patching.</p></div>
+      <div class="ops-summary-item"><span>03 / Recover</span><strong>Plan for failure</strong><p>Backups, restore paths, incident boundaries, and escalation.</p></div>
+      <div class="ops-summary-item"><span>04 / Improve</span><strong>Leave the next step visible</strong><p>Health summaries, reviews, remediation, and lifecycle care.</p></div>
     </div>
   </div>
+
+  <section class="sec-dark" id="engagement-paths">
+    <div class="container">
+      <div class="sh center reveal" style="margin-bottom:2.2rem"><div class="sh-label">// Two ways to work together</div><h2 class="sh-title">Fix the gap—or <span class="ac">own the rhythm.</span></h2><div class="sh-line"></div><p class="sh-sub" style="margin:0 auto">Start with the relationship the environment actually needs. A bounded project can stand alone or become the foundation for ongoing care.</p></div>
+      <div class="engagement-grid">
+        <article class="engagement-path reveal" data-n="01"><div class="engagement-label">Bounded project // Stabilize</div><h3>One problem. A defined finish line.</h3><p>Use a focused project when the need is clear and you want the environment documented and handed back—not wrapped in an unnecessary contract.</p><ul><li>Microsoft 365 control and security reset</li><li>Employee setup or offboarding</li><li>Backup, recovery, migration, or hardening</li><li>Day One Business IT foundation</li></ul><a href="#one-time-services" class="btn">See bounded projects →</a></article>
+        <article class="engagement-path reveal" data-n="02"><div class="engagement-label">Managed operations // Continue</div><h3>Keep the environment cared for.</h3><p>Use an ongoing relationship when reliability, response, security, and improvement need a consistent owner instead of another round of emergency calls.</p><ul><li>Help desk and Microsoft 365 support</li><li>Endpoint health, patching, and protection</li><li>Identity, backup, and security operations</li><li>Health summaries and scheduled review</li></ul><a href="#managed-plans" class="btn btn-solid">Compare operating plans →</a></article>
+      </div>
+      <details class="receipt-strip reveal">
+        <summary>See the operating receipts a scope can leave behind</summary>
+        <p class="receipt-note">Exact deliverables depend on the agreed scope. These are examples from the current service model—not a promise that every engagement includes every artifact.</p>
+        <div class="receipt-grid"><div class="receipt"><span>Environment</span>Current inventory and ownership</div><div class="receipt"><span>Identity</span>Access and administrative baseline</div><div class="receipt"><span>Endpoints</span>Health, protection, and patch state</div><div class="receipt"><span>Recovery</span>Backup and restore verification</div><div class="receipt"><span>Operations</span>Runbook and escalation path</div><div class="receipt"><span>Improvement</span>Prioritized next actions</div></div>
+      </details>
+    </div>
+  </section>
 
   <!-- 2 · MANAGED PLANS -->
   <section id="managed-plans" style="padding-top:2rem">
     <div class="container">
-      <div class="sh center reveal" style="margin-bottom:2.2rem">
-        <div class="sh-label">// Ongoing protection</div>
-        <h2 class="sh-title">Choose Your <span class="ac">Protection Level</span></h2>
-        <div class="sh-line" style="margin:1.2rem auto"></div>
-        <p class="sh-sub" style="margin:0 auto">Subscription IT support with cybersecurity baked in—flat monthly pricing, no surprises, no lock-in tricks.</p>
-        <p class="sh-sub" style="margin:1rem auto 0;font-size:.85rem;color:var(--cyan)">Managed seats are limited-availability so response times stay honest. Apply via consultation and we'll confirm fit within a business day.</p>
-      </div>
+      <div class="plans-arrival reveal"><div class="sh-label">// Managed Operations plans</div><h2 class="sh-title">Choose the depth of <span class="ac">operating care.</span></h2><p>Essentials, Secure, and Sentinel increase the level of identity, security, recovery, monitoring, and response—not the mystery around the relationship.</p><p class="plans-note">Managed seats are limited so response times stay honest. Apply through a consultation and we will confirm fit.</p></div>
 
       <div class="plans-grid">
-        <div class="plan-card reveal">
-          <div class="lever-icon">🔹</div>
-          <div class="plan-name">Twilight Essentials</div>
-          <div class="plan-target">// Solo pros &amp; micro-businesses</div>
-          <div class="plan-price"><span class="amt">Essential</span><span class="per">business coverage</span></div>
+        <details class="plan-card reveal plan-disclosure">
+          <summary><div class="lever-icon">🔹</div><div class="plan-name">Twilight Essentials</div><div class="plan-target">// Solo pros &amp; micro-businesses</div><div class="plan-price"><span class="amt">Essential</span><span class="per">business coverage</span></div></summary>
+          <div class="plan-body">
           <ul class="feature-list">
             <li>Remote help desk support (business hours)</li><li>Microsoft 365 user &amp; account support</li><li>Password resets &amp; account lockouts</li><li>Endpoint health &amp; uptime monitoring</li><li>OS &amp; application patch management</li><li>Microsoft Defender antivirus</li><li>Monthly system health summary</li>
           </ul>
           <div class="lever-meta">⏱ Same Business Day Response</div>
           <a href="/#contact" class="btn" style="width:100%;text-align:center;display:block">Apply for a Seat →</a>
-        </div>
+          </div>
+        </details>
 
-        <div class="plan-card featured reveal">
-          <div class="plan-badge">⭐ Recommended</div>
-          <div class="lever-icon">🛡️</div>
-          <div class="plan-name">Twilight Secure</div>
-          <div class="plan-target">// Small businesses, 5–25 users</div>
-          <div class="plan-price"><span class="amt">Secure</span><span class="per">business coverage</span></div>
+        <details class="plan-card featured reveal plan-disclosure">
+          <summary><div class="plan-badge">⭐ Recommended</div><div class="lever-icon">🛡️</div><div class="plan-name">Twilight Secure</div><div class="plan-target">// Small businesses, 5–25 users</div><div class="plan-price"><span class="amt">Secure</span><span class="per">business coverage</span></div></summary>
+          <div class="plan-body">
           <ul class="feature-list">
             <li>Everything in Essentials, plus:</li><li>Identity &amp; Access Management (Entra ID)</li><li>MFA enforcement &amp; conditional access</li><li>Email security &amp; phishing protection</li><li>Automated backup monitoring &amp; restores</li><li>Patch compliance reporting</li><li>Security baseline hardening</li><li>Quarterly security review</li>
           </ul>
           <div class="lever-meta">⏱ 4-Hour Response (Business Hours)</div>
           <a href="/#contact" class="btn btn-solid" style="width:100%;text-align:center;display:block">Apply for a Seat →</a>
-        </div>
+          </div>
+        </details>
 
-        <div class="plan-card reveal">
-          <div class="lever-icon">⚔️</div>
-          <div class="plan-name">Twilight Sentinel</div>
-          <div class="plan-target">// High-risk &amp; regulated environments</div>
-          <div class="plan-price"><span class="amt">Sentinel</span><span class="per">advanced coverage</span></div>
+        <details class="plan-card reveal plan-disclosure">
+          <summary><div class="lever-icon">⚔️</div><div class="plan-name">Twilight Sentinel</div><div class="plan-target">// High-risk &amp; regulated environments</div><div class="plan-price"><span class="amt">Sentinel</span><span class="per">advanced coverage</span></div></summary>
+          <div class="plan-body">
           <ul class="feature-list">
             <li>Everything in Secure, plus:</li><li>Endpoint Detection &amp; Response (EDR)</li><li>Huntress threat hunting &amp; managed detection</li><li>Vulnerability scanning &amp; remediation</li><li>Security event monitoring (SOC-lite)</li><li>After-hours emergency support</li><li>Monthly executive security report</li><li>Incident response support</li>
           </ul>
           <div class="lever-meta">🚨 1-Hour Emergency Response</div>
           <a href="/#contact" class="btn" style="width:100%;text-align:center;display:block">Apply for a Seat →</a>
-        </div>
+          </div>
+        </details>
       </div>
     </div>
   </section>
 
   <section class="sec-dark">
     <div class="container">
-      <div class="sh center reveal"><div class="sh-label">// Side by Side</div><h2 class="sh-title">Full Plan <span class="ac">Comparison</span></h2><div class="sh-line"></div></div>
-      <div class="table-wrap reveal">
+      <details class="plan-comparison reveal">
+        <summary>Compare every plan feature side by side</summary>
+        <div class="plan-comparison-body">
+          <div class="sh center"><div class="sh-label">// Side by Side</div><h2 class="sh-title">Full Plan <span class="ac">Comparison</span></h2><div class="sh-line"></div></div>
+          <div class="table-wrap">
         <table class="cmp-table">
           <thead><tr><th>Feature</th><th>Essentials<br><span style="color:var(--cyan);font-family:var(--mono)">Core care</span></th><th class="feat-col">Secure ⭐<br><span style="font-family:var(--mono)">Protected operations</span></th><th>Sentinel<br><span style="color:var(--cyan);font-family:var(--mono)">Advanced defense</span></th></tr></thead>
           <tbody>
@@ -152,7 +239,9 @@
             <tr><td style="color:var(--text);font-weight:600">SLA Response Time</td><td style="font-size:.78rem">Same business day</td><td class="feat-col" style="color:var(--cyan);font-size:.78rem;font-weight:600">4 hrs (biz hours)</td><td style="color:var(--green);font-size:.78rem;font-weight:600">1 hr emergency</td></tr>
           </tbody>
         </table>
-      </div>
+          </div>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -180,98 +269,42 @@
         </div>
 
         <div class="addons-grid flagship-grid">
-          <article class="addon-card">
-            <span class="flagship-label">01 / Employee setup</span>
-            <div class="addon-icon">🧑‍💼</div>
-            <div class="addon-name">Employee Ready</div>
-            <div class="addon-tagline">One employee gets a working, secured account and prepared company laptop before the agreed start date.</div>
+          <details class="addon-card project-disclosure">
+            <summary><span class="flagship-label">01 / Employee setup</span><div class="addon-icon">🧑‍💼</div><div class="addon-name">Employee Ready</div><div class="addon-tagline">One employee gets a working, secured account and prepared company laptop before the agreed start date.</div></summary>
+            <div class="project-body">
             <div class="addon-price-row"><div class="addon-price">Bounded</div><div class="addon-price-label">per standard new hire</div></div>
             <ul class="addon-includes"><li>Identity, mailbox, licensing, and MFA</li><li>Approved groups and shared-mailbox access</li><li>One Windows laptop enrolled and secured</li><li>Up to five standard business applications</li></ul>
             <a href="/#contact" class="addon-cta">Discuss a New Hire Setup →</a>
-          </article>
+            </div>
+          </details>
 
-          <article class="addon-card">
-            <span class="flagship-label">02 / Tenant control</span>
-            <div class="addon-icon">🔐</div>
-            <div class="addon-name">Microsoft 365 Secure Reset</div>
-            <div class="addon-tagline">Know what you own, reduce privileged access, and leave with a documented Microsoft 365 security baseline.</div>
+          <details class="addon-card project-disclosure">
+            <summary><span class="flagship-label">02 / Tenant control</span><div class="addon-icon">🔐</div><div class="addon-name">Microsoft 365 Secure Reset</div><div class="addon-tagline">Know what you own, reduce privileged access, and leave with a documented Microsoft 365 security baseline.</div></summary>
+            <div class="project-body">
             <div class="addon-price-row"><div class="addon-price">Scoped</div><div class="addon-price-label">to tenant size and risk</div></div>
             <ul class="addon-includes"><li>Tenant, license, and admin-role inventory</li><li>MFA and conditional-access baseline</li><li>Mail flow, domain, groups, and storage review</li><li>Findings report plus 60-minute handoff</li></ul>
             <a href="/#contact" class="addon-cta">Scope My Secure Reset →</a>
-          </article>
+            </div>
+          </details>
 
-          <article class="addon-card">
-            <span class="flagship-label">03 / New business launch</span>
-            <div class="addon-icon">🚀</div>
-            <div class="addon-name">Day One Business IT</div>
-            <div class="addon-tagline">Launch a small business with Microsoft 365, identity, security, backup, devices, and the handoff documentation accounted for.</div>
+          <details class="addon-card project-disclosure">
+            <summary><span class="flagship-label">03 / New business launch</span><div class="addon-icon">🚀</div><div class="addon-name">Day One Business IT</div><div class="addon-tagline">Launch a small business with Microsoft 365, identity, security, backup, devices, and the handoff documentation accounted for.</div></summary>
+            <div class="project-body">
             <div class="addon-price-row"><div class="addon-price">Scoped</div><div class="addon-price-label">to the launch environment</div></div>
             <ul class="addon-includes"><li>One tenant and domain · up to five users</li><li>Up to three supported Windows devices</li><li>MFA, Defender, and backup baseline</li><li>Environment diagram and admin handoff</li></ul>
             <a href="/#contact" class="addon-cta">Discuss the Founding Build →</a>
-          </article>
+            </div>
+          </details>
         </div>
         <p class="flagship-note">Need only one smaller task? The full one-time menu below still includes tenant setup, onboarding, offboarding, migrations, security hardening, backup, and other bounded fixes.</p>
       </div>
     </div>
   </section>
 
-  <!-- 5 · HOW IT WORKS (non-card strip) -->
-  <section style="padding-top:3rem">
+  <!-- 5 · FULL MENU (collapsed) -->
+  <section class="sec-dark compact-menu">
     <div class="container">
-      <div class="sh center reveal" style="margin-bottom:2.2rem"><div class="sh-label">// How it works</div><h2 class="sh-title">Four steps, <span class="ac">no surprises</span></h2><div class="sh-line" style="margin:1.2rem auto"></div></div>
-      <div class="svc-steps reveal">
-        <div class="svc-step"><h3>Tell us what's wrong</h3><p>One message. No discovery-call gauntlet, no sales deck.</p></div>
-        <div class="svc-step"><h3>Flat-rate quote</h3><p>Fixed scope, fixed price, up front. You approve before anything starts.</p></div>
-        <div class="svc-step"><h3>We fix it</h3><p>Done right, documented, handed back. Most jobs in days, not weeks.</p></div>
-        <div class="svc-step"><h3>Go managed if it fits</h3><p>Calling a lot? Roll into a plan — we credit the work toward it.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6 · THREE DOORS -->
-  <section class="sec-dark" style="padding-top:4rem">
-    <div class="container">
-      <div class="sh center reveal" style="margin-bottom:2.2rem"><div class="sh-label">// Start here</div><h2 class="sh-title">Three doors, <span class="ac">not nineteen</span></h2><div class="sh-line" style="margin:1.2rem auto"></div><p class="sh-sub" style="margin:0 auto">Pick the door that matches where you are. Each opens the full menu, filtered.</p></div>
-
-      <div class="plans-grid reveal">
-
-        <div class="plan-card">
-          <div class="plan-name">Try Twilight</div>
-          <div class="plan-target">// a low-risk first look</div>
-          <ul class="door-ex">
-            <li>IT Consultation <b>clarify</b></li>
-            <li>Dark Web Scan <b>inspect</b></li>
-            <li>Device Cleanup <b>restore</b></li>
-          </ul>
-          <button class="door-link" data-seeall="try">See all 3 →</button>
-        </div>
-
-        <div class="plan-card featured">
-          <div class="plan-badge">Most booked</div>
-          <div class="plan-name">Fix My Setup</div>
-          <div class="plan-target">// one thing, fixed right</div>
-          <ul class="door-ex">
-            <li>Employee Ready <b>bounded</b></li>
-            <li>Microsoft 365 Secure Reset <b>scoped</b></li>
-            <li>Day One Business IT <b>founding path</b></li>
-          </ul>
-          <button class="door-link" data-seeall="fix">See all 16 →</button>
-        </div>
-
-        <div class="plan-card">
-          <div class="plan-name">Run My IT</div>
-          <div class="plan-target">// stop calling per-fix · limited seats</div>
-          <ul class="door-ex">
-            <li>Twilight Essentials <b>core care</b></li>
-            <li>Twilight Secure <b>protected</b></li>
-            <li>Twilight Sentinel <b>advanced</b></li>
-          </ul>
-          <a href="#managed-plans" class="door-link">Compare Managed Plans →</a>
-        </div>
-
-      </div>
-
-      <!-- 7 · FULL MENU (collapsed) -->
+      <div class="compact-menu-head reveal"><div class="sh-label">// Full service index</div><h2>Need a different bounded fix?</h2><p>The common starting projects stay visible above. The deeper service index remains here when the problem is more specific.</p></div>
       <details class="svc-menu reveal" id="svc-menu">
         <summary>Browse all 20 one-time services</summary>
         <div class="svc-menu-body">
@@ -313,32 +346,11 @@
     </div>
   </section>
 
-  <!-- 8 · MANAGED CROSS-LINK (non-card comparison band) -->
-  <section style="padding-top:3.5rem">
-    <div class="container">
-      <div class="callout reveal">
-        <h3>Calling us more than twice a month?</h3>
-        <p>At that point a managed plan is usually cheaper than stacking one-time fixes — and you stop thinking about IT entirely. Same team, flat monthly rate, everything covered.</p>
-        <a href="#managed-plans" class="btn">Compare Managed Plans →</a>
-      </div>
-    </div>
-  </section>
-
-  <section style="padding-top:1.25rem">
-    <div class="container">
-      <div class="callout reveal">
-        <h3>Need answers from private documents—not another IT fix?</h3>
-        <p>That is the Private AI lane: start with a readiness audit, validate one workflow in a controlled pilot, and only then decide whether an on-premises appliance is justified.</p>
-        <a href="/ai/#path" class="btn">See the Private AI Path →</a>
-      </div>
-    </div>
-  </section>
-
-</div><!-- /shell -->
+</main><!-- /shell -->
 
 <footer>
   <div class="footer-inner">
-    <div>© 2026 <span class="nc">Twilight Tech LLC</span> · Atlanta, GA · <a class="footer-link" href="/labs/">Labs</a></div>
+    <div>© 2026 <span class="nc">Twilight Technology LLC</span> · Atlanta, GA · <a class="footer-link" href="/labs/">Labs</a></div>
     <div class="footer-status">All systems operational</div>
   </div>
 </footer>
@@ -358,7 +370,7 @@
   });
 })();
 </script>
-<script src="/assets/jbot-frontdesk-content.js?v=20260811-frontdesk-v3a" defer></script>
-<script src="/assets/jbot-widget.js?v=20260811-frontdesk-v3a" defer></script>
+<script src="/assets/jbot-frontdesk-content.js?v=20261021-frontdesk-v6" defer></script>
+<script src="/assets/jbot-widget.js?v=20261021-frontdesk-v6" defer></script>
 </body>
 </html>

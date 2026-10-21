@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enter Technology | Practice the Work, Build the Evidence</title>
+<meta name="description" content="Enter Technology bridges study and technical work through practical roadmaps, guided homelabs, career resources, and job-shaped practice environments in development.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://twilighttech.io/enter/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://twilighttech.io/enter/">
+<meta property="og:title" content="Enter Technology | Twilight Technology">
+<meta property="og:description" content="Practice believable technical work. Explain your decisions. Leave with evidence of what you can do.">
+<meta property="og:image" content="https://twilighttech.io/roadmap/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Enter Technology | Twilight Technology">
+<meta name="twitter:description" content="The bridge between studying technology and showing that you can do the work.">
+<meta name="twitter:image" content="https://twilighttech.io/roadmap/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800;900&amp;family=Rajdhani:wght@300;400;500;600;700&amp;family=Share+Tech+Mono&amp;display=swap" rel="stylesheet">
+<link rel="icon" href="/assets/logos/tt-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<script defer data-domain="twilighttech.io" src="https://plausible.io/js/pa-c0LpTwqFVP1lceRI6RQ_N.js"></script>
+<style>
+:root{--enter:#ffbf47;--enter-soft:#ffdf9a;--enter-line:rgba(255,191,71,.3)}
+.enter-hero{min-height:92svh;display:grid;align-items:center;padding:8.5rem 0 5rem;overflow:hidden;background:radial-gradient(circle at 18% 28%,rgba(255,191,71,.08),transparent 26%),radial-gradient(circle at 76% 55%,rgba(0,240,255,.07),transparent 30%)}
+.enter-hero-grid{display:grid;grid-template-columns:minmax(0,1.04fr) minmax(390px,.96fr);gap:clamp(2.5rem,6vw,6rem);align-items:center}.enter-hero-grid>*{min-width:0}
+.enter-kicker,.console-kicker,.route-state,.evidence-label,.boundary-label{font-family:var(--mono);font-size:.66rem;letter-spacing:2px;text-transform:uppercase}.enter-kicker{color:var(--enter);margin-bottom:1.3rem}
+.enter-title{max-width:790px;font-family:var(--display);font-size:clamp(2.55rem,6.4vw,6.2rem);font-weight:900;line-height:.96;letter-spacing:-.045em;color:#fff}.enter-title span{background:linear-gradient(105deg,var(--enter-soft),var(--enter) 42%,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+.enter-lead{max-width:700px;margin-top:1.7rem;color:var(--muted);font-size:clamp(1.05rem,1.9vw,1.28rem);line-height:1.75}.enter-lead strong{color:#fff}.enter-actions{display:flex;gap:.85rem;flex-wrap:wrap;margin-top:2rem}.enter-actions .btn-solid{background:linear-gradient(135deg,var(--enter),#ff7b2f);color:#1a0d00}
+.practice-console{position:relative;border:1px solid var(--enter-line);background:linear-gradient(160deg,rgba(12,16,28,.97),rgba(4,6,15,.98));box-shadow:0 34px 90px rgba(0,0,0,.46);overflow:hidden}.practice-console::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 47px,rgba(255,255,255,.032) 48px),linear-gradient(90deg,rgba(255,191,71,.04),transparent 45%);pointer-events:none}
+.console-top{position:relative;display:flex;justify-content:space-between;gap:1rem;padding:.9rem 1rem;border-bottom:1px solid var(--enter-line);background:rgba(255,191,71,.035)}.console-kicker{color:var(--enter)}.console-status{display:flex;align-items:center;gap:.5rem;color:#b9c9df;font:600 .58rem var(--mono);letter-spacing:1px;text-transform:uppercase}.console-status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--enter);box-shadow:0 0 10px var(--enter)}
+.console-body{position:relative;padding:1.25rem}.console-role{display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:center;padding:1rem;border:1px solid rgba(255,255,255,.08);background:#070d19}.role-badge{width:52px;height:52px;display:grid;place-items:center;border:1px solid var(--cyan);color:var(--cyan);font:800 .72rem var(--display)}.role-meta span{display:block;color:var(--enter);font:600 .6rem var(--mono);letter-spacing:1.5px;text-transform:uppercase}.role-meta strong{display:block;margin-top:.25rem;color:#fff;font:700 1rem var(--display)}
+.ticket{margin-top:.9rem;border-left:2px solid var(--cyan);padding:1rem 1rem 1rem 1.15rem;background:rgba(0,240,255,.035)}.ticket span{color:var(--cyan);font:600 .58rem var(--mono);letter-spacing:1.4px;text-transform:uppercase}.ticket strong{display:block;margin:.35rem 0;color:#fff;font-size:1rem}.ticket p{color:var(--muted);font-size:.82rem;line-height:1.55}
+.work-path{display:grid;grid-template-columns:repeat(4,1fr);margin-top:.9rem;border:1px solid rgba(255,255,255,.08)}.work-step{min-width:0;padding:.85rem .55rem;text-align:center;border-right:1px solid rgba(255,255,255,.08)}.work-step:last-child{border-right:0}.work-step b{display:block;color:var(--enter);font:700 .64rem var(--mono)}.work-step span{display:block;margin-top:.25rem;color:#bdc9df;font-size:.68rem}
+.console-evidence{margin-top:.9rem;padding:1rem;border:1px solid rgba(255,191,71,.22);background:rgba(255,191,71,.035)}.evidence-label{color:var(--enter)}.evidence-row{display:flex;justify-content:space-between;gap:1rem;margin-top:.45rem;color:#dfe7f6;font-size:.76rem}.evidence-row span:last-child{color:var(--green);font-family:var(--mono)}.console-note{position:relative;padding:.8rem 1rem;border-top:1px solid rgba(255,255,255,.07);color:#8593ad;font:600 .56rem var(--mono);letter-spacing:1px;text-transform:uppercase}
+.bridge-band{border-block:1px solid var(--border);background:rgba(255,191,71,.025)}.bridge-grid{display:grid;grid-template-columns:repeat(3,1fr)}.bridge-step{position:relative;padding:1.6rem 1.7rem;border-right:1px solid var(--border)}.bridge-step:last-child{border-right:0}.bridge-step::after{content:"→";position:absolute;right:-.45rem;top:50%;z-index:2;color:var(--enter);font:700 1rem var(--mono);transform:translateY(-50%)}.bridge-step:last-child::after{display:none}.bridge-step span{color:var(--enter);font:600 .6rem var(--mono);letter-spacing:1.4px;text-transform:uppercase}.bridge-step strong{display:block;margin:.45rem 0;color:#fff;font:700 .9rem var(--display)}.bridge-step p{color:var(--muted);font-size:.82rem;line-height:1.5}
+.now-intro{display:grid;grid-template-columns:.85fr 1.15fr;gap:3rem;align-items:end;margin-bottom:2.5rem}.now-intro p{max-width:620px;color:var(--muted);font-size:1rem;line-height:1.8}.now-grid{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--border);background:var(--border);gap:1px}.start-card{--tone:var(--cyan);position:relative;min-height:300px;padding:2rem;background:linear-gradient(150deg,color-mix(in srgb,var(--tone) 5%,#080918),#050711 72%);display:flex;flex-direction:column;overflow:hidden}.start-card:nth-child(2){--tone:var(--green)}.start-card:nth-child(3){--tone:var(--magenta)}.start-card:nth-child(4){--tone:var(--enter)}.start-card::before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,var(--tone),transparent)}.route-state{color:var(--tone)}.start-card h2{margin:1.3rem 0 .7rem;color:#fff;font:800 1.25rem/1.25 var(--display)}.start-card p{color:var(--muted);line-height:1.65}.start-card a{display:inline-block;align-self:flex-start;margin-top:auto;padding-top:1.5rem;color:var(--tone);font:700 .68rem var(--mono);letter-spacing:1.3px;text-transform:uppercase;border-bottom:1px solid color-mix(in srgb,var(--tone) 45%,transparent)}
+.role-section{background:linear-gradient(180deg,rgba(255,191,71,.025),transparent)}.role-intro{display:grid;grid-template-columns:1fr .82fr;gap:3rem;align-items:end;margin-bottom:2.5rem}.role-intro p{color:var(--muted);line-height:1.8}.role-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}.role-card{position:relative;min-height:380px;padding:1.6rem 1.45rem;border:1px solid var(--border);background:rgba(6,10,20,.84);display:flex;flex-direction:column}.role-card::before{content:attr(data-code);position:absolute;right:.8rem;top:.3rem;color:rgba(255,191,71,.065);font:900 5.5rem var(--display)}.role-card .route-state{position:relative;color:var(--enter)}.role-card h3{position:relative;margin:2.8rem 0 .8rem;color:#fff;font:800 1.05rem var(--display)}.role-card>p{position:relative;color:var(--muted);line-height:1.6;font-size:.88rem}.role-card ul{position:relative;list-style:none;display:grid;gap:.55rem;margin:1.25rem 0}.role-card li{color:#d8e1f2;font-size:.8rem}.role-card li::before{content:"//";margin-right:.45rem;color:var(--enter);font-family:var(--mono)}.role-proof{position:relative;margin-top:auto;padding-top:1rem;border-top:1px solid rgba(255,255,255,.08)}.role-proof span{display:block;color:#8391ac;font:600 .58rem var(--mono);letter-spacing:1.2px;text-transform:uppercase}.role-proof strong{display:block;margin-top:.35rem;color:var(--enter-soft);font-size:.8rem;line-height:1.5}
+.evidence-shell{display:grid;grid-template-columns:.78fr 1.22fr;gap:3rem;align-items:start}.evidence-copy p{margin-top:1rem;color:var(--muted);line-height:1.8}.evidence-board{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid var(--border)}.evidence-item{min-height:180px;padding:1.4rem}.evidence-item:nth-child(even){border-left:1px solid var(--border)}.evidence-item:nth-child(n+3){border-top:1px solid var(--border)}.evidence-item span{color:var(--enter);font:600 .62rem var(--mono);letter-spacing:1.3px}.evidence-item h3{margin:1rem 0 .45rem;color:#fff;font:700 .9rem var(--display)}.evidence-item p{color:var(--muted);font-size:.8rem;line-height:1.55}
+.enter-boundary{margin-top:2.3rem;padding:1.4rem;border-left:2px solid var(--enter);background:rgba(255,191,71,.035)}.boundary-label{color:var(--enter);margin-bottom:.45rem}.enter-boundary p{color:var(--muted);line-height:1.7}.enter-boundary strong{color:#fff}
+.enter-final{text-align:center;padding:7rem 0 7.5rem}.enter-final .container{max-width:880px}.enter-final p{max-width:700px;margin:1.3rem auto 2.4rem;color:var(--muted);font-size:1rem;line-height:1.8}.enter-final-actions{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}.enter-final .btn-solid{background:linear-gradient(135deg,var(--enter),#ff7b2f);color:#1a0d00}
+@media(max-width:1040px){.role-grid{grid-template-columns:1fr 1fr}.enter-hero-grid,.now-intro,.role-intro,.evidence-shell{grid-template-columns:1fr}.practice-console{max-width:700px}.now-intro,.role-intro{gap:1rem}.role-intro p{max-width:680px}}
+@media(max-width:720px){.enter-hero{min-height:auto;padding:7.5rem 0 3.5rem}.enter-title{font-size:clamp(2.2rem,11.4vw,3.7rem);overflow-wrap:anywhere}.enter-lead{overflow-wrap:anywhere}.enter-actions .btn,.enter-final-actions .btn{width:100%;text-align:center}.practice-console{width:100%;min-width:0}.console-top{align-items:flex-start;flex-direction:column}.work-path{grid-template-columns:1fr 1fr}.work-step:nth-child(2){border-right:0}.work-step:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.08)}.evidence-row{flex-direction:column;gap:.2rem}.bridge-grid,.now-grid,.role-grid,.evidence-board{grid-template-columns:1fr}.bridge-step{border-right:0;border-bottom:1px solid var(--border)}.bridge-step::after{content:"↓";right:1rem;top:auto;bottom:-.75rem}.start-card{min-height:0}.role-card{min-height:0}.evidence-item:nth-child(even){border-left:0}.evidence-item+.evidence-item{border-top:1px solid var(--border)}.enter-final{padding:5.5rem 0 6.5rem}}
+</style>
+</head>
+<body class="stage-enter">
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<canvas id="global-particles"></canvas>
+
+<nav aria-label="Primary">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Twilight Technology home"><img class="nav-mark" src="/assets/logos/tt-mark.svg" alt="">TWILIGHT<span class="sl">//</span>TECH</a>
+    <div class="nav-links">
+      <a href="/enter/" class="active" aria-current="page">Enter</a>
+      <a href="/services/">Sustain</a>
+      <a href="/further/">Further</a>
+      <a href="/labs/">Labs</a>
+      <a href="/#contact" class="nav-cta">Contact</a>
+    </div>
+    <button class="mob-tog" type="button" aria-label="Open menu">&#9776;</button>
+  </div>
+</nav>
+
+<main class="shell" id="main-content" tabindex="-1">
+  <section class="enter-hero">
+    <div class="container enter-hero-grid">
+      <div class="reveal">
+        <div class="enter-kicker">Stage 01 // Enter Technology</div>
+        <h1 class="enter-title">Practice the work before someone hands you <span>the title.</span></h1>
+        <p class="enter-lead">Studying can teach you what a tool is. Enter Technology is about learning what to do when the ticket, alert, user, handoff, or bad assumption shows up. <strong>Practice believable work, explain your decisions, and leave with evidence of what you can do.</strong></p>
+        <div class="enter-actions"><a class="btn btn-solid" href="#start-now">Choose a live starting point</a><a class="btn" href="#role-environments">See what we are building</a></div>
+      </div>
+
+      <div class="practice-console reveal" role="img" aria-label="Blueprint of a role-based IT support practice environment. A sign-in ticket moves through observe, triage, document, and escalate steps and leaves a troubleshooting record as evidence.">
+          <div class="console-top"><div class="console-kicker">First Role Lab // Help Desk</div><div class="console-status">Selected · not yet live</div></div>
+        <div class="console-body">
+          <div class="console-role"><div class="role-badge">L1</div><div class="role-meta"><span>Practice lane</span><strong>IT Support Desk</strong></div></div>
+          <div class="ticket"><span>Scenario 014 // Identity</span><strong>A new employee cannot sign in.</strong><p>The visible symptom is only the beginning. The operator has to find the boundary, protect the account, document the work, and know when to escalate.</p></div>
+          <div class="work-path" aria-hidden="true"><div class="work-step"><b>01</b><span>Observe</span></div><div class="work-step"><b>02</b><span>Triage</span></div><div class="work-step"><b>03</b><span>Document</span></div><div class="work-step"><b>04</b><span>Escalate</span></div></div>
+          <div class="console-evidence"><div class="evidence-label">Evidence left behind</div><div class="evidence-row"><span>Troubleshooting path · ticket note · handoff</span><span>REVIEWABLE</span></div></div>
+        </div>
+        <div class="console-note">Help Desk is first · scenarios, guidance, evidence, and delivery are still being built</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="bridge-band"><div class="container bridge-grid">
+    <div class="bridge-step"><span>01 // Learn</span><strong>Understand the system</strong><p>Build the vocabulary and mental model without memorizing your way past the work.</p></div>
+    <div class="bridge-step"><span>02 // Practice</span><strong>Work the scenario</strong><p>Make decisions inside a bounded environment where failure becomes useful feedback.</p></div>
+    <div class="bridge-step"><span>03 // Show</span><strong>Leave the evidence</strong><p>Explain what you saw, what you changed, what you refused, and what should happen next.</p></div>
+  </div></div>
+
+  <section id="start-now">
+    <div class="container">
+      <div class="now-intro reveal"><div class="sh"><div class="sh-label">// Available now</div><h2 class="sh-title">Start with the rung that fits <span class="ac">today.</span></h2><div class="sh-line"></div></div><p>The full role environments are still being bounded. These public routes already help you choose a direction, build your first useful practice environment, study with context, or get unstuck with a focused plan.</p></div>
+      <div class="now-grid">
+        <article class="start-card reveal"><div class="route-state">Free // Orientation</div><h2>Find a direction before collecting more certifications.</h2><p>The Roadmap to Break Into IT helps you choose a practical route and identify the kind of proof that route needs.</p><a href="/roadmap/">Open the free roadmap →</a></article>
+        <article class="start-card reveal"><div class="route-state">Free // First build</div><h2>Turn the laptop you own into a practice environment.</h2><p>The Homelab Starter walks through a useful first build without requiring a server rack or an expensive shopping list.</p><a href="/homelab-starter/">Build the first homelab →</a></article>
+        <article class="start-card reveal"><div class="route-state">Library // Study and career</div><h2>Connect the exam, the lab, and the first desk.</h2><p>The Guides desk brings A+ study support, practical projects, career preparation, and first-90-day thinking into one route.</p><a href="/guides/">Browse the Guides desk →</a></article>
+        <article class="start-card reveal"><div class="route-state">Focused // One conversation</div><h2>Stop guessing what to study next.</h2><p>The current strategy session is specifically bounded to CompTIA A+ and turns your exam, timeline, and sticking point into a focused fourteen-day plan.</p><a href="/strategy/">See the A+ strategy session →</a></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="role-section" id="role-environments">
+    <div class="container">
+      <div class="role-intro reveal"><div class="sh"><div class="sh-label">// In development</div><h2 class="sh-title">A practice space shaped like <span class="ac">the job.</span></h2><div class="sh-line"></div></div><p><strong>Help Desk will be the first Role Lab.</strong> It is not live yet: the scenarios, guidance, evidence model, and delivery format still have to be built and tested. SOC, NOC, and identity/cloud remain later candidate labs.</p></div>
+      <div class="role-grid">
+        <article class="role-card reveal" data-code="HD"><div class="route-state">First build // Help Desk Role Lab</div><h3>Handle the human problem and the technical one.</h3><p>Practice the first line of support as an operating role, not a list of trivia questions.</p><ul><li>Ticket intake and clarification</li><li>Identity and device triage</li><li>User communication</li><li>Escalation and handoff</li></ul><div class="role-proof"><span>Planned evidence</span><strong>Ticket notes · troubleshooting path · escalation record</strong></div></article>
+        <article class="role-card reveal" data-code="SOC"><div class="route-state">Later candidate // Security Operations</div><h3>Investigate without outrunning your authority.</h3><p>Work bounded alerts where scope, evidence, refusal, and escalation matter as much as the finding.</p><ul><li>Alert review and context</li><li>Scope and authorization</li><li>Investigation notes</li><li>Defensive escalation</li></ul><div class="role-proof"><span>Possible evidence</span><strong>Finding record · evidence trail · safe next action</strong></div></article>
+        <article class="role-card reveal" data-code="NOC"><div class="route-state">Later candidate // Network Operations</div><h3>Read the signal before touching the system.</h3><p>Practice monitoring, incident orientation, communication, and recovery-minded handoff.</p><ul><li>Health and availability signals</li><li>Impact and dependency checks</li><li>Incident chronology</li><li>Change-aware escalation</li></ul><div class="role-proof"><span>Possible evidence</span><strong>Incident timeline · impact note · operator handoff</strong></div></article>
+        <article class="role-card reveal" data-code="ID"><div class="route-state">Later candidate // Identity and Cloud</div><h3>Make access useful, reviewable, and reversible.</h3><p>Practice the decisions behind onboarding, access, role changes, and clean departure.</p><ul><li>Microsoft 365 and Entra context</li><li>Joiner, mover, leaver flows</li><li>Access review and least privilege</li><li>Change documentation</li></ul><div class="role-proof"><span>Possible evidence</span><strong>Access decision · change record · review checklist</strong></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec-dark">
+    <div class="container evidence-shell">
+      <div class="evidence-copy reveal"><div class="sh-label">// The evidence model</div><h2 class="sh-title">Not just completion. <span class="ac">A record of judgment.</span></h2><div class="sh-line"></div><p>A finished scenario should make your thinking inspectable. The useful proof is not a decorative score. It is the trail showing how you oriented yourself, handled uncertainty, respected the boundary, and communicated the next step.</p><div class="enter-boundary"><div class="boundary-label">Deliberate boundary</div><p><strong>Enter uses simulated, bounded environments.</strong> It does not provide production access, impersonate real employers, guarantee certification or employment, or convert private Labs projects into one merged training product.</p></div></div>
+      <div class="evidence-board reveal">
+        <div class="evidence-item"><span>01 // ORIENT</span><h3>What did you notice?</h3><p>Identify the people, system, symptom, scope, and missing context before acting.</p></div>
+        <div class="evidence-item"><span>02 // DECIDE</span><h3>Why this next step?</h3><p>Connect the observation to a bounded action and explain the alternative you rejected.</p></div>
+        <div class="evidence-item"><span>03 // DOCUMENT</span><h3>What survives the exercise?</h3><p>Leave a ticket note, timeline, checklist, handoff, finding, or other work-shaped artifact.</p></div>
+        <div class="evidence-item"><span>04 // EXPLAIN</span><h3>Can another person follow it?</h3><p>Translate the technical path into a clear account of impact, uncertainty, and next action.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="enter-final" id="next-step">
+    <div class="container reveal"><div class="sh-label">// Find your doorway</div><h2 class="sh-title">What kind of technical work are you trying to <span class="ac">enter?</span></h2><p>Use one of the live starting points above, or tell the Front Desk the role, certification, project, or part of the path that keeps feeling vague. You do not need the perfect plan before the first useful step.</p><div class="enter-final-actions"><button type="button" class="btn btn-solid" data-open-jbot>Ask the Front Desk</button><a class="btn" href="mailto:james@twilighttech.io?subject=Enter%20Technology%20path">Email James</a><a class="btn" href="https://discord.gg/QKGsTZRWMx" target="_blank" rel="noopener">Join the BreakRoom</a></div></div>
+  </section>
+</main>
+
+<footer><div class="footer-inner"><div>&copy; 2026 <span class="nc">Twilight Technology LLC</span> &middot; Atlanta, GA &middot; <a class="footer-link" href="/labs/">Labs</a></div><div class="footer-status">Practice with purpose</div></div></footer>
+<script src="/assets/site.js"></script>
+<script src="/assets/jbot-frontdesk-content.js?v=20261021-frontdesk-v6" defer></script>
+<script src="/assets/jbot-widget.js?v=20261021-frontdesk-v6" defer></script>
+</body>
+</html>

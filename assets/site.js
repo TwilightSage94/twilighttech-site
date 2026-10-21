@@ -1,6 +1,8 @@
 /* Twilight Tech — shared site JS: starfield canvas, hero particles, scroll reveal, mobile nav.
    Starfield logic preserved verbatim from the original site. */
 (function () {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   // ── GLOBAL CANVAS STARFIELD (runs on every page) ──
   const canvas = document.getElementById('global-particles');
   if (canvas) {
@@ -54,14 +56,14 @@
         ctx.beginPath(); ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2); ctx.fill();
       });
       ctx.shadowBlur = 0;
-      requestAnimationFrame(draw);
+      if (!reduceMotion) requestAnimationFrame(draw);
     }
     draw();
   }
 
   // ── HERO FLOATING PARTICLES ──
   const pc = document.getElementById('particles');
-  if (pc) {
+  if (pc && !reduceMotion) {
     for (let i = 0; i < 26; i++) {
       const p = document.createElement('div');
       p.className = 'particle';
@@ -73,15 +75,40 @@
   }
 
   // ── SCROLL REVEAL ──
-  const obs = new IntersectionObserver(es => {
-    es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  const revealItems = document.querySelectorAll('.reveal');
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealItems.forEach(el => el.classList.add('visible'));
+  } else {
+    const obs = new IntersectionObserver(es => {
+      es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    revealItems.forEach(el => obs.observe(el));
+  }
 
   // ── MOBILE NAV ──
   const tog = document.querySelector('.mob-tog');
   const links = document.querySelector('.nav-links');
-  if (tog && links) tog.addEventListener('click', () => links.classList.toggle('open'));
+  if (tog && links) {
+    if (!links.id) links.id = 'primary-navigation';
+    tog.setAttribute('aria-controls', links.id);
+    tog.setAttribute('aria-expanded', 'false');
+
+    const setMenu = open => {
+      links.classList.toggle('open', open);
+      tog.setAttribute('aria-expanded', String(open));
+      tog.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+
+    tog.addEventListener('click', () => setMenu(!links.classList.contains('open')));
+    links.addEventListener('click', event => {
+      if (event.target.closest('a')) setMenu(false);
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key !== 'Escape' || !links.classList.contains('open')) return;
+      setMenu(false);
+      tog.focus();
+    });
+  }
 
   // ── DECLARATIVE PLAUSIBLE EVENTS ──
   // Add data-track="Event Name" to clicks and data-track-view="Event Name"

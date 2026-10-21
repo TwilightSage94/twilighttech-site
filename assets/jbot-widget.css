@@ -92,7 +92,7 @@ html.jbot-mobile-open body { overflow: hidden; overscroll-behavior: none; }
   position: absolute;
   right: 0;
   bottom: 76px;
-  width: min(410px, calc(100vw - 28px));
+  width: min(470px, calc(100vw - 28px));
   height: min(640px, calc(100dvh - 110px));
   display: grid;
   grid-template-rows: auto auto minmax(0, 1fr) auto auto;
@@ -358,6 +358,25 @@ html.jbot-mobile-open body { overflow: hidden; overscroll-behavior: none; }
   text-transform: uppercase;
 }
 
+.jbot-route-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: .7rem;
+  padding: .18rem .08rem 0;
+}
+
+.jbot-route-label strong {
+  color: #fff;
+  font: 700 .64rem/1.3 "Orbitron", "Segoe UI", sans-serif;
+}
+
+.jbot-route-label span {
+  color: #718791;
+  font: 400 .5rem/1.35 "Share Tech Mono", monospace;
+  text-align: right;
+}
+
 .jbot-widget .bubble {
   position: relative;
   padding: .75rem .82rem;
@@ -589,6 +608,20 @@ html.jbot-mobile-open body { overflow: hidden; overscroll-behavior: none; }
 .jbot-widget .quick.breakroom .ico { color: #eba8dc; border-color: #704e6b; }
 .jbot-widget .quick.aptsu .ico { color: #8de2aa; border-color: #427253; }
 
+@media (min-width: 561px) {
+  .jbot-quick-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .jbot-widget .quick {
+    grid-template-columns: 28px minmax(0, 1fr);
+    min-height: 52px;
+  }
+  .jbot-widget .quick.context {
+    grid-column: 1 / -1;
+    grid-template-columns: 28px minmax(0, 1fr) auto;
+    min-height: 58px;
+  }
+  .jbot-widget .quick:not(.context) .quick-context { display: none; }
+}
+
 .jbot-mini-status {
   align-self: flex-start;
   color: #667d87;
@@ -719,6 +752,8 @@ html.jbot-mobile-open body { overflow: hidden; overscroll-behavior: none; }
   .jbot-launch-label { display: none; }
   .jbot-launch-orb { width: 58px; height: 58px; }
   .jbot-chat { padding: .85rem .78rem 1rem; }
+  .jbot-route-label { align-items: flex-start; flex-direction: column; gap: .18rem; }
+  .jbot-route-label span { text-align: left; }
   .jbot-input-row { padding-left: .65rem; padding-right: .65rem; }
   .jbot-consent { padding-bottom: max(.66rem, env(safe-area-inset-bottom, 0px)); }
 }

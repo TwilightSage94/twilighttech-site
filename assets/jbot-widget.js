@@ -2,7 +2,7 @@
   'use strict';
 
   var OPEN_KEY = 'tt_jbot_open_v1';
-  var ASSET_VERSION = '20260811-frontdesk-v3a';
+  var ASSET_VERSION = '20261021-frontdesk-v6';
   var CONTENT = window.TwilightFrontDeskContent;
 
   if (!CONTENT) return;
@@ -57,9 +57,9 @@
         '<div class="jbot-chat" id="jbot-chat" aria-live="polite">' +
           '<div class="jbot-overline">' + shell.overline + '</div>' +
           '<div class="bubble bot"><span class="msg-jbot" aria-hidden="true"><span class="tiny-ant"></span><span class="tiny-eye left"></span><span class="tiny-eye right"></span></span>' + context.message + '</div>' +
-          '<div class="jbot-front-card"><strong>' + shell.introTitle + '</strong><span>' + shell.introCopy + '</span></div>' +
-          '<div class="jbot-safe">' + shell.safety + '</div>' +
+          '<div class="jbot-route-label"><strong>' + shell.introTitle + '</strong><span>' + shell.introCopy + '</span></div>' +
           '<div class="jbot-quick-grid">' + quickMarkup(context.lane) + '</div>' +
+          '<div class="jbot-safe">' + shell.safety + '</div>' +
         '</div>' +
         '<div class="jbot-input-row">' +
           '<label class="jbot-hp" for="jbot-company">Leave this field blank</label>' +
@@ -191,6 +191,11 @@
 
     launcher.addEventListener('click', function () {
       setOpen(root, panel, launcher, !root.classList.contains('is-open'), true);
+    });
+    document.querySelectorAll('[data-open-jbot]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        setOpen(root, panel, launcher, true, true);
+      });
     });
     close.addEventListener('click', function () {
       setOpen(root, panel, launcher, false, true);

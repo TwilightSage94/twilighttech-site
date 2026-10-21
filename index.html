@@ -71,34 +71,35 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <canvas id="global-particles"></canvas>
 
-<nav>
+<nav aria-label="Primary">
   <div class="nav-inner">
-    <a href="/" class="nav-logo"><img class="nav-mark" src="/assets/logos/tt-mark.svg" alt="Twilight Tech">TWILIGHT<span class="sl">//</span>TECH</a>
+    <a href="/" class="nav-logo" aria-label="Twilight Technology home"><img class="nav-mark" src="/assets/logos/tt-mark.svg" alt="">TWILIGHT<span class="sl">//</span>TECH</a>
     <div class="nav-links">
-      <a href="/services/">Managed IT</a>
-      <a href="/ai/yours/">AI Solutions</a>
+      <a href="/enter/">Enter</a>
+      <a href="/services/">Sustain</a>
+      <a href="/further/">Further</a>
       <a href="/labs/">Labs</a>
-      <a href="/guides/">Guides</a>
       <a href="#contact" class="nav-cta">Contact</a>
     </div>
-    <button class="mob-tog" aria-label="Menu">&#9776;</button>
+    <button class="mob-tog" type="button" aria-label="Open menu">&#9776;</button>
   </div>
 </nav>
 
-<div class="shell">
+<main class="shell" id="main-content" tabindex="-1">
   <section id="hero" class="home-hero">
     <div class="hero-particles" id="particles"></div>
     <div class="hero-inner">
       <div class="hero-badge"><span class="badge-blink"></span> Atlanta, GA &middot; Remote-First &middot; Nationwide</div>
       <div class="mission-kicker">Twilight Technology helps people</div>
       <h1 class="mission-stack">
-        <span class="mission-line enter"><a href="#enter"><span class="mission-verb">Enter</span>&nbsp;Technology<span class="mission-period">.</span></a></span>
-        <span class="mission-line sustain"><a href="#sustain"><span class="mission-verb">Sustain</span>&nbsp;Technology<span class="mission-period">.</span></a></span>
-        <span class="mission-line further"><a href="#further"><span class="mission-verb">Further</span>&nbsp;Technology<span class="mission-period">.</span></a></span>
+        <span class="mission-line enter"><a href="/enter/"><span class="mission-verb">Enter</span>&nbsp;Technology<span class="mission-period">.</span></a></span>
+        <span class="mission-line sustain"><a href="/services/"><span class="mission-verb">Sustain</span>&nbsp;Technology<span class="mission-period">.</span></a></span>
+        <span class="mission-line further"><a href="/further/"><span class="mission-verb">Further</span>&nbsp;Technology<span class="mission-period">.</span></a></span>
       </h1>
-      <p class="mission-copy">From your first confident step into IT, through the systems your business depends on, to <strong>private AI and what comes next.</strong></p>
+      <p class="mission-copy">From your first confident step into IT, through the systems your business depends on, to <strong>the engineering, software, and governed AI that come next.</strong></p>
       <div class="hero-btns">
         <a href="#paths" class="btn btn-solid">Find Your Path</a>
         <button type="button" class="btn" data-open-jbot>Ask J-Bot</button>
@@ -109,8 +110,8 @@
 
   <div class="ticker-wrap identity-ticker">
     <div class="ticker">
-      <span class="ticker-item">Guides</span><span class="ticker-item">The BreakRoom</span><span class="ticker-item">A Place To Show Up</span><span class="ticker-item">Managed IT</span><span class="ticker-item">Cybersecurity</span><span class="ticker-item">Website Front Desk</span><span class="ticker-item">Private AI</span><span class="ticker-item">J-Bot</span>
-      <span class="ticker-item">Guides</span><span class="ticker-item">The BreakRoom</span><span class="ticker-item">A Place To Show Up</span><span class="ticker-item">Managed IT</span><span class="ticker-item">Cybersecurity</span><span class="ticker-item">Website Front Desk</span><span class="ticker-item">Private AI</span><span class="ticker-item">J-Bot</span>
+      <span class="ticker-item">Guides</span><span class="ticker-item">The BreakRoom</span><span class="ticker-item">A Place To Show Up</span><span class="ticker-item">Managed IT</span><span class="ticker-item">Cybersecurity</span><span class="ticker-item">Rover</span><span class="ticker-item">Website Front Desk</span><span class="ticker-item">Private AI</span><span class="ticker-item">J-Bot</span>
+      <span class="ticker-item">Guides</span><span class="ticker-item">The BreakRoom</span><span class="ticker-item">A Place To Show Up</span><span class="ticker-item">Managed IT</span><span class="ticker-item">Cybersecurity</span><span class="ticker-item">Rover</span><span class="ticker-item">Website Front Desk</span><span class="ticker-item">Private AI</span><span class="ticker-item">J-Bot</span>
     </div>
   </div>
 
@@ -126,17 +127,17 @@
         <article class="pathway enter" id="enter" data-step="01">
           <div class="path-kicker">Stage 01 &middot; Access</div>
           <h3>Enter Technology</h3>
-          <p>Build the skills, confidence, and community to step into technology without pretending the path is obvious.</p>
+          <p>Practice believable technical work, explain your decisions, and leave with evidence of what you can do.</p>
           <div class="path-offers">
+            <div class="path-offer">Role environments</div>
             <div class="path-offer">Guides</div>
             <div class="path-offer">From Cert to Career</div>
             <div class="path-offer">The BreakRoom community</div>
-            <div class="path-offer">A Place To Show Up</div>
           </div>
           <div class="path-actions">
-            <a class="path-link primary" href="/guides/">Enter through Guides &rarr;</a>
+            <a class="path-link primary" href="/enter/">Explore Enter Technology &rarr;</a>
+            <a class="path-link" href="/guides/">Browse the Guides &rarr;</a>
             <a class="path-link" href="https://discord.gg/QKGsTZRWMx" target="_blank" rel="noopener">Join the BreakRoom &rarr;</a>
-            <a class="path-link" href="https://aplacetoshowup.com/" target="_blank" rel="noopener">Visit A Place To Show Up &rarr;</a>
           </div>
         </article>
         <article class="pathway sustain" id="sustain" data-step="02">
@@ -158,14 +159,13 @@
           <h3>Further Technology</h3>
           <p>Turn hard-won knowledge into private systems, useful automation, and technology shaped around the people using it.</p>
           <div class="path-offers">
-            <div class="path-offer">Private AI appliances</div>
-            <div class="path-offer">AI operations &amp; automation</div>
-            <div class="path-offer">J-Bot &amp; Twilight Tech Labs</div>
+            <div class="path-offer">Engineering Services</div>
+            <div class="path-offer">AI Solutions</div>
+            <div class="path-offer">Custom Software</div>
           </div>
           <div class="path-actions">
-            <a class="path-link primary" href="/ai/yours/">Enter AI Solutions &rarr;</a>
-            <a class="path-link" href="/ai/">Explore Private AI &rarr;</a>
-            <a class="path-link" href="/ai/operations/">See AI Operations &rarr;</a>
+            <a class="path-link primary" href="/further/">Explore Further Technology &rarr;</a>
+            <a class="path-link" href="/ai/yours/">Explore AI Solutions &rarr;</a>
             <a class="path-link" href="/labs/">Enter the Labs &rarr;</a>
           </div>
         </article>
@@ -179,13 +179,18 @@
         <div class="sh-label">// Working now</div>
         <h2 class="sh-title">See the work. <span class="ac">Then decide.</span></h2>
         <div class="sh-line"></div>
-        <p class="sh-sub">The newest Twilight Tech offers are not pitch decks. Both have working demos on this site.</p>
+        <p class="sh-sub">Meet the working systems, live demos, and deployed releases behind Twilight Technology.</p>
       </div>
       <div class="live-stack">
         <article class="live-offer reveal">
+          <div class="live-tag" style="color:#ffd447">Further <span>V1 live &middot; first deployed in Watchtower</span></div>
+          <div class="live-copy"><h3>Rover</h3><p>Source-backed service-desk guidance, authenticated access, and cleaner technician handoffs—with technicians in control of what moves forward.</p></div>
+          <div class="live-actions"><a class="btn btn-solid" href="/rover/">Meet Rover</a><a class="btn" href="/labs/">See the Engineering</a></div>
+        </article>
+        <article class="live-offer reveal">
           <div class="live-tag">Sustain <span>Founding cohort &middot; limited openings</span></div>
           <div class="live-copy"><h3>Website Front Desk</h3><p>A branded guided chat that helps visitors find the right answer, captures a clean lead, and hands the conversation back to a human.</p></div>
-          <div class="live-actions"><button type="button" class="btn btn-solid" data-open-jbot>Try J-Bot</button><a class="btn" href="/site-chat/">Explore the Build</a></div>
+          <div class="live-actions"><button type="button" class="btn btn-solid" data-open-jbot>Try the Front Desk</button><a class="btn" href="/site-chat/">Explore the Build</a></div>
         </article>
         <article class="live-offer reveal">
           <div class="live-tag" style="color:var(--magenta)">Further <span>Readiness before architecture</span></div>
@@ -233,7 +238,7 @@
       </div>
     </div>
   </section>
-</div>
+</main>
 
 <footer>
   <div class="footer-inner">
@@ -243,7 +248,7 @@
 </footer>
 
 <script src="/assets/site.js"></script>
-<script src="/assets/jbot-frontdesk-content.js?v=20260811-frontdesk-v3a" defer></script>
-<script src="/assets/jbot-widget.js?v=20260811-frontdesk-v3a" defer></script>
+<script src="/assets/jbot-frontdesk-content.js?v=20261021-frontdesk-v6" defer></script>
+<script src="/assets/jbot-widget.js?v=20261021-frontdesk-v6" defer></script>
 </body>
 </html>

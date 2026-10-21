@@ -11,6 +11,7 @@ const DEFAULT_ALLOWED_ORIGINS = [
 const DEFAULT_TURNSTILE_HOSTNAMES = ['twilighttech.io', 'www.twilighttech.io'];
 
 const ALLOWED_LANES = {
+  'rover': 'Rover Support Workflow',
   'private-ai': 'Private AI',
   'site-chat': 'Website Chat / Intake',
   'system-care': 'System Care',

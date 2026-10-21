@@ -12,11 +12,17 @@
   --sans:'Rajdhani',sans-serif; --mono:'Share Tech Mono',monospace; --display:'Orbitron',sans-serif;
   --max:1200px;
 }
+body.stage-enter{--nav-stage:#ffbf47}
+body.stage-sustain{--nav-stage:var(--green)}
+body.stage-further{--nav-stage:var(--magenta)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--void);color:var(--text);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
+.skip-link{position:fixed;z-index:2000;left:1rem;top:1rem;transform:translateY(-180%);padding:.7rem 1rem;background:#fff;color:#02050c;font:700 .72rem var(--mono);letter-spacing:1px;text-transform:uppercase;box-shadow:0 8px 30px rgba(0,0,0,.38)}
+.skip-link:focus{transform:translateY(0)}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #fff;outline-offset:3px}
 
 /* ── ATMOSPHERIC LAYERS (the star grid — preserved verbatim) ── */
 body::before{content:'';position:fixed;inset:0;background:
@@ -42,9 +48,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(4,4,15,0.94
 .nav-links{display:flex;gap:0.1rem;align-items:center}
 .nav-links a{color:var(--muted);font-family:var(--mono);font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;padding:0.5rem 0.85rem;border:1px solid transparent;transition:all 0.25s;position:relative}
 .nav-links a:hover{color:var(--cyan);border-color:var(--border);background:rgba(0,240,255,0.04)}
-.nav-links a.active{color:var(--cyan)}
+.nav-links a.active,.nav-links a[aria-current="page"]{color:var(--nav-stage,var(--cyan));background:color-mix(in srgb,var(--nav-stage,var(--cyan)) 6%,transparent)}
 .nav-links a::after{content:'';position:absolute;bottom:-1px;left:50%;width:0;height:1px;background:var(--cyan);box-shadow:0 0 6px var(--cyan);transition:all 0.25s;transform:translateX(-50%)}
-.nav-links a:hover::after,.nav-links a.active::after{width:70%}
+.nav-links a:hover::after,.nav-links a.active::after,.nav-links a[aria-current="page"]::after{width:70%;background:var(--nav-stage,var(--cyan));box-shadow:0 0 6px var(--nav-stage,var(--cyan))}
 .nav-cta{background:rgba(0,240,255,0.08)!important;border-color:rgba(0,240,255,0.3)!important;color:var(--cyan)!important}
 .nav-cta:hover{background:rgba(0,240,255,0.15)!important;box-shadow:0 0 16px rgba(0,240,255,0.12)}
 .mob-tog{display:none;background:none;border:1px solid var(--border);color:var(--cyan);cursor:pointer;font-size:1.1rem;width:38px;height:38px}
@@ -171,7 +177,7 @@ section{padding:6rem 0;position:relative;z-index:2}
 .form-group{margin-bottom:1.1rem}
 .form-group label{display:block;font-family:var(--mono);font-size:.62rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem}
 .form-group input,.form-group select,.form-group textarea{width:100%;background:var(--void);border:1px solid var(--border);color:var(--text);padding:.7rem .8rem;font-family:var(--sans);font-size:.9rem;transition:border-color .25s}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--cyan)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:3px solid #fff;outline-offset:3px;border-color:var(--cyan)}
 .form-group textarea{min-height:110px;resize:vertical}
 
 /* ── FOOTER ── */
@@ -243,6 +249,7 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border);background
 @media(max-width:880px){
   .nav-links{position:fixed;top:64px;left:0;right:0;flex-direction:column;background:rgba(4,4,15,.98);border-bottom:1px solid var(--border);padding:1rem 2rem;gap:.3rem;display:none}
   .nav-links.open{display:flex}
+  .nav-links a{width:100%;min-height:44px;display:flex;align-items:center;justify-content:center}
   .mob-tog{display:inline-flex;align-items:center;justify-content:center}
   .contact-grid{grid-template-columns:1fr;gap:2.5rem}
   .hero-stats{gap:1.8rem}
@@ -254,4 +261,9 @@ footer{position:relative;z-index:2;border-top:1px solid var(--border);background
   .form-row{grid-template-columns:1fr}
   section{padding:4rem 0}
   .container{padding:0 1.3rem}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
 }

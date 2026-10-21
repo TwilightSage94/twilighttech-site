@@ -13,8 +13,8 @@
     shell: {
       subtitle: 'Twilight Tech front desk',
       overline: 'Start here',
-      introTitle: 'What should we do next?',
-      introCopy: "Choose what you need and I'll take you to the right place.",
+      introTitle: 'Choose a route',
+      introCopy: 'Start with the closest fit, or leave a high-level note below.',
       safety: 'Please do not paste private client files, child or custody details, health information, passwords, or urgent crisis details here.',
       inputPlaceholder: 'Pick a route or leave a high-level note...',
       consent: 'By sending, you agree Twilight Tech may reply by email. Do not include sensitive information.',
@@ -22,6 +22,7 @@
       launcherCopy: 'Open the Twilight Tech front desk.'
     },
     lanes: [
+      { slug: 'rover', icon: 'RV', label: 'Rover', leadLabel: 'Rover Support Workflow', detail: 'Guided service-desk support', className: 'system' },
       { slug: 'private-ai', icon: 'AI', label: 'Private AI', leadLabel: 'Private AI', detail: 'Sensitive document systems', className: 'private' },
       { slug: 'site-chat', icon: 'IN', label: 'Website Front Desk', leadLabel: 'Website Chat / Intake', detail: 'Guided site intake', className: 'intake' },
       { slug: 'system-care', icon: 'SYS', label: 'System Care', leadLabel: 'System Care', detail: 'Support and cleanup', className: 'system' },
@@ -33,6 +34,10 @@
       { slug: 'general', label: 'General', leadLabel: 'General' }
     ],
     pageContexts: [
+      {
+        prefixes: ['/rover'], lane: 'rover', label: 'Rover', step: 'Map the support workflow',
+        message: 'You are looking at Rover. Tell me where your team loses answers or handoff context, and I can help you leave James a clean workflow note.'
+      },
       {
         prefixes: ['/ai/yours'], lane: 'solutions', label: 'Twilight Tech Solutions', step: 'Map the operating problem',
         message: 'You are looking at purpose-built operational systems. I can show you the proof in Labs or help you leave James one clear operating problem.'
@@ -64,6 +69,7 @@
     },
     prompts: {
       laneSelected: {
+        'rover': 'Rover selected. Let us map the support workflow.',
         'private-ai': 'Private AI selected. Here is what Twilight Tech offers.',
         'site-chat': 'Website Front Desk selected. Here is what ships.',
         'system-care': 'System Care selected. Here are the support doors.',
@@ -73,6 +79,7 @@
         'general': 'I can route that and prepare a clean note for James.'
       },
       captureName: {
+        'rover': 'Let us map the Rover workflow. What should I call you?',
         'private-ai': 'Private AI it is. To start the desk note, what should I call you?',
         'site-chat': 'A site chat build. Nice. To start the desk note, what should I call you?',
         'system-care': 'Tech chaos has entered the front desk. What should I call you?',
@@ -82,6 +89,7 @@
         'general': 'I can route that. What should I call you?'
       },
       need: {
+        'rover': 'Where does your support workflow lose the answer, the context, or the handoff today?',
         'private-ai': 'At a high level, what documents or workflow should Private AI help with?',
         'site-chat': 'What should the site chat help visitors do - find answers, qualify a need, book, or leave a clean note?',
         'system-care': 'What part of the tech setup is causing the most drag right now?',
@@ -92,6 +100,14 @@
       }
     },
     resources: {
+      'rover': {
+        title: 'Rover',
+        copy: 'Source-backed guidance, authenticated access, and technician-controlled handoffs for service-desk teams.',
+        links: [
+          { label: 'Meet Rover', href: 'https://twilighttech.io/rover/' },
+          { label: 'See the engineering', href: 'https://labs.twilighttech.io/' }
+        ]
+      },
       'private-ai': {
         title: 'Private AI',
         copy: 'Private document systems built around approved sources, citations, controlled access, and clear data boundaries.',
