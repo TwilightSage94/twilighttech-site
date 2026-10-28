@@ -16,8 +16,11 @@
 
   function pageContext() {
     var path = window.location.pathname.toLowerCase();
+    var host = window.location.hostname.toLowerCase();
     var match = CONTENT.pageContexts.find(function (context) {
-      return context.prefixes.some(function (prefix) { return path.indexOf(prefix) === 0; });
+      var hostMatch = (context.hosts || []).indexOf(host) !== -1;
+      var pathMatch = context.prefixes.some(function (prefix) { return path.indexOf(prefix) === 0; });
+      return hostMatch || pathMatch;
     });
     return match || CONTENT.defaultContext;
   }

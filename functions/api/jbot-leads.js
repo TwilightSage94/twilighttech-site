@@ -5,10 +5,11 @@ const DELIVERY_TIMEOUT_MS = 8_000;
 const DEFAULT_ALLOWED_ORIGINS = [
   'https://twilighttech.io',
   'https://www.twilighttech.io',
+  'https://support.twilighttech.io',
   'http://localhost:8000',
   'http://127.0.0.1:8000',
 ];
-const DEFAULT_TURNSTILE_HOSTNAMES = ['twilighttech.io', 'www.twilighttech.io'];
+const DEFAULT_TURNSTILE_HOSTNAMES = ['twilighttech.io', 'www.twilighttech.io', 'support.twilighttech.io'];
 
 const ALLOWED_LANES = {
   'rover': 'Rover Support Workflow',

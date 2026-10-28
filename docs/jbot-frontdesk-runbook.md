@@ -16,10 +16,10 @@ Required variables and secrets:
 
 - `TURNSTILE_SITE_KEY`
 - `TURNSTILE_SECRET_KEY`
-- `TURNSTILE_ALLOWED_HOSTNAMES=twilighttech.io,www.twilighttech.io`
+- `TURNSTILE_ALLOWED_HOSTNAMES=twilighttech.io,www.twilighttech.io,support.twilighttech.io`
 - `JBOT_GOOGLE_ENDPOINT`
 - `JBOT_GOOGLE_SECRET`
-- `JBOT_ALLOWED_ORIGINS=https://twilighttech.io,https://www.twilighttech.io`
+- `JBOT_ALLOWED_ORIGINS=https://twilighttech.io,https://www.twilighttech.io,https://support.twilighttech.io`
 - `JBOT_DELIVERY_TIMEOUT_MS=8000` (optional; bounded to 1-15 seconds)
 
 Recommended rate-limit protection, in order:

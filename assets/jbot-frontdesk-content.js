@@ -35,8 +35,8 @@
     ],
     pageContexts: [
       {
-        prefixes: ['/rover'], lane: 'rover', label: 'Rover', step: 'Map the support workflow',
-        message: 'You are looking at Rover. Tell me where your team loses answers or handoff context, and I can help you leave James a clean workflow note.'
+        prefixes: ['/rover', '/support'], hosts: ['support.twilighttech.io'], lane: 'rover', label: 'Rover Support', step: 'Map the support workflow',
+        message: 'You are at the Rover support desk. I can explain the support flow or help you leave James a clean, high-level workflow note.'
       },
       {
         prefixes: ['/ai/yours'], lane: 'solutions', label: 'Twilight Tech Solutions', step: 'Map the operating problem',
