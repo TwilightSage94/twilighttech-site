@@ -3,172 +3,130 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Twilight Tech Support</title>
-  <meta name="description" content="Get help from Twilight Technology with Rover-guided support and a clear path to a person.">
+  <title>Twilight Tech Help Center</title>
+  <meta name="description" content="Ask Rover for Twilight Technology support, guides, services, community links, and the right path to a person.">
   <link rel="canonical" href="https://support.twilighttech.io/">
-  <meta property="og:title" content="Twilight Tech Support">
-  <meta property="og:description" content="Start with Rover, review the source, and hand the issue to a person when needed.">
+  <meta property="og:title" content="Twilight Tech Help Center">
+  <meta property="og:description" content="Need help? Ask Rover. Find support, guides, services, and the right Twilight Tech route.">
   <meta property="og:image" content="https://twilighttech.io/assets/rover/rover-cleared-for-duty-cover.png">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="/assets/logos/tt-mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/support/support.css?v=20261028-2">
+  <link rel="stylesheet" href="/support/support.css?v=20261028-4">
   <script defer data-domain="support.twilighttech.io" src="https://plausible.io/js/pa-c0LpTwqFVP1lceRI6RQ_N.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to support</a>
+  <a class="skip-link" href="#main-content">Skip to help center</a>
 
-  <header class="topbar">
+  <header class="site-head">
     <a class="brand" href="https://twilighttech.io/" aria-label="Twilight Technology home">
       <img src="/assets/logos/tt-mark.svg" alt="">
       <span>TWILIGHT <b>//</b> TECH</span>
     </a>
-    <div class="product-name"><span>Support</span><small>Powered by Rover</small></div>
-    <div class="top-actions">
-      <span class="desk-state"><i></i> Public desk available</span>
-      <button class="top-contact" type="button" data-open-jbot>Contact support</button>
-    </div>
+    <nav aria-label="Help center">
+      <a href="https://twilighttech.io/guides/">Guides</a>
+      <a href="https://twilighttech.io/services/">Services</a>
+      <button type="button" data-open-jbot>Submit a request</button>
+    </nav>
   </header>
 
-  <div class="support-layout">
-    <aside class="side-nav" aria-label="Support sections">
-      <div class="rover-id">
-        <span class="mini-rover" aria-hidden="true"><i></i><b></b></span>
-        <div><strong>Rover</strong><small>Support guide</small></div>
+  <main id="main-content">
+    <section class="help-hero" aria-labelledby="page-title">
+      <div class="rover-presence" aria-hidden="true">
+        <span class="rover-signal"><i></i></span>
+        <span class="rover-status">ROVER // PUBLIC GUIDE ONLINE</span>
       </div>
-      <nav aria-label="Support page">
-        <a class="active" aria-current="page" href="#get-help"><span>01</span> Get help</a>
-        <a href="#handoff"><span>02</span> Human handoff</a>
-        <a href="#what-happens"><span>03</span> What happens next</a>
-      </nav>
-      <div class="side-note">
-        <strong>Public support desk</strong>
-        <p>This page does not inspect your account, device, or customer systems.</p>
+      <p class="overline">Twilight Technology Help Center</p>
+      <h1 id="page-title">Need help?<br><span>Ask Rover.</span></h1>
+      <p class="hero-copy">Search Twilight Tech support, find a guide, explore services, or get pointed toward the right person.</p>
+
+      <form class="rover-search" id="rover-search-form" role="search">
+        <label class="visually-hidden" for="rover-search">Ask Rover a question</label>
+        <span aria-hidden="true">⌕</span>
+        <input id="rover-search" name="question" type="search" maxlength="240" autocomplete="off" placeholder="Try “Where can I get guides?”">
+        <button type="submit">Ask Rover</button>
+      </form>
+
+      <div class="popular-questions" aria-label="Popular questions">
+        <span>Popular:</span>
+        <button type="button" data-question="Where can I get guides?">Where can I get guides?</button>
+        <button type="button" data-question="I want to work with Twilight">I want to work with Twilight</button>
+        <button type="button" data-question="I need tech support">I need tech support</button>
       </div>
-      <a class="back-link" href="https://twilighttech.io/">← Twilight Tech home</a>
-    </aside>
 
-    <main id="main-content" class="main-workspace">
-      <section class="workspace-head" id="get-help" aria-labelledby="page-title">
-        <p class="overline">Twilight Technology Support</p>
-        <h1 id="page-title">What do you need help with?</h1>
-        <p>Tell Rover what is not working. Start with the visible error and impact—never include a password, security code, token, or recovery key.</p>
-      </section>
-
-      <section class="preview-notice" aria-label="Public preview boundary">
-        <strong>Guided preview</strong>
-        <span>This public page demonstrates Rover’s support flow. Use Contact support to send a real high-level note to Twilight Tech.</span>
-      </section>
-
-      <section class="support-card" aria-labelledby="conversation-title">
-        <header class="support-card-head">
-          <div class="rover-id compact">
-            <span class="mini-rover" aria-hidden="true"><i></i><b></b></span>
-            <div><strong id="conversation-title">Ask Rover</strong><small>Reviewed support guidance</small></div>
-          </div>
-          <span class="stage-label" id="stage-label" role="status" aria-live="polite">Ready</span>
-        </header>
-
-        <div class="conversation-body">
-          <div class="rover-message">
-            <span class="message-avatar" aria-hidden="true">R</span>
-            <div>
-              <p><strong>Hi. What is happening?</strong></p>
-              <p>Choose the closest issue below, then add the visible error or impact.</p>
-            </div>
-          </div>
-
-          <div class="issue-starters" aria-label="Common support issues">
-            <button type="button" data-topic="login" aria-pressed="true"><span>Account</span>I can’t sign in</button>
-            <button type="button" data-topic="network" aria-pressed="false"><span>Connection</span>Something won’t connect</button>
-            <button type="button" data-topic="access" aria-pressed="false"><span>Access</span>I need an app or group</button>
-          </div>
-
-          <div class="question-field">
-            <label for="support-question">Tell Rover what happened</label>
-            <textarea id="support-question" rows="5" maxlength="700" aria-describedby="question-help question-error">I changed my password, but I still can’t sign in to my workstation.</textarea>
-            <p class="field-help" id="question-help">Include the affected device or service, exact visible error, impact, and what you already tried.</p>
-            <p class="field-error" id="question-error" role="alert" hidden></p>
-          </div>
-
-          <button class="primary-action" id="check-guidance" type="button">Check reviewed guidance</button>
-
-          <section class="guidance-result" id="guidance-result" tabindex="-1" hidden aria-labelledby="guidance-title">
-            <div class="result-head"><span>Reviewed guidance · sample</span><strong id="guidance-source">KB-JL-LOGIN-001</strong></div>
-            <h2 id="guidance-title">Start with the approved sign-in path.</h2>
-            <p id="guidance-copy">Use the company workstation sign-in screen and confirm the new password works there before reopening other services. If Windows rejects the sign-in, stop repeated attempts and send the visible error to the Service Desk.</p>
-            <p class="answer-boundary">No account, permission, device, or ticket change was made.</p>
-            <button class="handoff-action" id="prepare-handoff" type="button">I still need help</button>
-          </section>
-
-          <section class="handoff-preview" id="handoff-preview" tabindex="-1" hidden aria-labelledby="handoff-preview-title">
-            <div class="handoff-title-row">
-              <div><span>Handoff preview</span><h2 id="handoff-preview-title">Review what a technician would receive</h2></div>
-              <strong>No ticket created</strong>
-            </div>
-            <dl>
-              <div><dt>Reported issue</dt><dd id="brief-issue">Unable to sign in after a password change</dd></div>
-              <div><dt>Guidance checked</dt><dd id="brief-source">KB-JL-LOGIN-001</dd></div>
-              <div><dt>Needs confirmation</dt><dd>Exact error and workstation state</dd></div>
-            </dl>
-            <p>Rover can prepare the context. A person still reviews the issue and decides what happens next.</p>
-            <button type="button" class="primary-action" data-open-jbot>Contact Twilight Tech</button>
-          </section>
+      <section class="rover-answer" id="rover-answer" tabindex="-1" hidden aria-labelledby="answer-title">
+        <div class="answer-avatar" aria-hidden="true"><i></i><i></i></div>
+        <div>
+          <p class="answer-label">Rover’s answer</p>
+          <h2 id="answer-title"></h2>
+          <p id="answer-copy"></p>
+          <div class="answer-links" id="answer-links"></div>
+          <p class="answer-boundary" id="answer-boundary"></p>
         </div>
       </section>
+      <p class="public-boundary">Rover is acting as a public directory here. This page does not inspect your account, device, or customer systems.</p>
+    </section>
 
-      <section class="next-steps" id="what-happens" aria-labelledby="next-title">
-        <div class="next-title-block">
-          <p class="overline">If guidance is not enough</p>
-          <h2 id="next-title">What happens next</h2>
-        </div>
-        <ol>
-          <li><span>01</span><div><strong>You review the handoff</strong><p>Nothing is sent or created without a separate action.</p></div></li>
-          <li><span>02</span><div><strong>A technician gets the context</strong><p>The report, source checked, and remaining unknowns stay visible.</p></div></li>
-          <li><span>03</span><div><strong>A person owns the decision</strong><p>Rover does not grant access, reset an account, assign work, or claim the issue is fixed.</p></div></li>
-        </ol>
-      </section>
-    </main>
+    <section class="help-library" aria-labelledby="library-title">
+      <div class="section-head">
+        <p class="overline dark">Choose a starting point</p>
+        <h2 id="library-title">What can Rover help you find?</h2>
+        <p>You do not need to know the exact department or page. Pick the closest route.</p>
+      </div>
 
-    <aside class="support-rail" aria-label="Additional support information">
-      <section class="rail-card human-card" id="handoff">
-        <p class="rail-kicker">Need a person?</p>
-        <h2>Contact Twilight Tech</h2>
-        <p>Use the Front Desk to leave a safe, high-level support note and a reply email.</p>
-        <button type="button" class="rail-action" data-open-jbot>Open the Front Desk</button>
-        <small>Do not send credentials, private client files, health information, or payment details.</small>
-      </section>
+      <div class="route-grid">
+        <button class="route-card support" type="button" data-route="support">
+          <span class="route-icon" aria-hidden="true">+</span>
+          <span><strong>Get tech support</strong><small>Troubleshooting, access, devices, and a path to a person</small></span>
+          <i aria-hidden="true">→</i>
+        </button>
+        <button class="route-card guides" type="button" data-route="guides">
+          <span class="route-icon" aria-hidden="true">≡</span>
+          <span><strong>Find guides & resources</strong><small>Study guides, roadmaps, cheat sheets, and homelab help</small></span>
+          <i aria-hidden="true">→</i>
+        </button>
+        <button class="route-card work" type="button" data-route="work">
+          <span class="route-icon" aria-hidden="true">↗</span>
+          <span><strong>Work with Twilight</strong><small>Hire Twilight, propose a project, collaborate, or ask about opportunities</small></span>
+          <i aria-hidden="true">→</i>
+        </button>
+        <button class="route-card rover" type="button" data-route="rover">
+          <span class="route-icon rover-face" aria-hidden="true"><b></b></span>
+          <span><strong>Learn about Rover & AI</strong><small>See Rover’s release story, engineering evidence, and AI systems</small></span>
+          <i aria-hidden="true">→</i>
+        </button>
+        <button class="route-card services" type="button" data-route="services">
+          <span class="route-icon" aria-hidden="true">◇</span>
+          <span><strong>Browse services</strong><small>Managed IT, system care, Private AI, and custom engineering</small></span>
+          <i aria-hidden="true">→</i>
+        </button>
+        <button class="route-card community" type="button" data-route="community">
+          <span class="route-icon" aria-hidden="true">◎</span>
+          <span><strong>Find the community</strong><small>BreakRoom, free learning routes, and A Place To Show Up</small></span>
+          <i aria-hidden="true">→</i>
+        </button>
+      </div>
+    </section>
 
-      <section class="rail-card">
-        <p class="rail-kicker">Before you send</p>
-        <ul class="checklist">
-          <li>Copy the exact visible error.</li>
-          <li>Name the affected device or service.</li>
-          <li>Say when the issue started.</li>
-          <li>List safe steps already tried.</li>
-        </ul>
-      </section>
-
-      <section class="rail-card technician-note">
-        <p class="rail-kicker">Technician handoff</p>
-        <h2>Rover keeps three things separate.</h2>
-        <dl>
-          <div><dt>Reported</dt><dd>What the person said</dd></div>
-          <div><dt>Verified</dt><dd>What the systems support</dd></div>
-          <div><dt>Proposed</dt><dd>What Rover suggests checking</dd></div>
-        </dl>
-      </section>
-    </aside>
-  </div>
+    <section class="human-help" aria-labelledby="human-title">
+      <div>
+        <p class="overline">Still not sure?</p>
+        <h2 id="human-title">Let the Front Desk route it.</h2>
+        <p>Leave a safe, high-level note and a reply email. Do not include passwords, security codes, private client files, health information, or payment details.</p>
+      </div>
+      <button type="button" data-open-jbot>Open the Front Desk</button>
+    </section>
+  </main>
 
   <footer>
+    <a href="https://twilighttech.io/">Twilight Technology</a>
     <span>&copy; 2026 Twilight Technology LLC · Atlanta, GA</span>
-    <span>Public preview · No customer system connected</span>
+    <span>Public help directory · No customer system connected</span>
   </footer>
 
-  <script src="/support/support.js?v=20261028-2" defer></script>
+  <script src="/support/support.js?v=20261028-4" defer></script>
   <script src="/assets/jbot-frontdesk-content.js?v=20261028-support-1" defer></script>
   <script src="/assets/jbot-widget.js?v=20261028-support-1" defer></script>
 </body>
