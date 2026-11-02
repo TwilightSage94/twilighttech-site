@@ -33,6 +33,7 @@ const primaryNavPages = [
 const widget = readFileSync(new URL('../assets/jbot-widget.js', import.meta.url), 'utf8');
 const desk = readFileSync(new URL('../assets/jbot-frontdesk.js', import.meta.url), 'utf8');
 const contentSource = readFileSync(new URL('../assets/jbot-frontdesk-content.js', import.meta.url), 'utf8');
+const publicAnswers = JSON.parse(readFileSync(new URL('../assets/frontdesk-public-answers.json', import.meta.url), 'utf8'));
 const leadProxy = readFileSync(new URL('../functions/api/jbot-leads.js', import.meta.url), 'utf8');
 const solutionsIntake = readFileSync(new URL('../assets/solutions-intake.js', import.meta.url), 'utf8');
 const healthFunction = readFileSync(new URL('../functions/api/jbot-health.js', import.meta.url), 'utf8');
@@ -384,6 +385,38 @@ test('resource browsing can always transition into a desk note', () => {
   assert.match(desk, /J-Bot Review Reached/);
 });
 
+test('typed questions use the reviewed public answer projection before optional PII capture', () => {
+  assert.match(contentSource, /publicAnswers:\s*['"]\/assets\/frontdesk-public-answers\.json/);
+  assert.match(desk, /answerTypedQuestion\(chat, input, send, value\)/);
+  const idleBranch = desk.match(/if \(uiState\.stage === 'idle'[\s\S]*?return;/)?.[0] || '';
+  assert.doesNotMatch(idleBranch, /beginCapture/);
+  assert.match(desk, /I do not have an approved answer for that/);
+  assert.match(desk, /Which part do you mean\?/);
+  assert.match(publicAnswers.revision, /^\d{4}-\d{2}-\d{2}\.\d+$/);
+  publicAnswers.answers.forEach((answer) => {
+    assert.match(answer.id, /^[a-z0-9-]+$/);
+    assert.match(answer.reviewed_at, /^\d{4}-\d{2}-\d{2}$/);
+    assert.ok(answer.source_links.length > 0);
+  });
+  assert.doesNotMatch(JSON.stringify(publicAnswers), /shared_secret|turnstile_token|request_id/);
+});
+
+test('delivery retries use a stable request ID and make partial notification failure recoverable', () => {
+  assert.match(desk, /request_id:\s*uiState\.requestId/);
+  assert.match(desk, /Desk note saved; notification pending/);
+  assert.match(desk, /Retry notification/);
+  assert.match(leadProxy, /retryable:\s*leadSaved && !emailSent/);
+  assert.match(leadProxy, /body\.request_id/);
+
+  const receiver = readFileSync(new URL('../integrations/google-apps-script/jbot-leads.gs', import.meta.url), 'utf8');
+  assert.match(receiver, /REQUEST_PROPERTY_PREFIX/);
+  assert.match(receiver, /loadRequestReceipt/);
+  assert.match(receiver, /duplicate:\s*true/);
+  assert.match(receiver, /saveRequestReceipt[\s\S]*sendNotification/);
+  assert.doesNotMatch(receiver, /DEFAULT_SHEET_ID/);
+  assert.match(receiver, /configureJBot/);
+});
+
 test('the compact widget keeps keyboard focus and avoids surprise touch keyboards', () => {
   assert.match(widget, /trapCompactFocus/);
   assert.match(widget, /syncCompactState/);
@@ -415,8 +448,8 @@ test('the widget fails into a usable direct-contact state', () => {
 test('all production pages request the current widget version', () => {
   productionPages.forEach((path) => {
     const html = readFileSync(resolve(root, path), 'utf8');
-    assert.match(html, /jbot-frontdesk-content\.js\?v=20261021-frontdesk-v6/);
-    assert.match(html, /jbot-widget\.js\?v=20261021-frontdesk-v6/);
+    assert.match(html, /jbot-frontdesk-content\.js\?v=20261102-frontdesk-v7/);
+    assert.match(html, /jbot-widget\.js\?v=20261102-frontdesk-v7/);
     assert.ok(
       html.indexOf('jbot-frontdesk-content.js') < html.indexOf('jbot-widget.js'),
       `content must load before widget: ${path}`,

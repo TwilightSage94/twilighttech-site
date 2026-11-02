@@ -1,0 +1,47 @@
+{
+  "schema": "https://twilighttech.io/schemas/frontdesk-answers-v1.json",
+  "revision": "2026-11-02.1",
+  "reviewed_at": "2026-11-02",
+  "answers": [
+    {
+      "id": "website-front-desk-purpose",
+      "reviewed_at": "2026-11-02",
+      "question": "What does the Website Front Desk do?",
+      "answer": "It guides visitors to approved answers, offers, resources, and next steps. If a visitor chooses to leave an inquiry, it collects a bounded high-level note for human follow-up.",
+      "match_phrases": ["what does the website front desk do", "what is the website front desk", "how does the website front desk work", "what does front desk do", "what is front desk"],
+      "source_links": [
+        { "label": "Website Front Desk", "href": "https://twilighttech.io/site-chat/" }
+      ]
+    },
+    {
+      "id": "website-front-desk-safety",
+      "reviewed_at": "2026-11-02",
+      "question": "How does the Front Desk protect an inquiry?",
+      "answer": "The current build uses Cloudflare Turnstile, field limits, a honeypot, rate limiting, server-side validation, and warnings not to submit sensitive information.",
+      "match_phrases": ["how is the front desk secure", "how does the front desk protect", "what security does the front desk use", "is the front desk secure", "how do you protect inquiries"],
+      "source_links": [
+        { "label": "Front Desk safeguards", "href": "https://twilighttech.io/site-chat/" }
+      ]
+    },
+    {
+      "id": "website-front-desk-scope",
+      "reviewed_at": "2026-11-02",
+      "question": "What can a Front Desk include?",
+      "answer": "A scoped build can include approved routes and answers, page-aware guidance, secure lead capture, a human handoff, activity tracking, and agreed delivery or integration work. Exact deliverables are set during intake.",
+      "match_phrases": ["what does a front desk include", "what can the front desk include", "what ships with front desk", "what is included in front desk", "what features does front desk have"],
+      "source_links": [
+        { "label": "Front Desk scope", "href": "https://twilighttech.io/site-chat/" }
+      ]
+    },
+    {
+      "id": "website-front-desk-pricing",
+      "reviewed_at": "2026-11-02",
+      "question": "How is a Website Front Desk priced?",
+      "answer": "There is no public fixed price in this answer set. Twilight Technology scopes the smallest suitable build after mapping the website's intake journey and required integrations.",
+      "match_phrases": ["how much does front desk cost", "what does front desk cost", "front desk pricing", "price of website front desk", "website front desk price"],
+      "source_links": [
+        { "label": "Map the intake", "href": "https://twilighttech.io/site-chat/" }
+      ]
+    }
+  ]
+}

@@ -1,28 +1,37 @@
-const DEFAULT_SHEET_ID = '1Q5JtlLxKh7cF1zAwB30FsZAxuqAttMj3hxYo9Zu2YL8';
 const SHEET_NAME = 'J-Bot Leads';
 const TIME_ZONE = 'America/New_York';
 const TEMPLATE_ROW = 5;
 const COLUMN_COUNT = 14;
+const REQUEST_PROPERTY_PREFIX = 'JBOT_REQUEST_';
+const REQUEST_RECEIPT_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+
+function configureJBot(sheetId, notificationEmail) {
+  const cleanSheetId = String(sheetId || '').trim();
+  const cleanEmail = String(notificationEmail || '').trim().toLowerCase();
+  if (!cleanSheetId) throw new Error('Pass the customer-owned Google Sheet ID.');
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(cleanEmail)) throw new Error('Pass the customer-owned notification email.');
+  PropertiesService.getScriptProperties().setProperties({
+    SHEET_ID: cleanSheetId,
+    NOTIFICATION_EMAIL: cleanEmail,
+  });
+}
 
 function setupJBot() {
   const properties = PropertiesService.getScriptProperties();
   const existingSecret = properties.getProperty('SHARED_SECRET');
   const sharedSecret = existingSecret || [Utilities.getUuid(), Utilities.getUuid()].join('-');
-  const notificationEmail = properties.getProperty('NOTIFICATION_EMAIL') || Session.getEffectiveUser().getEmail();
+  const notificationEmail = properties.getProperty('NOTIFICATION_EMAIL') || '';
+  const sheetId = properties.getProperty('SHEET_ID') || '';
 
-  if (!notificationEmail) {
-    throw new Error('Google could not determine the notification Gmail. Set NOTIFICATION_EMAIL in Script Properties, then run setupJBot again.');
-  }
+  if (!sheetId || !notificationEmail) throw new Error('Run configureJBot(customerSheetId, customerNotificationEmail) before setupJBot.');
 
   properties.setProperties({
-    SHEET_ID: DEFAULT_SHEET_ID,
     SHARED_SECRET: sharedSecret,
-    NOTIFICATION_EMAIL: notificationEmail,
   });
 
   console.log('JBOT_GOOGLE_SECRET=' + sharedSecret);
   console.log('Notification email=' + notificationEmail);
-  console.log('Sheet ID=' + DEFAULT_SHEET_ID);
+  console.log('Sheet ID=' + sheetId);
 }
 
 function doGet() {
@@ -45,10 +54,31 @@ function doPost(event) {
       return jsonOutput({ ok: false, error: 'Lead desk is busy. Please retry.' });
     }
 
-    const sheetId = properties.getProperty('SHEET_ID') || DEFAULT_SHEET_ID;
+    pruneRequestReceipts(properties);
+
+    const sheetId = properties.getProperty('SHEET_ID') || '';
+    if (!sheetId) throw new Error('Customer Sheet ID is not configured.');
     const spreadsheet = SpreadsheetApp.openById(sheetId);
     const sheet = spreadsheet.getSheetByName(SHEET_NAME);
     if (!sheet) throw new Error('J-Bot Leads sheet not found.');
+
+    const requestId = safeRequestId(body.request_id);
+    if (!requestId) return jsonOutput({ ok: false, error: 'Request ID is required.' });
+    const payloadHash = payloadFingerprint(body);
+
+    const existingReceipt = loadRequestReceipt(properties, requestId);
+    if (existingReceipt && existingReceipt.lead_saved) {
+      if (existingReceipt.payload_hash !== payloadHash) return jsonOutput({ ok: false, error: 'Request ID conflict.' });
+      let emailSent = existingReceipt.email_sent === true;
+      if (!emailSent) {
+        const retrySafetyNote = safeCell(body.safety_note || (body.sensitive_flag ? 'Sensitive terms detected. Review before replying.' : 'No sensitive terms detected.'));
+        emailSent = sendNotification(properties, sheet, existingReceipt.row, body, existingReceipt.lead_id, retrySafetyNote);
+        existingReceipt.email_sent = emailSent;
+        saveRequestReceipt(properties, requestId, existingReceipt);
+      }
+      SpreadsheetApp.flush();
+      return jsonOutput({ ok: true, duplicate: true, lead_saved: true, email_sent: emailSent, lead_id: existingReceipt.lead_id });
+    }
 
     const receivedAt = new Date();
     const leadId = 'JB-' + Utilities.formatDate(receivedAt, TIME_ZONE, 'yyyyMMdd-HHmmss') + '-' + Utilities.getUuid().slice(0, 8);
@@ -79,25 +109,12 @@ function doPost(event) {
     templateRange.copyTo(targetRange, SpreadsheetApp.CopyPasteType.PASTE_DATA_VALIDATION, false);
     targetRange.setValues([row]);
     sheet.getRange(targetRow, 1).setNumberFormat('yyyy-mm-dd hh:mm');
+    const receipt = { lead_saved: true, email_sent: false, lead_id: leadId, row: targetRow, payload_hash: payloadHash, saved_at: Date.now() };
+    saveRequestReceipt(properties, requestId, receipt);
 
-    let emailSent = false;
-    try {
-      const notificationEmail = properties.getProperty('NOTIFICATION_EMAIL') || Session.getEffectiveUser().getEmail();
-      if (!notificationEmail) throw new Error('Notification Gmail is not configured.');
-      MailApp.sendEmail({
-        to: notificationEmail,
-        replyTo: safeEmail(body.email),
-        name: 'J-Bot Front Desk',
-        subject: 'New J-Bot Lead - ' + safeSubject(body.lane || 'General'),
-        body: plainTextEmail(body, leadId, safetyNote),
-        htmlBody: htmlEmail(body, leadId, safetyNote),
-      });
-      emailSent = true;
-      sheet.getRange(targetRow, 13).setValue('Sent');
-    } catch (emailError) {
-      sheet.getRange(targetRow, 13).setValue('Failed');
-      sheet.getRange(targetRow, 14).setValue(safetyNote + ' | Gmail error: ' + safeCell(emailError.message));
-    }
+    const emailSent = sendNotification(properties, sheet, targetRow, body, leadId, safetyNote);
+    receipt.email_sent = emailSent;
+    saveRequestReceipt(properties, requestId, receipt);
 
     SpreadsheetApp.flush();
     return jsonOutput({
@@ -110,6 +127,71 @@ function doPost(event) {
     return jsonOutput({ ok: false, error: 'Google lead delivery failed.' });
   } finally {
     if (lock.hasLock()) lock.releaseLock();
+  }
+}
+
+function safeRequestId(value) {
+  const requestId = String(value || '').trim();
+  return /^[a-zA-Z0-9][a-zA-Z0-9_-]{7,99}$/.test(requestId) ? requestId : '';
+}
+
+function requestPropertyKey(requestId) {
+  const digest = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, requestId, Utilities.Charset.UTF_8);
+  const hex = digest.map(function (byte) { return ('0' + ((byte + 256) % 256).toString(16)).slice(-2); }).join('');
+  return REQUEST_PROPERTY_PREFIX + hex;
+}
+
+function payloadFingerprint(body) {
+  const bounded = [body.name, body.email, body.lane, body.need, body.urgency, body.page, body.summary, body.next_step].map(function (value) {
+    return String(value || '').trim().slice(0, 1200);
+  }).join('\n');
+  const digest = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, bounded, Utilities.Charset.UTF_8);
+  return digest.map(function (byte) { return ('0' + ((byte + 256) % 256).toString(16)).slice(-2); }).join('');
+}
+
+function loadRequestReceipt(properties, requestId) {
+  const stored = properties.getProperty(requestPropertyKey(requestId));
+  if (!stored) return null;
+  try { return JSON.parse(stored); } catch (error) { return null; }
+}
+
+function saveRequestReceipt(properties, requestId, receipt) {
+  receipt.saved_at = receipt.saved_at || Date.now();
+  properties.setProperty(requestPropertyKey(requestId), JSON.stringify(receipt));
+}
+
+function pruneRequestReceipts(properties) {
+  const now = Date.now();
+  const all = properties.getProperties();
+  Object.keys(all).forEach(function (key) {
+    if (key.indexOf(REQUEST_PROPERTY_PREFIX) !== 0) return;
+    try {
+      const receipt = JSON.parse(all[key]);
+      if (!receipt.saved_at || now - Number(receipt.saved_at) > REQUEST_RECEIPT_TTL_MS) properties.deleteProperty(key);
+    } catch (error) {
+      properties.deleteProperty(key);
+    }
+  });
+}
+
+function sendNotification(properties, sheet, targetRow, body, leadId, safetyNote) {
+  try {
+    const notificationEmail = properties.getProperty('NOTIFICATION_EMAIL') || '';
+    if (!notificationEmail) throw new Error('Customer notification Gmail is not configured.');
+    MailApp.sendEmail({
+      to: notificationEmail,
+      replyTo: safeEmail(body.email),
+      name: 'J-Bot Front Desk',
+      subject: 'New J-Bot Lead - ' + safeSubject(body.lane || 'General'),
+      body: plainTextEmail(body, leadId, safetyNote),
+      htmlBody: htmlEmail(body, leadId, safetyNote),
+    });
+    sheet.getRange(targetRow, 13).setValue('Sent');
+    return true;
+  } catch (emailError) {
+    sheet.getRange(targetRow, 13).setValue('Failed');
+    sheet.getRange(targetRow, 14).setValue(safetyNote + ' | Gmail error: ' + safeCell(emailError.message));
+    return false;
   }
 }
 

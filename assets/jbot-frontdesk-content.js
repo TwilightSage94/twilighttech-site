@@ -8,7 +8,10 @@
   }
 
   window.TwilightFrontDeskContent = deepFreeze({
-    version: '2026-08-11',
+    version: '2026-11-02.1',
+    endpoints: {
+      publicAnswers: '/assets/frontdesk-public-answers.json'
+    },
     supportEmail: 'james@twilighttech.io',
     shell: {
       subtitle: 'Twilight Tech front desk',

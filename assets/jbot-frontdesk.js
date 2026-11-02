@@ -1,5 +1,6 @@
 (function () {
   var JBOT_PROXY_ENDPOINT = '/api/jbot-leads';
+  var PUBLIC_ANSWERS_ENDPOINT = CONTENT.endpoints && CONTENT.endpoints.publicAnswers;
   var RATE_KEY = 'tt_jbot_last_submit_at';
   var RATE_WINDOW_MS = 45000;
   var CHAT_KEY = 'tt_jbot_chat_frontdesk_v3';
@@ -24,7 +25,8 @@
     next_step: 180,
     safety_note: 220,
     hp: 120,
-    turnstile_token: 2048
+    turnstile_token: 2048,
+    request_id: 100
   };
 
   var SENSITIVE_PATTERNS = [
@@ -77,7 +79,7 @@
       return false;
     });
 
-    return ALLOWED_LANES[slug] ? slug : 'general';
+    return ALLOWED_LANES[slug] ? slug : '';
   }
 
   function isEmail(value) {
@@ -104,6 +106,69 @@
     window.plausible(name, props ? { props: props } : undefined);
   }
 
+  var publicAnswersPromise = null;
+
+  function normalizeQuestion(value) {
+    return String(value || '').toLowerCase().replace(/[^a-z0-9\s]/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  function validateAnswerRegistry(registry) {
+    if (!registry || typeof registry.revision !== 'string' || !Array.isArray(registry.answers)) return null;
+    var answers = registry.answers.filter(function (answer) {
+      return answer && typeof answer.id === 'string' && typeof answer.reviewed_at === 'string' &&
+        typeof answer.question === 'string' && typeof answer.answer === 'string' &&
+        Array.isArray(answer.match_phrases) && Array.isArray(answer.source_links);
+    });
+    return answers.length ? { revision: registry.revision, reviewed_at: registry.reviewed_at || '', answers: answers } : null;
+  }
+
+  function loadPublicAnswers() {
+    if (!PUBLIC_ANSWERS_ENDPOINT) return Promise.resolve(null);
+    if (publicAnswersPromise) return publicAnswersPromise;
+    publicAnswersPromise = fetch(PUBLIC_ANSWERS_ENDPOINT, {
+      method: 'GET', credentials: 'same-origin', cache: 'no-cache', headers: { Accept: 'application/json' }
+    }).then(function (response) {
+      if (!response.ok) throw new Error('Public answers unavailable.');
+      return response.json();
+    }).then(function (registry) {
+      var validated = validateAnswerRegistry(registry);
+      if (!validated) throw new Error('Public answers are invalid.');
+      return validated;
+    }).catch(function () {
+      publicAnswersPromise = null;
+      return null;
+    });
+    return publicAnswersPromise;
+  }
+
+  function matchApprovedAnswer(question, registry) {
+    var normalized = normalizeQuestion(question);
+    if (!registry || !normalized) return { kind: 'unknown' };
+    var matches = [];
+    registry.answers.forEach(function (answer) {
+      var score = 0;
+      answer.match_phrases.forEach(function (phrase) {
+        var approvedPhrase = normalizeQuestion(phrase);
+        if (!approvedPhrase) return;
+        if (normalized === approvedPhrase) score = Math.max(score, approvedPhrase.length + 1000);
+        else if (normalized.indexOf(approvedPhrase) !== -1) score = Math.max(score, approvedPhrase.length);
+        else if (normalized.length >= 12 && approvedPhrase.indexOf(normalized) !== -1) score = Math.max(score, normalized.length);
+      });
+      if (score) matches.push({ answer: answer, score: score });
+    });
+    matches.sort(function (left, right) { return right.score - left.score; });
+    if (matches.length && (!matches[1] || matches[0].score > matches[1].score)) {
+      return { kind: 'answer', answer: matches[0].answer, revision: registry.revision };
+    }
+    if (matches.length > 1 || /\b(price|pricing|cost|offer|service|include|included|work|does)\b/.test(normalized)) return { kind: 'ambiguous' };
+    return { kind: 'unknown' };
+  }
+
+  function newClientRequestId() {
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') return window.crypto.randomUUID();
+    return 'jbot-' + Date.now() + '-' + Math.random().toString(16).slice(2);
+  }
+
   function normalizeLead(lead) {
     var source = lead || {};
     var laneSlug = slugLane(source.lane);
@@ -113,7 +178,7 @@
     return {
       name: neutralize(source.name, LIMITS.name),
       email: neutralize(source.email, LIMITS.email).toLowerCase(),
-      lane: ALLOWED_LANES[laneSlug],
+      lane: ALLOWED_LANES[laneSlug] || '',
       lane_slug: laneSlug,
       need: need,
       urgency: neutralize(source.urgency, LIMITS.urgency),
@@ -122,7 +187,8 @@
       safety_note: neutralize(source.safety_note, LIMITS.safety_note),
       hp: neutralize(source.hp, LIMITS.hp),
       turnstile_token: neutralize(source.turnstile_token, LIMITS.turnstile_token),
-      sensitive_flag: hasSensitiveContent([need, summary, source.next_step].join(' '))
+      sensitive_flag: hasSensitiveContent([need, summary, source.next_step].join(' ')),
+      request_id: neutralize(source.request_id, LIMITS.request_id)
     };
   }
 
@@ -217,7 +283,8 @@
       safety_note: lead.safety_note,
       hp: lead.hp,
       turnstile_token: lead.turnstile_token,
-      page: currentPage()
+      page: currentPage(),
+      request_id: lead.request_id
     };
   }
 
@@ -270,7 +337,7 @@
       });
     }).then(function (result) {
 
-      markSubmitted();
+      if (result.email_sent) markSubmitted();
 
       return {
         lead_saved: !!result.lead_saved,
@@ -302,7 +369,8 @@
     email: '',
     need: '',
     urgency: '',
-    submitting: false
+    submitting: false,
+    requestId: ''
   };
 
   var STAGE_PRESENTATION = CONTENT.stages;
@@ -590,6 +658,7 @@
     uiState.need = '';
     uiState.urgency = '';
     uiState.submitting = false;
+    uiState.requestId = '';
   }
 
   function showResources(chat, lane) {
@@ -607,6 +676,7 @@
     uiState.email = '';
     uiState.need = '';
     uiState.urgency = '';
+    uiState.requestId = newClientRequestId();
     trackEvent('J-Bot Note Started', { lane: uiState.lane, page: window.location.pathname });
     appendMessage(chat, 'bot', CAPTURE_NAME_PROMPTS[uiState.lane] || CAPTURE_NAME_PROMPTS.general);
     setInput(input, send, 'Your name...', false);
@@ -667,8 +737,39 @@
       next_step: 'Reply by email for a fit check.',
       safety_note: 'Visitor was warned not to paste sensitive files or details.',
       hp: hp || '',
-      turnstile_token: turnstileState.token
+      turnstile_token: turnstileState.token,
+      request_id: uiState.requestId || (uiState.requestId = newClientRequestId())
     };
+  }
+
+  function showAnswerResult(chat, input, send, result) {
+    var lane = uiState.lane || 'general';
+    if (result.kind === 'answer') {
+      var answer = result.answer;
+      var card = appendCard(chat, 'link-card', answer.question, answer.answer);
+      var actions = answer.source_links.map(function (link) { return { label: link.label, href: link.href }; });
+      actions.push({ label: 'Leave James a note', action: 'capture', value: lane, className: 'alt' });
+      addActions(card, actions);
+      appendReceipt(card, 'Approved answer ' + answer.id + ' | reviewed ' + answer.reviewed_at + ' | revision ' + result.revision);
+      trackEvent('J-Bot Approved Answer', { answer_id: answer.id, revision: result.revision });
+    } else if (result.kind === 'ambiguous') {
+      var clarify = appendCard(chat, 'link-card', 'Which part do you mean?', 'I can answer from approved information about what the Website Front Desk does, its scope, safeguards, or pricing. Please ask about one of those, or leave an optional note.');
+      addActions(clarify, [{ label: 'Leave James a note', action: 'capture', value: lane, className: 'alt' }]);
+    } else {
+      var unknown = appendCard(chat, 'link-card', 'I do not have an approved answer for that', 'Try asking about what the Website Front Desk does, its scope, safeguards, or pricing. You can also leave an optional high-level note for a human reply.');
+      addActions(unknown, [{ label: 'Leave James a note', action: 'capture', value: lane, className: 'alt' }]);
+    }
+    setStage('resource', { status: 'Answered', step: 'Ask another question or choose a next step' });
+    setInput(input, send, 'Ask another approved-information question...', false);
+  }
+
+  function answerTypedQuestion(chat, input, send, value) {
+    appendMessage(chat, 'user', value);
+    if (hasSensitiveContent(value)) appendMessage(chat, 'bot', 'Please keep questions high-level. Do not include passwords, private files, medical details, or other sensitive information.');
+    setInput(input, send, 'Checking approved information...', true);
+    loadPublicAnswers().then(function (registry) {
+      showAnswerResult(chat, input, send, matchApprovedAnswer(value, registry));
+    });
   }
 
   function finishLocalPreview(chat, input, send) {
@@ -699,6 +800,23 @@
     }
 
     submitLead(leadFromState(hp)).then(function (result) {
+      if (result.lead_saved && !result.email_sent) {
+        clearTurnstileWidget();
+        var pendingCard = appendCard(chat, 'link-card', 'Desk note saved; notification pending', 'The lead record is safe, but the email notification did not complete. Retrying uses the same delivery reference and will not create a second lead.');
+        if (result.request_id) appendReceipt(pendingCard, 'Delivery reference ' + result.request_id.slice(0, 8));
+        var pendingRow = addActions(pendingCard, [
+          { label: 'Retry notification', action: 'retry', className: 'primary' },
+          { label: 'Email Twilight Tech', href: 'mailto:' + CONTENT.supportEmail + '?subject=J-Bot%20notification%20pending' }
+        ]);
+        if (result.warnings && result.warnings.length) appendMessage(chat, 'bot', result.warnings.join(' '));
+        uiState.stage = 'confirm';
+        uiState.submitting = false;
+        announceState('error', { status: 'Saved', step: 'Retry the notification' });
+        prepareTurnstile(pendingCard, pendingRow.querySelector('[data-jbot-action="retry"]'));
+        setInput(input, send, 'Use the retry button above...', true);
+        persistConversation(chat);
+        return;
+      }
       var destinations = [];
       if (result.lead_saved) destinations.push('Google Leads');
       if (result.email_sent) destinations.push('Gmail');
@@ -738,16 +856,7 @@
     input.value = '';
 
     if (uiState.stage === 'idle' || uiState.stage === 'resource' || uiState.stage === 'done') {
-      var selectedLane = uiState.lane || 'general';
-      resetState();
-      uiState.lane = selectedLane;
-      uiState.need = value;
-      appendMessage(chat, 'user', value);
-      if (hasSensitiveContent(value)) {
-        appendMessage(chat, 'bot', 'Keep the note high-level, please. No names, file contents, passwords, or other private details.');
-      }
-      beginCapture(chat, input, send, selectedLane);
-      uiState.need = value;
+      answerTypedQuestion(chat, input, send, value);
       return;
     }
 
@@ -918,6 +1027,7 @@
   }
 
   window.TwilightJBot.initFrontDesk = initFrontDesk;
+  window.TwilightJBot.matchApprovedAnswer = matchApprovedAnswer;
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initFrontDesk);
   } else {

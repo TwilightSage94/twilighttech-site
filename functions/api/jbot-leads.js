@@ -36,6 +36,7 @@ const LIMITS = {
   hp: 120,
   page: 300,
   turnstile_token: 2048,
+  request_id: 100,
 };
 
 const SENSITIVE_PATTERNS = [
@@ -141,7 +142,7 @@ function slugLane(value) {
     return false;
   });
 
-  return ALLOWED_LANES[slug] ? slug : 'general';
+  return ALLOWED_LANES[slug] ? slug : '';
 }
 
 function isEmail(value) {
@@ -161,7 +162,7 @@ function normalizeLead(input) {
   return {
     name: neutralize(input.name, LIMITS.name),
     email: neutralize(input.email, LIMITS.email).toLowerCase(),
-    lane: ALLOWED_LANES[laneSlug],
+    lane: ALLOWED_LANES[laneSlug] || '',
     lane_slug: laneSlug,
     need,
     urgency: neutralize(input.urgency, LIMITS.urgency),
@@ -172,6 +173,7 @@ function normalizeLead(input) {
     page: neutralize(input.page, LIMITS.page),
     turnstile_token: neutralize(input.turnstile_token, LIMITS.turnstile_token),
     sensitive_flag: hasSensitiveContent([need, summary, input.next_step].join(' ')),
+    request_id: neutralize(input.request_id, LIMITS.request_id),
   };
 }
 
@@ -336,7 +338,7 @@ export async function onRequestOptions(context) {
 
 export async function onRequestPost(context) {
   const { request, env } = context;
-  const requestId = newRequestId();
+  let requestId = newRequestId();
   context.requestId = requestId;
   const headers = { ...corsHeaders(request, env), 'X-JBot-Request-ID': requestId };
 
@@ -350,6 +352,12 @@ export async function onRequestPost(context) {
   } catch (error) {
     const tooLarge = error && error.message === 'request-too-large';
     return json({ ok: false, error: tooLarge ? 'Request is too large.' : 'Invalid JSON.', request_id: requestId }, tooLarge ? 413 : 400, headers);
+  }
+
+  if (body && /^[a-zA-Z0-9][a-zA-Z0-9_-]{7,99}$/.test(String(body.request_id || ''))) {
+    requestId = String(body.request_id);
+    context.requestId = requestId;
+    headers['X-JBot-Request-ID'] = requestId;
   }
 
   const lead = normalizeLead(body || {});
@@ -407,11 +415,15 @@ export async function onRequestPost(context) {
 
   console.log(JSON.stringify({ event: 'jbot_delivery_complete', request_id: requestId, lead_saved: leadSaved, email_sent: emailSent }));
 
+  const warnings = validation.warnings.slice();
+  if (leadSaved && !emailSent) warnings.push('Your note was saved, but the notification is pending. You can retry without creating a duplicate lead.');
+
   return json({
     ok: true,
     lead_saved: leadSaved,
     email_sent: emailSent,
-    warnings: validation.warnings,
+    retryable: leadSaved && !emailSent,
+    warnings,
     request_id: requestId,
   }, 200, headers);
 }
