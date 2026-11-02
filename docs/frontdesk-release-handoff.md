@@ -4,7 +4,8 @@ The reusable customer-ownership checklist lives with the Front Desk product sour
 
 - publish the reviewed `/assets/frontdesk-public-answers.json` revision;
 - configure the Twilight-owned Sheet ID and notification mailbox explicitly in Apps Script;
-- deploy the updated Apps Script receiver and Cloudflare Pages functions;
+- deploy the cache-busted site assets and Cloudflare Pages function first while the current receiver remains compatible, then verify new submissions carry a stable request ID;
+- deploy the updated Apps Script receiver after the browser/runtime and function are live; legacy submissions remain accepted but cannot be deduplicated;
 - run one synthetic successful inquiry and remove or label its test record;
 - simulate a saved lead with failed Gmail notification, then retry the same request ID and confirm a single row;
 - verify production origin and Turnstile hostname rejection with non-production test values;

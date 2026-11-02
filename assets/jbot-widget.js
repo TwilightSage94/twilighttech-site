@@ -2,7 +2,7 @@
   'use strict';
 
   var OPEN_KEY = 'tt_jbot_open_v1';
-  var ASSET_VERSION = '20261102-frontdesk-v7';
+  var ASSET_VERSION = '20261102-frontdesk-v9';
   var CONTENT = window.TwilightFrontDeskContent;
 
   if (!CONTENT) return;

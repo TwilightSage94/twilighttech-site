@@ -1,6 +1,5 @@
 (function () {
   var JBOT_PROXY_ENDPOINT = '/api/jbot-leads';
-  var PUBLIC_ANSWERS_ENDPOINT = CONTENT.endpoints && CONTENT.endpoints.publicAnswers;
   var RATE_KEY = 'tt_jbot_last_submit_at';
   var RATE_WINDOW_MS = 45000;
   var CHAT_KEY = 'tt_jbot_chat_frontdesk_v3';
@@ -9,6 +8,7 @@
   var CONTENT = window.TwilightFrontDeskContent;
 
   if (!CONTENT) return;
+  var PUBLIC_ANSWERS_ENDPOINT = CONTENT.endpoints && CONTENT.endpoints.publicAnswers;
 
   var ALLOWED_LANES = CONTENT.lanes.reduce(function (lanes, lane) {
     lanes[lane.slug] = lane.leadLabel;
@@ -157,7 +157,7 @@
       if (score) matches.push({ answer: answer, score: score });
     });
     matches.sort(function (left, right) { return right.score - left.score; });
-    if (matches.length && (!matches[1] || matches[0].score > matches[1].score)) {
+    if (matches.length === 1 || (matches[0] && matches[0].score >= 1000 && (!matches[1] || matches[1].score < 1000))) {
       return { kind: 'answer', answer: matches[0].answer, revision: registry.revision };
     }
     if (matches.length > 1 || /\b(price|pricing|cost|offer|service|include|included|work|does)\b/.test(normalized)) return { kind: 'ambiguous' };

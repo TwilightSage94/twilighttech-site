@@ -62,14 +62,15 @@ function doPost(event) {
     const sheet = spreadsheet.getSheetByName(SHEET_NAME);
     if (!sheet) throw new Error('J-Bot Leads sheet not found.');
 
-    const requestId = safeRequestId(body.request_id);
-    if (!requestId) return jsonOutput({ ok: false, error: 'Request ID is required.' });
+    const suppliedRequestId = safeRequestId(body.request_id);
+    const requestId = suppliedRequestId || ('legacy-' + Utilities.getUuid());
     const payloadHash = payloadFingerprint(body);
 
     const existingReceipt = loadRequestReceipt(properties, requestId);
     if (existingReceipt && existingReceipt.lead_saved) {
       if (existingReceipt.payload_hash !== payloadHash) return jsonOutput({ ok: false, error: 'Request ID conflict.' });
       let emailSent = existingReceipt.email_sent === true;
+      if (!emailSent && notificationAlreadySent(sheet, existingReceipt.row)) emailSent = true;
       if (!emailSent) {
         const retrySafetyNote = safeCell(body.safety_note || (body.sensitive_flag ? 'Sensitive terms detected. Review before replying.' : 'No sensitive terms detected.'));
         emailSent = sendNotification(properties, sheet, existingReceipt.row, body, existingReceipt.lead_id, retrySafetyNote);
@@ -77,7 +78,7 @@ function doPost(event) {
         saveRequestReceipt(properties, requestId, existingReceipt);
       }
       SpreadsheetApp.flush();
-      return jsonOutput({ ok: true, duplicate: true, lead_saved: true, email_sent: emailSent, lead_id: existingReceipt.lead_id });
+      return jsonOutput({ ok: true, duplicate: true, lead_saved: true, email_sent: emailSent, lead_id: existingReceipt.lead_id, idempotency: 'stable' });
     }
 
     const receivedAt = new Date();
@@ -122,6 +123,7 @@ function doPost(event) {
       lead_saved: true,
       email_sent: emailSent,
       lead_id: leadId,
+      idempotency: suppliedRequestId ? 'stable' : 'legacy-unavailable',
     });
   } catch (error) {
     return jsonOutput({ ok: false, error: 'Google lead delivery failed.' });
@@ -193,6 +195,10 @@ function sendNotification(properties, sheet, targetRow, body, leadId, safetyNote
     sheet.getRange(targetRow, 14).setValue(safetyNote + ' | Gmail error: ' + safeCell(emailError.message));
     return false;
   }
+}
+
+function notificationAlreadySent(sheet, targetRow) {
+  return String(sheet.getRange(targetRow, 13).getValue() || '').trim().toLowerCase() === 'sent';
 }
 
 function jsonOutput(value) {

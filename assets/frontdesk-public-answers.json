@@ -18,7 +18,7 @@
       "reviewed_at": "2026-11-02",
       "question": "How does the Front Desk protect an inquiry?",
       "answer": "The current build uses Cloudflare Turnstile, field limits, a honeypot, rate limiting, server-side validation, and warnings not to submit sensitive information.",
-      "match_phrases": ["how is the front desk secure", "how does the front desk protect", "what security does the front desk use", "is the front desk secure", "how do you protect inquiries"],
+      "match_phrases": ["how is the front desk secure", "how does the front desk protect", "what security does the front desk use", "is the front desk secure", "how do you protect inquiries", "front desk security", "what is front desk security", "front desk safeguards"],
       "source_links": [
         { "label": "Front Desk safeguards", "href": "https://twilighttech.io/site-chat/" }
       ]
@@ -28,7 +28,7 @@
       "reviewed_at": "2026-11-02",
       "question": "What can a Front Desk include?",
       "answer": "A scoped build can include approved routes and answers, page-aware guidance, secure lead capture, a human handoff, activity tracking, and agreed delivery or integration work. Exact deliverables are set during intake.",
-      "match_phrases": ["what does a front desk include", "what can the front desk include", "what ships with front desk", "what is included in front desk", "what features does front desk have"],
+      "match_phrases": ["what does a front desk include", "what can the front desk include", "what ships with front desk", "what is included in front desk", "what features does front desk have", "front desk scope", "front desk features"],
       "source_links": [
         { "label": "Front Desk scope", "href": "https://twilighttech.io/site-chat/" }
       ]

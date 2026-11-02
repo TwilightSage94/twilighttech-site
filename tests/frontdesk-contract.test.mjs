@@ -399,6 +399,10 @@ test('typed questions use the reviewed public answer projection before optional 
     assert.ok(answer.source_links.length > 0);
   });
   assert.doesNotMatch(JSON.stringify(publicAnswers), /shared_secret|turnstile_token|request_id/);
+  assert.ok(
+    desk.indexOf('var CONTENT = window.TwilightFrontDeskContent') < desk.indexOf('CONTENT.endpoints && CONTENT.endpoints.publicAnswers'),
+    'the runtime must load client content before reading the answer endpoint',
+  );
 });
 
 test('delivery retries use a stable request ID and make partial notification failure recoverable', () => {
@@ -448,8 +452,8 @@ test('the widget fails into a usable direct-contact state', () => {
 test('all production pages request the current widget version', () => {
   productionPages.forEach((path) => {
     const html = readFileSync(resolve(root, path), 'utf8');
-    assert.match(html, /jbot-frontdesk-content\.js\?v=20261102-frontdesk-v7/);
-    assert.match(html, /jbot-widget\.js\?v=20261102-frontdesk-v7/);
+    assert.match(html, /jbot-frontdesk-content\.js\?v=20261102-frontdesk-v9/);
+    assert.match(html, /jbot-widget\.js\?v=20261102-frontdesk-v9/);
     assert.ok(
       html.indexOf('jbot-frontdesk-content.js') < html.indexOf('jbot-widget.js'),
       `content must load before widget: ${path}`,

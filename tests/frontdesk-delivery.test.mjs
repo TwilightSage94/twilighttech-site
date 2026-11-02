@@ -24,6 +24,7 @@ test('Apps Script saves once and recovers a failed notification on duplicate ret
         setNumberFormat() {},
         setValues(values) { rows.push({ row, values: values[0] }); },
         setValue(value) { cellValues.set(`${row}:${column}`, value); },
+        getValue() { return cellValues.get(`${row}:${column}`) || ''; },
       };
     },
   };
@@ -88,9 +89,23 @@ test('Apps Script saves once and recovers a failed notification on duplicate ret
   assert.equal(cellValues.get('6:13'), 'Sent');
   assert.equal(emailAttempts, 2);
 
+  const receiptKey = [...properties.keys()].find((key) => key.startsWith('JBOT_REQUEST_'));
+  const staleReceipt = JSON.parse(properties.get(receiptKey));
+  staleReceipt.email_sent = false;
+  properties.set(receiptKey, JSON.stringify(staleReceipt));
+  const statusRecovery = JSON.parse(sandbox.__receiver.doPost(event).text);
+  assert.equal(statusRecovery.email_sent, true);
+  assert.equal(emailAttempts, 2, 'a Sheet Sent marker prevents a duplicate notification when the receipt is stale');
+
   const conflicting = JSON.parse(sandbox.__receiver.doPost({
     postData: { contents: JSON.stringify({ ...payload, need: 'Different payload with reused ID' }) },
   }).text);
   assert.deepEqual({ ok: conflicting.ok, error: conflicting.error }, { ok: false, error: 'Request ID conflict.' });
   assert.equal(rows.length, 1);
+
+  const legacy = JSON.parse(sandbox.__receiver.doPost({
+    postData: { contents: JSON.stringify({ ...payload, request_id: '', email: 'legacy@example.com' }) },
+  }).text);
+  assert.deepEqual({ ok: legacy.ok, lead_saved: legacy.lead_saved, idempotency: legacy.idempotency }, { ok: true, lead_saved: true, idempotency: 'legacy-unavailable' });
+  assert.equal(rows.length, 2, 'legacy submissions remain accepted during rollout');
 });
