@@ -7,7 +7,7 @@
   var shell = CONTENT.shell;
   var storagePrefix = CONTENT.storagePrefix || 'frontdesk';
   var OPEN_KEY = storagePrefix + '_open_v1';
-  var ASSET_VERSION = '20261102-frontdesk-v5';
+  var ASSET_VERSION = '20261102-frontdesk-v6';
 
   function trackWidgetEvent(name, props) {
     if (typeof window.plausible !== 'function') return;
@@ -81,7 +81,7 @@
     if (document.querySelector('link[data-frontdesk-style]')) return;
     var link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = '/assets/frontdesk-widget.css?v=' + ASSET_VERSION;
+    link.href = (CONTENT.assets && CONTENT.assets.style) || '/assets/frontdesk-widget.css?v=' + ASSET_VERSION;
     link.dataset.frontdeskStyle = 'true';
     document.head.appendChild(link);
   }

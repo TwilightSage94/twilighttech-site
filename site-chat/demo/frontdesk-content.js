@@ -8,11 +8,14 @@
   }
 
   window.FrontDeskContent = deepFreeze({
-    version: '2026-11-02.1',
+    version: '2026-11-02.2',
     mode: 'synthetic-preview',
     storagePrefix: 'cedarline_demo_frontdesk',
     supportEmail: 'service@cedarline.demo.invalid',
-    assets: { runtime: '/assets/frontdesk-runtime.js' },
+    assets: {
+      runtime: '/assets/frontdesk-runtime.js',
+      style: './frontdesk-widget.css?v=20261102-cedarline-v1'
+    },
     endpoints: {
       publicAnswers: './frontdesk-public-answers.json'
     },

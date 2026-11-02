@@ -1,0 +1,267 @@
+@import url("/assets/frontdesk-widget.css?v=20261102-frontdesk-v6");
+
+/* Cedarline's white-label skin: warm, practical, and intentionally separate from Twilight. */
+.frontdesk-widget {
+  --fd-bg: #f6f1e7;
+  --fd-panel: #fffdf8;
+  --fd-surface: #f1eadc;
+  --fd-surface-2: #e7ddcb;
+  --fd-cyan: #214f42;
+  --fd-green: #214f42;
+  --fd-amber: #9a4e32;
+  --fd-pink: #6d5545;
+  --fd-text: #17332d;
+  --fd-muted: #536861;
+  --fd-border: #c7bca9;
+  color: var(--fd-text);
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.frontdesk-launch-label {
+  padding: .72rem .9rem;
+  border: 1px solid #b9ad99;
+  border-radius: 999px;
+  color: #29463e;
+  background: rgba(255, 253, 248, .98);
+  box-shadow: 0 14px 34px rgba(23, 51, 45, .2);
+  font-size: .83rem;
+}
+
+.frontdesk-launch-label strong {
+  color: #9a4e32;
+  font: 700 .57rem/1.2 system-ui, sans-serif;
+  letter-spacing: .09em;
+}
+
+.frontdesk-launch-orb {
+  width: 62px;
+  height: 62px;
+  border: 1px solid #214f42;
+  background: #214f42;
+  box-shadow: 0 16px 40px rgba(23, 51, 45, .28);
+}
+
+.frontdesk-launcher:hover .frontdesk-launch-orb { border-color: #c86742; }
+
+.frontdesk-panel {
+  width: min(420px, calc(100vw - 28px));
+  border: 1px solid #b9ad99;
+  border-radius: 18px 18px 9px 9px;
+  color: var(--fd-text);
+  background: var(--fd-panel);
+  box-shadow: 0 28px 78px rgba(23, 51, 45, .32);
+}
+
+.frontdesk-head {
+  min-height: 72px;
+  padding: .78rem .78rem .78rem .92rem;
+  border-bottom: 1px solid #2f6556;
+  background: #214f42;
+}
+
+.frontdesk-name {
+  color: #fffdf8;
+  font: 700 1rem/1.15 Georgia, "Times New Roman", serif;
+}
+
+.frontdesk-sub,
+.frontdesk-live {
+  color: #dbe8df;
+  font-family: system-ui, sans-serif;
+  letter-spacing: .08em;
+}
+
+.frontdesk-status { background: #f0bd75; box-shadow: none; }
+.frontdesk-close { color: #eff6f0; border-radius: 50%; }
+.frontdesk-close:hover { color: #17332d; background: #fffdf8; }
+
+.frontdesk-context {
+  min-height: 38px;
+  padding: .5rem .92rem;
+  border-bottom: 1px solid #d9d1c2;
+  color: #536861;
+  background: #f1eadc;
+  font-family: system-ui, sans-serif;
+  letter-spacing: .06em;
+}
+
+.frontdesk-context span { color: #9a4e32; }
+.frontdesk-context strong { color: #536861; }
+
+.frontdesk-avatar {
+  border-color: #d3e0d8;
+  background: #fffdf8;
+  box-shadow: none;
+}
+
+/* Recast the shared mascot markup as a simple Cedarline house mark. */
+.frontdesk-face {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.frontdesk-face > span { display: none; }
+.frontdesk-face::before {
+  left: 4px;
+  right: auto;
+  top: 3px;
+  width: 20px;
+  height: 14px;
+  border: 0;
+  border-radius: 2px;
+  background: #c86742;
+  box-shadow: none;
+  clip-path: polygon(50% 0, 100% 58%, 84% 58%, 84% 100%, 16% 100%, 16% 58%, 0 58%);
+}
+
+.frontdesk-face::after {
+  left: 12px;
+  bottom: 3px;
+  width: 5px;
+  height: 8px;
+  border: 0;
+  border-radius: 1px 1px 0 0;
+  background: #214f42;
+  transform: none;
+}
+
+.frontdesk-chat { background: #fffdf8; }
+.frontdesk-overline,
+.frontdesk-mini-status,
+.frontdesk-receipt,
+.frontdesk-widget .quick-context {
+  color: #6d5545;
+  font-family: system-ui, sans-serif;
+  letter-spacing: .08em;
+}
+
+.frontdesk-widget .bubble.bot {
+  border-color: #d4c8b5;
+  color: #17332d;
+  background: #f6f1e7;
+}
+
+.frontdesk-widget .bubble.user {
+  border-color: #214f42;
+  color: #fffdf8;
+  background: #214f42;
+}
+
+.frontdesk-front-card,
+.frontdesk-safe {
+  border-color: #d4c8b5;
+  border-radius: 10px;
+  color: #29463e;
+  background: #f6f1e7;
+}
+
+.frontdesk-front-card strong { color: #17332d; }
+.frontdesk-front-card a { color: #214f42; }
+
+.frontdesk-widget .quick {
+  min-height: 52px;
+  border-color: #d1c6b4;
+  border-radius: 10px;
+  color: #17332d;
+  background: #fffdf8;
+}
+
+.frontdesk-widget .quick:hover {
+  border-color: #769386;
+  background: #f1eadc;
+}
+
+.frontdesk-widget .quick.context {
+  border-color: #769386;
+  box-shadow: inset 3px 0 #214f42;
+}
+
+.frontdesk-widget .quick .ico {
+  border-color: #769386;
+  color: #214f42;
+  background: #eef3ef;
+  font-family: system-ui, sans-serif;
+}
+
+.frontdesk-widget .quick-copy strong { color: #17332d; }
+.frontdesk-widget .quick-copy small { color: #536861; font-family: system-ui, sans-serif; }
+.frontdesk-widget .quick.system .ico,
+.frontdesk-widget .quick.guides .ico { color: #9a4e32; border-color: #c99c87; }
+
+.frontdesk-widget .chat-action {
+  min-height: 38px;
+  border-color: #214f42;
+  border-radius: 999px;
+  color: #214f42;
+  background: #fffdf8;
+  font: 700 .58rem/1.2 system-ui, sans-serif;
+  letter-spacing: .04em;
+}
+
+.frontdesk-widget .chat-action.primary {
+  border-color: #214f42;
+  color: #fffdf8;
+  background: #214f42;
+}
+
+.frontdesk-widget .chat-action.alt {
+  border-color: #c86742;
+  color: #773b27;
+  background: #fff5ef;
+}
+
+.frontdesk-input-row {
+  gap: .5rem;
+  padding: .72rem .78rem .5rem;
+  border-top-color: #d9d1c2;
+  background: #f6f1e7;
+}
+
+.frontdesk-input-row #frontdesk-input {
+  border-color: #b9ad99;
+  border-radius: 999px;
+  color: #17332d;
+  background: #fffdf8;
+}
+
+.frontdesk-input-row #frontdesk-input::placeholder { color: #6c7e78; }
+.frontdesk-input-row #frontdesk-input:focus {
+  border-color: #214f42;
+  box-shadow: 0 0 0 3px rgba(33, 79, 66, .16);
+}
+
+.frontdesk-widget .send {
+  border-radius: 50%;
+  color: #fffdf8;
+  background: #c86742;
+  box-shadow: none;
+}
+
+.frontdesk-consent {
+  color: #536861;
+  background: #f6f1e7;
+  font-family: system-ui, sans-serif;
+}
+
+.frontdesk-widget button:focus-visible,
+.frontdesk-widget input:focus-visible,
+.frontdesk-widget a:focus-visible {
+  outline: 3px solid #c86742;
+  outline-offset: 3px;
+}
+
+@media (max-width: 560px) {
+  .frontdesk-panel {
+    width: 100vw;
+    height: 100dvh;
+    border-radius: 0;
+  }
+  .frontdesk-head { min-height: calc(74px + env(safe-area-inset-top, 0px)); }
+}
+
+
