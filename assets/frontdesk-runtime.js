@@ -1,0 +1,1126 @@
+(function () {
+  var CONTENT = window.FrontDeskContent;
+  if (!CONTENT) return;
+
+  var shell = CONTENT.shell;
+  var IS_SYNTHETIC_PREVIEW = CONTENT.mode === 'synthetic-preview';
+  var SYNTHETIC_PREVIEW = CONTENT.syntheticPreview || {};
+  var SYNTHETIC_IDENTITIES = Array.isArray(SYNTHETIC_PREVIEW.identities) ? SYNTHETIC_PREVIEW.identities : [];
+  var storagePrefix = CONTENT.storagePrefix || 'frontdesk';
+  var FRONTDESK_PROXY_ENDPOINT = (CONTENT.endpoints && CONTENT.endpoints.leads) || (IS_SYNTHETIC_PREVIEW ? '' : '/api/frontdesk-leads');
+  var PUBLIC_ANSWERS_ENDPOINT = CONTENT.endpoints && CONTENT.endpoints.publicAnswers;
+  var RATE_KEY = storagePrefix + '_last_submit_at';
+  var RATE_WINDOW_MS = 45000;
+  var CHAT_KEY = storagePrefix + '_chat_v3';
+  var STATE_KEY = storagePrefix + '_state_v3';
+  var TURNSTILE_TEST_SITEKEY = '1x00000000000000000000AA';
+
+  var ALLOWED_LANES = CONTENT.lanes.reduce(function (lanes, lane) {
+    lanes[lane.slug] = lane.leadLabel;
+    return lanes;
+  }, {});
+
+  var LIMITS = {
+    name: 90,
+    email: 160,
+    lane: 40,
+    need: 700,
+    urgency: 80,
+    summary: 900,
+    next_step: 180,
+    safety_note: 220,
+    hp: 120,
+    turnstile_token: 2048,
+    request_id: 100
+  };
+
+  var SENSITIVE_PATTERNS = [
+    /\bpassword\b/i,
+    /\bpasscode\b/i,
+    /\bapi[_\s-]?key\b/i,
+    /\bsecret\b/i,
+    /\btoken\b/i,
+    /\bssn\b/i,
+    /\bsocial security\b/i,
+    /\bcredit card\b/i,
+    /\bprivate key\b/i,
+    /\bcustody\b/i,
+    /\bmedical record\b/i,
+    /\bclient file\b/i
+  ];
+
+  function getParam(name) {
+    return new URLSearchParams(window.location.search).get(name) || '';
+  }
+
+  function truncate(value, max) {
+    var text = (value || '').toString().trim();
+    if (!max || text.length <= max) return text;
+    return text.slice(0, max - 1).trim() + '…';
+  }
+
+  function neutralize(value, max) {
+    return truncate(value, max)
+      .replace(/[<>]/g, '')
+      .replace(/[\u0000-\u001F\u007F]/g, ' ')
+      .replace(/\s{2,}/g, ' ')
+      .trim();
+  }
+
+  function slugLane(value) {
+    var raw = neutralize(value, LIMITS.lane).toLowerCase();
+    var slug = raw
+      .replace(/&/g, 'and')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+
+    if (ALLOWED_LANES[slug]) return slug;
+
+    Object.keys(ALLOWED_LANES).some(function (key) {
+      if (ALLOWED_LANES[key].toLowerCase() === raw) {
+        slug = key;
+        return true;
+      }
+      return false;
+    });
+
+    return ALLOWED_LANES[slug] ? slug : '';
+  }
+
+  function isEmail(value) {
+    var email = neutralize(value, LIMITS.email);
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+  }
+
+  function hasSensitiveContent(text) {
+    var value = (text || '').toString();
+    return SENSITIVE_PATTERNS.some(function (pattern) {
+      return pattern.test(value);
+    });
+  }
+
+  function currentPage() {
+    if (window.location.origin && window.location.origin !== 'null') {
+      return window.location.origin + window.location.pathname;
+    }
+    return window.location.href.split('?')[0].split('#')[0];
+  }
+
+  function trackEvent(name, props) {
+    if (typeof window.plausible !== 'function') return;
+    window.plausible(name, props ? { props: props } : undefined);
+  }
+
+  var publicAnswersPromise = null;
+
+  function normalizeQuestion(value) {
+    return String(value || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9\s]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function validateAnswerRegistry(registry) {
+    if (!registry || typeof registry.revision !== 'string' || !Array.isArray(registry.answers)) return null;
+    var answers = registry.answers.filter(function (answer) {
+      return answer && typeof answer.id === 'string' && typeof answer.reviewed_at === 'string' &&
+        typeof answer.question === 'string' && typeof answer.answer === 'string' &&
+        Array.isArray(answer.match_phrases) && Array.isArray(answer.source_links);
+    });
+    if (!answers.length) return null;
+    return { revision: registry.revision, reviewed_at: registry.reviewed_at || '', answers: answers };
+  }
+
+  function loadPublicAnswers() {
+    if (!PUBLIC_ANSWERS_ENDPOINT) return Promise.resolve(null);
+    if (publicAnswersPromise) return publicAnswersPromise;
+    publicAnswersPromise = fetch(PUBLIC_ANSWERS_ENDPOINT, {
+      method: 'GET',
+      credentials: 'same-origin',
+      cache: 'no-cache',
+      headers: { Accept: 'application/json' }
+    }).then(function (response) {
+      if (!response.ok) throw new Error('Public answers unavailable.');
+      return response.json();
+    }).then(function (registry) {
+      var validated = validateAnswerRegistry(registry);
+      if (!validated) throw new Error('Public answers are invalid.');
+      return validated;
+    }).catch(function () {
+      publicAnswersPromise = null;
+      return null;
+    });
+    return publicAnswersPromise;
+  }
+
+  function matchApprovedAnswer(question, registry) {
+    var normalized = normalizeQuestion(question);
+    if (!registry || !normalized) return { kind: 'unknown' };
+    var matches = [];
+    registry.answers.forEach(function (answer) {
+      var score = 0;
+      answer.match_phrases.forEach(function (phrase) {
+        var approvedPhrase = normalizeQuestion(phrase);
+        if (!approvedPhrase) return;
+        if (normalized === approvedPhrase) score = Math.max(score, approvedPhrase.length + 1000);
+        else if (normalized.indexOf(approvedPhrase) !== -1) score = Math.max(score, approvedPhrase.length);
+        else if (normalized.length >= 12 && approvedPhrase.indexOf(normalized) !== -1) score = Math.max(score, normalized.length);
+      });
+      if (score) matches.push({ answer: answer, score: score });
+    });
+    matches.sort(function (left, right) { return right.score - left.score; });
+    if (matches.length === 1 || (matches[0] && matches[0].score >= 1000 && (!matches[1] || matches[1].score < 1000))) {
+      return { kind: 'answer', answer: matches[0].answer, revision: registry.revision };
+    }
+    if (matches.length > 1 || /\b(price|pricing|cost|offer|service|include|included|work|does)\b/.test(normalized)) {
+      return { kind: 'ambiguous' };
+    }
+    return { kind: 'unknown' };
+  }
+
+  function newClientRequestId() {
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') return window.crypto.randomUUID();
+    return 'frontdesk-' + Date.now() + '-' + Math.random().toString(16).slice(2);
+  }
+
+  function normalizeLead(lead) {
+    var source = lead || {};
+    var laneSlug = slugLane(source.lane);
+    var summary = neutralize(source.summary, LIMITS.summary);
+    var need = neutralize(source.need, LIMITS.need);
+
+    return {
+      name: neutralize(source.name, LIMITS.name),
+      email: neutralize(source.email, LIMITS.email).toLowerCase(),
+      lane: ALLOWED_LANES[laneSlug] || '',
+      lane_slug: laneSlug,
+      need: need,
+      urgency: neutralize(source.urgency, LIMITS.urgency),
+      summary: summary,
+      next_step: neutralize(source.next_step, LIMITS.next_step),
+      safety_note: neutralize(source.safety_note, LIMITS.safety_note),
+      hp: neutralize(source.hp, LIMITS.hp),
+      turnstile_token: neutralize(source.turnstile_token, LIMITS.turnstile_token),
+      sensitive_flag: hasSensitiveContent([need, summary, source.next_step].join(' ')),
+      request_id: neutralize(source.request_id, LIMITS.request_id)
+    };
+  }
+
+  function validateLead(lead) {
+    var normalized = normalizeLead(lead);
+    var errors = [];
+    var warnings = [];
+
+    if (normalized.hp) {
+      errors.push('Bot check failed.');
+    }
+    if (!normalized.email) {
+      errors.push('Email is required.');
+    } else if (!isEmail(normalized.email)) {
+      errors.push('Email does not look valid.');
+    }
+    if (!ALLOWED_LANES[normalized.lane_slug]) {
+      errors.push('Invalid route selected.');
+    }
+    if (!normalized.turnstile_token) {
+      errors.push('Security verification is required.');
+    }
+    if (normalized.sensitive_flag) {
+      warnings.push('Sensitive terms detected. Do not submit passwords, private client files, custody details, medical records, API keys, or secrets.');
+    }
+
+    return {
+      ok: errors.length === 0,
+      errors: errors,
+      warnings: warnings,
+      lead: normalized
+    };
+  }
+
+  function compactSummary(lead) {
+    var bits = [
+      lead.name ? 'Name: ' + lead.name : '',
+      lead.lane ? 'Lane: ' + lead.lane : '',
+      lead.need ? 'Need: ' + lead.need : '',
+      lead.urgency ? 'Urgency: ' + lead.urgency : '',
+      lead.next_step ? 'Next: ' + lead.next_step : ''
+    ].filter(Boolean);
+    return truncate(bits.join(' | '), 450);
+  }
+
+  function buildLeadPayload(rawLead) {
+    var lead = normalizeLead(rawLead);
+    return {
+      email: lead.email,
+      source_page: 'frontdesk:' + lead.lane_slug,
+      utm_campaign: neutralize(getParam('utm_campaign') || 'frontdesk', 120),
+      utm_medium: neutralize(getParam('utm_medium') || 'site-chat', 80),
+      utm_source: neutralize(getParam('utm_source') || window.location.pathname, 160),
+      utm_content: neutralize(getParam('utm_content') || compactSummary(lead), 450),
+      referrer: neutralize(document.referrer || '', 300),
+      hp: lead.hp
+    };
+  }
+
+  function buildEmailPayload(rawLead) {
+    var lead = normalizeLead(rawLead);
+    var safetyNote = lead.safety_note || (lead.sensitive_flag
+      ? 'Sensitive terms detected. Review before replying.'
+      : 'No sensitive files requested in chat.');
+
+    return {
+      _subject: 'New ' + shell.productName + ' lead - ' + lead.lane,
+      source: shell.widgetLabel,
+      name: lead.name,
+      email: lead.email,
+      lane: lead.lane,
+      need: lead.need,
+      urgency: lead.urgency,
+      page: currentPage(),
+      summary: lead.summary || compactSummary(lead),
+      next_step: lead.next_step,
+      safety_note: safetyNote,
+      sensitive_flag: lead.sensitive_flag ? 'yes' : 'no'
+    };
+  }
+
+  function buildProxyPayload(rawLead) {
+    var lead = normalizeLead(rawLead);
+    return {
+      name: lead.name,
+      email: lead.email,
+      lane: lead.lane_slug,
+      need: lead.need,
+      urgency: lead.urgency,
+      summary: lead.summary || compactSummary(lead),
+      next_step: lead.next_step,
+      safety_note: lead.safety_note,
+      hp: lead.hp,
+      turnstile_token: lead.turnstile_token,
+      page: currentPage(),
+      request_id: lead.request_id
+    };
+  }
+
+  function rateLimited() {
+    try {
+      var last = parseInt(localStorage.getItem(RATE_KEY) || '0', 10);
+      return Date.now() - last < RATE_WINDOW_MS;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  function markSubmitted() {
+    try {
+      localStorage.setItem(RATE_KEY, String(Date.now()));
+    } catch (err) {
+      /* localStorage can be blocked; server-side rate limits still matter. */
+    }
+  }
+
+  function postJson(url, payload) {
+    return fetch(url, {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  }
+
+  function submitLead(rawLead) {
+    var validation = validateLead(rawLead);
+
+    if (!validation.ok) {
+      return Promise.reject(new Error(validation.errors.join(' ')));
+    }
+
+    if (rateLimited()) {
+      return Promise.reject(new Error('Please wait a moment before submitting another note.'));
+    }
+
+    return postJson(FRONTDESK_PROXY_ENDPOINT, buildProxyPayload(validation.lead)).then(function (response) {
+      return response.json().catch(function () { return {}; }).then(function (result) {
+        if (!response.ok || !result || !result.ok) {
+          var error = new Error(result && result.error ? result.error : 'Front Desk delivery failed.');
+          error.requestId = (result && result.request_id) || response.headers.get('X-FrontDesk-Request-ID') || '';
+          throw error;
+        }
+        return result;
+      });
+    }).then(function (result) {
+
+      if (result.email_sent) markSubmitted();
+
+      return {
+        lead_saved: !!result.lead_saved,
+        email_sent: !!result.email_sent,
+        warnings: result.warnings || validation.warnings,
+        request_id: result.request_id || ''
+      };
+    });
+  }
+
+  window.FrontDesk = window.FrontDesk || {};
+  window.FrontDesk.allowedLanes = ALLOWED_LANES;
+  window.FrontDesk.normalizeLead = normalizeLead;
+  window.FrontDesk.validateLead = validateLead;
+  window.FrontDesk.buildProxyPayload = buildProxyPayload;
+  window.FrontDesk.buildLeadPayload = buildLeadPayload;
+  window.FrontDesk.buildEmailPayload = buildEmailPayload;
+  window.FrontDesk.submitLead = submitLead;
+
+  var LANE_PROMPTS = CONTENT.prompts.laneSelected;
+  var CAPTURE_NAME_PROMPTS = CONTENT.prompts.captureName;
+  var NEED_PROMPTS = CONTENT.prompts.need;
+  var RESOURCE_ROUTES = CONTENT.resources;
+
+  var uiState = {
+    stage: 'idle',
+    lane: '',
+    name: '',
+    email: '',
+    need: '',
+    urgency: '',
+    submitting: false,
+    requestId: ''
+  };
+
+  var STAGE_PRESENTATION = CONTENT.stages;
+
+  function announceState(stage, overrides) {
+    var presentation = STAGE_PRESENTATION[stage] || STAGE_PRESENTATION.idle;
+    var detail = overrides || {};
+    document.dispatchEvent(new CustomEvent('frontdesk:state', {
+      detail: {
+        stage: stage,
+        status: detail.status || presentation.status,
+        step: detail.step || presentation.step
+      }
+    }));
+  }
+
+  function setStage(stage, overrides) {
+    uiState.stage = stage;
+    var input = document.getElementById('frontdesk-input');
+    if (input) {
+      input.type = stage === 'email' ? 'email' : 'text';
+      input.inputMode = stage === 'email' ? 'email' : 'text';
+      input.autocomplete = stage === 'name' ? 'name' : (stage === 'email' ? 'email' : 'off');
+      input.autocapitalize = stage === 'email' ? 'none' : 'sentences';
+    }
+    announceState(stage, overrides);
+  }
+  var activeChat = null;
+  var baseChatMarkup = '';
+  var turnstileState = {
+    token: '',
+    widgetId: null,
+    loadPromise: null,
+    sitekeyPromise: null,
+    actionButton: null
+  };
+
+  function isLocalHost() {
+    return window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+  }
+
+  function getTurnstileSitekey() {
+    if (window.location.protocol === 'file:' || isLocalHost()) {
+      return Promise.resolve(TURNSTILE_TEST_SITEKEY);
+    }
+    if (turnstileState.sitekeyPromise) return turnstileState.sitekeyPromise;
+    turnstileState.sitekeyPromise = fetch('/api/frontdesk-config', {
+      method: 'GET',
+      credentials: 'same-origin',
+      cache: 'no-store',
+      headers: { Accept: 'application/json' }
+    }).then(function (response) {
+      if (!response.ok) throw new Error('Turnstile configuration unavailable.');
+      return response.json();
+    }).then(function (config) {
+      if (!config || !config.sitekey) throw new Error('Turnstile sitekey missing.');
+      return config.sitekey;
+    }).catch(function (error) {
+      turnstileState.sitekeyPromise = null;
+      throw error;
+    });
+    return turnstileState.sitekeyPromise;
+  }
+
+  function loadTurnstileApi() {
+    if (window.turnstile) return Promise.resolve(window.turnstile);
+    if (turnstileState.loadPromise) return turnstileState.loadPromise;
+    turnstileState.loadPromise = new Promise(function (resolve, reject) {
+      var script = document.createElement('script');
+      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      script.async = true;
+      script.defer = true;
+      script.onload = function () {
+        if (window.turnstile) resolve(window.turnstile);
+        else reject(new Error('Turnstile did not initialize.'));
+      };
+      script.onerror = function () { reject(new Error('Turnstile could not load.')); };
+      document.head.appendChild(script);
+    }).catch(function (error) {
+      turnstileState.loadPromise = null;
+      throw error;
+    });
+    return turnstileState.loadPromise;
+  }
+
+  function clearTurnstileWidget() {
+    if (turnstileState.widgetId !== null && window.turnstile) {
+      try { window.turnstile.remove(turnstileState.widgetId); } catch (error) { /* already removed */ }
+    }
+    turnstileState.token = '';
+    turnstileState.widgetId = null;
+    turnstileState.actionButton = null;
+    if (activeChat) {
+      activeChat.querySelectorAll('.frontdesk-turnstile-box').forEach(function (box) { box.remove(); });
+    }
+  }
+
+  function prepareTurnstile(card, actionButton) {
+    clearTurnstileWidget();
+    turnstileState.actionButton = actionButton;
+    actionButton.disabled = true;
+    announceState('security');
+
+    var box = document.createElement('div');
+    box.className = 'frontdesk-turnstile-box';
+    var status = document.createElement('div');
+    status.className = 'frontdesk-turnstile-status';
+    status.textContent = 'Cloudflare security check loading...';
+    var container = document.createElement('div');
+    container.className = 'frontdesk-turnstile';
+    box.appendChild(status);
+    box.appendChild(container);
+    var actionRow = card.querySelector('.chat-actions');
+    card.insertBefore(box, actionRow || null);
+
+    if (window.location.protocol === 'file:') {
+      turnstileState.token = 'local-preview-only';
+      actionButton.disabled = false;
+      status.textContent = 'Turnstile activates on the HTTP or live preview.';
+      announceState('confirm', { status: 'Preview', step: 'Review the desk note' });
+      return;
+    }
+
+    Promise.all([getTurnstileSitekey(), loadTurnstileApi()]).then(function (parts) {
+      if (!container.isConnected) return;
+      var sitekey = parts[0];
+      var turnstile = parts[1];
+      turnstileState.widgetId = turnstile.render(container, {
+        sitekey: sitekey,
+        theme: 'dark',
+        size: 'flexible',
+        appearance: 'interaction-only',
+        action: 'frontdesk_lead',
+        callback: function (token) {
+          turnstileState.token = token;
+          actionButton.disabled = false;
+          status.textContent = 'Verified by Cloudflare. Ready to send.';
+          announceState('confirm', { status: 'Verified', step: 'Send the desk note' });
+          trackEvent('Front Desk Security Verified', { lane: uiState.lane || 'general' });
+          persistConversation(activeChat);
+        },
+        'expired-callback': function () {
+          turnstileState.token = '';
+          actionButton.disabled = true;
+          status.textContent = 'Security check expired. Verifying again...';
+          announceState('security', { status: 'Expired', step: 'Verify again' });
+          turnstile.reset(turnstileState.widgetId);
+        },
+        'error-callback': function () {
+          turnstileState.token = '';
+          actionButton.disabled = true;
+          status.textContent = 'Security check unavailable. Please try again.';
+          announceState('error', { status: 'Security paused', step: 'Try again or email' });
+          trackEvent('Front Desk Security Failed', { lane: uiState.lane || 'general' });
+        }
+      });
+    }).catch(function () {
+      actionButton.disabled = true;
+      status.textContent = 'Security check unavailable. Use direct contact instead.';
+      announceState('error', { status: 'Security paused', step: 'Use the email fallback' });
+      trackEvent('Front Desk Security Failed', { lane: uiState.lane || 'general' });
+    });
+  }
+
+  function hasPersistentWidget() {
+    return !!document.getElementById('frontdesk-widget');
+  }
+
+  function persistConversation(chat) {
+    if (!chat || !hasPersistentWidget()) return;
+    try {
+      if (IS_SYNTHETIC_PREVIEW) {
+        sessionStorage.removeItem(CHAT_KEY);
+        sessionStorage.removeItem(STATE_KEY);
+        return;
+      }
+      var safeClone = chat.cloneNode(true);
+      safeClone.querySelectorAll('.frontdesk-turnstile-box').forEach(function (box) { box.remove(); });
+      sessionStorage.setItem(CHAT_KEY, safeClone.innerHTML);
+      sessionStorage.setItem(STATE_KEY, JSON.stringify(uiState));
+    } catch (error) {
+      /* The front desk still works when browser storage is unavailable. */
+    }
+  }
+
+  function restoreConversation(chat) {
+    if (!chat || !hasPersistentWidget()) return false;
+    try {
+      if (IS_SYNTHETIC_PREVIEW) {
+        sessionStorage.removeItem(CHAT_KEY);
+        sessionStorage.removeItem(STATE_KEY);
+        return false;
+      }
+      var savedChat = sessionStorage.getItem(CHAT_KEY);
+      var savedState = JSON.parse(sessionStorage.getItem(STATE_KEY) || 'null');
+      if (!savedChat || !savedState || typeof savedState !== 'object') return false;
+      if (savedState.lane && !ALLOWED_LANES[savedState.lane]) savedState.lane = 'general';
+      Object.keys(uiState).forEach(function (key) {
+        if (Object.prototype.hasOwnProperty.call(savedState, key)) uiState[key] = savedState[key];
+      });
+      chat.innerHTML = savedChat;
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function createMascot() {
+    var mascot = document.createElement('span');
+    mascot.className = 'msg-frontdesk';
+    mascot.setAttribute('aria-hidden', 'true');
+    mascot.innerHTML = '<span class="tiny-ant"></span><span class="tiny-eye left"></span><span class="tiny-eye right"></span>';
+    return mascot;
+  }
+
+  function scrollChat(chat) {
+    window.requestAnimationFrame(function () {
+      chat.scrollTop = chat.scrollHeight;
+      persistConversation(chat);
+    });
+  }
+
+  function appendMessage(chat, kind, message) {
+    var bubble = document.createElement('div');
+    bubble.className = 'bubble ' + kind;
+    if (kind === 'bot') bubble.appendChild(createMascot());
+    bubble.appendChild(document.createTextNode(message));
+    chat.appendChild(bubble);
+    scrollChat(chat);
+    return bubble;
+  }
+
+  function appendCard(chat, className, title, message) {
+    var card = document.createElement('div');
+    card.className = className;
+    var heading = document.createElement('strong');
+    heading.textContent = title;
+    card.appendChild(heading);
+    card.appendChild(document.createTextNode(message));
+    chat.appendChild(card);
+    scrollChat(chat);
+    return card;
+  }
+
+  function appendReceipt(card, message) {
+    var receipt = document.createElement('div');
+    receipt.className = 'frontdesk-receipt';
+    receipt.textContent = message;
+    card.appendChild(receipt);
+    persistConversation(activeChat);
+    return receipt;
+  }
+
+  function addActions(card, actions) {
+    var row = document.createElement('div');
+    row.className = 'chat-actions';
+
+    actions.forEach(function (action) {
+      var control;
+      if (action.href) {
+        control = document.createElement('a');
+        control.href = action.href;
+        control.target = '_blank';
+        control.rel = 'noopener';
+      } else {
+        control = document.createElement('button');
+        control.type = 'button';
+        control.dataset.frontdeskAction = action.action;
+        if (action.value) control.dataset.frontdeskValue = action.value;
+      }
+      control.className = 'chat-action' + (action.className ? ' ' + action.className : '');
+      control.textContent = action.label;
+      row.appendChild(control);
+    });
+
+    card.appendChild(row);
+    persistConversation(activeChat);
+    return row;
+  }
+
+  function setInput(input, send, placeholder, disabled, shouldFocus) {
+    input.placeholder = placeholder;
+    input.disabled = !!disabled;
+    send.disabled = !!disabled;
+    if (!disabled && shouldFocus !== false) input.focus();
+    persistConversation(activeChat);
+  }
+
+  function resetState() {
+    clearTurnstileWidget();
+    setStage('idle');
+    uiState.lane = '';
+    uiState.name = '';
+    uiState.email = '';
+    uiState.need = '';
+    uiState.urgency = '';
+    uiState.submitting = false;
+    uiState.requestId = '';
+  }
+
+  function showResources(chat, lane) {
+    var route = RESOURCE_ROUTES[lane];
+    var card = appendCard(chat, 'link-card', route.title, route.copy);
+    var actions = route.links.slice();
+    actions.push({ label: shell.noteLabel, action: 'capture', value: lane, className: 'alt' });
+    addActions(card, actions);
+  }
+
+  function beginCapture(chat, input, send, lane) {
+    setStage('name');
+    uiState.lane = lane || uiState.lane || 'general';
+    uiState.name = '';
+    uiState.email = '';
+    uiState.need = '';
+    uiState.urgency = '';
+    uiState.requestId = newClientRequestId();
+    trackEvent('Front Desk Note Started', { lane: uiState.lane, page: window.location.pathname });
+    if (IS_SYNTHETIC_PREVIEW) {
+      var identityCard = appendCard(
+        chat,
+        'link-card',
+        SYNTHETIC_PREVIEW.identityTitle || 'Choose a fictional visitor',
+        SYNTHETIC_PREVIEW.identityCopy || 'This preview uses made-up contact details and never sends or saves them.'
+      );
+      var identityActions = SYNTHETIC_IDENTITIES.map(function (identity) {
+        return { label: identity.label, action: 'identity', value: identity.id, className: 'alt' };
+      });
+      if (identityActions.length) addActions(identityCard, identityActions);
+      else appendReceipt(identityCard, 'No synthetic identities are configured. The preview cannot continue.');
+      setInput(input, send, 'Choose a fictional visitor above...', true);
+      return;
+    }
+    appendMessage(chat, 'bot', CAPTURE_NAME_PROMPTS[uiState.lane] || CAPTURE_NAME_PROMPTS.general);
+    setInput(input, send, 'Your name...', false);
+  }
+
+  function chooseSyntheticIdentity(chat, input, send, identityId) {
+    if (!IS_SYNTHETIC_PREVIEW || uiState.stage !== 'name') return;
+    var identity = SYNTHETIC_IDENTITIES.find(function (candidate) { return candidate.id === identityId; });
+    if (!identity || !identity.name || !isEmail(identity.email)) return;
+    uiState.name = neutralize(identity.name, LIMITS.name);
+    uiState.email = neutralize(identity.email, LIMITS.email).toLowerCase();
+    appendMessage(chat, 'user', identity.label);
+    setStage('need', { status: 'Synthetic preview', step: 'Describe a fictional need' });
+    appendMessage(chat, 'bot', (NEED_PROMPTS[uiState.lane] || NEED_PROMPTS.general) + ' Use a fictional, high-level example only.');
+    setInput(input, send, 'A fictional, high-level example...', false);
+  }
+
+  function selectLane(chat, input, send, lane) {
+    if (!ALLOWED_LANES[lane]) lane = 'general';
+    resetState();
+    uiState.lane = lane;
+    trackEvent('Front Desk Lane Selected', { lane: lane, page: window.location.pathname });
+    appendMessage(chat, 'user', ALLOWED_LANES[lane]);
+
+    if (RESOURCE_ROUTES[lane]) {
+      appendMessage(chat, 'bot', LANE_PROMPTS[lane]);
+      showResources(chat, lane);
+      setStage('resource');
+      setInput(input, send, 'You can also describe what you need...', false, false);
+      return;
+    }
+
+    beginCapture(chat, input, send, lane);
+  }
+
+  function askUrgency(chat, input, send) {
+    setStage('urgency');
+    var bubble = appendMessage(chat, 'bot', 'Last little routing flag: what is the timing?');
+    addActions(bubble, CONTENT.urgencyOptions.map(function (option) {
+      return { label: option.label, action: 'urgency', value: option.value, className: option.className };
+    }));
+    setInput(input, send, 'Or type your timing...', false);
+  }
+
+  function showConfirmation(chat, input, send) {
+    setStage('confirm');
+    var laneName = ALLOWED_LANES[uiState.lane] || ALLOWED_LANES.general;
+    var summary = 'Lane: ' + laneName + ' | Name: ' + uiState.name + ' | Email: ' + uiState.email + ' | Need: ' + uiState.need + ' | Timing: ' + uiState.urgency;
+    var card = appendCard(chat, 'lead-card', IS_SYNTHETIC_PREVIEW ? (SYNTHETIC_PREVIEW.confirmationTitle || 'Ready for the synthetic preview') : 'Ready for the desk', summary);
+    appendReceipt(card, IS_SYNTHETIC_PREVIEW ? 'Fictional browser-only data - review before completing the preview' : 'Built from the answers above - review before sending');
+    trackEvent('Front Desk Review Reached', { lane: uiState.lane || 'general', page: window.location.pathname });
+    var actionRow = addActions(card, [
+      { label: IS_SYNTHETIC_PREVIEW ? (SYNTHETIC_PREVIEW.submitLabel || 'Complete synthetic preview') : 'Send desk note', action: 'submit', className: 'primary' },
+      { label: 'Start over', action: 'restart' }
+    ]);
+    var submitButton = actionRow.querySelector('[data-frontdesk-action="submit"]');
+    if (!IS_SYNTHETIC_PREVIEW) prepareTurnstile(card, submitButton);
+    setInput(input, send, IS_SYNTHETIC_PREVIEW ? 'Complete the synthetic preview above...' : 'Confirm above or start over...', true);
+  }
+
+  function leadFromState(hp) {
+    var laneName = ALLOWED_LANES[uiState.lane] || ALLOWED_LANES.general;
+    return {
+      name: uiState.name,
+      email: uiState.email,
+      lane: uiState.lane || 'general',
+      need: uiState.need,
+      urgency: uiState.urgency,
+      summary: uiState.name + ' is asking about ' + laneName + ': ' + uiState.need,
+      next_step: 'Reply by email for a fit check.',
+      safety_note: 'Visitor was warned not to paste sensitive files or details.',
+      hp: hp || '',
+      turnstile_token: turnstileState.token,
+      request_id: uiState.requestId || (uiState.requestId = newClientRequestId())
+    };
+  }
+
+  function showAnswerResult(chat, input, send, result) {
+    var lane = uiState.lane || 'general';
+    var approvedTopics = shell.approvedTopics || 'the approved information listed here';
+    if (result.kind === 'answer') {
+      var answer = result.answer;
+      var card = appendCard(chat, 'link-card', answer.question, answer.answer);
+      var actions = answer.source_links.map(function (link) {
+        return { label: link.label, href: link.href };
+      });
+      actions.push({ label: shell.noteLabel, action: 'capture', value: lane, className: 'alt' });
+      addActions(card, actions);
+      appendReceipt(card, 'Approved answer ' + answer.id + ' | reviewed ' + answer.reviewed_at + ' | revision ' + result.revision);
+      trackEvent('Front Desk Approved Answer', { answer_id: answer.id, revision: result.revision });
+    } else if (result.kind === 'ambiguous') {
+      var clarify = appendCard(chat, 'link-card', 'Which part do you mean?', 'I can answer from approved information about ' + approvedTopics + '. Please ask about one topic at a time, or leave an optional note.');
+      addActions(clarify, [{ label: shell.noteLabel, action: 'capture', value: lane, className: 'alt' }]);
+    } else {
+      var unknown = appendCard(chat, 'link-card', 'I do not have an approved answer for that', 'Try asking about ' + approvedTopics + '. You can also leave an optional high-level note for a human reply.');
+      addActions(unknown, [{ label: shell.noteLabel, action: 'capture', value: lane, className: 'alt' }]);
+    }
+    setStage('resource', { status: 'Answered', step: 'Ask another question or choose a next step' });
+    setInput(input, send, 'Ask another approved-information question...', false);
+  }
+
+  function answerTypedQuestion(chat, input, send, value) {
+    appendMessage(chat, 'user', value);
+    if (hasSensitiveContent(value)) {
+      appendMessage(chat, 'bot', 'Please keep questions high-level. Do not include passwords, private files, medical details, or other sensitive information.');
+    }
+    setInput(input, send, 'Checking approved information...', true);
+    loadPublicAnswers().then(function (registry) {
+      showAnswerResult(chat, input, send, matchApprovedAnswer(value, registry));
+    });
+  }
+
+  function finishSyntheticPreview(chat, input, send) {
+    var reference = 'DEMO-' + newClientRequestId().replace(/[^a-z0-9]/gi, '').slice(0, 8).toUpperCase();
+    chat.querySelectorAll('[data-frontdesk-action="submit"]').forEach(function (button) {
+      button.disabled = true;
+      button.textContent = 'Synthetic preview completed';
+    });
+    var card = appendCard(chat, 'lead-card', SYNTHETIC_PREVIEW.receiptTitle || 'Synthetic preview complete', SYNTHETIC_PREVIEW.receiptCopy || shell.previewCopy || 'Nothing was sent, saved, emailed, or added to a lead system.');
+    appendReceipt(card, 'Browser-only synthetic receipt ' + reference + ' - not a delivery ID');
+    addActions(card, [{ label: 'Run the demo again', action: 'restart', className: 'primary' }]);
+    setStage('done', { status: 'Preview complete', step: 'Nothing was sent' });
+    uiState.submitting = false;
+    uiState.name = '';
+    uiState.email = '';
+    uiState.need = '';
+    uiState.urgency = '';
+    uiState.requestId = '';
+    setInput(input, send, 'Preview complete - run it again or ask another question...', true);
+    persistConversation(chat);
+  }
+
+  function finishLocalPreview(chat, input, send) {
+    appendCard(chat, 'lead-card', 'Preview complete', shell.previewCopy || 'The guided flow works. Nothing was sent from this local preview.');
+    setStage('done', { status: 'Preview complete', step: 'Nothing was sent' });
+    uiState.submitting = false;
+    setInput(input, send, 'Preview complete - choose another lane above...', true);
+    persistConversation(chat);
+  }
+
+  function submitDeskNote(chat, input, send, hp) {
+    if (uiState.submitting) return;
+    if (IS_SYNTHETIC_PREVIEW) {
+      uiState.submitting = true;
+      setStage('submitting', { status: 'Preview', step: 'Creating a browser-only receipt' });
+      setInput(input, send, 'Completing the synthetic preview...', true);
+      appendMessage(chat, 'bot', shell.submittingCopy);
+      window.setTimeout(function () {
+        finishSyntheticPreview(chat, input, send);
+      }, 200);
+      return;
+    }
+    if (!turnstileState.token) {
+      appendMessage(chat, 'bot', 'The security check is still finishing. Give it a moment, then send the desk note.');
+      return;
+    }
+    uiState.submitting = true;
+    setStage('submitting');
+    trackEvent('Front Desk Note Attempted', { lane: uiState.lane || 'general', page: window.location.pathname });
+    setInput(input, send, 'Filing the desk note...', true);
+    appendMessage(chat, 'bot', shell.submittingCopy);
+
+    if (window.location.protocol === 'file:') {
+      window.setTimeout(function () {
+        finishLocalPreview(chat, input, send);
+      }, 450);
+      return;
+    }
+
+    submitLead(leadFromState(hp)).then(function (result) {
+      if (result.lead_saved && !result.email_sent) {
+        clearTurnstileWidget();
+        var pendingCard = appendCard(chat, 'link-card', 'Desk note saved; notification pending', 'The lead record is safe, but the email notification did not complete. Retrying uses the same delivery reference and will not create a second lead.');
+        if (result.request_id) appendReceipt(pendingCard, 'Delivery reference ' + result.request_id.slice(0, 8));
+        var pendingRow = addActions(pendingCard, [
+          { label: 'Retry notification', action: 'retry', className: 'primary' },
+          { label: shell.contactLabel, href: 'mailto:' + CONTENT.supportEmail + '?subject=Front%20Desk%20notification%20pending' }
+        ]);
+        if (result.warnings && result.warnings.length) appendMessage(chat, 'bot', result.warnings.join(' '));
+        uiState.stage = 'confirm';
+        uiState.submitting = false;
+        announceState('error', { status: 'Saved', step: 'Retry the notification' });
+        prepareTurnstile(pendingCard, pendingRow.querySelector('[data-frontdesk-action="retry"]'));
+        setInput(input, send, 'Use the retry button above...', true);
+        persistConversation(chat);
+        return;
+      }
+      var destinations = [];
+      if (result.lead_saved) destinations.push('Google Leads');
+      if (result.email_sent) destinations.push('Gmail');
+      var destinationText = destinations.length ? destinations.join(' + ') : 'the front desk';
+      clearTurnstileWidget();
+      var deliveredCard = appendCard(chat, 'lead-card', 'Desk note filed', 'Your note reached ' + destinationText + '. ' + shell.deliveryCopy);
+      if (result.request_id) appendReceipt(deliveredCard, 'Delivery reference ' + result.request_id.slice(0, 8));
+      if (result.warnings && result.warnings.length) {
+        appendMessage(chat, 'bot', result.warnings.join(' '));
+      }
+      setStage('done', { status: 'Delivered', step: shell.deliveredStep });
+      uiState.submitting = false;
+      trackEvent('Front Desk Note Filed', { lane: uiState.lane || 'general', lead_saved: result.lead_saved ? 'yes' : 'no', email_sent: result.email_sent ? 'yes' : 'no' });
+      setInput(input, send, 'Desk note sent - choose another lane above...', true);
+      persistConversation(chat);
+    }).catch(function (error) {
+      clearTurnstileWidget();
+      var reference = error && error.requestId ? ' Reference ' + error.requestId.slice(0, 8) + '.' : '';
+      var card = appendCard(chat, 'link-card', 'The desk line hiccupped', 'Your note did not leave the site. You can use direct contact and keep moving.' + reference);
+      var retryRow = addActions(card, [
+        { label: shell.contactLabel, href: 'mailto:' + CONTENT.supportEmail + '?subject=Front%20Desk%20note' },
+        { label: 'Try again', action: 'retry', className: 'primary' }
+      ]);
+      prepareTurnstile(card, retryRow.querySelector('[data-frontdesk-action="retry"]'));
+      uiState.stage = 'confirm';
+      announceState('error');
+      uiState.submitting = false;
+      trackEvent('Front Desk Note Failed', { lane: uiState.lane || 'general', page: window.location.pathname, has_reference: error && error.requestId ? 'yes' : 'no' });
+      setInput(input, send, 'Use the options above...', true);
+      persistConversation(chat);
+    });
+  }
+
+  function handleText(chat, input, send) {
+    var value = input.value.trim();
+    if (!value || uiState.submitting) return;
+    input.value = '';
+
+    if (uiState.stage === 'idle' || uiState.stage === 'resource' || uiState.stage === 'done') {
+      answerTypedQuestion(chat, input, send, value);
+      return;
+    }
+
+    if (uiState.stage === 'name') {
+      uiState.name = neutralize(value, LIMITS.name);
+      if (!uiState.name) {
+        appendMessage(chat, 'bot', 'I missed the name. What should I call you?');
+        return;
+      }
+      appendMessage(chat, 'user', uiState.name);
+      setStage('email');
+      appendMessage(chat, 'bot', 'Good to meet you, ' + uiState.name + '. What email should the team use to reply?');
+      setInput(input, send, 'you@example.com', false);
+      return;
+    }
+
+    if (uiState.stage === 'email') {
+      if (!isEmail(value)) {
+        appendMessage(chat, 'bot', 'That email looks a little sideways. Give it one more shot.');
+        setInput(input, send, 'you@example.com', false);
+        return;
+      }
+      uiState.email = neutralize(value, LIMITS.email).toLowerCase();
+      appendMessage(chat, 'user', uiState.email);
+      if (uiState.need) {
+        askUrgency(chat, input, send);
+      } else {
+        setStage('need');
+        appendMessage(chat, 'bot', (NEED_PROMPTS[uiState.lane] || NEED_PROMPTS.general) + ' Keep it high-level - no client files, passwords, medical details, or private records.');
+        setInput(input, send, 'A short, high-level description...', false);
+      }
+      return;
+    }
+
+    if (uiState.stage === 'need') {
+      uiState.need = neutralize(value, LIMITS.need);
+      if (!uiState.need) {
+        appendMessage(chat, 'bot', 'Give me one short, high-level sentence so I can route this correctly.');
+        return;
+      }
+      appendMessage(chat, 'user', uiState.need);
+      if (hasSensitiveContent(uiState.need)) {
+        appendMessage(chat, 'bot', 'I flagged that for careful handling. Please do not add names, record contents, passwords, or other private details. The high-level note is enough.');
+      }
+      askUrgency(chat, input, send);
+      return;
+    }
+
+    if (uiState.stage === 'urgency') {
+      uiState.urgency = neutralize(value, LIMITS.urgency);
+      appendMessage(chat, 'user', uiState.urgency);
+      showConfirmation(chat, input, send);
+    }
+  }
+
+  function initFrontDesk() {
+    var chat = document.getElementById('frontdesk-chat');
+    var input = document.getElementById('frontdesk-input');
+    var send = document.getElementById('frontdesk-send');
+    var hp = document.getElementById('frontdesk-company');
+    if (!chat || !input || !send) return;
+    if (chat.dataset.frontdeskReady === '1') return;
+    chat.dataset.frontdeskReady = '1';
+    activeChat = chat;
+    baseChatMarkup = chat.innerHTML;
+
+    var restored = restoreConversation(chat);
+    var widget = document.getElementById('frontdesk-widget');
+    if (!restored && widget && ALLOWED_LANES[widget.dataset.frontdeskDefaultLane]) {
+      uiState.lane = widget.dataset.frontdeskDefaultLane;
+    }
+
+    if (restored) {
+      if (uiState.stage === 'submitting') {
+        uiState.stage = 'confirm';
+        announceState('error', { status: 'Paused', step: 'Review and send again' });
+        uiState.submitting = false;
+        var recovery = appendCard(chat, 'link-card', 'Desk note paused', 'The page changed while I was filing. Nothing is lost - use the button below to send it again.');
+        var recoveryRow = addActions(recovery, [{ label: 'Send desk note', action: 'retry', className: 'primary' }]);
+        prepareTurnstile(recovery, recoveryRow.querySelector('[data-frontdesk-action="retry"]'));
+        setInput(input, send, 'Use the retry button above...', true);
+      } else if (uiState.stage === 'name') {
+        setStage('name');
+        setInput(input, send, 'Your name...', false, false);
+      } else if (uiState.stage === 'email') {
+        setStage('email');
+        setInput(input, send, 'you@example.com', false, false);
+      } else if (uiState.stage === 'need') {
+        setStage('need');
+        setInput(input, send, 'A short, high-level description...', false, false);
+      } else if (uiState.stage === 'urgency') {
+        setStage('urgency');
+        setInput(input, send, 'Or type your timing...', false, false);
+      } else if (uiState.stage === 'confirm') {
+        var restoredSubmitButtons = chat.querySelectorAll('[data-frontdesk-action="submit"], [data-frontdesk-action="retry"]');
+        var restoredSubmitButton = restoredSubmitButtons[restoredSubmitButtons.length - 1];
+        if (restoredSubmitButton) {
+          prepareTurnstile(restoredSubmitButton.closest('.lead-card, .link-card'), restoredSubmitButton);
+        }
+        setInput(input, send, 'Confirm above or start over...', true);
+      } else if (uiState.stage === 'done') {
+        announceState('done');
+        setInput(input, send, 'Desk note sent - choose another lane above...', true);
+      } else {
+        announceState('idle');
+      }
+      scrollChat(chat);
+    } else {
+      announceState('idle');
+      persistConversation(chat);
+    }
+
+    chat.addEventListener('click', function (event) {
+      var laneButton = event.target.closest('[data-frontdesk-lane]');
+      if (laneButton) {
+        if (uiState.submitting) return;
+        input.disabled = false;
+        send.disabled = false;
+        selectLane(chat, input, send, laneButton.dataset.frontdeskLane);
+        return;
+      }
+
+      var resourceLink = event.target.closest('a.chat-action');
+      if (resourceLink) {
+        trackEvent('Front Desk Resource Clicked', { lane: uiState.lane || 'general', resource: resourceLink.textContent.trim() });
+        return;
+      }
+
+      var button = event.target.closest('[data-frontdesk-action]');
+      if (!button) return;
+      var action = button.dataset.frontdeskAction;
+      var value = button.dataset.frontdeskValue || '';
+
+      if (action === 'capture') {
+        if (uiState.submitting) return;
+        beginCapture(chat, input, send, value || uiState.lane || 'general');
+      } else if (action === 'identity') {
+        chooseSyntheticIdentity(chat, input, send, value);
+      } else if (action === 'urgency') {
+        if (uiState.stage !== 'urgency') return;
+        uiState.urgency = value;
+        appendMessage(chat, 'user', value);
+        showConfirmation(chat, input, send);
+      } else if (action === 'submit' && uiState.stage === 'confirm') {
+        submitDeskNote(chat, input, send, hp ? hp.value : '');
+      } else if (action === 'retry' && uiState.stage === 'confirm') {
+        submitDeskNote(chat, input, send, hp ? hp.value : '');
+      } else if (action === 'restart') {
+        chat.innerHTML = baseChatMarkup;
+        resetState();
+        if (widget && ALLOWED_LANES[widget.dataset.frontdeskDefaultLane]) {
+          uiState.lane = widget.dataset.frontdeskDefaultLane;
+        }
+        setInput(input, send, 'Pick a lane or describe what you need...', false);
+        announceState('idle');
+        scrollChat(chat);
+      }
+    });
+
+    send.addEventListener('click', function () {
+      handleText(chat, input, send);
+    });
+
+    input.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        handleText(chat, input, send);
+      }
+    });
+  }
+
+  window.FrontDesk.initFrontDesk = initFrontDesk;
+  window.FrontDesk.matchApprovedAnswer = matchApprovedAnswer;
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFrontDesk);
+  } else {
+    initFrontDesk();
+  }
+})();
+

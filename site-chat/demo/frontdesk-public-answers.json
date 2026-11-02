@@ -1,0 +1,49 @@
+{
+  "schema": "https://twilighttech.io/schemas/frontdesk-answers-v1.json",
+  "revision": "2026-11-02.1",
+  "reviewed_at": "2026-11-02",
+  "demo_notice": "Synthetic facts for a fictional business. Not for production use.",
+  "answers": [
+    {
+      "id": "cedarline-services",
+      "reviewed_at": "2026-11-02",
+      "question": "What services does Cedarline offer?",
+      "answer": "In this fictional demo, Cedarline handles common residential heating and cooling visits, plumbing fixtures and visible leaks, switches and outlets, lighting fixtures, ceiling fans, and agreed seasonal maintenance.",
+      "match_phrases": ["what services does cedarline offer", "what services do you offer", "which home services do you provide", "what can cedarline help with"],
+      "source_links": [{ "label": "Demo service list", "href": "#services" }]
+    },
+    {
+      "id": "cedarline-service-area",
+      "reviewed_at": "2026-11-02",
+      "question": "Where does Cedarline provide service?",
+      "answer": "For this fictional demo, Cedarline serves homes in Northstar County and the neighboring towns of Alder, Bellwether, and Moss Glen. A coordinator confirms whether a specific address is in range.",
+      "match_phrases": ["where does cedarline provide service", "what is your service area", "which towns do you serve", "do you serve moss glen", "do you serve alder"],
+      "source_links": [{ "label": "Demo service area", "href": "#service-area" }]
+    },
+    {
+      "id": "cedarline-hours",
+      "reviewed_at": "2026-11-02",
+      "question": "What are Cedarline's scheduling hours?",
+      "answer": "In this fictional demo, scheduling requests are reviewed Monday through Friday, 8:00 a.m. to 5:00 p.m. No same-day or emergency response is promised.",
+      "match_phrases": ["what are cedarline scheduling hours", "what are your hours", "when are you open", "do you offer same day service"],
+      "source_links": [{ "label": "Demo scheduling policy", "href": "#scheduling" }]
+    },
+    {
+      "id": "cedarline-estimates",
+      "reviewed_at": "2026-11-02",
+      "question": "How do estimates work?",
+      "answer": "This demo publishes no fixed prices. A fictional coordinator would confirm fit, explain any visit or diagnostic fee before booking, and provide the next approved estimate step.",
+      "match_phrases": ["how do estimates work", "how much does a visit cost", "what does service cost", "do you charge a diagnostic fee", "what are your prices"],
+      "source_links": [{ "label": "Demo estimate policy", "href": "#estimates" }]
+    },
+    {
+      "id": "cedarline-urgent-limit",
+      "reviewed_at": "2026-11-02",
+      "question": "Can Cedarline handle an emergency?",
+      "answer": "No emergency response is offered or promised in this fictional demo. For immediate danger, leave the area when appropriate and contact local emergency services or the relevant utility. Do not wait for this form.",
+      "match_phrases": ["can cedarline handle an emergency", "do you provide emergency service", "is this for emergencies", "can you come right now"],
+      "source_links": [{ "label": "Demo urgent-situation limit", "href": "#scheduling" }]
+    }
+  ]
+}
+
