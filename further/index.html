@@ -31,11 +31,37 @@
 .route-node{--tone:var(--cyan);position:relative;z-index:3;grid-column:2;width:auto;padding:1rem 1.05rem 1.05rem 1.2rem;border:1px solid var(--border);border-left:2px solid var(--tone);background:rgba(5,10,23,.95)}.route-node::before{content:"";position:absolute;right:100%;top:50%;width:1.4rem;height:1px;background:linear-gradient(90deg,transparent,var(--tone))}.route-node strong{display:block;margin:.35rem 0;color:#fff;font:700 .84rem var(--display)}.route-node p{color:var(--muted);font-size:.78rem;line-height:1.45}.route-node .route-label{color:var(--tone)}.route-node.engineering{--tone:var(--cyan);grid-row:1}.route-node.ai{--tone:var(--magenta);grid-row:2}.route-node.software{--tone:var(--green);grid-row:3}.route-board-note{position:absolute;right:1rem;bottom:.8rem;color:#71809f;font:600 .55rem var(--mono);letter-spacing:1px;text-transform:uppercase}
 .friction-band{border-block:1px solid var(--border);background:rgba(0,240,255,.025)}.friction-grid{display:grid;grid-template-columns:repeat(4,1fr)}.friction{padding:1.5rem;border-right:1px solid var(--border)}.friction:last-child{border-right:0}.friction strong{display:block;color:#fff;font:700 .85rem var(--display);margin-bottom:.4rem}.friction span{color:var(--muted);font-size:.82rem;line-height:1.5}
 .practice-intro{display:grid;grid-template-columns:.8fr 1.2fr;gap:3rem;align-items:end;margin-bottom:2.5rem}.practice-intro p{max-width:620px;color:var(--muted);font-size:1rem;line-height:1.8}.practice-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);background:var(--border);gap:1px}.practice{--tone:var(--cyan);min-height:560px;display:flex;flex-direction:column;padding:2.2rem;background:linear-gradient(160deg,color-mix(in srgb,var(--tone) 4%,#080818),#050711 62%);position:relative;overflow:hidden}.practice.ai{--tone:var(--magenta)}.practice.software{--tone:var(--green)}.practice::before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,var(--tone),transparent)}.practice::after{content:attr(data-mark);position:absolute;right:-.05em;top:-.18em;color:color-mix(in srgb,var(--tone) 7%,transparent);font:900 10rem var(--display);line-height:1}.practice-number{position:relative;color:var(--tone)}.practice h2{position:relative;margin:2.1rem 0 .9rem;color:#fff;font:800 clamp(1.3rem,2.4vw,1.8rem) var(--display)}.practice>p{position:relative;color:var(--muted);line-height:1.7;min-height:108px}.practice ul{position:relative;list-style:none;display:grid;gap:.65rem;margin:1.4rem 0 1.7rem}.practice li{padding-bottom:.6rem;border-bottom:1px solid rgba(255,255,255,.07);color:#dce6ff;font-size:.86rem}.practice li::before{content:"//";margin-right:.55rem;color:var(--tone);font-family:var(--mono)}.practice-proof{position:relative;margin-top:auto;padding:1rem;border:1px solid color-mix(in srgb,var(--tone) 25%,transparent);background:color-mix(in srgb,var(--tone) 3%,transparent)}.proof-label{color:var(--tone)}.practice-proof p{margin-top:.45rem;color:var(--muted);font-size:.8rem;line-height:1.55}.practice-link{position:relative;display:inline-block;margin-top:1rem;color:var(--tone);font:700 .65rem var(--mono);letter-spacing:1.2px;text-transform:uppercase;border-bottom:1px solid color-mix(in srgb,var(--tone) 42%,transparent)}
+.scopes-section{padding-top:2rem;border-top:1px solid var(--border)}
+.scopes-head{max-width:780px;margin-bottom:2rem}
+.scopes-head p{color:var(--muted);line-height:1.7;margin-top:.75rem}
+.scopes-grid .addon-card{align-self:start;border-color:rgba(0,240,255,.22);background:linear-gradient(180deg,rgba(0,240,255,.04),var(--card) 36%)}
+.scopes-grid .addon-card:first-child{border-color:rgba(255,0,229,.32);background:linear-gradient(180deg,rgba(255,0,229,.055),var(--card) 36%)}
+.scopes-grid .addon-card:last-child{border-color:rgba(57,255,20,.26);background:linear-gradient(180deg,rgba(57,255,20,.045),var(--card) 36%)}
+.scope-label{display:inline-block;margin-bottom:.75rem;color:var(--cyan);font:700 .62rem var(--mono);letter-spacing:1.5px;text-transform:uppercase}
+.scopes-grid .addon-card:first-child .scope-label{color:var(--magenta)}
+.scopes-grid .addon-card:last-child .scope-label{color:var(--green)}
+.project-disclosure>summary{position:relative;cursor:pointer;list-style:none;padding-right:1.5rem}
+.project-disclosure>summary::-webkit-details-marker{display:none}
+.project-disclosure>summary::after{content:"+";position:absolute;right:0;top:0;color:var(--cyan);font:700 1.15rem var(--mono)}
+.project-disclosure[open]>summary::after{content:"−"}
+.project-body{padding-top:1rem;border-top:1px solid var(--border);margin-top:1rem}
+.scope-subnote{margin:0 0 1rem;padding:.7rem .85rem;border-left:2px solid var(--amber);background:rgba(255,174,0,.035);color:var(--muted);font-size:.76rem;line-height:1.55}
+.scope-subnote strong{color:var(--amber);font-family:var(--display);font-size:.7rem;text-transform:uppercase}
+button.addon-cta{width:100%;background:transparent;cursor:pointer}
+.receipt-strip{margin-top:1.6rem;border-block:1px solid var(--border)}
+.receipt-strip>summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.1rem 0;cursor:pointer;list-style:none;color:#fff;font:700 .76rem var(--mono);letter-spacing:1.2px;text-transform:uppercase}
+.receipt-strip>summary::-webkit-details-marker{display:none}
+.receipt-strip>summary::after{content:"+";color:var(--green);font-size:1.15rem}
+.receipt-strip[open]>summary::after{content:"−"}
+.receipt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding:.2rem 0 1.4rem}
+.receipt{padding:.6rem .8rem .6rem 0;color:#d9e2f2;font-size:.82rem;line-height:1.5}
+.receipt span{display:block;margin-bottom:.3rem;color:var(--cyan);font:700 .55rem var(--mono);letter-spacing:1.3px;text-transform:uppercase}
+.receipt a{display:inline-block;margin-top:.45rem;color:var(--green);font:700 .6rem var(--mono);letter-spacing:1.1px;text-transform:uppercase;border-bottom:1px solid rgba(57,255,20,.35)}
 .method-shell{display:grid;grid-template-columns:.78fr 1.22fr;gap:3rem;align-items:start}.method-copy p{margin-top:1rem;color:var(--muted);line-height:1.8}.method-flow{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border)}.method-step{min-height:210px;padding:1.4rem;position:relative}.method-step+.method-step{border-left:1px solid var(--border)}.method-step span{color:var(--cyan);font:700 .62rem var(--mono);letter-spacing:1.5px}.method-step h3{margin:1.2rem 0 .5rem;color:#fff;font:700 .9rem var(--display)}.method-step p{color:var(--muted);font-size:.8rem;line-height:1.55}.method-step::after{content:"→";position:absolute;right:-.48rem;top:50%;z-index:2;color:var(--magenta);font:700 1.2rem var(--mono);transform:translateY(-50%)}.method-step:last-child::after{display:none}
 .boundary{margin-top:2rem;padding:1.25rem 1.4rem;border-left:2px solid var(--amber);background:rgba(255,174,0,.035);color:var(--muted);line-height:1.65}.boundary strong{color:var(--amber);font-family:var(--display)}
 .practice-link{margin-top:1.75rem;padding:.25rem 0 .35rem}.further-final{text-align:center;padding:7rem 0 7.5rem}.further-final .container{max-width:880px}.further-final p{max-width:700px;margin:1.35rem auto 2.5rem;color:var(--muted);font-size:1rem;line-height:1.8}.further-final-actions{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
-@media(max-width:980px){.further-hero-grid,.practice-intro,.method-shell{grid-template-columns:1fr}.route-board{min-height:0;max-width:680px;margin-inline:auto}.practice-grid{grid-template-columns:1fr}.practice{min-height:0;padding-bottom:2.6rem}.practice>p{min-height:0}.method-flow{grid-template-columns:1fr 1fr}.method-step:nth-child(3){border-left:0;border-top:1px solid var(--border)}.method-step:nth-child(4){border-top:1px solid var(--border)}.method-step::after{display:none}.friction-grid{grid-template-columns:1fr 1fr}.friction:nth-child(2){border-right:0}.friction:nth-child(-n+2){border-bottom:1px solid var(--border)}}
-@media(max-width:620px){.further-hero{min-height:auto;padding:7.5rem 0 3.5rem}.further-title{font-size:clamp(2.25rem,12vw,3.8rem);overflow-wrap:anywhere}.further-lead{overflow-wrap:anywhere}.further-actions .btn,.further-final-actions .btn{width:100%;text-align:center}.route-board{width:100%;max-width:100%;min-width:0;grid-template-columns:minmax(0,1fr);grid-template-rows:auto;padding:1.25rem 1.1rem 3rem;gap:.75rem}.route-board::before{background:repeating-linear-gradient(0deg,transparent 0 63px,rgba(255,255,255,.035) 64px)}.route-core{grid-column:1;grid-row:auto;width:100%;height:auto;min-height:92px;transform:none;justify-self:stretch}.route-core span{transform:none}.route-node{grid-column:1;grid-row:auto!important;min-width:0;padding:.95rem 1rem}.route-node::before{display:none}.route-node strong{font-size:.78rem}.route-node p{font-size:.74rem;overflow-wrap:anywhere}.route-board-note{left:1.1rem;right:auto}.friction-grid,.method-flow{grid-template-columns:1fr}.friction{border-right:0;border-bottom:1px solid var(--border)}.friction:last-child{border-bottom:0}.method-step+.method-step,.method-step:nth-child(3){border-left:0;border-top:1px solid var(--border)}.practice{padding:1.7rem 1.35rem 2.35rem}.further-final{padding:5.5rem 0 6.5rem}}
+@media(max-width:980px){.further-hero-grid,.practice-intro,.method-shell{grid-template-columns:1fr}.route-board{min-height:0;max-width:680px;margin-inline:auto}.practice-grid{grid-template-columns:1fr}.practice{min-height:0;padding-bottom:2.6rem}.practice>p{min-height:0}.method-flow,.receipt-grid{grid-template-columns:1fr 1fr}.method-step:nth-child(3){border-left:0;border-top:1px solid var(--border)}.method-step:nth-child(4){border-top:1px solid var(--border)}.method-step::after{display:none}.friction-grid{grid-template-columns:1fr 1fr}.friction:nth-child(2){border-right:0}.friction:nth-child(-n+2){border-bottom:1px solid var(--border)}}
+@media(max-width:620px){.further-hero{min-height:auto;padding:7.5rem 0 3.5rem}.further-title{font-size:clamp(2.25rem,12vw,3.8rem);overflow-wrap:anywhere}.further-lead{overflow-wrap:anywhere}.further-actions .btn,.further-final-actions .btn{width:100%;text-align:center}.route-board{width:100%;max-width:100%;min-width:0;grid-template-columns:minmax(0,1fr);grid-template-rows:auto;padding:1.25rem 1.1rem 3rem;gap:.75rem}.route-board::before{background:repeating-linear-gradient(0deg,transparent 0 63px,rgba(255,255,255,.035) 64px)}.route-core{grid-column:1;grid-row:auto;width:100%;height:auto;min-height:92px;transform:none;justify-self:stretch}.route-core span{transform:none}.route-node{grid-column:1;grid-row:auto!important;min-width:0;padding:.95rem 1rem}.route-node::before{display:none}.route-node strong{font-size:.78rem}.route-node p{font-size:.74rem;overflow-wrap:anywhere}.route-board-note{left:1.1rem;right:auto}.friction-grid,.method-flow,.receipt-grid{grid-template-columns:1fr}.friction{border-right:0;border-bottom:1px solid var(--border)}.friction:last-child{border-bottom:0}.method-step+.method-step,.method-step:nth-child(3){border-left:0;border-top:1px solid var(--border)}.practice{padding:1.7rem 1.35rem 2.35rem}.further-final{padding:5.5rem 0 6.5rem}}
 </style>
 </head>
 <body class="stage-further">
@@ -87,10 +113,85 @@
     <div class="container">
       <div class="practice-intro reveal"><div class="sh"><div class="sh-label">// Three engineering practices</div><h2 class="sh-title">Use the capability the problem <span class="ac">actually needs.</span></h2><div class="sh-line"></div></div><p>These practices can stand alone or work together. The point is not to force every problem into AI. It is to build the smallest useful operating layer that people can understand, inspect, and improve.</p></div>
       <div class="practice-grid">
-        <article class="practice reveal" data-mark="01"><div class="practice-number">01 // Engineering Services</div><h2>Strengthen the system underneath the work.</h2><p>Design or repair the identity, infrastructure, integrations, and operating boundaries that the next capability depends on.</p><ul><li>Systems and solution architecture</li><li>Microsoft 365 and identity engineering</li><li>Infrastructure and integration</li><li>Workflow and automation design</li></ul><div class="practice-proof"><div class="proof-label">Relevant foundation</div><p>Twilight's Microsoft, identity, infrastructure, and operational background supports this work. Public packages and proof will be added only as their scopes are bounded.</p></div><a class="practice-link" href="#start">Bring an engineering problem →</a></article>
-        <article class="practice ai reveal" data-mark="02"><div class="practice-number">02 // AI Solutions</div><h2>Make AI useful without handing it the building keys.</h2><p>Build or verify private and governed AI systems around real knowledge, workflows, permissions, decisions, and human authority.</p><ul><li>Pre-launch AI Agent Go-Live Access Review</li><li>Private AI and grounded knowledge access</li><li>Agents, connectors, and model orchestration</li><li>Approval, refusal, and audit paths</li></ul><div class="practice-proof"><div class="proof-label">Reference systems</div><p>Rover, J-Bot, HackBot, and The Exchange demonstrate different parts of the architecture. They are reference systems, not identical off-the-shelf customer products.</p></div><a class="practice-link" href="/ai/go-live-review/">Verify an Agent Before Go-Live →</a><a class="practice-link" href="/ai/yours/" style="margin-top:.65rem">Explore AI Solutions →</a></article>
+        <article class="practice reveal" data-mark="01"><div class="practice-number">01 // Engineering Services</div><h2>Strengthen the system underneath the work.</h2><p>Design or repair the identity, infrastructure, integrations, and operating boundaries that the next capability depends on.</p><ul><li>Systems and solution architecture</li><li>Microsoft 365 and identity engineering</li><li>Infrastructure and integration</li><li>Workflow and automation design</li></ul><div class="practice-proof"><div class="proof-label">Relevant foundation</div><p>Twilight's Microsoft, Entra, infrastructure, and Watchtower lab background supports this practice—starting with bounded identity and grounding scopes below.</p></div><a class="practice-link" href="#go-live-review">See bounded starting scopes →</a></article>
+        <article class="practice ai reveal" data-mark="02"><div class="practice-number">02 // AI Solutions</div><h2>Make AI useful without handing it the building keys.</h2><p>Build or verify private and governed AI systems around real knowledge, workflows, permissions, decisions, and human authority.</p><ul><li>Pre-launch AI Agent Go-Live Access Review</li><li>Private AI and grounded knowledge access</li><li>Agents, connectors, and model orchestration</li><li>Approval, refusal, and audit paths</li></ul><div class="practice-proof"><div class="proof-label">Reference systems</div><p>Rover, J-Bot, HackBot, and The Exchange demonstrate different parts of the architecture. They are reference systems, not identical off-the-shelf customer products.</p></div><a class="practice-link" href="#go-live-review">Verify an Agent Before Go-Live →</a><a class="practice-link" href="/ai/yours/" style="margin-top:.65rem">Explore AI Solutions →</a></article>
         <article class="practice software reveal" data-mark="03"><div class="practice-number">03 // Custom Software</div><h2>Build the interface the operation has been missing.</h2><p>Create a focused internal tool, workflow system, or specialized application when generic software cannot hold the real human setting.</p><ul><li>Internal tools and operating surfaces</li><li>Workflow and decision systems</li><li>Local-first applications</li><li>Human-centered digital products</li></ul><div class="practice-proof"><div class="proof-label">Reference systems</div><p>Reader, Twilight Academy, A Place to Show Up, and Tabletop show this practice across very different environments. Their current states and boundaries live in Labs.</p></div><a class="practice-link" href="/labs/">Inspect the Labs proof →</a></article>
       </div>
+    </div>
+  </section>
+
+  <section class="scopes-section" id="go-live-review">
+    <div class="container">
+      <div class="scopes-head reveal">
+        <div class="sh-label">// Bounded starting scopes</div>
+        <h2 class="sh-title">Start with one defined gate, <span class="ac">not an open-ended project.</span></h2>
+        <div class="sh-line"></div>
+        <p>Just like Sustain offers bounded IT fixes alongside ongoing operations, Further lets teams verify an upcoming launch or map one manual workflow before committing to a larger build.</p>
+      </div>
+
+      <div class="addons-grid scopes-grid reveal">
+        <details class="addon-card project-disclosure" open>
+          <summary>
+            <span class="scope-label">01 / Pre-launch agent gate &middot; Founding pilot</span>
+            <div class="addon-name">AI Agent Go-Live Access Review</div>
+            <div class="addon-tagline">Before an action-taking agent touches tickets, SharePoint, or CRM, verify which identity runs its connectors, what gets blocked, and what waits for a person—in five business days.</div>
+          </summary>
+          <div class="project-body">
+            <div class="addon-price-row"><div class="addon-price">Verify</div><div class="addon-price-label">1 agent &middot; 2 connectors &middot; 5 business days</div></div>
+            <ul class="addon-includes">
+              <li>Four mandatory checks: Expected Allow, Expected 403 Deny, Code-Enforced Hold, and Confused Deputy &amp; Grounding Inheritance</li>
+              <li>Two intake paths: Track A // Isolated Sandbox Proof or Track B // Static Config &amp; Guided Walkthrough</li>
+              <li>Deliverables: 1-Page Agent Access Map, redacted Verification Evidence Pack, and Go-Live Decision Brief</li>
+            </ul>
+            <div class="scope-subnote"><strong>Boundary:</strong> Point-in-time cooperative workflow verification—<strong>not</strong> a penetration test, offensive red-team engagement, or regulatory certification.</div>
+            <button type="button" class="addon-cta" data-open-jbot>Request Sample Packet &amp; Pilot Scope →</button>
+          </div>
+        </details>
+
+        <details class="addon-card project-disclosure">
+          <summary>
+            <span class="scope-label">02 / Workflow discovery</span>
+            <div class="addon-name">AI Opportunity Review</div>
+            <div class="addon-tagline">Bring one messy operation your team is still holding together by hand. Leave a complimentary 30-minute review with a clearer fit, major risks, and smallest useful build.</div>
+          </summary>
+          <div class="project-body">
+            <div class="addon-price-row"><div class="addon-price">Map</div><div class="addon-price-label">one workflow &middot; 30-minute review</div></div>
+            <ul class="addon-includes">
+              <li>Trace people, tools, handoffs, exceptions, and who holds authority</li>
+              <li>Separate automation, private AI, custom software, or no-build options</li>
+              <li>Define the smallest bounded slice worth testing first</li>
+            </ul>
+            <a href="/ai/yours/#start" class="addon-cta">Map One Workflow →</a>
+          </div>
+        </details>
+
+        <details class="addon-card project-disclosure">
+          <summary>
+            <span class="scope-label">03 / Foundation engineering</span>
+            <div class="addon-name">Identity &amp; Grounding Readiness</div>
+            <div class="addon-tagline">SharePoint and Entra permissions not ready for an agent yet? Lock down Global Admin sprawl, Conditional Access, and overshared libraries before Copilot or custom agents turn on.</div>
+          </summary>
+          <div class="project-body">
+            <div class="addon-price-row"><div class="addon-price">Harden</div><div class="addon-price-label">Entra ID &middot; SharePoint &middot; access boundaries</div></div>
+            <ul class="addon-includes">
+              <li>Privileged-role, service-principal, and Conditional Access baseline</li>
+              <li>SharePoint library oversharing and grounding-scope cleanup</li>
+              <li>Documented findings report and 60-minute technical handoff</li>
+            </ul>
+            <a href="/services/#one-time-services" class="addon-cta">See Microsoft 365 Secure Reset →</a>
+          </div>
+        </details>
+      </div>
+
+      <details class="receipt-strip reveal">
+        <summary>Inspect the engineering &amp; Twilight Labs proof behind these scopes</summary>
+        <div class="receipt-grid">
+          <div class="receipt"><span>Watchtower // Rover v1</span>472 automated checks verifying technician routes, 403 requester blocks, and routing-defect catches.<br><a href="/rover/">Rover release proof →</a></div>
+          <div class="receipt"><span>Labs // Case 01 &amp; 09</span>Code-enforced capability checkouts, single-use replay-resistant approvals, and fail-closed timeouts.<br><a href="https://labs.twilighttech.io/engineering">Engineering case files →</a></div>
+          <div class="receipt"><span>J-Bot // Governance</span>Active work separated from retained history, with approval receipts and capability boundaries.<br><a href="/ai/operations/">See J-Bot governance →</a></div>
+          <div class="receipt"><span>Public Rails // Front Desk</span>Zero-LLM public intake running on fixed deterministic routes with strict preview isolation.<br><a href="/site-chat/">Front Desk build →</a></div>
+        </div>
+      </details>
     </div>
   </section>
 

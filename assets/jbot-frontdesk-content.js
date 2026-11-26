@@ -39,8 +39,8 @@
     ],
     pageContexts: [
       {
-        prefixes: ['/ai/go-live-review'], lane: 'go-live-review', label: 'Agent Go-Live Review', step: 'Verify before go-live',
-        message: 'You are looking at the AI Agent Go-Live Access Review. I can show you the four checks, open the engineering proof, or prepare a sample-packet note for James.'
+        prefixes: ['/further', '/ai/go-live-review'], lane: 'go-live-review', label: 'Further Technology', step: 'Verify or scope the work',
+        message: 'You are in Further Technology. I can prepare an AI Agent Go-Live Access Review sample-packet note, open Twilight Labs proof, or route an engineering problem to James.'
       },
       {
         prefixes: ['/rover', '/support'], hosts: ['support.twilighttech.io'], lane: 'rover', label: 'Rover Support', step: 'Map the support workflow',
@@ -115,7 +115,7 @@
         title: 'AI Agent Go-Live Access Review',
         copy: 'Verify connector execution identity, 403 denials, human approval holds, and grounding inheritance in five business days—before an agent touches live workflows.',
         links: [
-          { label: 'See the 4 verification checks', href: 'https://twilighttech.io/ai/go-live-review/#four-checks' },
+          { label: 'See the 4 verification checks', href: 'https://twilighttech.io/further/#go-live-review' },
           { label: 'Inspect Labs engineering proof', href: 'https://labs.twilighttech.io/engineering' }
         ]
       },

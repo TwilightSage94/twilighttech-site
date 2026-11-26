@@ -111,15 +111,18 @@ test('every public visitor lane has a deterministic route', () => {
   assert.doesNotMatch(desk, /\$999|discord\.gg|calendar\.app\.google/);
 });
 
-test('AI Agent Go-Live Access Review states its four checks, two-track intake, and defensive boundary', () => {
-  const page = readFileSync(resolve(root, 'ai/go-live-review/index.html'), 'utf8');
-  assert.match(page, /Stage 03 \/\/ Further &middot; AI Agent Go-Live Access Review/);
-  assert.match(page, /Before the agent acts, <span>prove the boundary\.<\/span>/);
-  assert.match(page, /Confused Deputy &amp; Grounding Inheritance/);
-  assert.match(page, /Track A \/\/ Isolated Sandbox Proof/);
-  assert.match(page, /Track B \/\/ Static Config &amp; Guided Walkthrough/);
-  assert.match(page, /not<\/strong> a penetration test/i);
-  assert.match(page, /https:\/\/labs\.twilighttech\.io\/engineering/);
+test('Further integrates AI Agent Go-Live Access Review inline without spinning off a separate page', () => {
+  const furtherPage = readFileSync(resolve(root, 'further/index.html'), 'utf8');
+  const legacyRoute = readFileSync(resolve(root, 'ai/go-live-review/index.html'), 'utf8');
+  assert.match(furtherPage, /id="go-live-review"/);
+  assert.match(furtherPage, /AI Agent Go-Live Access Review/);
+  assert.match(furtherPage, /Confused Deputy &amp; Grounding Inheritance/);
+  assert.match(furtherPage, /Track A \/\/ Isolated Sandbox Proof/);
+  assert.match(furtherPage, /Track B \/\/ Static Config &amp; Guided Walkthrough/);
+  assert.match(furtherPage, /not<\/strong> a penetration test/i);
+  assert.match(furtherPage, /https:\/\/labs\.twilighttech\.io\/engineering/);
+  assert.match(legacyRoute, /url=\/further\/#go-live-review/);
+  assert.match(legacyRoute, /location\.replace\('\/further\/#go-live-review'\)/);
 });
 
 test('the legacy personal AI lane remains bounded and hidden', () => {
