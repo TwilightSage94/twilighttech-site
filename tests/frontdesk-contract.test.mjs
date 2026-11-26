@@ -113,7 +113,8 @@ test('every public visitor lane has a deterministic route', () => {
 
 test('AI Agent Go-Live Access Review states its four checks, two-track intake, and defensive boundary', () => {
   const page = readFileSync(resolve(root, 'ai/go-live-review/index.html'), 'utf8');
-  assert.match(page, /AI Agent <span>Go-Live Access Review\.<\/span>/);
+  assert.match(page, /Stage 03 \/\/ Further &middot; AI Agent Go-Live Access Review/);
+  assert.match(page, /Before the agent acts, <span>prove the boundary\.<\/span>/);
   assert.match(page, /Confused Deputy &amp; Grounding Inheritance/);
   assert.match(page, /Track A \/\/ Isolated Sandbox Proof/);
   assert.match(page, /Track B \/\/ Static Config &amp; Guided Walkthrough/);
