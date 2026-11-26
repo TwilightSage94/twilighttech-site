@@ -12,6 +12,7 @@ const DEFAULT_ALLOWED_ORIGINS = [
 const DEFAULT_TURNSTILE_HOSTNAMES = ['twilighttech.io', 'www.twilighttech.io', 'support.twilighttech.io'];
 
 const ALLOWED_LANES = {
+  'go-live-review': 'AI Agent Go-Live Access Review',
   'rover': 'Rover Support Workflow',
   'private-ai': 'Private AI',
   'site-chat': 'Website Chat / Intake',

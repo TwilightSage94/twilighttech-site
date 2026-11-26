@@ -1,8 +1,38 @@
 {
   "schema": "https://twilighttech.io/schemas/frontdesk-answers-v1.json",
-  "revision": "2026-11-02.1",
-  "reviewed_at": "2026-11-02",
+  "revision": "2026-11-26.1",
+  "reviewed_at": "2026-11-26",
   "answers": [
+    {
+      "id": "go-live-review-purpose",
+      "reviewed_at": "2026-11-26",
+      "question": "What does the AI Agent Go-Live Access Review check?",
+      "answer": "It verifies one action-taking agent workflow and up to two connectors across four checks: expected allow, expected downstream deny, code-enforced human approval hold, and confused-deputy identity or SharePoint grounding inheritance.",
+      "match_phrases": ["what is the go-live review", "what does the go-live review check", "ai agent go-live review", "go-live access review", "agent review", "what are the four checks", "pre-launch agent review"],
+      "source_links": [
+        { "label": "AI Agent Go-Live Review", "href": "https://twilighttech.io/ai/go-live-review/" }
+      ]
+    },
+    {
+      "id": "go-live-review-sandbox",
+      "reviewed_at": "2026-11-26",
+      "question": "Do we need a clean sandbox for the Go-Live Access Review?",
+      "answer": "No. Track A exercises synthetic test records inside an isolated non-production sandbox, while Track B uses redacted connector, Entra, and DLP configuration exports plus a guided read-only walkthrough.",
+      "match_phrases": ["do we need a sandbox", "do i need a sandbox", "no sandbox", "track a", "track b", "sandbox required"],
+      "source_links": [
+        { "label": "Two-track intake", "href": "https://twilighttech.io/ai/go-live-review/#tracks" }
+      ]
+    },
+    {
+      "id": "go-live-review-boundary",
+      "reviewed_at": "2026-11-26",
+      "question": "Is the Go-Live Access Review a penetration test or certification?",
+      "answer": "No. It is a cooperative, point-in-time defensive verification of configured workflow and connector boundaries using synthetic data. It is not a penetration test, red-team engagement, or compliance certification.",
+      "match_phrases": ["is this a pentest", "is this a penetration test", "red team", "soc 2 certification", "hipaa certification", "go-live review scope"],
+      "source_links": [
+        { "label": "Scope boundary", "href": "https://twilighttech.io/ai/go-live-review/#cadence" }
+      ]
+    },
     {
       "id": "website-front-desk-purpose",
       "reviewed_at": "2026-11-02",

@@ -10,6 +10,7 @@ const productionPages = [
   'index.html',
   'about/index.html',
   'ai/index.html',
+  'ai/go-live-review/index.html',
   'ai/operations/index.html',
   'ai/yours/index.html',
   'cheat-sheet/index.html',
@@ -93,13 +94,13 @@ test('the edge proxy is bounded, origin-aware, and observable without storing ch
 
 test('every public visitor lane has a deterministic route', () => {
   const laneSlugs = [
+    'go-live-review',
     'rover',
     'private-ai',
     'site-chat',
     'system-care',
     'guides',
     'breakroom',
-    'aptsu',
   ];
   assert.deepEqual(Array.from(content.lanes.filter((lane) => lane.icon), (lane) => lane.slug), laneSlugs);
   laneSlugs.forEach((lane) => {
@@ -108,6 +109,16 @@ test('every public visitor lane has a deterministic route', () => {
   });
   assert.match(desk, /CONTENT\.resources/);
   assert.doesNotMatch(desk, /\$999|discord\.gg|calendar\.app\.google/);
+});
+
+test('AI Agent Go-Live Access Review states its four checks, two-track intake, and defensive boundary', () => {
+  const page = readFileSync(resolve(root, 'ai/go-live-review/index.html'), 'utf8');
+  assert.match(page, /AI Agent <span>Go-Live Access Review\.<\/span>/);
+  assert.match(page, /Confused Deputy &amp; Grounding Inheritance/);
+  assert.match(page, /Track A \/\/ Isolated Sandbox Proof/);
+  assert.match(page, /Track B \/\/ Static Config &amp; Guided Walkthrough/);
+  assert.match(page, /not<\/strong> a penetration test/i);
+  assert.match(page, /https:\/\/labs\.twilighttech\.io\/engineering/);
 });
 
 test('the legacy personal AI lane remains bounded and hidden', () => {
@@ -171,6 +182,7 @@ test('supporting pages identify their active mission stage', () => {
     Further: [
       'further/index.html',
       'ai/index.html',
+      'ai/go-live-review/index.html',
       'ai/operations/index.html',
       'ai/yours/index.html',
       'site-chat/index.html',

@@ -25,18 +25,23 @@
       launcherCopy: 'Open the Twilight Tech front desk.'
     },
     lanes: [
+      { slug: 'go-live-review', icon: 'GL', label: 'Agent Go-Live Review', leadLabel: 'AI Agent Go-Live Access Review', detail: 'Pre-launch access & receipts', className: 'private' },
       { slug: 'rover', icon: 'RV', label: 'Rover', leadLabel: 'Rover Support Workflow', detail: 'Guided service-desk support', className: 'system' },
       { slug: 'private-ai', icon: 'AI', label: 'Private AI', leadLabel: 'Private AI', detail: 'Sensitive document systems', className: 'private' },
       { slug: 'site-chat', icon: 'IN', label: 'Website Front Desk', leadLabel: 'Website Chat / Intake', detail: 'Guided site intake', className: 'intake' },
-      { slug: 'system-care', icon: 'SYS', label: 'System Care', leadLabel: 'System Care', detail: 'Support and cleanup', className: 'system' },
+      { slug: 'system-care', icon: 'SYS', label: 'System Care', leadLabel: 'System Care', detail: 'Support and security resets', className: 'system' },
       { slug: 'guides', icon: 'PDF', label: 'Guides', leadLabel: 'Guides / Freebies', detail: 'Learning and free resources', className: 'guides' },
       { slug: 'breakroom', icon: 'BR', label: 'BreakRoom', leadLabel: 'BreakRoom', detail: 'Community', className: 'breakroom' },
-      { slug: 'aptsu', icon: 'UP', label: 'A Place To Show Up', leadLabel: 'A Place To Show Up', detail: 'Community platform', className: 'aptsu' },
+      { slug: 'aptsu', label: 'A Place To Show Up', leadLabel: 'A Place To Show Up' },
       { slug: 'personal-ai', label: 'Personal AI Assistant', leadLabel: 'Personal AI Assistant' },
       { slug: 'solutions', label: 'Custom Operational Systems', leadLabel: 'Twilight Tech Solutions' },
       { slug: 'general', label: 'General', leadLabel: 'General' }
     ],
     pageContexts: [
+      {
+        prefixes: ['/ai/go-live-review'], lane: 'go-live-review', label: 'Agent Go-Live Review', step: 'Verify before go-live',
+        message: 'You are looking at the AI Agent Go-Live Access Review. I can show you the four checks, open the engineering proof, or prepare a sample-packet note for James.'
+      },
       {
         prefixes: ['/rover', '/support'], hosts: ['support.twilighttech.io'], lane: 'rover', label: 'Rover Support', step: 'Map the support workflow',
         message: 'You are at the Rover support desk. I can explain the support flow or help you leave James a clean, high-level workflow note.'
@@ -63,15 +68,16 @@
       },
       {
         prefixes: ['/about'], lane: '', label: 'About Twilight Tech', step: 'Choose where you are headed',
-        message: 'You are reading the founder story. I can route you toward learning, business support, Private AI, or a direct note to James.'
+        message: 'You are reading the founder story. I can route you toward pre-launch agent reviews, business support, Private AI, learning, or a direct note to James.'
       }
     ],
     defaultContext: {
       lane: '', label: 'Twilight Tech', step: 'Choose where you are headed',
-      message: 'I can route you toward learning, business support, Private AI, the BreakRoom, A Place To Show Up, or a direct note to James.'
+      message: 'I can route you toward an AI Agent Go-Live Review, Rover, Private AI, business support, learning guides, or a direct note to James.'
     },
     prompts: {
       laneSelected: {
+        'go-live-review': 'AI Agent Go-Live Review selected. Here is how the five-day verification works.',
         'rover': 'Rover selected. Let us map the support workflow.',
         'private-ai': 'Private AI selected. Here is what Twilight Tech offers.',
         'site-chat': 'Website Front Desk selected. Here is what ships.',
@@ -82,6 +88,7 @@
         'general': 'I can route that and prepare a clean note for James.'
       },
       captureName: {
+        'go-live-review': 'Let us start your Go-Live Review or Sample Packet note. What should I call you?',
         'rover': 'Let us map the Rover workflow. What should I call you?',
         'private-ai': 'Private AI it is. To start the desk note, what should I call you?',
         'site-chat': 'A site chat build. Nice. To start the desk note, what should I call you?',
@@ -92,6 +99,7 @@
         'general': 'I can route that. What should I call you?'
       },
       need: {
+        'go-live-review': 'At a high level, what system does your agent touch (tickets, SharePoint, CRM) and do you already have a non-production sandbox?',
         'rover': 'Where does your support workflow lose the answer, the context, or the handoff today?',
         'private-ai': 'At a high level, what documents or workflow should Private AI help with?',
         'site-chat': 'What should the site chat help visitors do - find answers, qualify a need, book, or leave a clean note?',
@@ -103,6 +111,14 @@
       }
     },
     resources: {
+      'go-live-review': {
+        title: 'AI Agent Go-Live Access Review',
+        copy: 'Verify connector execution identity, 403 denials, human approval holds, and grounding inheritance in five business days—before an agent touches live workflows.',
+        links: [
+          { label: 'See the 4 verification checks', href: 'https://twilighttech.io/ai/go-live-review/#four-checks' },
+          { label: 'Inspect Labs engineering proof', href: 'https://labs.twilighttech.io/engineering' }
+        ]
+      },
       'rover': {
         title: 'Rover',
         copy: 'Source-backed guidance, authenticated access, and technician-controlled handoffs for service-desk teams.',
@@ -127,10 +143,10 @@
       },
       'system-care': {
         title: 'System Care',
-        copy: 'Practical support for the systems your team depends on, from one-time cleanup to ongoing managed IT and security.',
+        copy: 'Practical support for the systems your team depends on, from Microsoft 365 Secure Resets to ongoing operations.',
         links: [
-          { label: 'See Managed IT', href: 'https://twilighttech.io/managed-it/' },
-          { label: 'Browse technical services', href: 'https://twilighttech.io/services/' }
+          { label: 'Browse technical services', href: 'https://twilighttech.io/services/' },
+          { label: 'See Managed IT', href: 'https://twilighttech.io/managed-it/' }
         ]
       },
       'guides': {
