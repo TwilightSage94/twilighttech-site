@@ -31,11 +31,53 @@
 .route-node{--tone:var(--cyan);position:relative;z-index:3;grid-column:2;width:auto;padding:1rem 1.05rem 1.05rem 1.2rem;border:1px solid var(--border);border-left:2px solid var(--tone);background:rgba(5,10,23,.95)}.route-node::before{content:"";position:absolute;right:100%;top:50%;width:1.4rem;height:1px;background:linear-gradient(90deg,transparent,var(--tone))}.route-node strong{display:block;margin:.35rem 0;color:#fff;font:700 .84rem var(--display)}.route-node p{color:var(--muted);font-size:.78rem;line-height:1.45}.route-node .route-label{color:var(--tone)}.route-node.engineering{--tone:var(--cyan);grid-row:1}.route-node.ai{--tone:var(--magenta);grid-row:2}.route-node.software{--tone:var(--green);grid-row:3}.route-board-note{position:absolute;right:1rem;bottom:.8rem;color:#71809f;font:600 .55rem var(--mono);letter-spacing:1px;text-transform:uppercase}
 .friction-band{border-block:1px solid var(--border);background:rgba(0,240,255,.025)}.friction-grid{display:grid;grid-template-columns:repeat(4,1fr)}.friction{padding:1.5rem;border-right:1px solid var(--border)}.friction:last-child{border-right:0}.friction strong{display:block;color:#fff;font:700 .85rem var(--display);margin-bottom:.4rem}.friction span{color:var(--muted);font-size:.82rem;line-height:1.5}
 .practice-intro{display:grid;grid-template-columns:.8fr 1.2fr;gap:3rem;align-items:end;margin-bottom:2.5rem}.practice-intro p{max-width:620px;color:var(--muted);font-size:1rem;line-height:1.8}.practice-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--border);background:var(--border);gap:1px}.practice{--tone:var(--cyan);min-height:560px;display:flex;flex-direction:column;padding:2.2rem;background:linear-gradient(160deg,color-mix(in srgb,var(--tone) 4%,#080818),#050711 62%);position:relative;overflow:hidden}.practice.ai{--tone:var(--magenta)}.practice.software{--tone:var(--green)}.practice::before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,var(--tone),transparent)}.practice::after{content:attr(data-mark);position:absolute;right:-.05em;top:-.18em;color:color-mix(in srgb,var(--tone) 7%,transparent);font:900 10rem var(--display);line-height:1}.practice-number{position:relative;color:var(--tone)}.practice h2{position:relative;margin:2.1rem 0 .9rem;color:#fff;font:800 clamp(1.3rem,2.4vw,1.8rem) var(--display)}.practice>p{position:relative;color:var(--muted);line-height:1.7;min-height:108px}.practice ul{position:relative;list-style:none;display:grid;gap:.65rem;margin:1.4rem 0 1.7rem}.practice li{padding-bottom:.6rem;border-bottom:1px solid rgba(255,255,255,.07);color:#dce6ff;font-size:.86rem}.practice li::before{content:"//";margin-right:.55rem;color:var(--tone);font-family:var(--mono)}.practice-proof{position:relative;margin-top:auto;padding:1rem;border:1px solid color-mix(in srgb,var(--tone) 25%,transparent);background:color-mix(in srgb,var(--tone) 3%,transparent)}.proof-label{color:var(--tone)}.practice-proof p{margin-top:.45rem;color:var(--muted);font-size:.8rem;line-height:1.55}.practice-link{position:relative;display:inline-block;margin-top:1rem;color:var(--tone);font:700 .65rem var(--mono);letter-spacing:1.2px;text-transform:uppercase;border-bottom:1px solid color-mix(in srgb,var(--tone) 42%,transparent)}
-.method-shell{display:grid;grid-template-columns:.78fr 1.22fr;gap:3rem;align-items:start}.method-copy p{margin-top:1rem;color:var(--muted);line-height:1.8}.method-flow{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border)}.method-step{min-height:210px;padding:1.4rem;position:relative}.method-step+.method-step{border-left:1px solid var(--border)}.method-step span{color:var(--cyan);font:700 .62rem var(--mono);letter-spacing:1.5px}.method-step h3{margin:1.2rem 0 .5rem;color:#fff;font:700 .9rem var(--display)}.method-step p{color:var(--muted);font-size:.8rem;line-height:1.55}.method-step::after{content:"→";position:absolute;right:-.48rem;top:50%;z-index:2;color:var(--magenta);font:700 1.2rem var(--mono);transform:translateY(-50%)}.method-step:last-child::after{display:none}
+.scopes-section{padding-top:2rem;border-top:1px solid var(--border)}
+.scopes-head{max-width:780px;margin-bottom:2rem}
+.scopes-head p{color:var(--muted);line-height:1.7;margin-top:.75rem}
+.scopes-grid .addon-card{align-self:start;border-color:rgba(0,240,255,.22);background:linear-gradient(180deg,rgba(0,240,255,.04),var(--card) 36%)}
+.scopes-grid .addon-card:first-child{border-color:rgba(255,0,229,.32);background:linear-gradient(180deg,rgba(255,0,229,.055),var(--card) 36%)}
+.scopes-grid .addon-card:last-child{border-color:rgba(57,255,20,.26);background:linear-gradient(180deg,rgba(57,255,20,.045),var(--card) 36%)}
+.scope-label{display:inline-block;margin-bottom:.75rem;color:var(--cyan);font:700 .62rem var(--mono);letter-spacing:1.5px;text-transform:uppercase}
+.scopes-grid .addon-card:first-child .scope-label{color:var(--magenta)}
+.scopes-grid .addon-card:last-child .scope-label{color:var(--green)}
+.project-disclosure>summary{position:relative;cursor:pointer;list-style:none;padding-right:1.5rem}
+.project-disclosure>summary::-webkit-details-marker{display:none}
+.project-disclosure>summary::after{content:"+";position:absolute;right:0;top:0;color:var(--cyan);font:700 1.15rem var(--mono)}
+.project-disclosure[open]>summary::after{content:"−"}
+.project-body{padding-top:1rem;border-top:1px solid var(--border);margin-top:1rem}
+.scope-subnote{margin:0 0 1rem;padding:.7rem .85rem;border-left:2px solid var(--amber);background:rgba(255,174,0,.035);color:var(--muted);font-size:.76rem;line-height:1.55}
+.scope-subnote strong{color:var(--amber);font-family:var(--display);font-size:.7rem;text-transform:uppercase}
+button.addon-cta{width:100%;background:transparent;cursor:pointer}
+.gl-inspector{margin:0 0 2rem;border:1px solid rgba(255,0,229,.38);background:linear-gradient(155deg,rgba(18,12,34,.86),rgba(5,9,22,.90));backdrop-filter:blur(12px);padding:1.75rem 1.75rem}
+.gl-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.9rem;margin-bottom:1.15rem;padding-bottom:.95rem;border-bottom:1px solid var(--border)}
+.gl-head strong{font-family:var(--display);font-size:1.15rem;color:#fff;letter-spacing:.35px}
+.gl-head span{font-family:var(--mono);font-size:.68rem;letter-spacing:1.3px;text-transform:uppercase;color:var(--magenta)}
+.gl-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin-bottom:1.15rem}
+.gl-tab{padding:.85rem .9rem;background:rgba(4,8,19,.86);border:1px solid var(--border);border-top:2px solid transparent;color:var(--muted);text-align:left;cursor:pointer;transition:all .18s}
+.gl-tab:hover{border-color:rgba(0,240,255,.35);color:#fff}
+.gl-tab.active{background:rgba(12,20,40,.95);border-color:var(--t-c,var(--cyan));border-top-color:var(--t-c,var(--cyan));color:#fff}
+.gl-tab small{display:block;font-family:var(--mono);font-size:.64rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--t-c,var(--cyan));margin-bottom:.25rem}
+.gl-tab b{display:block;font-family:var(--display);font-size:.84rem;line-height:1.32}
+.gl-panel{display:grid;grid-template-columns:1.15fr .85fr;gap:1.2rem;padding:1.2rem;background:rgba(4,8,18,.84);border:1px solid var(--border)}
+.gl-panel p{color:#d8e3f8;font-size:1.02rem;line-height:1.65;margin:0}
+.gl-receipt{font-family:var(--mono);font-size:.78rem;line-height:1.68;color:#bfefff;background:#030712;border:1px solid rgba(0,240,255,.24);padding:.95rem 1.05rem;white-space:pre-wrap;margin:0}
+.gl-cta-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-top:1.2rem;padding-top:1.15rem;border-top:1px solid var(--border)}
+.gl-cta-bar p{margin:0;color:#dce6fa;font-size:1rem;max-width:620px;line-height:1.55}
+.gl-cta-actions{display:flex;gap:.75rem;flex-wrap:wrap}
+.receipt-strip{margin-top:1.6rem;border-block:1px solid var(--border)}
+.receipt-strip>summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.1rem 0;cursor:pointer;list-style:none;color:#fff;font:700 .78rem var(--mono);letter-spacing:1.2px;text-transform:uppercase}
+.receipt-strip>summary::-webkit-details-marker{display:none}
+.receipt-strip>summary::after{content:"+";color:var(--green);font-size:1.15rem}
+.receipt-strip[open]>summary::after{content:"−"}
+.receipt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;padding:.2rem 0 1.4rem}
+.receipt{padding:.6rem .8rem .6rem 0;color:#d9e2f2;font-size:.94rem;line-height:1.55}
+.receipt span{display:block;margin-bottom:.3rem;color:var(--cyan);font:700 .64rem var(--mono);letter-spacing:1.3px;text-transform:uppercase}
+.receipt a{display:inline-block;margin-top:.45rem;color:var(--green);font:700 .68rem var(--mono);letter-spacing:1.1px;text-transform:uppercase;border-bottom:1px solid rgba(57,255,20,.35)}
+.method-shell{display:grid;grid-template-columns:.78fr 1.22fr;gap:3rem;align-items:start}.method-copy p{margin-top:1rem;color:var(--muted);line-height:1.8}.method-flow{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border)}.method-step{min-height:210px;padding:1.4rem;position:relative}.method-step+.method-step{border-left:1px solid var(--border)}.method-step span{color:var(--cyan);font:700 .66rem var(--mono);letter-spacing:1.5px}.method-step h3{margin:1.2rem 0 .5rem;color:#fff;font:700 .98rem var(--display)}.method-step p{color:var(--muted);font-size:.92rem;line-height:1.58}.method-step::after{content:"→";position:absolute;right:-.48rem;top:50%;z-index:2;color:var(--magenta);font:700 1.2rem var(--mono);transform:translateY(-50%)}.method-step:last-child::after{display:none}
 .boundary{margin-top:2rem;padding:1.25rem 1.4rem;border-left:2px solid var(--amber);background:rgba(255,174,0,.035);color:var(--muted);line-height:1.65}.boundary strong{color:var(--amber);font-family:var(--display)}
-.practice-link{margin-top:1.75rem;padding:.25rem 0 .35rem}.further-final{text-align:center;padding:7rem 0 7.5rem}.further-final .container{max-width:880px}.further-final p{max-width:700px;margin:1.35rem auto 2.5rem;color:var(--muted);font-size:1rem;line-height:1.8}.further-final-actions{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
-@media(max-width:980px){.further-hero-grid,.practice-intro,.method-shell{grid-template-columns:1fr}.route-board{min-height:0;max-width:680px;margin-inline:auto}.practice-grid{grid-template-columns:1fr}.practice{min-height:0;padding-bottom:2.6rem}.practice>p{min-height:0}.method-flow{grid-template-columns:1fr 1fr}.method-step:nth-child(3){border-left:0;border-top:1px solid var(--border)}.method-step:nth-child(4){border-top:1px solid var(--border)}.method-step::after{display:none}.friction-grid{grid-template-columns:1fr 1fr}.friction:nth-child(2){border-right:0}.friction:nth-child(-n+2){border-bottom:1px solid var(--border)}}
-@media(max-width:620px){.further-hero{min-height:auto;padding:7.5rem 0 3.5rem}.further-title{font-size:clamp(2.25rem,12vw,3.8rem);overflow-wrap:anywhere}.further-lead{overflow-wrap:anywhere}.further-actions .btn,.further-final-actions .btn{width:100%;text-align:center}.route-board{width:100%;max-width:100%;min-width:0;grid-template-columns:minmax(0,1fr);grid-template-rows:auto;padding:1.25rem 1.1rem 3rem;gap:.75rem}.route-board::before{background:repeating-linear-gradient(0deg,transparent 0 63px,rgba(255,255,255,.035) 64px)}.route-core{grid-column:1;grid-row:auto;width:100%;height:auto;min-height:92px;transform:none;justify-self:stretch}.route-core span{transform:none}.route-node{grid-column:1;grid-row:auto!important;min-width:0;padding:.95rem 1rem}.route-node::before{display:none}.route-node strong{font-size:.78rem}.route-node p{font-size:.74rem;overflow-wrap:anywhere}.route-board-note{left:1.1rem;right:auto}.friction-grid,.method-flow{grid-template-columns:1fr}.friction{border-right:0;border-bottom:1px solid var(--border)}.friction:last-child{border-bottom:0}.method-step+.method-step,.method-step:nth-child(3){border-left:0;border-top:1px solid var(--border)}.practice{padding:1.7rem 1.35rem 2.35rem}.further-final{padding:5.5rem 0 6.5rem}}
+.practice-link{margin-top:1.75rem;padding:.25rem 0 .35rem}.further-final{text-align:center;padding:7rem 0 7.5rem}.further-final .container{max-width:880px}.further-final p{max-width:700px;margin:1.35rem auto 2.5rem;color:var(--muted);font-size:1.08rem;line-height:1.8}.further-final-actions{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+@media(max-width:980px){.further-hero-grid,.practice-intro,.method-shell,.gl-panel{grid-template-columns:1fr}.gl-tabs{grid-template-columns:1fr 1fr}.route-board{min-height:0;max-width:680px;margin-inline:auto}.practice-grid{grid-template-columns:1fr}.practice{min-height:0;padding-bottom:2.6rem}.practice>p{min-height:0}.method-flow,.receipt-grid{grid-template-columns:1fr 1fr}.method-step:nth-child(3){border-left:0;border-top:1px solid var(--border)}.method-step:nth-child(4){border-top:1px solid var(--border)}.method-step::after{display:none}.friction-grid{grid-template-columns:1fr 1fr}.friction:nth-child(2){border-right:0}.friction:nth-child(-n+2){border-bottom:1px solid var(--border)}}
+@media(max-width:620px){.further-hero{min-height:auto;padding:7.5rem 0 3.5rem}.further-title{font-size:clamp(2.25rem,12vw,3.8rem);overflow-wrap:anywhere}.further-lead{overflow-wrap:anywhere}.further-actions .btn,.further-final-actions .btn{width:100%;text-align:center}.gl-tabs{grid-template-columns:1fr}.route-board{width:100%;max-width:100%;min-width:0;grid-template-columns:minmax(0,1fr);grid-template-rows:auto;padding:1.25rem 1.1rem 3rem;gap:.75rem}.route-board::before{background:repeating-linear-gradient(0deg,transparent 0 63px,rgba(255,255,255,.035) 64px)}.route-core{grid-column:1;grid-row:auto;width:100%;height:auto;min-height:92px;transform:none;justify-self:stretch}.route-core span{transform:none}.route-node{grid-column:1;grid-row:auto!important;min-width:0;padding:.95rem 1rem}.route-node::before{display:none}.route-node strong{font-size:.84rem}.route-node p{font-size:.86rem;overflow-wrap:anywhere}.route-board-note{left:1.1rem;right:auto}.friction-grid,.method-flow,.receipt-grid{grid-template-columns:1fr}.friction{border-right:0;border-bottom:1px solid var(--border)}.friction:last-child{border-bottom:0}.method-step+.method-step,.method-step:nth-child(3){border-left:0;border-top:1px solid var(--border)}.practice{padding:1.7rem 1.35rem 2.35rem}.further-final{padding:5.5rem 0 6.5rem}}
 </style>
 </head>
 <body class="stage-further">
@@ -62,8 +104,8 @@
       <div class="reveal">
         <div class="further-kicker">Stage 03 // Further Technology</div>
         <h1 class="further-title">When the tool stops fitting, <span>build the next layer.</span></h1>
-        <p class="further-lead">Bring the operation that is still held together by memory, copying, disconnected systems, or unclear authority. Twilight Technology maps the real constraint and determines whether the useful answer is <strong>engineering, automation, governed AI, custom software—or no new build at all.</strong></p>
-        <div class="further-actions"><a class="btn btn-solid" href="#start">Start with the problem</a><a class="btn" href="#capabilities">Explore the practices</a></div>
+        <p class="further-lead">Bring the workflow still held together by memory, copying, disconnected systems, or unclear permissions. Twilight Technology maps the real bottleneck and shows whether the right move is <strong>engineering, automation, governed AI, custom software—or no new build at all.</strong></p>
+        <div class="further-actions"><a class="btn btn-solid" href="#go-live-review">See Go-Live Access Review</a><a class="btn" href="#capabilities">Explore the practices</a></div>
       </div>
       <div class="route-board reveal" role="img" aria-label="Three engineering practices connect to a bounded working system: Engineering Services, AI Solutions, and Custom Software.">
         <div class="route-rail one" aria-hidden="true"></div><div class="route-rail two" aria-hidden="true"></div><div class="route-rail three" aria-hidden="true"></div>
@@ -77,26 +119,136 @@
   </section>
 
   <div class="friction-band"><div class="container friction-grid">
-    <div class="friction"><strong>Manual glue</strong><span>People carry information between systems by hand.</span></div>
-    <div class="friction"><strong>Trapped knowledge</strong><span>The work depends on one person's memory or inbox.</span></div>
-    <div class="friction"><strong>Authority gaps</strong><span>The system can act, but nobody can explain who approved it.</span></div>
-    <div class="friction"><strong>Tool mismatch</strong><span>The operation keeps bending around software that does not fit.</span></div>
+    <div class="friction"><strong>Manual glue</strong><span>People copy data between systems by hand every day.</span></div>
+    <div class="friction"><strong>Trapped knowledge</strong><span>Critical work depends on one person's memory or inbox.</span></div>
+    <div class="friction"><strong>Authority gaps</strong><span>An agent can take action, yet nobody can prove who approved it.</span></div>
+    <div class="friction"><strong>Tool mismatch</strong><span>Your team keeps bending around software that never fit.</span></div>
   </div></div>
 
   <section id="capabilities">
     <div class="container">
-      <div class="practice-intro reveal"><div class="sh"><div class="sh-label">// Three engineering practices</div><h2 class="sh-title">Use the capability the problem <span class="ac">actually needs.</span></h2><div class="sh-line"></div></div><p>These practices can stand alone or work together. The point is not to force every problem into AI. It is to build the smallest useful operating layer that people can understand, inspect, and improve.</p></div>
+      <div class="practice-intro reveal"><div class="sh"><div class="sh-label">// Three engineering practices</div><h2 class="sh-title">Use the capability the problem <span class="ac">actually needs.</span></h2><div class="sh-line"></div></div><p>These practices stand on their own or work together. We build the smallest working layer your team can inspect, maintain, and trust—without forcing AI onto a job that just needs cleaner permissions.</p></div>
       <div class="practice-grid">
-        <article class="practice reveal" data-mark="01"><div class="practice-number">01 // Engineering Services</div><h2>Strengthen the system underneath the work.</h2><p>Design or repair the identity, infrastructure, integrations, and operating boundaries that the next capability depends on.</p><ul><li>Systems and solution architecture</li><li>Microsoft 365 and identity engineering</li><li>Infrastructure and integration</li><li>Workflow and automation design</li></ul><div class="practice-proof"><div class="proof-label">Relevant foundation</div><p>Twilight's Microsoft, identity, infrastructure, and operational background supports this work. Public packages and proof will be added only as their scopes are bounded.</p></div><a class="practice-link" href="#start">Bring an engineering problem →</a></article>
-        <article class="practice ai reveal" data-mark="02"><div class="practice-number">02 // AI Solutions</div><h2>Make AI useful without handing it the building keys.</h2><p>Build private and governed AI systems around real knowledge, workflows, permissions, decisions, and human authority.</p><ul><li>Private AI and grounded knowledge access</li><li>Agents and model orchestration</li><li>Approval, refusal, and audit paths</li><li>Human-governed operational workflows</li></ul><div class="practice-proof"><div class="proof-label">Reference systems</div><p>J-Bot, HackBot, and The Exchange demonstrate different parts of the architecture. They are reference systems, not identical off-the-shelf customer products.</p></div><a class="practice-link" href="/ai/yours/">Explore AI Solutions →</a></article>
-        <article class="practice software reveal" data-mark="03"><div class="practice-number">03 // Custom Software</div><h2>Build the interface the operation has been missing.</h2><p>Create a focused internal tool, workflow system, or specialized application when generic software cannot hold the real human setting.</p><ul><li>Internal tools and operating surfaces</li><li>Workflow and decision systems</li><li>Local-first applications</li><li>Human-centered digital products</li></ul><div class="practice-proof"><div class="proof-label">Reference systems</div><p>Reader, Twilight Academy, A Place to Show Up, and Tabletop show this practice across very different environments. Their current states and boundaries live in Labs.</p></div><a class="practice-link" href="/labs/">Inspect the Labs proof →</a></article>
+        <article class="practice reveal" data-mark="01"><div class="practice-number">01 // Engineering Services</div><h2>Strengthen the system underneath the work.</h2><p>Design or repair the identity, infrastructure, integrations, and access boundaries that new automation depends on.</p><ul><li>Systems and solution architecture</li><li>Microsoft 365 and identity engineering</li><li>Infrastructure and integration</li><li>Workflow and automation design</li></ul><div class="practice-proof"><div class="proof-label">Relevant foundation</div><p>Twilight's Microsoft, Entra, infrastructure, and Watchtower lab background supports this practice—starting with bounded identity and grounding scopes below.</p></div><a class="practice-link" href="#go-live-review">See bounded starting scopes →</a></article>
+        <article class="practice ai reveal" data-mark="02"><div class="practice-number">02 // AI Solutions</div><h2>Make AI useful without handing it the building keys.</h2><p>Verify or build private and governed AI systems around real knowledge, workflows, permissions, and human sign-off.</p><ul><li>Pre-launch AI Agent Go-Live Access Review</li><li>Private AI and grounded knowledge access</li><li>Agents, connectors, and model orchestration</li><li>Approval, refusal, and audit paths</li></ul><div class="practice-proof"><div class="proof-label">Reference systems</div><p>Rover, J-Bot, HackBot, and The Exchange demonstrate different parts of the architecture. They are reference systems, not identical off-the-shelf customer products.</p></div><a class="practice-link" href="#go-live-review">Verify an Agent Before Go-Live →</a><a class="practice-link" href="/ai/yours/" style="margin-top:.65rem">Explore AI Solutions →</a></article>
+        <article class="practice software reveal" data-mark="03"><div class="practice-number">03 // Custom Software</div><h2>Build the interface the operation has been missing.</h2><p>Create a focused internal tool, workflow system, or local-first application when generic software cannot hold the real work.</p><ul><li>Internal tools and operating surfaces</li><li>Workflow and decision systems</li><li>Local-first applications</li><li>Human-centered digital products</li></ul><div class="practice-proof"><div class="proof-label">Reference systems</div><p>Reader, Twilight Academy, A Place to Show Up, and Tabletop show this practice across very different environments. Their current states and boundaries live in Labs.</p></div><a class="practice-link" href="/labs/">Inspect the Labs proof →</a></article>
       </div>
+    </div>
+  </section>
+
+  <section class="scopes-section" id="go-live-review">
+    <div class="container">
+      <div class="scopes-head reveal">
+        <div class="sh-label">// Bounded starting scopes</div>
+        <h2 class="sh-title">Start with one defined gate, <span class="ac">not an open-ended project.</span></h2>
+        <div class="sh-line"></div>
+        <p>Before committing to a long build—or turning on an agent that can touch tickets, SharePoint, or CRM—start with a five-day verification gate or a focused workflow map.</p>
+      </div>
+
+      <!-- NATIVE STAGE-03 INTERACTIVE 4-CHECK INSPECTOR -->
+      <div class="gl-inspector reveal" role="region" aria-label="Interactive preview of the four mandatory checks in an AI Agent Go-Live Access Review">
+        <div class="gl-head">
+          <div>
+            <span>Interactive Preview // Four Mandatory Go-Live Checks</span><br>
+            <strong>What a 5-Day AI Agent Go-Live Access Review Actually Proves</strong>
+          </div>
+          <span style="color:var(--cyan)">Click any check below</span>
+        </div>
+        <div class="gl-tabs" id="gl-tabs">
+          <button type="button" class="gl-tab active" style="--t-c:var(--green)" data-gl="0"><small>Check 01 // Allow</small><b>Expected Allow Path</b></button>
+          <button type="button" class="gl-tab" style="--t-c:var(--magenta)" data-gl="1"><small>Check 02 // Hard Stop</small><b>Expected 403 Deny</b></button>
+          <button type="button" class="gl-tab" style="--t-c:var(--amber)" data-gl="2"><small>Check 03 // Human Gate</small><b>Code-Enforced Hold</b></button>
+          <button type="button" class="gl-tab" style="--t-c:var(--cyan)" data-gl="3"><small>Check 04 // Identity</small><b>Confused Deputy Check</b></button>
+        </div>
+        <div class="gl-panel">
+          <div>
+            <p id="gl-desc">We verify the intended action succeeds under a standard delegated user account—not a builder's admin preview—and capture the exact downstream record created.</p>
+            <p id="gl-gap" style="margin-top:.75rem;color:#ffdca0;font-size:.94rem">Common catch: agent works in studio only because it borrowed the maker's privileged connection.</p>
+          </div>
+          <pre class="gl-receipt" id="gl-out">CHECK 01 // EXPECTED ALLOW
+identity:  test.user@sandbox.local (delegated)
+scope:     Tickets.AppendNote (narrow)
+receipt:   INC-2048 -> note_id n_901
+verdict:   PASS (system-of-record verified)</pre>
+        </div>
+        <div class="gl-cta-bar">
+          <p><strong>Launching an agent in the next 2–6 weeks?</strong> Send your platform and 1–2 connectors—we will reply with a sanitized 1-page Sample Packet and confirm Track A (sandbox) or Track B (config walkthrough) fit.</p>
+          <div class="gl-cta-actions">
+            <button type="button" class="btn btn-solid" data-open-jbot>Request Sample Packet &amp; Pilot Scope →</button>
+            <a class="btn" href="mailto:james@twilighttech.io?subject=AI%20Agent%20Go-Live%20Access%20Review">Email James Directly</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="addons-grid scopes-grid reveal">
+        <details class="addon-card project-disclosure" open>
+          <summary>
+            <span class="scope-label">01 / Pre-launch agent gate &middot; Founding pilot</span>
+            <div class="addon-name">AI Agent Go-Live Access Review</div>
+            <div class="addon-tagline">Before an action-taking agent connects to tickets, SharePoint, or CRM, verify which identity runs its connectors, what gets blocked, and what pauses for a person—in five business days.</div>
+          </summary>
+          <div class="project-body">
+            <div class="addon-price-row"><div class="addon-price">Verify</div><div class="addon-price-label">1 agent &middot; 2 connectors &middot; 5 business days</div></div>
+            <ul class="addon-includes">
+              <li>Four mandatory checks: Expected Allow, Expected 403 Deny, Code-Enforced Hold, and Confused Deputy &amp; Grounding Inheritance</li>
+              <li>Two intake paths: Track A // Isolated Sandbox Proof or Track B // Static Config &amp; Guided Walkthrough</li>
+              <li>Deliverables: 1-Page Agent Access Map, redacted Verification Evidence Pack, and Go-Live Decision Brief</li>
+            </ul>
+            <div class="scope-subnote"><strong>Boundary:</strong> Point-in-time cooperative workflow verification—<strong>not</strong> a penetration test, offensive red-team engagement, or regulatory certification.</div>
+            <button type="button" class="btn btn-solid" style="width:100%;text-align:center" data-open-jbot>Request Sample Packet &amp; Pilot Scope →</button>
+          </div>
+        </details>
+
+        <details class="addon-card project-disclosure">
+          <summary>
+            <span class="scope-label">02 / Workflow discovery</span>
+            <div class="addon-name">AI Opportunity Review</div>
+            <div class="addon-tagline">Bring one messy operation your team still holds together by hand. Leave a complimentary 30-minute review with a clearer fit, major risks, and smallest useful build.</div>
+          </summary>
+          <div class="project-body">
+            <div class="addon-price-row"><div class="addon-price">Map</div><div class="addon-price-label">one workflow &middot; 30-minute review</div></div>
+            <ul class="addon-includes">
+              <li>Trace people, tools, handoffs, exceptions, and who holds authority</li>
+              <li>Separate automation, private AI, custom software, or no-build options</li>
+              <li>Define the smallest bounded slice worth testing first</li>
+            </ul>
+            <a href="/ai/yours/#start" class="addon-cta">Map One Workflow →</a>
+          </div>
+        </details>
+
+        <details class="addon-card project-disclosure" open>
+          <summary>
+            <span class="scope-label">03 / Foundation &amp; AI readiness</span>
+            <div class="addon-name">Identity &amp; Grounding Readiness</div>
+            <div class="addon-tagline">SharePoint and Entra permissions not ready for Copilot or an AI agent yet? Lock down Global Admin sprawl, Conditional Access, and overshared libraries first.</div>
+          </summary>
+          <div class="project-body">
+            <div class="addon-price-row"><div class="addon-price">Harden</div><div class="addon-price-label">Entra ID &middot; SharePoint &middot; access boundaries</div></div>
+            <ul class="addon-includes">
+              <li>Privileged-role, service-principal, and Conditional Access baseline</li>
+              <li>SharePoint library oversharing and grounding-scope cleanup</li>
+              <li>Documented findings report and 60-minute technical handoff</li>
+            </ul>
+            <a href="/services/#one-time-services" class="btn btn-solid" style="width:100%;text-align:center">Start With M365 Secure Reset →</a>
+          </div>
+        </details>
+      </div>
+
+      <details class="receipt-strip reveal">
+        <summary>Inspect the engineering &amp; Twilight Labs proof behind these scopes</summary>
+        <div class="receipt-grid">
+          <div class="receipt"><span>Watchtower // Rover v1</span>472 automated checks verifying technician routes, 403 requester blocks, and separate AI-draft vs. tech-edit records.<br><a href="/rover/">Rover release proof →</a></div>
+          <div class="receipt"><span>Labs // Cases 01, 09 &amp; 22</span>435 indexed tools, timed capability checkouts, single-use replay-resistant approvals, and fail-closed timeouts.<br><a href="https://labs.twilighttech.io/engineering">Engineering case files →</a></div>
+          <div class="receipt"><span>J-Bot // Governance</span>Active work separated from retained history, with approval receipts and capability boundaries.<br><a href="/ai/operations/">See J-Bot governance →</a></div>
+          <div class="receipt"><span>Public Rails // Front Desk</span>Zero-LLM public intake running on fixed deterministic routes with strict preview isolation.<br><a href="/site-chat/">Front Desk build →</a></div>
+        </div>
+      </details>
     </div>
   </section>
 
   <section class="sec-dark">
     <div class="container method-shell">
-      <div class="method-copy reveal"><div class="sh-label">// The method</div><h2 class="sh-title">Map it before we <span class="ac">make it.</span></h2><div class="sh-line"></div><p>The first useful decision is often deciding what does not need to be built. Twilight begins with the environment, the people, the consequences, and the proof the finished system must leave behind.</p><div class="boundary"><strong>Boundary:</strong> Labs projects demonstrate methods and working systems. They do not automatically represent packaged products, production readiness, or customer results.</div></div>
+      <div class="method-copy reveal"><div class="sh-label">// The method</div><h2 class="sh-title">Map it before we <span class="ac">make it.</span></h2><div class="sh-line"></div><p>Half the value of an early review is spotting what does not need to be built. We start with the actual environment, the people using it, and the evidence the finished system has to leave behind.</p><div class="boundary"><strong>Boundary:</strong> Labs projects demonstrate methods and working systems. They do not automatically represent packaged products, production readiness, or customer results.</div></div>
       <div class="method-flow reveal">
         <div class="method-step"><span>01 // MAP</span><h3>Understand the work</h3><p>People, tools, state, friction, authority, and the real operating environment.</p></div>
         <div class="method-step"><span>02 // MODEL</span><h3>Define the system</h3><p>Boundaries, data, workflows, interfaces, risks, and deliberate exclusions.</p></div>
@@ -107,12 +259,51 @@
   </section>
 
   <section class="further-final" id="start">
-    <div class="container reveal"><div class="sh-label">// Start with the problem</div><h2 class="sh-title">What is your team still holding together <span class="ac">by hand?</span></h2><p>You do not need to decide whether the answer is engineering, automation, AI, or software before the conversation. Describe the loop, bottleneck, or operating problem. Twilight will help map the next useful step.</p><div class="further-final-actions"><button type="button" class="btn btn-solid" data-open-jbot>Tell the Front Desk</button><a class="btn" href="mailto:james@twilighttech.io?subject=Further%20Technology%20fit%20check">Email James</a><a class="btn" href="/labs/">See the technical proof</a></div></div>
+    <div class="container reveal"><div class="sh-label">// Start with the problem</div><h2 class="sh-title">What is your team still holding together <span class="ac">by hand?</span></h2><p>Describe the upcoming agent launch, manual loop, or system bottleneck in plain English. We will help you map the cleanest next step.</p><div class="further-final-actions"><button type="button" class="btn btn-solid" data-open-jbot>Tell the Front Desk</button><a class="btn" href="mailto:james@twilighttech.io?subject=Further%20Technology%20fit%20check">Email James</a><a class="btn" href="/labs/">See the technical proof</a></div></div>
   </section>
 </main>
 
 <footer><div class="footer-inner"><div>&copy; 2026 <span class="nc">Twilight Technology LLC</span> &middot; Atlanta, GA &middot; <a class="footer-link" href="/labs/">Labs</a></div><div class="footer-status">Human in command</div></div></footer>
 <script src="/assets/site.js"></script>
+<script>
+(function(){
+  var checks = [
+    {
+      d: "We verify the intended action succeeds under a standard delegated user account—not a builder's admin preview—and capture the exact downstream record created.",
+      g: "Common catch: agent works in studio only because it borrowed the maker's privileged connection.",
+      r: "CHECK 01 // EXPECTED ALLOW\nidentity:  test.user@sandbox.local (delegated)\nscope:     Tickets.AppendNote (narrow)\nreceipt:   INC-2048 -> note_id n_901\nverdict:   PASS (system-of-record verified)"
+    },
+    {
+      d: "A polite refusal in chat is not a security control. We test an out-of-bounds action and confirm in the downstream system logs that the API enforced a hard 403 block with zero side effects.",
+      g: "Common catch: 'never touch restricted records' lived only in the prompt while the API token still had write access.",
+      r: "CHECK 02 // EXPECTED 403 DENY\nidentity:  test.contractor@sandbox.local\nattempt:   HR.ReadCompensation / CloseOtherTicket\nstatus:    HTTP 403 Forbidden (platform-enforced)\ndiff:      0 bytes read · 0 fields modified"
+    },
+    {
+      d: "For high-impact writes (external sends, role changes, ticket closures), we verify the workflow pauses in code or platform policy until a named person approves that exact payload.",
+      g: "Common catch: approval token could be replayed or edited, or failed to log who approved the final message.",
+      r: "CHECK 03 // CODE-ENFORCED HOLD\naction:    external.customer_reply\npre_sign:  HELD_FOR_APPROVAL (0 external sends)\nlock:      sha256 payload binding (single-use)\naudit:     ai_proposal_id != human_edit_id"
+    },
+    {
+      d: "We inspect whether connectors execute as the signed-in user or a shared service principal, and test whether a low-privilege user inherits access to overshared SharePoint or HR folders.",
+      g: "Common catch: SharePoint libraries open to 'Everyone except external users' surfacing confidential files via search grounding.",
+      r: "CHECK 04 // CONFUSED DEPUTY & GROUNDING\nauth_mode: Service Principal flagged -> switch to Delegated\nsharepoint: 2 overshared libraries identified\nretest:    BLOCKED after security-group scoping\nbrief:     CONDITIONAL GO (2 fixes assigned)"
+    }
+  ];
+  var bar = document.getElementById('gl-tabs');
+  if (!bar) return;
+  bar.addEventListener('click', function(ev){
+    var btn = ev.target.closest('.gl-tab');
+    if (!btn) return;
+    var idx = Number(btn.getAttribute('data-gl') || 0);
+    var c = checks[idx];
+    if (!c) return;
+    bar.querySelectorAll('.gl-tab').forEach(function(b, i){ b.classList.toggle('active', i === idx); });
+    document.getElementById('gl-desc').textContent = c.d;
+    document.getElementById('gl-gap').textContent = c.g;
+    document.getElementById('gl-out').textContent = c.r;
+  });
+})();
+</script>
 <script src="/assets/jbot-frontdesk-content.js?v=20261102-frontdesk-v9" defer></script>
 <script src="/assets/jbot-widget.js?v=20261102-frontdesk-v9" defer></script>
 </body>

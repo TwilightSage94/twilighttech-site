@@ -10,6 +10,7 @@ const productionPages = [
   'index.html',
   'about/index.html',
   'ai/index.html',
+  'ai/go-live-review/index.html',
   'ai/operations/index.html',
   'ai/yours/index.html',
   'cheat-sheet/index.html',
@@ -93,13 +94,13 @@ test('the edge proxy is bounded, origin-aware, and observable without storing ch
 
 test('every public visitor lane has a deterministic route', () => {
   const laneSlugs = [
+    'go-live-review',
     'rover',
     'private-ai',
     'site-chat',
     'system-care',
     'guides',
     'breakroom',
-    'aptsu',
   ];
   assert.deepEqual(Array.from(content.lanes.filter((lane) => lane.icon), (lane) => lane.slug), laneSlugs);
   laneSlugs.forEach((lane) => {
@@ -108,6 +109,20 @@ test('every public visitor lane has a deterministic route', () => {
   });
   assert.match(desk, /CONTENT\.resources/);
   assert.doesNotMatch(desk, /\$999|discord\.gg|calendar\.app\.google/);
+});
+
+test('Further integrates AI Agent Go-Live Access Review inline without spinning off a separate page', () => {
+  const furtherPage = readFileSync(resolve(root, 'further/index.html'), 'utf8');
+  const legacyRoute = readFileSync(resolve(root, 'ai/go-live-review/index.html'), 'utf8');
+  assert.match(furtherPage, /id="go-live-review"/);
+  assert.match(furtherPage, /AI Agent Go-Live Access Review/);
+  assert.match(furtherPage, /Confused Deputy &amp; Grounding Inheritance/);
+  assert.match(furtherPage, /Track A \/\/ Isolated Sandbox Proof/);
+  assert.match(furtherPage, /Track B \/\/ Static Config &amp; Guided Walkthrough/);
+  assert.match(furtherPage, /not<\/strong> a penetration test/i);
+  assert.match(furtherPage, /https:\/\/labs\.twilighttech\.io\/engineering/);
+  assert.match(legacyRoute, /url=\/further\/#go-live-review/);
+  assert.match(legacyRoute, /location\.replace\('\/further\/#go-live-review'\)/);
 });
 
 test('the legacy personal AI lane remains bounded and hidden', () => {
@@ -171,6 +186,7 @@ test('supporting pages identify their active mission stage', () => {
     Further: [
       'further/index.html',
       'ai/index.html',
+      'ai/go-live-review/index.html',
       'ai/operations/index.html',
       'ai/yours/index.html',
       'site-chat/index.html',
