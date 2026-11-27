@@ -18,19 +18,19 @@
       'rgba(255,0,229,',   // magenta (rare)
       'rgba(57,255,20,',   // green (rare)
     ];
-    const stars = Array.from({ length: 120 }, () => ({
-      x: Math.random(), y: Math.random(), r: 0.4 + Math.random() * 1.4,
+    const stars = Array.from({ length: 135 }, () => ({
+      x: Math.random(), y: Math.random(), r: 0.5 + Math.random() * 1.45,
       color: COLORS[Math.floor(Math.random() * COLORS.length)],
       speed: 0.00008 + Math.random() * 0.00015,
-      opacity: 0.15 + Math.random() * 0.65,
+      opacity: 0.22 + Math.random() * 0.68,
       pulse: Math.random() * Math.PI * 2,
       pulseSpeed: 0.008 + Math.random() * 0.015,
       drift: (Math.random() - 0.5) * 0.00006,
     }));
     const orbs = Array.from({ length: 6 }, () => ({
-      x: Math.random(), y: Math.random(), r: 60 + Math.random() * 120,
-      color: Math.random() > 0.5 ? '0,240,255' : '124,92,191',
-      opacity: 0.018 + Math.random() * 0.025,
+      x: Math.random(), y: Math.random(), r: 90 + Math.random() * 160,
+      color: Math.random() > 0.5 ? '0,240,255' : '150,92,235',
+      opacity: 0.045 + Math.random() * 0.04,
       dx: (Math.random() - 0.5) * 0.00012, dy: (Math.random() - 0.5) * 0.00008,
     }));
 

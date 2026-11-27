@@ -38,7 +38,7 @@
 .mission-meta span{display:flex;align-items:center;gap:.55rem}.mission-meta span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan)}
 .mission-meta span:nth-child(2)::before{background:var(--green);box-shadow:0 0 8px var(--green)}.mission-meta span:nth-child(3)::before{background:var(--magenta);box-shadow:0 0 8px var(--magenta)}
 .identity-ticker .ticker-item:nth-child(3n+1)::before{background:var(--cyan)}.identity-ticker .ticker-item:nth-child(3n+2)::before{background:var(--green)}.identity-ticker .ticker-item:nth-child(3n)::before{background:var(--magenta)}
-.pathway-shell{display:grid;grid-template-columns:repeat(3,1fr);margin-top:3rem;border:1px solid var(--border);background:linear-gradient(145deg,rgba(10,16,31,.92),rgba(5,6,17,.94));box-shadow:0 28px 80px rgba(0,0,0,.35)}
+.pathway-shell{display:grid;grid-template-columns:repeat(3,1fr);margin-top:3rem;border:1px solid var(--border);background:linear-gradient(145deg,rgba(10,16,31,.82),rgba(5,6,17,.86));backdrop-filter:blur(10px);box-shadow:0 28px 80px rgba(0,0,0,.35)}
 .pathway{position:relative;display:flex;flex-direction:column;min-height:500px;padding:2.5rem 2.2rem;overflow:hidden;scroll-margin-top:90px;transition:transform .22s ease,background .22s ease,box-shadow .22s ease}
 .pathway:target{background:linear-gradient(155deg,color-mix(in srgb,var(--stage) 8%,transparent),rgba(8,10,22,.94));box-shadow:inset 0 0 0 1px var(--stage),0 0 42px color-mix(in srgb,var(--stage) 14%,transparent)}
 .pathway:hover{transform:translateY(-4px);background:rgba(255,255,255,.018)}
@@ -57,7 +57,7 @@
 .path-link:hover{color:#fff;border-color:var(--stage);transform:translateX(4px)}
 .path-link.primary{display:inline-flex;align-items:center;gap:.55rem;margin-bottom:.35rem;padding:.72rem .85rem;border:1px solid var(--stage);background:color-mix(in srgb,var(--stage) 7%,transparent);color:#fff}
 .path-link.primary:hover{background:color-mix(in srgb,var(--stage) 14%,transparent)}
-.live-section{background:linear-gradient(180deg,rgba(0,240,255,.025),transparent 35%),var(--deep)}
+.live-section{background:linear-gradient(180deg,rgba(0,240,255,.04),rgba(5,7,20,.72) 38%,rgba(5,7,20,.78));backdrop-filter:blur(6px)}
 .live-stack{margin-top:2.7rem;border-top:1px solid var(--border)}
 .live-offer{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:2rem;align-items:center;padding:2rem 0;border-bottom:1px solid var(--border)}
 .live-tag{font-family:var(--mono);font-size:.61rem;letter-spacing:1.6px;text-transform:uppercase;color:var(--cyan)}
@@ -99,7 +99,7 @@
         <span class="mission-line sustain"><a href="/services/"><span class="mission-verb">Sustain</span>&nbsp;Technology<span class="mission-period">.</span></a></span>
         <span class="mission-line further"><a href="/further/"><span class="mission-verb">Further</span>&nbsp;Technology<span class="mission-period">.</span></a></span>
       </h1>
-      <p class="mission-copy">From your first confident step into IT, through the systems your business depends on, to <strong>the engineering, software, and governed AI that come next.</strong></p>
+      <p class="mission-copy">From your first step into IT, through the Microsoft 365 and endpoint systems your business runs on, to <strong>private AI and governed agents where humans stay in charge.</strong></p>
       <div class="hero-btns">
         <a href="#paths" class="btn btn-solid">Find Your Path</a>
         <button type="button" class="btn" data-open-jbot>Ask J-Bot</button>
@@ -121,13 +121,13 @@
         <div class="sh-label">// One company &middot; three stages</div>
         <h2 class="sh-title">Start where you are. <span class="ac">Move forward.</span></h2>
         <div class="sh-line"></div>
-        <p class="sh-sub">Twilight Tech is not four unrelated businesses. It is one technology journey: helping people get in, helping organizations stay steady, and building the next layer when they are ready.</p>
+        <p class="sh-sub">Most people meet us at one of three moments: breaking into IT, stabilizing a business tenant that outgrew ad-hoc setup, or verifying and building the AI and software that come next.</p>
       </div>
       <div class="pathway-shell reveal">
         <article class="pathway enter" id="enter" data-step="01">
           <div class="path-kicker">Stage 01 &middot; Access</div>
           <h3>Enter Technology</h3>
-          <p>Practice believable technical work, explain your decisions, and leave with evidence of what you can do.</p>
+          <p>Practice realistic support work, explain how you ruled things out, and leave with notes a hiring manager can actually review.</p>
           <div class="path-offers">
             <div class="path-offer">Role environments</div>
             <div class="path-offer">Guides</div>
@@ -143,7 +143,7 @@
         <article class="pathway sustain" id="sustain" data-step="02">
           <div class="path-kicker">Stage 02 &middot; Stability</div>
           <h3>Sustain Technology</h3>
-          <p>Keep people working, systems documented, and the business protected with support that stays practical.</p>
+          <p>Keep Microsoft 365, devices, backups, and day-to-day support documented and steady—through one flat-scoped reset or ongoing care.</p>
           <div class="path-offers">
             <div class="path-offer">Managed IT &amp; cybersecurity</div>
             <div class="path-offer">One-time technical services</div>
@@ -157,7 +157,7 @@
         <article class="pathway further" id="further" data-step="03">
           <div class="path-kicker">Stage 03 &middot; Possibility</div>
           <h3>Further Technology</h3>
-          <p>Turn hard-won knowledge into private systems, useful automation, and technology shaped around the people using it.</p>
+          <p>Verify what an action-taking AI agent can touch before launch, or build private AI and internal tools shaped around how your team works.</p>
           <div class="path-offers">
             <div class="path-offer">Engineering Services</div>
             <div class="path-offer">AI Solutions</div>
@@ -180,27 +180,27 @@
         <div class="sh-label">// Working now</div>
         <h2 class="sh-title">See the work. <span class="ac">Then decide.</span></h2>
         <div class="sh-line"></div>
-        <p class="sh-sub">Meet the working systems, live demos, and deployed releases behind Twilight Technology.</p>
+        <p class="sh-sub">Inspect the active offers, live demos, and lab releases running under Twilight Technology today.</p>
       </div>
       <div class="live-stack">
         <article class="live-offer reveal">
           <div class="live-tag" style="color:var(--green)">Further <span>Founding pilot &middot; 5-day pre-launch gate</span></div>
-          <div class="live-copy"><h3>AI Agent Go-Live Access Review</h3><p>Before an action-taking agent touches tickets, SharePoint, or CRM, verify which identity runs its connectors, what gets blocked, and what waits for a person—backed by system-of-record receipts.</p></div>
+          <div class="live-copy"><h3>AI Agent Go-Live Access Review</h3><p>Before an action-taking agent connects to tickets, SharePoint, or CRM, verify which identity runs its connectors, what gets blocked, and what pauses for a person—backed by system-of-record receipts.</p></div>
           <div class="live-actions"><a class="btn btn-solid" href="/further/#go-live-review">See the Review</a><a class="btn" href="https://labs.twilighttech.io/engineering">See Labs Proof</a></div>
         </article>
         <article class="live-offer reveal">
           <div class="live-tag" style="color:#ffd447">Further <span>V1 live &middot; first deployed in Watchtower</span></div>
-          <div class="live-copy"><h3>Rover</h3><p>Source-backed service-desk guidance, authenticated access, and cleaner technician handoffs—with technicians in control of what moves forward.</p></div>
+          <div class="live-copy"><h3>Rover</h3><p>Service-desk companion built in our Active Directory and GLPI lab: approved runbook citations, 403 role isolation, and separate records for AI drafts vs. technician edits.</p></div>
           <div class="live-actions"><a class="btn btn-solid" href="/rover/">Meet Rover</a><a class="btn" href="/labs/">See the Engineering</a></div>
         </article>
         <article class="live-offer reveal">
           <div class="live-tag">Sustain <span>Founding cohort &middot; limited openings</span></div>
-          <div class="live-copy"><h3>Website Front Desk</h3><p>A branded guided chat that helps visitors find the right answer, captures a clean lead, and hands the conversation back to a human.</p></div>
+          <div class="live-copy"><h3>Website Front Desk</h3><p>A deterministic visitor guide that routes common questions, captures a clean lead without a public LLM, and hands the note straight to a person.</p></div>
           <div class="live-actions"><button type="button" class="btn btn-solid" data-open-jbot>Try the Front Desk</button><a class="btn" href="/site-chat/">Explore the Build</a></div>
         </article>
         <article class="live-offer reveal">
           <div class="live-tag" style="color:var(--magenta)">Further <span>Readiness before architecture</span></div>
-          <div class="live-copy"><h3>Private AI</h3><p>Local and private document intelligence for confidentiality-bound teams: approved sources, cited answers, controlled access, and practical care after setup.</p></div>
+          <div class="live-copy"><h3>Private AI</h3><p>Local and private document search for confidentiality-bound teams: approved sources, visible citations, role-scoped access, and ongoing care after setup.</p></div>
           <div class="live-actions"><a class="btn btn-solid" href="/ai/#demo">Try the Demo</a><a class="btn" href="/ai/">See Private AI</a></div>
         </article>
       </div>
@@ -216,7 +216,7 @@
     <div class="container">
       <div class="sh reveal">
         <div class="sh-label">// Client Reference</div>
-        <h2 class="sh-title">The wall of tech gets <span class="ac">a doorway.</span></h2>
+        <h2 class="sh-title">A clear doorway through <span class="ac">the wall of tech.</span></h2>
         <div class="sh-line"></div>
       </div>
       <div class="proof-grid" style="grid-template-columns:1fr;max-width:760px;margin:0 auto">
@@ -236,7 +236,7 @@
         <div class="sh-label">// Front desk</div>
         <h2 class="sh-title">Not sure which stage <span class="ac">you are in?</span></h2>
         <div class="sh-line"></div>
-        <p>Tell J-Bot what you are trying to do, or send James a direct note. You do not need to know which Twilight Tech lane owns the answer before you ask the question.</p>
+        <p>Tell J-Bot what you are working on, or email James directly. Describe the bottleneck in plain English and we will point you to the right door.</p>
       </div>
       <div class="contact-actions reveal">
         <button type="button" class="btn btn-solid" data-open-jbot>Talk to J-Bot</button>
