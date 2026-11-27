@@ -156,11 +156,9 @@
 </footer>
 
 <script src="/assets/site.js"></script>
+<script src="/assets/lead-magnet-capture.js"></script>
 <script>
 (function () {
-  var ENDPOINT = 'https://testmachine.tail1dcfc5.ts.net/api/leads/';
-  function getParam(n){ return new URLSearchParams(window.location.search).get(n) || ''; }
-
   var Q = [
     {key:'stage', q:'Where are you on the path?', opts:[
       {t:'Just exploring — haven&rsquo;t really started', v:'explore'},
@@ -204,25 +202,14 @@
     h+='<div class="rm-next"><div class="rm-next-label">Your next step</div><a href="/guides/#bundle">Explore the A+ Complete Bundle &rarr;</a></div>';
     h+='</div>';
     body.innerHTML=h;
-    wireForm();
-  }
-
-  function wireForm(){
-    var form=document.getElementById('rm-form'), button=document.getElementById('rm-submit'),
-        status=document.getElementById('rm-status'), deliver=document.getElementById('rm-deliver');
-    function reveal(){ form.style.display='none'; deliver.classList.add('show'); if(window.plausible) window.plausible('Roadmap Lead', { props:{ source:getParam('utm_source')||'(direct)', stage:ans.stage||'', goal:ans.goal||'' } }); }
-    form.addEventListener('submit', function(ev){
-      ev.preventDefault();
-      status.className='rm-status'; status.textContent='';
-      var fd=new FormData(form), email=(fd.get('email')||'').toString().trim(), hp=(fd.get('hp')||'').toString();
-      if(!email){ status.className='rm-status error'; status.textContent='Drop an email above first.'; return; }
-      button.disabled=true; button.textContent='Sending…';
-      var payload={ email:email, source_page:window.location.pathname, utm_campaign:getParam('utm_campaign'), utm_medium:getParam('utm_medium'), utm_source:getParam('utm_source'), utm_content:'quiz:'+(ans.stage||'')+'/'+(ans.goal||'')+'/'+(ans.learn||''), referrer:document.referrer||'', hp:hp };
-      fetch(ENDPOINT,{ method:'POST', mode:'cors', cache:'no-cache', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) })
-        .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
-        .then(function(){ reveal(); })
-        .catch(function(){ reveal(); status.className='rm-status'; status.textContent=''; });
-    });
+    if (window.TwilightLeadMagnet) {
+      window.TwilightLeadMagnet.wireForm({
+        guideLabel: 'Build It, Break It Roadmap PDF',
+        eventName: 'Roadmap Lead',
+        getDetail: function(){ return 'quiz:'+(ans.stage||'')+'/'+(ans.goal||'')+'/'+(ans.learn||''); },
+        extraProps: function(){ return { stage: ans.stage || '', goal: ans.goal || '' }; }
+      });
+    }
   }
 
   function draw(){ if(step<Q.length){ drawQ(); } else { drawCapture(); } }
